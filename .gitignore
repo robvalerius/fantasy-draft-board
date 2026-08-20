@@ -7,3 +7,6 @@ cache/
 
 data/draft_state.csv
 draft-board.html
+
+node_modules/
+package-lock.json

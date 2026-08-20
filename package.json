@@ -1,0 +1,27 @@
+{
+  "name": "ff",
+  "version": "1.0.0",
+  "description": "Custom draft assistant for Yahoo league 204761. 14 teams, live salary cap auction,\r $269 budget, Aug 22 8:00pm EDT.",
+  "main": "static_shim.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/robvalerius/fantasy-draft-board.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/robvalerius/fantasy-draft-board/issues"
+  },
+  "homepage": "https://github.com/robvalerius/fantasy-draft-board#readme",
+  "dependencies": {
+    "puppeteer-core": "^25.7.0"
+  }
+}

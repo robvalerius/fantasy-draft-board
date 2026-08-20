@@ -24,30 +24,6 @@ from targets import BUDGET_NOTE, PLAN, note_of
 from watchlist import TEAM_CHANGES
 
 OUT = Path("docs")
-VIEWPORT = '<meta name="viewport" content="width=device-width, initial-scale=1">'
-
-# The desktop layout assumes a 290px sidebar and a hover-to-reveal action row.
-# Neither works on a phone, so collapse to one column and always show the buttons.
-MOBILE_CSS = """
-  @media (max-width: 820px) {
-    body { font-size: 14px; }
-    #bar { padding: 8px 10px; gap: 8px; }
-    #q { min-width: 100%; font-size: 17px; padding: 10px; order: -1; }
-    .stat { min-width: 0; flex: 1; }
-    .stat b { font-size: 17px; }
-    #wrap { flex-direction: column; padding: 0 8px 40px; }
-    #side { width: 100%; position: static; }
-    #head, .adp, .rng { display: none; }
-    .row { flex-wrap: wrap; gap: 6px 8px; padding: 10px 8px; }
-    .nm { flex: 1 1 100%; white-space: normal; }
-    .pos { width: 44px; }
-    .mkt, .edge, .val { width: auto; min-width: 46px; }
-    .row .acts { visibility: visible; margin-left: auto; }
-    .btn { padding: 9px 14px; }
-    #hint { display: none; }
-    .sortgrp { margin-left: 0; }
-  }
-"""
 
 
 def _clean(v):
@@ -93,9 +69,6 @@ def players_payload(draft: Draft) -> list[dict]:
 
 def build_html() -> str:
     html = Path("templates/index.html").read_text(encoding="utf-8")
-
-    html = html.replace('<meta charset="utf-8">', '<meta charset="utf-8">\n' + VIEWPORT, 1)
-    html = html.replace("</style>", MOBILE_CSS + "</style>", 1)
 
     # The shim must replace fetch before the page's own <script> runs.
     html = html.replace(
