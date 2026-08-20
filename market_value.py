@@ -169,11 +169,15 @@ def merged() -> pd.DataFrame:
     vals = pd.read_csv(DATA / "auction_values.csv")
     vals["key"] = vals["name"].map(_norm)
 
-    mkt = build()[["key", "adp", "market", "source", "status", "out"]].drop_duplicates("key")
+    # aav_200 rides along as a reference: it is the price on the $200 scale that
+    # every published auction board uses, so it can be compared directly against
+    # any list without mentally undoing our $269 budget.
+    mkt = build()[["key", "adp", "market", "aav_200", "source", "status", "out"]].drop_duplicates("key")
 
     df = vals.merge(mkt, on="key", how="left")
     df["has_market"] = df["market"].notna()
     df["market"] = df["market"].fillna(1).astype(int)
+    df["mkt_200"] = df["aav_200"].round(0).clip(lower=1).fillna(1).astype(int)
     df["source"] = df["source"].fillna("curve")
     df["status"] = df["status"].fillna("")
     df["out"] = df["out"].fillna(False).astype(bool)

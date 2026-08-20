@@ -91,7 +91,7 @@
     border-bottom: 1px solid var(--border); font-size: 10px; color: var(--muted-2);
     text-transform: uppercase; letter-spacing: .6px;
   }
-  #head .nm, #head .val, #head .rng, #head .mkt, #head .edge { font-weight: 400; color: var(--muted-2); }
+  #head .nm, #head .val, #head .rng, #head .mkt, #head .edge, #head .lg2 { font-weight: 400; color: var(--muted-2); }
   #side { width: 290px; flex-shrink: 0; position: sticky; top: 92px; }
 
   .row {
@@ -116,6 +116,7 @@
   .val.poor { color: var(--muted-2); }
   .adp { width: 46px; text-align: right; font-size: 11px; color: var(--muted-2); }
   .mkt { width: 52px; text-align: right; font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .lg2 { width: 50px; text-align: right; font-size: 12px; color: var(--muted-3); font-variant-numeric: tabular-nums; }
   .edge { width: 52px; text-align: right; font-size: 14px; font-weight: 700; font-variant-numeric: tabular-nums; }
   .edge.up { color: var(--green); }
   .edge.dn { color: var(--red); }
@@ -203,24 +204,26 @@
        actions belong to the tapped row instead - that keeps ~10 players on
        screen for scanning rather than 5. */
     .row {
-      display: grid; align-items: center; gap: 2px 8px; padding: 9px 10px;
-      grid-template-columns: 46px 1fr auto;
-      grid-template-areas: "pos nm val" "mkt edge rng" "acts acts acts";
+      display: grid; align-items: center; gap: 2px 6px; padding: 9px 10px;
+      grid-template-columns: 56px 50px 1fr auto;
+      grid-template-areas: "pos nm nm val" "mkt lg2 edge rng" "acts acts acts acts";
     }
     .row .pos { grid-area: pos; width: auto; }
     .row .nm { grid-area: nm; white-space: normal; }
     .row .val { grid-area: val; width: auto; }
     .row .adp { display: none; }
     .row .mkt { grid-area: mkt; width: auto; text-align: left; }
+    .row .lg2 { grid-area: lg2; width: auto; text-align: left; }
     .row .edge { grid-area: edge; width: auto; text-align: left; }
     .row .rng { grid-area: rng; width: auto; text-align: right; }
     .row .rng i { display: inline; margin-left: 4px; }
 
     /* No column headers on a phone, so name the numbers inline. */
-    .row .mkt::before, .row .edge::before, .row .rng::before {
+    .row .mkt::before, .row .lg2::before, .row .edge::before, .row .rng::before {
       font-size: 10px; color: var(--muted-2); text-transform: uppercase; letter-spacing: .04em;
     }
     .row .mkt::before { content: "mkt "; }
+    .row .lg2::before { content: "@200 "; }
     .row .edge::before { content: "edge "; }
     .row .rng::before { content: "bid "; }
 
@@ -310,10 +313,11 @@
       <div class="nm">Player</div>
       <div class="adp">ADP</div>
       <div class="mkt">Market</div>
+      <div class="lg2">@ $200</div>
       <div class="edge">Edge</div>
       <div class="rng">Bid range</div>
       <div class="val">Value</div>
-      <div style="width:184px"></div>
+      <div style="width:171px"></div>   <!-- matches the rendered width of .acts -->
     </div>
     <div id="list"></div>
   </div>
@@ -349,8 +353,7 @@ const $ = id => document.getElementById(id);
 const TOUCH = window.matchMedia('(pointer: coarse)').matches || window.innerWidth <= 820;
 const focusQ = () => { if (!TOUCH) $('q').focus(); };
 
-const paintTheme = () => {
-  $('theme').textContent = document.documentElement.dataset.theme === 'dark' ? '☀' : '☾';
+const paintTheme = () => {  $('theme').textContent = document.documentElement.dataset.theme === 'dark' ? '☀' : '☾';
 };
 $('theme').onclick = () => {
   const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
@@ -400,6 +403,7 @@ function draw() {
         ${p.exp_rank ? `<span class="meta exp ${p.exp_move > 1 ? 'up' : p.exp_move < -1 ? 'dn' : ''}" title="expert ${p.position}${p.exp_rank} vs ADP ${p.position}${p.exp_adp}">EX ${p.position}${p.exp_rank}${p.exp_adp !== p.exp_rank ? ` (${p.exp_adp > p.exp_rank ? '▲' : '▼'}${Math.abs(p.exp_adp - p.exp_rank)})` : ''}</span>` : ''}</div>
       <div class="adp">${p.adp ?? '–'}</div>
       <div class="mkt">$${p.market}</div>
+      <div class="lg2" title="Yahoo's own price for this player in a standard $200 auction">$${p.mkt_200 ?? 1}</div>
       <div class="edge ${ec}">${e}</div>
       <div class="rng">${p.min}–${p.max}${p.over_budget ? `<i>cap $${myMax}</i>` : ''}</div>
       <div class="val ${p.adj < 1 ? 'poor' : ''}">$${p.adj}</div>

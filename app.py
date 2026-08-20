@@ -151,6 +151,7 @@ def api_players():
             "affordable": adj <= max_bid,
             "adp": _clean(round(float(r.adp), 1) if pd.notna(r.adp) else None),
             "market": int(r.market),
+            "mkt_200": int(getattr(r, "mkt_200", 1)),
             "edge": int(r.edge),
             "low_conf": bool(r.low_conf),
             "thin": bool(getattr(r, "thin", False)) and int(r.edge) != 0,

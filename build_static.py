@@ -50,6 +50,7 @@ def players_payload(draft: Draft) -> list[dict]:
             "value": int(r.value),
             "adp": _clean(round(float(r.adp), 1) if pd.notna(r.adp) else None),
             "market": int(r.market),
+            "mkt_200": int(getattr(r, "mkt_200", 1)),
             "edge": edge,
             "low_conf": bool(r.low_conf),
             "thin": thin and edge != 0,
