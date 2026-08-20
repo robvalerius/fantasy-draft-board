@@ -115,6 +115,11 @@
   .val { width: 56px; text-align: right; font-size: 19px; font-weight: 700; color: var(--green); }
   .val.poor { color: var(--muted-2); }
   .adp { width: 46px; text-align: right; font-size: 11px; color: var(--muted-2); }
+  /* On desktop the four price cells are plain columns of the row; `contents`
+     removes the wrapper from layout entirely so nothing shifts. On a phone the
+     same wrapper becomes a flex strip that spreads them across the full width. */
+  .band { display: contents; }
+
   .mkt { width: 52px; text-align: right; font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
   .lg2 { width: 50px; text-align: right; font-size: 12px; color: var(--muted-3); font-variant-numeric: tabular-nums; }
   .edge { width: 52px; text-align: right; font-size: 14px; font-weight: 700; font-variant-numeric: tabular-nums; }
@@ -205,17 +210,21 @@
        screen for scanning rather than 5. */
     .row {
       display: grid; align-items: center; gap: 2px 6px; padding: 9px 10px;
-      grid-template-columns: 56px 50px 1fr auto;
-      grid-template-areas: "pos nm nm val" "mkt lg2 edge rng" "acts acts acts acts";
+      grid-template-columns: 56px 1fr auto;
+      grid-template-areas: "pos nm val" "band band band" "acts acts acts";
     }
     .row .pos { grid-area: pos; width: auto; }
     .row .nm { grid-area: nm; white-space: normal; }
     .row .val { grid-area: val; width: auto; }
     .row .adp { display: none; }
-    .row .mkt { grid-area: mkt; width: auto; text-align: left; }
-    .row .lg2 { grid-area: lg2; width: auto; text-align: left; }
-    .row .edge { grid-area: edge; width: auto; text-align: left; }
-    .row .rng { grid-area: rng; width: auto; text-align: right; }
+
+    /* Spread the four numbers evenly instead of packing them left. */
+    .row .band {
+      grid-area: band; display: flex; justify-content: space-between;
+      align-items: baseline; gap: 6px; margin-top: 1px;
+    }
+    .row .mkt, .row .lg2, .row .edge { width: auto; text-align: left; }
+    .row .rng { width: auto; text-align: right; }
     .row .rng i { display: inline; margin-left: 4px; }
 
     /* No column headers on a phone, so name the numbers inline. */
@@ -227,8 +236,7 @@
     .row .edge::before { content: "edge "; }
     .row .rng::before { content: "bid "; }
 
-    .row .acts { grid-area: acts; display: none; margin-top: 8px; }
-    .row.sel .acts { display: flex; visibility: visible; }
+    .row .acts { grid-area: acts; display: none; margin-top: 8px; }    .row.sel .acts { display: flex; visibility: visible; }
     .acts .btn { flex: 1; padding: 12px; font-size: 13px; }
     .px { width: 62px; font-size: 16px; }   /* 16px stops iOS zooming on focus */
 
@@ -312,10 +320,12 @@
       <div class="pos">Pos</div>
       <div class="nm">Player</div>
       <div class="adp">ADP</div>
-      <div class="mkt">Market</div>
-      <div class="lg2">@ $200</div>
-      <div class="edge">Edge</div>
-      <div class="rng">Bid range</div>
+      <div class="band">
+        <div class="mkt">Market</div>
+        <div class="lg2">@ $200</div>
+        <div class="edge">Edge</div>
+        <div class="rng">Bid range</div>
+      </div>
       <div class="val">Value</div>
       <div style="width:171px"></div>   <!-- matches the rendered width of .acts -->
     </div>
@@ -402,10 +412,12 @@ function draw() {
         ${p.team_change ? `<span class="meta">→${p.team_change}</span>` : ''}
         ${p.exp_rank ? `<span class="meta exp ${p.exp_move > 1 ? 'up' : p.exp_move < -1 ? 'dn' : ''}" title="expert ${p.position}${p.exp_rank} vs ADP ${p.position}${p.exp_adp}">EX ${p.position}${p.exp_rank}${p.exp_adp !== p.exp_rank ? ` (${p.exp_adp > p.exp_rank ? '▲' : '▼'}${Math.abs(p.exp_adp - p.exp_rank)})` : ''}</span>` : ''}</div>
       <div class="adp">${p.adp ?? '–'}</div>
-      <div class="mkt">$${p.market}</div>
-      <div class="lg2" title="Yahoo's own price for this player in a standard $200 auction">$${p.mkt_200 ?? 1}</div>
-      <div class="edge ${ec}">${e}</div>
-      <div class="rng">${p.min}–${p.max}${p.over_budget ? `<i>cap $${myMax}</i>` : ''}</div>
+      <div class="band">
+        <div class="mkt">$${p.market}</div>
+        <div class="lg2" title="Yahoo's own price for this player in a standard $200 auction">$${p.mkt_200 ?? 1}</div>
+        <div class="edge ${ec}">${e}</div>
+        <div class="rng">${p.min}–${p.max}${p.over_budget ? `<i>cap $${myMax}</i>` : ''}</div>
+      </div>
       <div class="val ${p.adj < 1 ? 'poor' : ''}">$${p.adj}</div>
       <div class="acts">
         <input class="px" value="${price ?? ''}" placeholder="$" data-px="${i}">
