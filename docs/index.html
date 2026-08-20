@@ -135,10 +135,13 @@
     .stat b { font-size: 18px; }
     #bar .btn { padding: 9px 14px; }
 
-    #tabs { padding: 7px 8px; gap: 5px; overflow-x: auto; flex-wrap: nowrap; }
-    #tabs::-webkit-scrollbar { display: none; }
-    .tab { flex: 0 0 auto; padding: 8px 14px; }
-    .sortgrp { margin-left: 6px; flex: 0 0 auto; }
+    /* Wrap rather than scroll horizontally: a hidden scroll track is easy to
+       miss and hard to reach one-handed. Sort gets its own full-width line so
+       the position filters always fit above it. */
+    #tabs { padding: 6px 8px; gap: 5px; flex-wrap: wrap; overflow: visible; }
+    .tab { flex: 0 0 auto; padding: 7px 11px; font-size: 12px; }
+    .sortgrp { flex: 1 0 100%; margin-left: 0; margin-top: 1px; }
+    .sortgrp .tab { padding: 6px 10px; }
     #hint, #head { display: none; }
 
     #wrap { flex-direction: column; padding: 0 8px 24px; gap: 0; }
@@ -220,8 +223,8 @@
   <div class="tab" data-pos="RB">RB</div>
   <div class="tab" data-pos="WR">WR</div>
   <div class="tab" data-pos="TE">TE</div>
-  <div class="tab star" data-watch="1">★ Watchlist</div>
-  <div class="tab tgt-tab" data-target="1">◆ My targets</div>
+  <div class="tab star" data-watch="1">★ Watch</div>
+  <div class="tab tgt-tab" data-target="1">◆ Targets</div>
   <span class="sortgrp">
     <span class="sortlbl">sort</span>
     <div class="tab sort on" data-sort="value">Value</div>
