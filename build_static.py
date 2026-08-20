@@ -133,8 +133,18 @@ def main() -> None:
     (OUT / "index.html").write_text(build_html(), encoding="utf-8")
     (OUT / ".nojekyll").write_text("", encoding="utf-8")
 
+    # A single self-contained file needs no hosting at all: AirDrop or email it
+    # to a phone and open it from Files. Same board, fully offline.
+    single = (build_html()
+              .replace('<script src="data.js"></script>',
+                       "<script>" + (OUT / "data.js").read_text(encoding="utf-8") + "</script>")
+              .replace('<script src="shim.js"></script>',
+                       "<script>" + Path("static_shim.js").read_text(encoding="utf-8") + "</script>"))
+    Path("draft-board.html").write_text(single, encoding="utf-8")
+
     kb = sum(f.stat().st_size for f in OUT.iterdir()) // 1024
     print(f"  docs/  {len(data['players'])} players, {kb} KB")
+    print(f"  draft-board.html  {Path('draft-board.html').stat().st_size // 1024} KB standalone")
     print("  open docs/index.html to test, then push and enable Pages on /docs")
 
 
