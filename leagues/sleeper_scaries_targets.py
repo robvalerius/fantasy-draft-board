@@ -35,25 +35,39 @@ PLAN = [
     ("RB",   "25-40", "A second every-week starter with a clean backfield. "
                       "Committee backs never clear the first-down threshold."),
     ("WR",   "25-38", "One receiver you start without thinking. Only one."),
-    ("WR",   "12-22", "Second starter. Half PPR plus a rushing-first-down premium "
-                      "means the receiver room is where the market overpays."),
-    ("TE",   "18-26", "The loudest inefficiency in this league. Reception first "
-                      "downs plus the tight-end first-down bonus make the top TEs "
-                      "score like WR1s while ADP prices them like backups."),
-    ("QB",   "15-30", "Do NOT wait. Completions, attempts, passing first downs and "
-                      "the 25-completion game bonus all pay, and the incompletion "
-                      "penalty is mild. Volume passers are underpriced by ADP."),
-    ("FLEX", "8-16",  "Best remaining back. REC_FLEX takes the leftover WR/TE."),
+    ("WR",   "10-18", "Second starter. Half PPR plus a rushing-first-down premium "
+                      "means the receiver room is where the market overpays. Take "
+                      "whoever falls rather than paying for a name."),
+    ("TE",   "2-8",   "Cheap. The tight-end first-down bonus lifts the WHOLE "
+                      "position, so the gap between the elite tier and a starting "
+                      "chain-mover is small while the price gap is enormous. The top "
+                      "two are still fine buys if nobody else notices them - but the "
+                      "cheap tier captures most of the edge for a fraction of it."),
+    ("QB",   "2-10",  "Do not wait until the end, and do not pay up either. "
+                      "Completions, attempts, passing first downs and the "
+                      "25-completion bonus mean every volume passer clears a big "
+                      "number, so the position is deep, not top-heavy. The elite arm "
+                      "costs several times a near-equal one. Buy the near-equal one."),
+    ("FLEX", "12-20", "Best remaining back. This is a third RB, not a third WR."),
+    ("REC_FLEX", "2-6", "The quiet structural edge: this slot takes a TIGHT END. A "
+                        "second cheap TE here scores close to the WR3 you would "
+                        "otherwise start, and frees most of that money for the "
+                        "backfield. Do not spend WR3 money on this slot."),
     ("K/DEF", "2",    "Minimum bid, both. Neither is projected and neither should be."),
-    ("BN",   "10-20", "Four spots. Handcuff your anchor first, then dart throws."),
+    ("BN",   "12-22", "Four spots. Handcuff your anchor first, then dart throws."),
 ]
 
 BUDGET_NOTE = (
     "Twelve teams and a $200 cap means $2,400 chasing 168 players, so the room is "
-    "shallower than a 14-team league and stars cost relatively more. Rough shape: "
-    "~$120 on two backs, ~$50 on the receiver room, ~$40 combined on QB and TE - "
-    "which is where this league's scoring quietly hands you an edge - and single "
-    "dollars on K, DEF and the back of the bench."
+    "shallower than a 14-team league and stars cost relatively more. The scoring "
+    "hands you one big structural edge: consensus ADP is format-blind, so it prices "
+    "quarterbacks and tight ends as if the volume and first-down bonuses did not "
+    "exist. Both positions are nearly free, and REC_FLEX accepts a tight end. Rough "
+    "shape: the large majority of the budget on three or four backs, one receiver you "
+    "actually want plus scraps, single-digit money on each of QB, TE and the second "
+    "TE that fills REC_FLEX, and minimum bids on K, DEF and the back of the bench. "
+    "Nominate the expensive receivers early to drain other rooms while the cheap "
+    "passers and tight ends sit untouched."
 )
 
 # ---------------------------------------------------------------- targets
@@ -133,8 +147,10 @@ TARGETS: dict[str, tuple[str, str]] = {
     "Josh Allen": (
         "value",
         "The rushing quarterback in a format that pays 1.5 per rushing first down on "
-        "top of a generous passing line. He is the highest-scoring player in this "
-        "league by raw points and the market prices him like a normal QB1.",
+        "top of a generous passing line, and the highest-scoring player in the league "
+        "by raw points. Genuinely underpriced - but the cheap volume passers below "
+        "give up only a couple of points a game for a small fraction of the cost, so "
+        "take him only if the room lets him fall.",
     ),
     "Jalen Hurts": (
         "value",
