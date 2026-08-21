@@ -47,6 +47,11 @@ STATS_GRAIN = "season"
 # board is deployed and its payload must not gain keys. See build_static.py.
 EXTRA_PAYLOAD: dict = {}
 
+# This league has no per-game threshold bonuses and no positional first-down
+# bonus. Both empty means scoring.py behaves exactly as it always has.
+GAME_BONUSES: list[tuple[str, float, float]] = []
+FIRST_DOWN_BONUS: dict[str, float] = {}
+
 # 10 starters + 3 bench + 1 IR
 STARTERS = {
     "QB": 1,

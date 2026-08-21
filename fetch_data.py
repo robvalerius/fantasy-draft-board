@@ -25,6 +25,27 @@ def fetch_nflverse_stats() -> None:
         print(f"  saved   stats_{season}.csv ({len(df)} rows)")
 
 
+def fetch_nflverse_weekly() -> None:
+    """Per-game box scores.
+
+    The Yahoo league scores off season totals, which is why only the season
+    files existed. That is wrong for any league with per-game bonuses: Sleeper
+    pays 1 pt for a 20-carry game and 2 pts for a 25-completion game, and those
+    fire eight or ten times a year, not once. Scoring them off a season total
+    would award them a single time. So leagues with STATS_GRAIN == "week" score
+    from these files instead.
+    """
+    for season in SEASONS:
+        out = DATA / f"stats_week_{season}.csv"
+        if out.exists():
+            print(f"  cached  stats_week_{season}.csv")
+            continue
+        url = f"{NFLVERSE}/stats_player/stats_player_week_{season}.csv"
+        df = pd.read_csv(url, low_memory=False)
+        df.to_csv(out, index=False)
+        print(f"  saved   stats_week_{season}.csv ({len(df)} rows)")
+
+
 def fetch_team_defense() -> None:
     for season in SEASONS:
         out = DATA / f"team_stats_{season}.csv"
@@ -66,23 +87,30 @@ def fetch_sleeper_players(force: bool = False) -> None:
 
 
 def fetch_adp() -> None:
-    """FantasyFootballCalculator ADP - closest public proxy for market value."""
-    for fmt in ("half-ppr", "ppr", "standard"):
-        out = DATA / f"adp_{fmt}.csv"
-        if out.exists():
-            print(f"  cached  adp_{fmt}.csv")
-            continue
-        url = f"https://fantasyfootballcalculator.com/api/v1/adp/{fmt}?teams=14&year=2026"
-        r = requests.get(url, timeout=60)
-        if not r.ok:
-            print(f"  MISS    adp_{fmt} ({r.status_code})")
-            continue
-        players = r.json().get("players", [])
-        if not players:
-            print(f"  EMPTY   adp_{fmt}")
-            continue
-        pd.DataFrame(players).to_csv(out, index=False)
-        print(f"  saved   adp_{fmt}.csv ({len(players)} players)")
+    """FantasyFootballCalculator ADP - closest public proxy for market value.
+
+    Pulled per league size, because a 14-team board and a 12-team board are
+    genuinely different markets. The unsuffixed files are the original 14-team
+    pull and are what the Yahoo league reads; do not rename them.
+    """
+    for teams, suffix in ((14, ""), (12, "_12tm")):
+        for fmt in ("half-ppr", "ppr", "standard"):
+            out = DATA / f"adp_{fmt}{suffix}.csv"
+            if out.exists():
+                print(f"  cached  adp_{fmt}{suffix}.csv")
+                continue
+            url = (f"https://fantasyfootballcalculator.com/api/v1/adp/{fmt}"
+                   f"?teams={teams}&year=2026")
+            r = requests.get(url, timeout=60)
+            if not r.ok:
+                print(f"  MISS    adp_{fmt}{suffix} ({r.status_code})")
+                continue
+            players = r.json().get("players", [])
+            if not players:
+                print(f"  EMPTY   adp_{fmt}{suffix}")
+                continue
+            pd.DataFrame(players).to_csv(out, index=False)
+            print(f"  saved   adp_{fmt}{suffix}.csv ({len(players)} players)")
 
 
 def fetch_rosters() -> None:
@@ -101,6 +129,8 @@ if __name__ == "__main__":
     force = "--refresh" in sys.argv
     print("nflverse player stats:")
     fetch_nflverse_stats()
+    print("nflverse weekly stats:")
+    fetch_nflverse_weekly()
     print("nflverse team stats:")
     fetch_team_defense()
     print("nflverse rosters:")

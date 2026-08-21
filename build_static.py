@@ -34,6 +34,7 @@ from targets import BUDGET_NOTE, PLAN, note_of
 from watchlist import TEAM_CHANGES
 
 OUT = DOCS_DIR
+LIVE_SYNC_JS = Path("sleeper_live.js")
 
 
 def _clean(v):
@@ -92,6 +93,12 @@ def build_html() -> str:
         "Clears every pick and restores all players. Cannot be undone.",
         "Clears every pick on this device. Draft state is saved in this browser only.",
     )
+    # Live pick sync, for leagues whose provider has a public draft API. Appended
+    # last so document.body and the page's own load() already exist, and gated so
+    # the deployed Yahoo board's HTML is untouched.
+    if LEAGUE_SLUG != "yahoo_belt" and LIVE_SYNC_JS.exists():
+        html = html.replace(
+            "</body>", '<script src="sleeper.js"></script>\n</body>', 1)
     return html
 
 
@@ -123,6 +130,8 @@ def main() -> None:
         "const DATA = " + json.dumps(data, separators=(",", ":")) + ";",
         encoding="utf-8")
     shutil.copy("static_shim.js", OUT / "shim.js")
+    if LEAGUE_SLUG != "yahoo_belt" and LIVE_SYNC_JS.exists():
+        shutil.copy(LIVE_SYNC_JS, OUT / "sleeper.js")
     (OUT / "index.html").write_text(build_html(), encoding="utf-8")
     (OUT / ".nojekyll").write_text("", encoding="utf-8")
 
@@ -133,6 +142,10 @@ def main() -> None:
                        "<script>" + (OUT / "data.js").read_text(encoding="utf-8") + "</script>")
               .replace('<script src="shim.js"></script>',
                        "<script>" + Path("static_shim.js").read_text(encoding="utf-8") + "</script>"))
+    if LEAGUE_SLUG != "yahoo_belt" and LIVE_SYNC_JS.exists():
+        single = single.replace(
+            '<script src="sleeper.js"></script>',
+            "<script>" + LIVE_SYNC_JS.read_text(encoding="utf-8") + "</script>")
     Path(STANDALONE_HTML).write_text(single, encoding="utf-8")
 
     kb = sum(f.stat().st_size for f in OUT.iterdir() if f.is_file()) // 1024

@@ -1,21 +1,27 @@
-"""Market auction price (AAV) for Battle for the Belt XIV.
+"""Market auction price (AAV) for the active league.
 
-The best market data we have is Yahoo's own "Avg. $" column from the mock
-draft room - that is what teams in this exact format actually paid. The mock
-runs on Yahoo's default $200 cap while our league uses $269, so every observed
-price is scaled by the budget multiple:
+Two sources, chosen by MARKET_SOURCE in the league config.
 
-    OUR_MULTIPLE = 269 / 200 = 1.345
+MARKET_SOURCE = "yahoo_aav"  (Battle for the Belt XIV)
+    The best market data we have is Yahoo's own "Avg. $" column from the mock
+    draft room - that is what teams in this exact format actually paid. The
+    mock runs on Yahoo's default $200 cap while that league uses $269, so every
+    observed price is scaled by the budget multiple. Observed prices live in
+    data/yahoo_aav.csv and cover roughly the top 135 players; anyone missing
+    falls back to the curve below. Observed always wins.
 
-Observed prices live in data/yahoo_aav.csv and cover roughly the top 135
-players. Anyone not in that file falls back to a curve fitted to the same
-observations and extended down to the $1 minimum. Observed always wins.
+    That file also carries Yahoo's injury tag. It matters: a player can look
+    like a huge bargain purely because the market knows he is hurt and we do
+    not. George Kittle at $2.7 is not market stupidity, he is on PUP.
 
-That file also carries Yahoo's injury tag. It matters: a player can look like a
-huge bargain purely because the market knows he is hurt and we do not. George
-Kittle at $2.7 is not market stupidity, he is on PUP.
+    To extend: add rows to data/yahoo_aav.csv. No code change needed.
 
-To extend: add rows to data/yahoo_aav.csv. No code change needed.
+MARKET_SOURCE = "curve"  (Sunday Scaries Society)
+    No auction price file exists for a Sleeper league and ADP sites publish
+    draft position, not dollars. So every player is priced off the curve, using
+    a 12-team ADP pull, and _fit_deflation solves the level so the drafted pool
+    sums to the real money in the room. Injury signal then comes entirely from
+    Sleeper's live feed, which is the better source anyway.
 """
 
 from pathlib import Path
@@ -122,6 +128,11 @@ def _fit_deflation(aav: np.ndarray) -> float:
     keeps the ordering, pins the most expensive player to his observed price,
     and lifts the tail by more than the top. q is solved so the pool balances,
     which means this recalibrates itself as more prices are added.
+
+    The same form runs in reverse. A league priced entirely off the curve
+    (Sleeper) inherits a curve shaped by a 14-team room, so its pool comes out
+    too rich for 12 teams - $2,706 against $2,400. q > 1 deflates instead of
+    inflating, and the identical solve lands the pool on the real money.
     """
     x = np.clip(aav - 1.0, 0, None)
     top = float(aav.max())
@@ -132,8 +143,18 @@ def _fit_deflation(aav: np.ndarray) -> float:
         return slots + (top ** (1 - q)) * float(np.sum(x ** q))
 
     lo, hi = 0.05, 1.0
-    if total(hi) > target:      # already rich enough, no correction possible
-        return 1.0
+    if total(hi) > target:
+        # Pool is already too rich. Deflate: total falls as q rises.
+        lo, hi = 1.0, 2.0
+        while total(hi) > target and hi < 64:
+            hi *= 2
+        for _ in range(80):
+            mid = (lo + hi) / 2
+            if total(mid) > target:
+                lo = mid
+            else:
+                hi = mid
+        return hi
     for _ in range(80):
         mid = (lo + hi) / 2
         if total(mid) > target:

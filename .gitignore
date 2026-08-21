@@ -11,6 +11,7 @@ cache/
 
 data/draft_state.csv
 draft-board.html
+draft-board-sleeper.html
 
 node_modules/
 package-lock.json

@@ -230,7 +230,7 @@ if __name__ == "__main__":
     df = build()
     levels = replacement_levels(build_projections())
 
-    print("\n=== REPLACEMENT LEVEL (14-team, flex-aware) ===")
+    print(f"\n=== REPLACEMENT LEVEL ({NUM_TEAMS}-team, flex-aware) ===")
     for pos, pts in sorted(levels.items()):
         print(f"  {pos:4} {pts:7.1f} pts")
 
