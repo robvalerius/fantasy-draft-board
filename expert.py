@@ -23,9 +23,10 @@ import numpy as np
 import pandas as pd
 
 import market_value as MV
+from league_config import EXPERT_RANKS, SHARED_DATA
 
 WEIGHT = 0.60          # how much of his disagreement-with-ADP we take
-PATH = "data/expert_ranks.csv"
+PATH = SHARED_DATA / EXPERT_RANKS
 
 ALIAS = {"kenneth gainwell": "kenny gainwell"}
 

@@ -17,18 +17,17 @@ Commands:
 
 import re
 import sys
-from pathlib import Path
 
 import pandas as pd
 
 import expert
 import market_value
-from league_config import BUDGET, NUM_TEAMS, ROSTER_SIZE, STARTERS
+from league_config import BUDGET, DATA_DIR, NUM_TEAMS, ROSTER_SIZE, STARTERS
 from targets import TIER_LABEL, note_of, tier_of
 from watchlist import TEAM_CHANGES, is_watched
 
-DATA = Path(__file__).parent / "data"
-STATE = DATA / "draft_state.csv"
+DATA_DIR.mkdir(parents=True, exist_ok=True)
+STATE = DATA_DIR / "draft_state.csv"
 
 
 def _paid(sale: dict) -> int:

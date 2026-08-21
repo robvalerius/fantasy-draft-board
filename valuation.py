@@ -1,13 +1,23 @@
-"""2026 projections + VORP + auction dollar values for Battle for the Belt XIV."""
-
-from pathlib import Path
+"""2026 projections + VORP + auction dollar values for the active league."""
 
 import numpy as np
 import pandas as pd
 
-from league_config import BUDGET, NUM_TEAMS, ROSTER_SIZE, STARTERS
+from league_config import (
+    BUDGET,
+    DATA_DIR,
+    FLEX_ELIGIBLE,
+    NUM_TEAMS,
+    ROSTER_SIZE,
+    SHARED_DATA,
+    STARTERS,
+)
 
-DATA = Path(__file__).parent / "data"
+DATA = SHARED_DATA
+
+# The positions a player can actually be. Everything else in STARTERS is a flex
+# slot, resolved through FLEX_ELIGIBLE.
+BASE_POSITIONS = ("QB", "RB", "WR", "TE")
 
 SEASON_WEIGHTS = {2025: 0.60, 2024: 0.28, 2023: 0.12}
 
@@ -59,7 +69,7 @@ def _norm(name: str) -> str:
 
 
 def build_projections() -> pd.DataFrame:
-    hist = pd.read_csv(DATA / "scored_history.csv")
+    hist = pd.read_csv(DATA_DIR / "scored_history.csv")
     hist["key"] = hist["name"].map(_norm)
 
     # Weighted per-game average across seasons
@@ -143,19 +153,19 @@ def build_projections() -> pd.DataFrame:
 def replacement_levels(df: pd.DataFrame) -> dict[str, float]:
     """Points of the last startable player at each position, flex-aware."""
     need = {
-        "QB": STARTERS["QB"] * NUM_TEAMS,
-        "RB": STARTERS["RB"] * NUM_TEAMS,
-        "WR": STARTERS["WR"] * NUM_TEAMS,
-        "TE": STARTERS["TE"] * NUM_TEAMS,
+        pos: STARTERS.get(pos, 0) * NUM_TEAMS
+        for pos in BASE_POSITIONS
+        if STARTERS.get(pos, 0)
     }
 
     pools = {p: df[df["position"] == p].sort_values("proj_points", ascending=False)
              for p in need}
     taken = {p: need[p] for p in need}
 
-    # W/T flex -> best remaining WR or TE ; W/R/T -> best remaining WR/RB/TE
-    for slot, eligible in (("W/T", ("WR", "TE")), ("W/R/T", ("WR", "RB", "TE"))):
-        for _ in range(STARTERS[slot] * NUM_TEAMS):
+    # Each flex slot takes the best remaining eligible player. FLEX_ELIGIBLE is
+    # ordered, which is what breaks exact ties, so iterate it as given.
+    for slot, eligible in FLEX_ELIGIBLE.items():
+        for _ in range(STARTERS.get(slot, 0) * NUM_TEAMS):
             best_pos, best_val = None, -1e9
             for pos in eligible:
                 idx = taken[pos]
@@ -211,7 +221,8 @@ def build() -> pd.DataFrame:
         "proj_points", "proj_ppg", "vorp", "value", "injury_status",
         "games_total", "seasons",
     ]]
-    out.to_csv(DATA / "auction_values.csv", index=False)
+    DATA_DIR.mkdir(parents=True, exist_ok=True)
+    out.to_csv(DATA_DIR / "auction_values.csv", index=False)
     return out
 
 

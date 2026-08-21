@@ -23,9 +23,9 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-from league_config import BUDGET, NUM_TEAMS, ROSTER_SIZE
+from league_config import ADP_FILE, BUDGET, DATA_DIR, MARKET_SOURCE, NUM_TEAMS, ROSTER_SIZE, SHARED_DATA
 
-DATA = Path(__file__).parent / "data"
+DATA = SHARED_DATA
 
 YAHOO_BUDGET = 200
 OUR_MULTIPLE = BUDGET / YAHOO_BUDGET
@@ -76,6 +76,14 @@ def _norm(name: str) -> str:
 
 
 def load_observed() -> pd.DataFrame:
+    """Observed auction prices, when the league has any.
+
+    Only the Yahoo league does: data/yahoo_aav.csv is scraped from its mock
+    draft room. A league with no observed-price file (Sleeper) gets an empty
+    frame here and prices entirely off the ADP curve in build().
+    """
+    if MARKET_SOURCE != "yahoo_aav":
+        return pd.DataFrame(columns=["key", "name", "position", "aav_200", "status", "out"])
     df = pd.read_csv(DATA / "yahoo_aav.csv")
     df["key"] = df["name"].map(_norm)
     df["status"] = df["status"].fillna("").str.strip()
@@ -147,7 +155,7 @@ def _scale_to_our_budget(aav_200: pd.Series) -> pd.Series:
 
 
 def build() -> pd.DataFrame:
-    adp = pd.read_csv(DATA / "adp_half-ppr.csv")
+    adp = pd.read_csv(DATA / ADP_FILE)
     adp = adp.dropna(subset=["adp"]).sort_values("adp").reset_index(drop=True)
     adp["key"] = adp["name"].map(_norm)
 
@@ -177,13 +185,14 @@ def build() -> pd.DataFrame:
 
     out = adp[["key", "name", "position", "team", "adp", "raw_200", "aav_200",
                "market", "source", "status", "out"]]
-    out.to_csv(DATA / "market_values.csv", index=False)
+    DATA_DIR.mkdir(parents=True, exist_ok=True)
+    out.to_csv(DATA_DIR / "market_values.csv", index=False)
     return out
 
 
 def merged() -> pd.DataFrame:
     """League value joined to market price, with the gap between them."""
-    vals = pd.read_csv(DATA / "auction_values.csv")
+    vals = pd.read_csv(DATA_DIR / "auction_values.csv")
     vals["key"] = vals["name"].map(_norm)
 
     # aav_200 rides along as a reference: it is the price on the $200 scale that

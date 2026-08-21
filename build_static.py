@@ -19,11 +19,21 @@ import pandas as pd
 
 from app import POSITIONS, bid_range  # noqa: F401  (bid_range ported in JS)
 from draft import Draft
-from league_config import BUDGET, NUM_TEAMS, ROSTER_SIZE, STARTERS
+from league_config import (
+    BUDGET,
+    DOCS_DIR,
+    EXTRA_PAYLOAD,
+    LEAGUE_NAME,
+    LEAGUE_SLUG,
+    NUM_TEAMS,
+    ROSTER_SIZE,
+    STANDALONE_HTML,
+    STARTERS,
+)
 from targets import BUDGET_NOTE, PLAN, note_of
 from watchlist import TEAM_CHANGES
 
-OUT = Path("docs")
+OUT = DOCS_DIR
 
 
 def _clean(v):
@@ -87,7 +97,7 @@ def build_html() -> str:
 
 def main() -> None:
     draft = Draft()
-    OUT.mkdir(exist_ok=True)
+    OUT.mkdir(parents=True, exist_ok=True)
 
     data = {
         "cap": BUDGET,
@@ -99,6 +109,15 @@ def main() -> None:
         "budget_note": BUDGET_NOTE,
         "players": players_payload(draft),
     }
+
+    # Extra keys are added only for leagues other than the original. The Yahoo
+    # board is deployed and in use, and its data.js must stay byte-for-byte what
+    # it was before this file learned about a second league - so the default
+    # league's payload keeps exactly the keys it always had.
+    if LEAGUE_SLUG != "yahoo_belt":
+        data["league_name"] = LEAGUE_NAME
+        data["league_slug"] = LEAGUE_SLUG
+        data.update(EXTRA_PAYLOAD)
 
     (OUT / "data.js").write_text(
         "const DATA = " + json.dumps(data, separators=(",", ":")) + ";",
@@ -114,11 +133,11 @@ def main() -> None:
                        "<script>" + (OUT / "data.js").read_text(encoding="utf-8") + "</script>")
               .replace('<script src="shim.js"></script>',
                        "<script>" + Path("static_shim.js").read_text(encoding="utf-8") + "</script>"))
-    Path("draft-board.html").write_text(single, encoding="utf-8")
+    Path(STANDALONE_HTML).write_text(single, encoding="utf-8")
 
-    kb = sum(f.stat().st_size for f in OUT.iterdir()) // 1024
-    print(f"  docs/  {len(data['players'])} players, {kb} KB")
-    print(f"  draft-board.html  {Path('draft-board.html').stat().st_size // 1024} KB standalone")
+    kb = sum(f.stat().st_size for f in OUT.iterdir() if f.is_file()) // 1024
+    print(f"  {OUT}/  {len(data['players'])} players, {kb} KB")
+    print(f"  {STANDALONE_HTML}  {Path(STANDALONE_HTML).stat().st_size // 1024} KB standalone")
     print("  open docs/index.html to test, then push and enable Pages on /docs")
 
 

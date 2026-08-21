@@ -1,12 +1,12 @@
-"""Score every real NFL player under Battle for the Belt XIV rules."""
-
-from pathlib import Path
+"""Score every real NFL player under the active league's rules."""
 
 import pandas as pd
 
+from league_config import DATA_DIR, SHARED_DATA
 from scoring import score_offense
 
-DATA = Path(__file__).parent / "data"
+# Raw box scores are the same for every league; the scored output is not.
+DATA = SHARED_DATA
 
 # nflverse column -> our scoring key
 OFFENSE_MAP = {
@@ -70,7 +70,8 @@ def all_seasons() -> pd.DataFrame:
 
 if __name__ == "__main__":
     df = all_seasons()
-    df.to_csv(DATA / "scored_history.csv", index=False)
+    DATA_DIR.mkdir(parents=True, exist_ok=True)
+    df.to_csv(DATA_DIR / "scored_history.csv", index=False)
 
     latest = df[df["season"] == 2025].sort_values("points", ascending=False)
     print(f"\n=== 2025 in YOUR scoring: top 20 overall ===\n")
@@ -86,4 +87,4 @@ if __name__ == "__main__":
         for i, r in enumerate(top.itertuples(), 1):
             print(f"  {i}. {r.name[:22]:23} {r.points:>7.1f} pts  {r.ppg:>5.1f}/g")
 
-    print(f"\nSaved {len(df)} player-seasons -> data/scored_history.csv")
+    print(f"\nSaved {len(df)} player-seasons -> {DATA_DIR / 'scored_history.csv'}")
