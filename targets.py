@@ -104,6 +104,15 @@ TARGETS = {
     "Trey McBride": ("value",
         "TE1 in our model with a WR1 target share. The edge is real but "
         "smaller than the other tight ends - the market has partly caught on."),
+    "Breece Hall": ("value",
+        "Carrying a Questionable tag, which is why he is cheap - but it is not "
+        "a pin, and the model still has him as a clear top-10 back. Experts rank "
+        "him well ahead of his ADP. Buy the discount the tag creates, and stop "
+        "if the bidding climbs back toward what a healthy RB8 costs."),
+    "Zay Flowers": ("value",
+        "Just cleared his injury tag, and the room has not repriced him yet - "
+        "this window closes as soon as someone checks. Volume-driven WR1 role "
+        "in Baltimore, and the expert consensus is rising on him."),
 
     # ---- DARK HORSE: cheap, with a real path to volume ----------------
     "Bhayshul Tuten": ("dark_horse",
