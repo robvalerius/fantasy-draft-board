@@ -116,15 +116,17 @@ TARGETS = {
         "price, so you are buying the situation, not a discount."),
     "Wan'Dale Robinson": ("dark_horse",
         "New scheme in Tennessee under Saleh/Daboll, large role expected."),
-    "Zach Charbonnet": ("dark_horse",
-        "Now a minimum-bid flier rather than a value play - the ACL rehab and "
-        "a crowded Seattle backfield collapsed his projection. Minimum bid only."),
+    "Zach Charbonnet": ("avoid",
+        "On PUP. The ACL rehab and a crowded Seattle backfield already collapsed "
+        "his projection, and the tag means he cannot help you early. Earlier "
+        "notes had him as a value play - that is long gone."),
     "Josh Downs": ("dark_horse",
         "Pittman traded - 100+ vacated targets. Pierce started camp on PUP. "
         "70+ catches a year already on limited snaps. On your watchlist."),
-    "Jayden Higgins": ("dark_horse",
-        "Locked into a three-down boundary role opposite Collins, who has an "
-        "extensive injury history."),
+    "Jayden Higgins": ("avoid",
+        "ON IR as of the morning of the draft. The three-down boundary role "
+        "opposite Collins was the whole thesis and it is unavailable to you "
+        "now. You hold one IR slot - spend it on someone with a return date."),
     "Tyler Shough": ("dark_horse",
         "QB12 per game over his last 6 starts, six straight 17+ point games. "
         "Adds Etienne and Tyson. Runs near the goal line. Free QB1 upside."),
@@ -243,11 +245,12 @@ AVOID_MAX_EDGE = 3    # an "avoid" pick must not have a real positive edge
 def audit(verbose: bool = True) -> list[str]:
     """Check every target against the live model. Returns a list of problems.
 
-    This is what stops the notes from rotting again. It catches four things:
+    This is what stops the notes from rotting again. It catches five things:
       - a note that hardcodes a dollar figure (they go stale)
       - a `value` pick the model no longer thinks is cheap
       - an `avoid` pick the model actually likes, without a risk exemption
       - a name the board cannot price at all
+      - a player you are told to buy who is flagged out (PUP/IR/etc)
     """
     from draft import Draft
 
@@ -264,6 +267,14 @@ def audit(verbose: bool = True) -> list[str]:
         if r is None:
             problems.append(f"{nm}: not present in the player pool")
             continue
+
+        # Never point at a hurt player with a buy marker. The board renders any
+        # non-avoid tier as a purple diamond, so this would actively mislead.
+        if tier != "avoid" and bool(getattr(r, "out", False)):
+            problems.append(
+                f"{nm}: tier={tier} but flagged out "
+                f"({getattr(r, 'injury_status', None) or getattr(r, 'status', '?')})"
+            )
 
         edge = int(r.value) - int(r.market)
         if tier == "value" and edge < VALUE_MIN_EDGE:

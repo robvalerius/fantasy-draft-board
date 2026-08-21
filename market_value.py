@@ -32,7 +32,24 @@ OUR_MULTIPLE = BUDGET / YAHOO_BUDGET
 
 # Tags that mean the player is not expected to be available week 1. The market
 # has priced this in and our projections have not, so any "edge" is an illusion.
+#
+# Two independent sources, because each one misses things the other catches:
+#   OUT_TAGS         Yahoo's own status column, read from the draft-room
+#                    screenshots in yahoo_aav.csv. Authoritative about how the
+#                    room is pricing a player, but frozen at whenever those
+#                    screenshots were taken.
+#   SLEEPER_OUT_TAGS Sleeper's live injury feed, refreshed by
+#                    `python fetch_data.py --refresh`. Catches anyone who got
+#                    hurt after the screenshots.
+#
+# A player is unavailable if EITHER source says so. Relying on Yahoo alone
+# silently treated post-screenshot injuries as healthy - a player who landed on
+# IR still looked like a live bargain, and optimize.py would start him.
+#
+# "Questionable" is deliberately absent from both sets. It is the normal state
+# of half the league in August and does not mean unavailable.
 OUT_TAGS = {"PUP-P", "IR", "O", "SUSP", "NFI-R"}
+SLEEPER_OUT_TAGS = {"IR", "PUP", "OUT", "DOUBTFUL", "SUSP", "SUSPENDED", "NFI", "DNR"}
 
 # ---------------------------------------------------------------- observed
 # Yahoo "Avg. $" at a $200 cap, read straight from the draft room, in
@@ -181,6 +198,14 @@ def merged() -> pd.DataFrame:
     df["source"] = df["source"].fillna("curve")
     df["status"] = df["status"].fillna("")
     df["out"] = df["out"].fillna(False).astype(bool)
+
+    # Union in Sleeper's live injury feed. yahoo_aav.csv is a snapshot and goes
+    # stale between the screenshots and draft night; this is what catches a
+    # player who landed on IR or PUP in the meantime.
+    inj = (df.get("injury_status", pd.Series("", index=df.index))
+             .fillna("").astype(str).str.strip().str.upper())
+    df["out_sleeper"] = inj.isin(SLEEPER_OUT_TAGS)
+    df["out"] = df["out"] | df["out_sleeper"]
     df["edge"] = df["value"] - df["market"]
 
     # Two different kinds of uncertainty, previously conflated.

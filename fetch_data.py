@@ -37,10 +37,14 @@ def fetch_team_defense() -> None:
         print(f"  saved   team_stats_{season}.csv ({len(df)} rows)")
 
 
-def fetch_sleeper_players() -> None:
+def fetch_sleeper_players(force: bool = False) -> None:
+    """Sleeper carries the injury tags. Unlike the historical stats files this
+    one goes stale fast, so it takes a --refresh flag. Injury status drives
+    OUT_TAGS in market_value.py, which pins hurt players to replacement level.
+    """
     out = DATA / "sleeper_players.json"
-    if out.exists():
-        print("  cached  sleeper_players.json")
+    if out.exists() and not force:
+        print("  cached  sleeper_players.json  (use --refresh for live injuries)")
         return
     r = requests.get("https://api.sleeper.app/v1/players/nfl", timeout=120)
     r.raise_for_status()
@@ -92,6 +96,9 @@ def fetch_rosters() -> None:
 
 
 if __name__ == "__main__":
+    import sys
+
+    force = "--refresh" in sys.argv
     print("nflverse player stats:")
     fetch_nflverse_stats()
     print("nflverse team stats:")
@@ -99,7 +106,7 @@ if __name__ == "__main__":
     print("nflverse rosters:")
     fetch_rosters()
     print("sleeper:")
-    fetch_sleeper_players()
+    fetch_sleeper_players(force=force)
     print("adp:")
     fetch_adp()
     print(f"\nAll data in {DATA}")
