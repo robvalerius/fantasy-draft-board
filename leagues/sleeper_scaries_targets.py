@@ -29,15 +29,21 @@ from __future__ import annotations
 # ---------------------------------------------------------------- the plan
 
 PLAN = [
-    ("RB",   "55-70", "One true anchor, and pay up. A rushing first down is worth "
-                      "1.75 to a back here against 0.25 in a normal league, so "
-                      "bell-cow volume is the single most valuable thing on the board."),
-    ("RB",   "25-40", "A second every-week starter with a clean backfield. "
-                      "Committee backs never clear the first-down threshold."),
-    ("WR",   "25-38", "One receiver you start without thinking. Only one."),
-    ("WR",   "10-18", "Second starter. Half PPR plus a rushing-first-down premium "
-                      "means the receiver room is where the market overpays. Take "
-                      "whoever falls rather than paying for a name."),
+    ("RB",   "30-70", "Three backs is the shape, and it is worth roughly fifty points "
+                      "a season over two - a rushing first down pays 1.75 here against "
+                      "0.25 in a normal league, so the backfield is where points live. "
+                      "How you BUY those three is open, though. An elite anchor plus two "
+                      "cheap backs and three mid-priced backs come out within a handful "
+                      "of points of each other, so do not panic if the anchor gets away "
+                      "from you. Win the room's one bidding war or skip it entirely; "
+                      "just do not end up with two backs."),
+    ("RB",   "15-40", "Second every-week starter with a clean backfield. Committee "
+                      "backs never clear the first-down threshold."),
+    ("WR",   "25-38", "One receiver you start without thinking. Only one - and if you "
+                      "spent big on the backfield, even this one is optional."),
+    ("WR",   "1-10",  "Second and third starters. Half PPR plus a rushing-first-down "
+                      "premium means the receiver room is where the market overpays. "
+                      "Take whoever falls rather than paying for a name."),
     ("TE",   "2-8",   "Cheap. The tight-end first-down bonus lifts the WHOLE "
                       "position, so the gap between the elite tier and a starting "
                       "chain-mover is small while the price gap is enormous. The top "
@@ -48,7 +54,7 @@ PLAN = [
                       "25-completion bonus mean every volume passer clears a big "
                       "number, so the position is deep, not top-heavy. The elite arm "
                       "costs several times a near-equal one. Buy the near-equal one."),
-    ("FLEX", "12-20", "Best remaining back. This is a third RB, not a third WR."),
+    ("FLEX", "12-20", "The third back. This slot is an RB, not a WR."),
     ("REC_FLEX", "2-6", "The quiet structural edge: this slot takes a TIGHT END. A "
                         "second cheap TE here scores close to the WR3 you would "
                         "otherwise start, and frees most of that money for the "
@@ -62,12 +68,14 @@ BUDGET_NOTE = (
     "shallower than a 14-team league and stars cost relatively more. The scoring "
     "hands you one big structural edge: consensus ADP is format-blind, so it prices "
     "quarterbacks and tight ends as if the volume and first-down bonuses did not "
-    "exist. Both positions are nearly free, and REC_FLEX accepts a tight end. Rough "
-    "shape: the large majority of the budget on three or four backs, one receiver you "
-    "actually want plus scraps, single-digit money on each of QB, TE and the second "
-    "TE that fills REC_FLEX, and minimum bids on K, DEF and the back of the bench. "
-    "Nominate the expensive receivers early to drain other rooms while the cheap "
-    "passers and tight ends sit untouched."
+    "exist. Both positions are nearly free, and REC_FLEX accepts a tight end. "
+    "The optimizer is emphatic about the SHAPE - three backs, two tight ends or a "
+    "cheap third receiver, single digits at quarterback - and relaxed about the "
+    "SPEND. Anchoring the backfield and spreading it across three mid-priced backs "
+    "finish within a handful of points, so treat the one big-ticket bid as optional "
+    "rather than mandatory, and let the room decide which path you take. Nominate "
+    "the expensive receivers early to drain other rosters while the cheap passers "
+    "and tight ends sit untouched."
 )
 
 # ---------------------------------------------------------------- targets
