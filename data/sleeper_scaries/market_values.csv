@@ -1,226 +1,232 @@
 key,name,position,team,adp,raw_200,aav_200,market,source,status,out
-jahmyr gibbs,Jahmyr Gibbs,RB,DET,1.5,72.5,72.36166350536416,72,curve,,False
-bijan robinson,Bijan Robinson,RB,ATL,2.2,70.4,69.97840825273153,70,curve,,False
-puka nacua,Puka Nacua,WR,LAR,3.1,67.7,66.92900668828723,67,curve,,False
-jamarr chase,Ja'Marr Chase,WR,CIN,3.9,65.3,64.23282106424463,64,curve,,False
-jaxon smith njigba,Jaxon Smith-Njigba,WR,SEA,5.4,61.36,59.83715228711611,60,curve,,False
-jonathan taylor,Jonathan Taylor,RB,IND,6.0,60.4,58.77207835103786,59,curve,,False
-christian mccaffrey,Christian McCaffrey,RB,SF,6.7,59.28,57.53252470455979,58,curve,,False
-amon ra st brown,Amon-Ra St. Brown,WR,DET,7.9,57.36,55.41532424181942,55,curve,,False
-james cook,James Cook III,RB,BUF,9.4,54.96,52.78297051347436,53,curve,,False
-derrick henry,Derrick Henry,RB,BAL,10.0,54.0,51.73455215024889,52,curve,,False
-devon achane,De'Von Achane,RB,MIA,11.6,52.08,49.64569153334935,50,curve,,False
-drake london,Drake London,WR,ATL,12.1,51.480000000000004,48.99514571294233,49,curve,,False
-ceedee lamb,CeeDee Lamb,WR,DAL,12.5,51.0,48.47548418046799,48,curve,,False
-justin jefferson,Justin Jefferson,WR,MIN,14.2,48.96,46.27474879285399,46,curve,,False
-ashton jeanty,Ashton Jeanty,RB,LV,14.9,48.12,45.37231989908427,45,curve,,False
-chase brown,Chase Brown,RB,CIN,15.3,47.64,44.85764997018068,45,curve,,False
-rashee rice,Rashee Rice,WR,KC,15.8,47.04,44.21535120763963,44,curve,,False
-saquon barkley,Saquon Barkley,RB,PHI,17.0,45.6,42.67861725439755,43,curve,,False
-george pickens,George Pickens,WR,DAL,19.2,42.96,39.87934504977464,40,curve,,False
-aj brown,A.J. Brown,WR,NE,19.7,42.36,39.24651090609351,39,curve,,False
-kenneth walker,Kenneth Walker,RB,KC,21.8,39.839999999999996,36.60276373631048,37,curve,,False
-nico collins,Nico Collins,WR,HOU,21.9,39.72,36.47745473966992,36,curve,,False
-omarion hampton,Omarion Hampton,RB,LAC,23.5,37.8,34.47997423898161,34,curve,,False
-chris olave,Chris Olave,WR,NO,24.0,37.2,33.85870131650116,34,curve,,False
-zay flowers,Zay Flowers,WR,BAL,25.1,35.9,32.51755794561245,33,curve,,False
-josh jacobs,Josh Jacobs,RB,GB,25.3,35.7,32.31183939788369,32,curve,,False
-kyren williams,Kyren Williams,RB,LAR,26.6,34.4,30.978734432518092,31,curve,,False
-malik nabers,Malik Nabers,WR,NYG,28.3,32.7,29.246371337308794,29,curve,,False
-jeremiyah love,Jeremiyah Love,RB,ARI,29.9,31.1,27.627695577946202,28,curve,,False
-garrett wilson,Garrett Wilson,WR,NYJ,31.7,29.810000000000002,26.33131939467878,26,curve,,False
-devonta smith,DeVonta Smith,WR,PHI,32.2,29.459999999999997,25.98096830730264,26,curve,,False
-tetairoa mcmillan,Tetairoa McMillan,WR,CAR,32.5,29.25,25.771045379509925,26,curve,,False
-josh allen,Josh Allen,QB,BUF,33.2,28.759999999999998,25.282073388127486,25,curve,,False
-javonte williams,Javonte Williams,RB,DAL,33.2,28.759999999999998,25.282073388127486,25,curve,,False
-cam skattebo,Cam Skattebo,RB,NYG,33.6,28.48,25.00319934254972,25,curve,,False
-breece hall,Breece Hall,RB,NYJ,33.9,28.270000000000003,24.79430345060269,25,curve,,False
-emeka egbuka,Emeka Egbuka,WR,TB,35.0,27.5,24.030281345891165,24,curve,,False
-tee higgins,Tee Higgins,WR,CIN,37.2,25.959999999999997,22.511585415228467,23,curve,,False
-trey mcbride,Trey McBride,TE,ARI,38.7,24.909999999999997,21.48353130899536,21,curve,,False
-davante adams,Davante Adams,WR,LAR,38.8,24.840000000000003,21.415214948340594,21,curve,,False
-travis etienne,Travis Etienne Jr.,RB,NO,40.4,23.8,20.40356235341015,20,curve,,False
-jameson williams,Jameson Williams,WR,DET,41.1,23.45,20.064532678140072,20,curve,,False
-ladd mcconkey,Ladd McConkey,WR,LAC,41.1,23.45,20.064532678140072,20,curve,,False
-dandre swift,D'Andre Swift,RB,CHI,42.6,22.7,19.340532513529237,19,curve,,False
-brock bowers,Brock Bowers,TE,LV,43.4,22.3,18.955815944758683,19,curve,,False
-bucky irving,Bucky Irving,RB,TB,44.4,21.8,18.476337027893713,18,curve,,False
-terry mclaurin,Terry McLaurin,WR,WAS,45.4,21.3,17.99846270112386,18,curve,,False
-rome odunze,Rome Odunze,WR,CHI,46.0,21.0,17.7125223705254,18,curve,,False
-jaylen waddle,Jaylen Waddle,WR,DEN,49.4,19.3,16.103715104559594,16,curve,,False
-quinshon judkins,Quinshon Judkins,RB,CLE,50.5,18.8,15.634406829571768,16,curve,,False
-dj moore,DJ Moore,WR,BUF,50.7,18.72,15.559486619621712,16,curve,,False
-drake maye,Drake Maye,QB,NE,52.1,18.16,15.03637571585371,15,curve,,False
-bhayshul tuten,Bhayshul Tuten,RB,JAX,52.8,17.880000000000003,14.775706813212695,15,curve,,False
-alec pierce,Alec Pierce,WR,IND,53.9,17.44,14.36730436695429,14,curve,,False
-mike evans,Mike Evans,WR,SF,55.0,17.0,13.960423357602187,14,curve,,False
-david montgomery,David Montgomery,RB,HOU,55.1,16.96,13.923510845996388,14,curve,,False
-christian watson,Christian Watson,WR,GB,56.4,16.44,13.444832139737928,13,curve,,False
-lamar jackson,Lamar Jackson,QB,BAL,56.5,16.4,13.408102777438494,13,curve,,False
-joe burrow,Joe Burrow,QB,CIN,57.3,16.080000000000002,13.114749200160615,13,curve,,False
-treveyon henderson,TreVeyon Henderson,RB,NE,59.3,15.280000000000001,12.385192890607268,12,curve,,False
-courtland sutton,Courtland Sutton,WR,DEN,59.6,15.16,12.276242583706592,12,curve,,False
-colston loveland,Colston Loveland,TE,CHI,61.9,14.24,11.44530299540313,11,curve,,False
-jaylen warren,Jaylen Warren,RB,PIT,62.4,14.04,11.26570826294175,11,curve,,False
-luther burden,Luther Burden III,WR,CHI,62.4,14.04,11.26570826294175,11,curve,,False
-dk metcalf,DK Metcalf,WR,PIT,63.8,13.48,10.764900709909002,11,curve,,False
-tony pollard,Tony Pollard,RB,TEN,65.0,13.0,10.338119383932614,10,curve,,False
-marvin harrison,Marvin Harrison Jr.,WR,ARI,65.2,12.946666666666665,10.290844301239318,10,curve,,False
-parker washington,Parker Washington,WR,JAX,65.3,12.92,10.267217784927668,10,curve,,False
-dak prescott,Dak Prescott,QB,DAL,65.7,12.813333333333333,10.172785550939423,10,curve,,False
-rhamondre stevenson,Rhamondre Stevenson,RB,NE,68.2,12.146666666666667,9.585313677541514,10,curve,,False
-brian thomas,Brian Thomas Jr.,WR,JAX,69.4,11.826666666666664,9.305045419412552,9,curve,,False
-jayden daniels,Jayden Daniels,QB,WAS,70.5,11.533333333333333,9.049144864697453,9,curve,,False
-tyler warren,Tyler Warren,TE,IND,70.6,11.506666666666668,9.025930003678425,9,curve,,False
-carnell tate,Carnell Tate,WR,TEN,72.6,10.973333333333334,8.563382227164677,9,curve,,False
-chuba hubbard,Chuba Hubbard,RB,CAR,74.1,10.573333333333334,8.21871855266807,8,curve,,False
-rico dowdle,Rico Dowdle,RB,PIT,74.8,10.386666666666667,8.058556459993806,8,curve,,False
-michael wilson,Michael Wilson,WR,ARI,76.1,10.040000000000001,7.762295122856386,8,curve,,False
-jadarian price,Jadarian Price,RB,SEA,76.6,9.906666666666668,7.648766370123246,8,curve,,False
-chris godwin,Chris Godwin Jr.,WR,TB,77.8,9.586666666666668,7.377269160785721,7,curve,,False
-matthew stafford,Matthew Stafford,QB,LAR,78.7,9.346666666666666,7.174567391073326,7,curve,,False
-jalen hurts,Jalen Hurts,QB,PHI,80.4,8.919999999999998,6.816224770425673,7,curve,,False
-michael pittman,Michael Pittman Jr.,WR,PIT,81.4,8.719999999999999,6.649167546246826,7,curve,,False
-seattle defense,Seattle Defense,DEF,SEA,82.1,8.580000000000002,6.532585136583721,7,curve,,False
-jk dobbins,J.K. Dobbins,RB,DEN,83.5,8.3,6.300324776086292,6,curve,,False
-harold fannin,Harold Fannin Jr.,TE,CLE,83.9,8.219999999999999,6.234190474403404,6,curve,,False
-kyle pitts,Kyle Pitts Sr.,TE,ATL,84.9,8.02,6.069303568723358,6,curve,,False
-josh downs,Josh Downs,WR,IND,85.3,7.94,6.003530969195326,6,curve,,False
-quentin johnston,Quentin Johnston,WR,LAC,85.4,7.919999999999999,5.987104283957779,6,curve,,False
-jakobi meyers,Jakobi Meyers,WR,JAX,86.7,7.659999999999999,5.774165763989679,6,curve,,False
-brock purdy,Brock Purdy,QB,SF,87.6,7.480000000000001,5.627421753116375,6,curve,,False
-rj harvey,RJ Harvey,RB,DEN,88.8,7.24,5.43264799101599,5,curve,,False
-jordan addison,Jordan Addison,WR,MIN,89.3,7.140000000000001,5.351797798025158,5,curve,,False
-caleb williams,Caleb Williams,QB,CHI,90.1,6.98,5.222820056855987,5,curve,,False
-denver defense,Denver Defense,DEF,DEN,91.4,6.719999999999999,5.014260718799496,5,curve,,False
-wandale robinson,Wan'Dale Robinson,WR,TEN,92.5,6.5,4.838814847583859,5,curve,,False
-jayden reed,Jayden Reed,WR,GB,92.8,6.44,4.791133951429044,5,curve,,False
-stefon diggs,Stefon Diggs,WR,WAS,94.2,6.159999999999999,4.569603459736223,5,curve,,False
-sam laporta,Sam LaPorta,TE,DET,94.4,6.119999999999999,4.538090795867784,5,curve,,False
-trevor lawrence,Trevor Lawrence,QB,JAX,94.8,6.040000000000001,4.475168630191659,4,curve,,False
-kenny gainwell,Kenny Gainwell,RB,TB,98.5,5.3,3.8999997868182747,4,curve,,False
-dallas goedert,Dallas Goedert,TE,PHI,99.5,5.1,3.746813527053127,4,curve,,False
-xavier worthy,Xavier Worthy,WR,KC,100.0,5.0,3.6706071844487473,4,curve,,False
-houston defense,Houston Defense,DEF,HOU,100.2,4.9799999999999995,3.6553975583377603,4,curve,,False
-matthew golden,Matthew Golden,WR,GB,101.7,4.83,3.54166818111761,4,curve,,False
-aaron jones,Aaron Jones Sr.,RB,MIN,102.1,4.790000000000001,3.511444111860436,4,curve,,False
-tucker kraft,Tucker Kraft,TE,GB,102.5,4.75,3.4812644891886833,3,curve,,False
-jonathon brooks,Jonathon Brooks,RB,CAR,103.5,4.65,3.406012582043972,3,curve,,False
-patrick mahomes,Patrick Mahomes,QB,KC,104.2,4.58,3.353506582473368,3,curve,,False
-jared goff,Jared Goff,QB,DET,105.3,4.470000000000001,3.271286944687903,3,curve,,False
-khalil shakir,Khalil Shakir,WR,BUF,105.3,4.470000000000001,3.271286944687903,3,curve,,False
-jacory croskey merritt,Jacory Croskey-Merritt,RB,WAS,106.3,4.37,3.1968562779414054,3,curve,,False
-kyle monangai,Kyle Monangai,RB,CHI,106.3,4.37,3.1968562779414054,3,curve,,False
-romeo doubs,Romeo Doubs,WR,NE,107.1,4.290000000000001,3.1375326690498784,3,curve,,False
-deebo samuel,Deebo Samuel Sr.,WR,SF,108.5,4.15,3.0342021505682806,3,curve,,False
-justin herbert,Justin Herbert,QB,LAC,109.6,4.040000000000001,2.9534606200016658,3,curve,,False
-makai lemon,Makai Lemon,WR,PHI,111.0,3.9,2.8512881847096647,3,curve,,False
-minnesota defense,Minnesota Defense,DEF,MIN,111.8,3.8200000000000003,2.7932099511061352,3,curve,,False
-la rams defense,LA Rams Defense,DEF,LAR,112.9,3.709999999999999,2.713727967018735,3,curve,,False
-rachaad white,Rachaad White,RB,WAS,114.5,3.55,2.598923144888187,3,curve,,False
-jordyn tyson,Jordyn Tyson,WR,NO,114.6,3.5400000000000005,2.5917805062860304,3,curve,,False
-bo nix,Bo Nix,QB,DEN,116.2,3.38,2.478040711210154,2,curve,,False
-jordan mason,Jordan Mason,RB,MIN,117.8,3.22,2.3653628599991867,2,curve,,False
-kc concepcion,KC Concepcion,WR,CLE,118.6,3.1400000000000006,2.3094423309691434,2,curve,,False
-jalen coker,Jalen Coker,WR,CAR,119.0,3.0999999999999996,2.281590524577674,2,curve,,False
-rashid shaheed,Rashid Shaheed,WR,SEA,119.6,3.0400000000000005,2.2399517209063964,2,curve,,False
-blake corum,Blake Corum,RB,LAR,119.8,3.0200000000000005,2.226109780544731,2,curve,,False
-george kittle,George Kittle,TE,SF,120.0,3.0,2.2122869369195994,2,curve,,False
-jaxson dart,Jaxson Dart,QB,NYG,121.8,2.94,2.170934644280223,2,curve,,False
-travis kelce,Travis Kelce,TE,KC,123.2,2.893333333333333,2.1388945476706045,2,curve,,False
-jayden higgins,Jayden Higgins,WR,HOU,124.1,2.8633333333333337,2.1183552486272945,2,curve,,False
-jerry jeudy,Jerry Jeudy,WR,CLE,127.2,2.76,2.0479654178356923,2,curve,,False
-theo wease,Theo Wease Jr.,WR,MIA,127.4,2.753333333333333,2.043443544942504,2,curve,,False
-new england defense,New England Defense,DEF,NE,127.6,2.746666666666667,2.038924068812716,2,curve,,False
-brandon aubrey,Brandon Aubrey,PK,DAL,128.9,2.703333333333333,2.009606444001605,2,curve,,False
-detroit defense,Detroit Defense,DEF,DET,129.1,2.6966666666666668,2.005105198397377,2,curve,,False
-zach charbonnet,Zach Charbonnet,RB,SEA,131.2,2.626666666666667,1.9579925988924067,2,curve,,False
-tre tucker,Tre Tucker,WR,LV,133.1,2.5633333333333335,1.9156095522141334,2,curve,,False
-keenan allen,Keenan Allen,WR,IND,133.9,2.5366666666666666,1.8978350157383468,2,curve,,False
-pittsburgh defense,Pittsburgh Defense,DEF,PIT,134.1,2.5300000000000002,1.8933980689253365,2,curve,,False
-rashod bateman,Rashod Bateman,WR,BAL,134.5,2.5166666666666666,1.884532270237774,2,curve,,False
-baker mayfield,Baker Mayfield,QB,TB,134.6,2.5133333333333336,1.8823175144325113,2,curve,,False
-mark andrews,Mark Andrews,TE,BAL,135.2,2.4933333333333336,1.8690433073499644,2,curve,,False
-kyler murray,Kyler Murray,QB,MIN,135.4,2.4866666666666664,1.8646240612033016,2,curve,,False
-jason myers,Jason Myers,PK,SEA,136.1,2.4633333333333334,1.849178524015601,2,curve,,False
-kaimi fairbairn,Ka'imi Fairbairn,PK,HOU,136.1,2.4633333333333334,1.849178524015601,2,curve,,False
-calvin ridley,Calvin Ridley,WR,TEN,137.2,2.426666666666667,1.8249764574195046,2,curve,,False
-jalen mcmillan,Jalen McMillan,WR,TB,137.4,2.42,1.8205853279954622,2,curve,,False
-tyler shough,Tyler Shough,QB,NO,137.5,2.4166666666666665,1.818390840172819,2,curve,,False
-isaiah likely,Isaiah Likely,TE,NYG,137.6,2.4133333333333336,1.8161970722135659,2,curve,,False
-denzel boston,Denzel Boston,WR,CLE,138.3,2.3899999999999997,1.8008609761975218,2,curve,,False
-jauan jennings,Jauan Jennings,WR,MIN,138.8,2.373333333333333,1.7899285443043462,2,curve,,False
-dezhaun stribling,De'Zhaun Stribling,WR,SF,140.3,2.323333333333333,1.7572429414619146,2,curve,,False
-philadelphia defense,Philadelphia Defense,DEF,PHI,140.4,2.32,1.755069947328714,2,curve,,False
-woody marks,Woody Marks,RB,HOU,142.0,2.2666666666666666,1.720407234048867,2,curve,,False
-la chargers defense,LA Chargers Defense,DEF,LAC,144.2,2.193333333333334,1.6730789497739147,2,curve,,False
-tyjae spears,Tyjae Spears,RB,TEN,144.7,2.176666666666667,1.6623780979939573,2,curve,,False
-alvin kamara,Alvin Kamara,RB,NO,144.9,2.17,1.6581036548126855,2,curve,,False
-jalen nailor,Jalen Nailor,WR,LV,145.9,2.1366666666666667,1.6367826976851663,2,curve,,False
-cameron dicker,Cameron Dicker,PK,LAC,146.1,2.1300000000000003,1.6325288777102576,2,curve,,False
-jake ferguson,Jake Ferguson,TE,DAL,146.3,2.123333333333333,1.6282785556550545,2,curve,,False
-harrison mevis,Harrison Mevis,PK,LAR,146.6,2.1133333333333333,1.621909670288886,2,curve,,False
-chase mclaughlin,Chase McLaughlin,PK,TB,146.7,2.1100000000000003,1.6197884769316455,2,curve,,False
-sam darnold,Sam Darnold,QB,SEA,147.4,2.0866666666666664,1.6049651177578677,2,curve,,False
-malik washington,Malik Washington,WR,MIA,149.3,2.023333333333333,1.5649561122273445,2,curve,,False
-tyler loop,Tyler Loop,PK,BAL,150.4,1.9874999999999998,1.5424706109094186,2,curve,,False
-jake bates,Jake Bates,PK,DET,150.6,1.9812500000000002,1.5385602462611088,2,curve,,False
-dalton kincaid,Dalton Kincaid,TE,BUF,150.8,1.9749999999999996,1.5346533530091724,2,curve,,False
-tyrone tracy,Tyrone Tracy Jr.,RB,NYG,150.9,1.9718749999999998,1.5327012141296192,2,curve,,False
-cam little,Cam Little,PK,JAX,153.2,1.9000000000000004,1.4880486091532918,1,curve,,False
-jordan love,Jordan Love,QB,GB,154.1,1.8718750000000002,1.470708676634491,1,curve,,False
-tank bigsby,Tank Bigsby,RB,PHI,154.8,1.8499999999999996,1.4572757599851425,1,curve,,False
-cooper kupp,Cooper Kupp,WR,SEA,154.8,1.8499999999999996,1.4572757599851425,1,curve,,False
-tyler allgeier,Tyler Allgeier,RB,ARI,155.6,1.8250000000000002,1.4419828428874943,1,curve,,False
-keaton mitchell,Keaton Mitchell,RB,LAC,155.7,1.8218750000000004,1.440075728203658,1,curve,,False
-malik willis,Malik Willis,QB,MIA,156.5,1.796875,1.424855482912252,1,curve,,False
-isiah pacheco,Isiah Pacheco,RB,DET,156.6,1.7937500000000002,1.4229575873302855,1,curve,,False
-tyler bass,Tyler Bass,PK,BUF,157.0,1.78125,1.4153764564613014,1,curve,,False
-chris rodriguez,Chris Rodriguez Jr.,RB,JAX,157.2,1.7750000000000004,1.411592212135587,1,curve,,False
-tank dell,Tank Dell,WR,HOU,157.8,1.7562499999999996,1.4002651165133309,1,curve,,False
-jacksonville defense,Jacksonville Defense,DEF,JAX,158.2,1.7437500000000004,1.3927353870214139,1,curve,,False
-travis hunter,Travis Hunter,WR,JAX,158.2,1.7437500000000004,1.3927353870214139,1,curve,,False
-buffalo defense,Buffalo Defense,DEF,BUF,158.9,1.7218749999999998,1.3796009280349444,1,curve,,False
-antonio williams,Antonio Williams,WR,WAS,160.2,1.6812500000000004,1.3553564350256357,1,curve,,False
-adonai mitchell,Adonai Mitchell,WR,NYJ,160.4,1.6749999999999998,1.351644082271621,1,curve,,False
-jonah coleman,Jonah Coleman,RB,DEN,160.5,1.671875,1.3497896997214287,1,curve,,False
-kayshon boutte,Kayshon Boutte,WR,NE,160.7,1.6656250000000004,1.3460845462326754,1,curve,,False
-cyrus allen,Cyrus Allen,WR,KC,161.0,1.65625,1.3405359181621517,1,curve,,False
-cleveland defense,Cleveland Defense,DEF,CLE,161.0,1.65625,1.3405359181621517,1,curve,,False
-hunter henry,Hunter Henry,TE,NE,161.3,1.6468749999999996,1.3349983320356018,1,curve,,False
-brian robinson,Brian Robinson,RB,ATL,161.7,1.6343750000000004,1.327632298563894,1,curve,,False
-omar cooper,Omar Cooper Jr.,WR,NYJ,161.9,1.6281249999999998,1.3239568397150423,1,curve,,False
-brenton strange,Brenton Strange,TE,JAX,162.0,1.625,1.3221210185491488,1,curve,,False
-marshawn lloyd,MarShawn Lloyd,RB,GB,162.8,1.5999999999999996,1.3074809811057546,1,curve,,False
-wil lutz,Wil Lutz,PK,DEN,163.0,1.59375,1.3038341074262023,1,curve,,False
-juwan johnson,Juwan Johnson,TE,NO,163.9,1.5656249999999998,1.287490083616331,1,curve,,False
-kaelon black,Kaelon Black,RB,SF,164.3,1.5531249999999996,1.2802620443984374,1,curve,,False
-blake grupe,Blake Grupe,PK,IND,165.0,1.53125,1.2676679704930522,1,curve,,False
-mike washington,Mike Washington Jr.,RB,LV,165.3,1.5218749999999996,1.2622924377229807,1,curve,,False
-ryan flournoy,Ryan Flournoy,WR,DAL,165.9,1.5031249999999998,1.2515819298019744,1,curve,,False
-daniel jones,Daniel Jones,QB,IND,165.9,1.5031249999999998,1.2515819298019744,1,curve,,False
-cj stroud,C.J. Stroud,QB,HOU,166.0,1.5,1.2498021950380043,1,curve,,False
-baltimore defense,Baltimore Defense,DEF,BAL,166.0,1.5,1.2498021950380043,1,curve,,False
-harrison butker,Harrison Butker,PK,KC,166.5,1.484375,1.2409269454752159,1,curve,,False
-jakobi lane,Ja'Kobi Lane,WR,BAL,166.8,1.4749999999999996,1.2356208461786469,1,curve,,False
-ray davis,Ray Davis,RB,BUF,167.0,1.46875,1.2320915331459077,1,curve,,False
-jaydon blue,Jaydon Blue,RB,DAL,167.0,1.46875,1.2320915331459077,1,curve,,False
-dontayvion wicks,Dontayvion Wicks,WR,PHI,167.3,1.4593749999999996,1.2268098791171944,1,curve,,False
-chicago defense,Chicago Defense,DEF,CHI,168.0,1.4375,1.214544855275593,1,curve,,False
-braelon allen,Braelon Allen,RB,NYJ,168.2,1.4312500000000004,1.2110560584975365,1,curve,,False
-will reichard,Will Reichard,PK,MIN,169.9,1.3781249999999998,1.1816950747677526,1,curve,,False
-eddy piñeiro,Eddy Piñeiro,PK,SF,170.6,1.3562500000000002,1.1697672622452435,1,curve,,False
-new orleans defense,New Orleans Defense,DEF,NO,172.6,1.2937500000000002,1.136268466809275,1,curve,,False
-dylan sampson,Dylan Sampson,RB,CLE,172.8,1.2874999999999996,1.1329697958728386,1,curve,,False
-caleb douglas,Caleb Douglas,WR,MIA,173.7,1.2593750000000004,1.1182521633738658,1,curve,,False
-tennessee defense,Tennessee Defense,DEF,TEN,173.9,1.2531249999999998,1.1150108887065018,1,curve,,False
-chris boswell,Chris Boswell,PK,PIT,175.3,1.2093749999999996,1.0926483618407064,1,curve,,False
-tre harris,Tre' Harris,WR,LAC,176.1,1.1843750000000002,1.0801520947126246,1,curve,,False
-greg dulcich,Greg Dulcich,TE,MIA,177.0,1.15625,1.0663758183404328,1,curve,,False
-tj hockenson,T.J. Hockenson,TE,MIN,177.1,1.1531250000000002,1.064865318997372,1,curve,,False
-pat bryant,Pat Bryant,WR,DEN,179.0,1.09375,1.0370874786060016,1,curve,,False
-evan mcpherson,Evan McPherson,PK,CIN,180.3,1.0531249999999996,1.0194160029746786,1,curve,,False
-cairo santos,Cairo Santos,PK,CHI,180.4,1.0499999999999998,1.0181200617802908,1,curve,,False
-isaac teslaa,Isaac TeSlaa,WR,DET,180.7,1.0406250000000004,1.0143024066918576,1,curve,,False
-atlanta defense,Atlanta Defense,DEF,ATL,187.9,1.0,1.0,1,curve,,False
-cincinnati defense,Cincinnati Defense,DEF,CIN,198.0,1.0,1.0,1,curve,,False
+jahmyr gibbs,Jahmyr Gibbs,RB,DET,1.5,72.5,72.3514059492663,72,curve,,False
+bijan robinson,Bijan Robinson,RB,ATL,2.3,70.1,69.6046428595489,70,curve,,False
+puka nacua,Puka Nacua,WR,LAR,3.1,67.7,66.87213513548376,67,curve,,False
+jamarr chase,Ja'Marr Chase,WR,CIN,3.9,65.3,64.15431789378623,64,curve,,False
+jaxon smith njigba,Jaxon Smith-Njigba,WR,SEA,5.1,61.84,60.26293357241343,60,curve,,False
+jonathan taylor,Jonathan Taylor,RB,IND,6.0,60.4,58.653037388213846,59,curve,,False
+christian mccaffrey,Christian McCaffrey,RB,SF,6.5,59.6,57.76116449565799,58,curve,,False
+amon ra st brown,Amon-Ra St. Brown,WR,DET,7.9,57.36,55.27368189393042,55,curve,,False
+james cook,James Cook III,RB,BUF,9.3,55.12,52.80096733994502,53,curve,,False
+derrick henry,Derrick Henry,RB,BAL,9.7,54.480000000000004,52.0972615169362,52,curve,,False
+devon achane,De'Von Achane,RB,MIA,11.8,51.839999999999996,49.20794123469816,49,curve,,False
+drake london,Drake London,WR,ATL,12.4,51.12,48.42378970847265,48,curve,,False
+ceedee lamb,CeeDee Lamb,WR,DAL,12.5,51.0,48.293261103368785,48,curve,,False
+justin jefferson,Justin Jefferson,WR,MIN,14.4,48.72,45.822242955313094,46,curve,,False
+ashton jeanty,Ashton Jeanty,RB,LV,14.8,48.24,45.304250597056516,45,curve,,False
+rashee rice,Rashee Rice,WR,KC,15.1,47.88,44.91627293403655,45,curve,,False
+chase brown,Chase Brown,RB,CIN,15.3,47.64,44.65786876400651,45,curve,,False
+saquon barkley,Saquon Barkley,RB,PHI,17.6,44.879999999999995,41.70075605474166,42,curve,,False
+nico collins,Nico Collins,WR,HOU,19.2,42.96,39.659907954160275,40,curve,,False
+george pickens,George Pickens,WR,DAL,19.9,42.120000000000005,38.77138949159046,39,curve,,False
+aj brown,A.J. Brown,WR,NE,20.0,42.0,38.64467879312795,39,curve,,False
+kenneth walker,Kenneth Walker,RB,KC,20.9,40.92,37.50679849709021,38,curve,,False
+chris olave,Chris Olave,WR,NO,23.5,37.8,34.245829599680775,34,curve,,False
+omarion hampton,Omarion Hampton,RB,LAC,24.3,36.839999999999996,33.25060273328703,33,curve,,False
+josh jacobs,Josh Jacobs,RB,GB,25.1,35.9,32.27997088944727,32,curve,,False
+zay flowers,Zay Flowers,WR,BAL,25.7,35.3,31.662456525995907,32,curve,,False
+malik nabers,Malik Nabers,WR,NYG,26.8,34.2,30.534561447047814,31,curve,,False
+kyren williams,Kyren Williams,RB,LAR,27.4,33.6,29.921689655909898,30,curve,,False
+jeremiyah love,Jeremiyah Love,RB,ARI,29.4,31.6,27.89112264230599,28,curve,,False
+tetairoa mcmillan,Tetairoa McMillan,WR,CAR,30.9,30.37,26.65208297948,27,curve,,False
+garrett wilson,Garrett Wilson,WR,NYJ,31.5,29.95,26.23075733372304,26,curve,,False
+devonta smith,DeVonta Smith,WR,PHI,31.6,29.88,26.160625007658084,26,curve,,False
+josh allen,Josh Allen,QB,BUF,33.0,28.9,25.181469716836936,25,curve,,False
+javonte williams,Javonte Williams,RB,DAL,33.3,28.69,24.97231408372859,25,curve,,False
+emeka egbuka,Emeka Egbuka,WR,TB,33.5,28.55,24.83300882405621,25,curve,,False
+breece hall,Breece Hall,RB,NYJ,35.0,27.5,23.791630145613507,24,curve,,False
+tee higgins,Tee Higgins,WR,CIN,36.1,26.73,23.031857927986607,23,curve,,False
+cam skattebo,Cam Skattebo,RB,NYG,37.0,26.1,22.412750017963106,22,curve,,False
+trey mcbride,Trey McBride,TE,ARI,37.8,25.540000000000003,21.86438086128195,22,curve,,False
+davante adams,Davante Adams,WR,LAR,37.9,25.470000000000002,21.79596554941574,22,curve,,False
+travis etienne,Travis Etienne Jr.,RB,NO,38.6,24.98,21.31788304094546,21,curve,,False
+jameson williams,Jameson Williams,WR,DET,39.3,24.490000000000002,20.841261652168477,21,curve,,False
+ladd mcconkey,Ladd McConkey,WR,LAC,41.1,23.45,19.834617797550315,20,curve,,False
+dandre swift,D'Andre Swift,RB,CHI,43.3,22.35,18.777481477876897,19,curve,,False
+brock bowers,Brock Bowers,TE,LV,43.5,22.25,18.681775961136218,19,curve,,False
+terry mclaurin,Terry McLaurin,WR,WAS,44.8,21.6,18.06134611328832,18,curve,,False
+dj moore,DJ Moore,WR,BUF,45.6,21.2,17.680992350659942,18,curve,,False
+bucky irving,Bucky Irving,RB,TB,46.5,20.75,17.254441903836245,17,curve,,False
+jaylen waddle,Jaylen Waddle,WR,DEN,47.8,20.1,16.640886820855503,17,curve,,False
+rome odunze,Rome Odunze,WR,CHI,48.4,19.8,16.35875440782162,16,curve,,False
+drake maye,Drake Maye,QB,NE,51.4,18.44,15.08834199616619,15,curve,,False
+quinshon judkins,Quinshon Judkins,RB,CLE,51.8,18.28,14.939833501444443,15,curve,,False
+ollie gordon,Ollie Gordon II,RB,MIA,52.0,18.2,14.865656338140052,15,curve,,False
+bhayshul tuten,Bhayshul Tuten,RB,JAX,52.7,17.919999999999998,14.606444440009131,15,curve,,False
+mike evans,Mike Evans,WR,SF,54.2,17.32,14.05316314191259,14,curve,,False
+david montgomery,David Montgomery,RB,HOU,55.3,16.880000000000003,13.649349603288359,14,curve,,False
+lamar jackson,Lamar Jackson,QB,BAL,55.6,16.759999999999998,13.53950726963356,14,curve,,False
+christian watson,Christian Watson,WR,GB,56.2,16.52,13.320199035300828,13,curve,,False
+joe burrow,Joe Burrow,QB,CIN,57.1,16.16,12.992190187527754,13,curve,,False
+courtland sutton,Courtland Sutton,WR,DEN,58.9,15.440000000000001,12.33969074436368,12,curve,,False
+luther burden,Luther Burden III,WR,CHI,59.3,15.280000000000001,12.195343164144905,12,curve,,False
+alec pierce,Alec Pierce,WR,IND,60.2,14.919999999999998,11.87144968450809,12,curve,,False
+colston loveland,Colston Loveland,TE,CHI,62.2,14.119999999999997,11.1562115604454,11,curve,,False
+jaylen warren,Jaylen Warren,RB,PIT,62.4,14.04,11.08504001998476,11,curve,,False
+treveyon henderson,TreVeyon Henderson,RB,NE,62.4,14.04,11.08504001998476,11,curve,,False
+dk metcalf,DK Metcalf,WR,PIT,63.9,13.440000000000001,10.553361275381494,11,curve,,False
+rhamondre stevenson,Rhamondre Stevenson,RB,NE,65.1,12.973333333333334,10.14247211234734,10,curve,,False
+parker washington,Parker Washington,WR,JAX,65.2,12.946666666666665,10.119064236634252,10,curve,,False
+marvin harrison,Marvin Harrison Jr.,WR,ARI,65.2,12.946666666666665,10.119064236634252,10,curve,,False
+dak prescott,Dak Prescott,QB,DAL,66.4,12.626666666666665,9.83878437862053,10,curve,,False
+tony pollard,Tony Pollard,RB,TEN,67.7,12.28,9.536450108724507,10,curve,,False
+brian thomas,Brian Thomas Jr.,WR,JAX,69.2,11.879999999999999,9.189330902225302,9,curve,,False
+jayden daniels,Jayden Daniels,QB,WAS,70.4,11.559999999999999,8.913005444342224,9,curve,,False
+tyler warren,Tyler Warren,TE,IND,73.2,10.813333333333333,8.273170904842997,8,curve,,False
+jadarian price,Jadarian Price,RB,SEA,73.7,10.68,8.159664777765592,8,curve,,False
+rico dowdle,Rico Dowdle,RB,PIT,74.2,10.546666666666667,8.046392599051448,8,curve,,False
+michael wilson,Michael Wilson,WR,ARI,75.1,10.306666666666668,7.8431011322890365,8,curve,,False
+matthew stafford,Matthew Stafford,QB,LAR,75.4,10.226666666666665,7.775510639491927,8,curve,,False
+carnell tate,Carnell Tate,WR,TEN,75.4,10.226666666666665,7.775510639491927,8,curve,,False
+chris godwin,Chris Godwin Jr.,WR,TB,76.6,9.906666666666668,7.5060324972403025,8,curve,,False
+jk dobbins,J.K. Dobbins,RB,DEN,77.8,9.586666666666668,7.23800095700489,7,curve,,False
+jalen hurts,Jalen Hurts,QB,PHI,79.7,9.079999999999998,6.816689046557455,7,curve,,False
+seattle defense,Seattle Defense,DEF,SEA,80.6,8.88,6.651454782266555,7,curve,,False
+michael pittman,Michael Pittman Jr.,WR,PIT,80.9,8.819999999999999,6.602006157614926,7,curve,,False
+kyle pitts,Kyle Pitts Sr.,TE,ATL,82.7,8.459999999999999,6.306520399017196,6,curve,,False
+harold fannin,Harold Fannin Jr.,TE,CLE,82.9,8.419999999999998,6.27381846091087,6,curve,,False
+chuba hubbard,Chuba Hubbard,RB,CAR,84.2,8.16,6.061904747582752,6,curve,,False
+jakobi meyers,Jakobi Meyers,WR,JAX,85.5,7.9,5.851140773835742,6,curve,,False
+jordan addison,Jordan Addison,WR,MIN,86.8,7.640000000000001,5.641563287196644,6,curve,,False
+quentin johnston,Quentin Johnston,WR,LAC,87.7,7.459999999999999,5.497186822850981,5,curve,,False
+jayden reed,Jayden Reed,WR,GB,89.1,7.1800000000000015,5.2738019158881935,5,curve,,False
+brock purdy,Brock Purdy,QB,SF,89.3,7.140000000000001,5.242011798147311,5,curve,,False
+josh downs,Josh Downs,WR,IND,89.9,7.019999999999999,5.146828174824665,5,curve,,False
+caleb williams,Caleb Williams,QB,CHI,92.0,6.6,4.815952969695104,5,curve,,False
+denver defense,Denver Defense,DEF,DEN,92.1,6.580000000000001,4.800287411389578,5,curve,,False
+jonathon brooks,Jonathon Brooks,RB,CAR,92.2,6.559999999999999,4.784630261196856,5,curve,,False
+trevor lawrence,Trevor Lawrence,QB,JAX,92.8,6.44,4.690865382168796,5,curve,,False
+wandale robinson,Wan'Dale Robinson,WR,TEN,93.4,6.3199999999999985,4.597409824825068,5,curve,,False
+stefon diggs,Stefon Diggs,WR,WAS,95.8,5.84,4.226803165202135,4,curve,,False
+tucker kraft,Tucker Kraft,TE,GB,95.8,5.84,4.226803165202135,4,curve,,False
+kyle monangai,Kyle Monangai,RB,CHI,96.2,5.76,4.165554898595106,4,curve,,False
+xavier worthy,Xavier Worthy,WR,KC,98.9,5.219999999999999,3.756273688829318,4,curve,,False
+kenny gainwell,Kenny Gainwell,RB,TB,99.8,5.040000000000001,3.6215348356415333,4,curve,,False
+rj harvey,RJ Harvey,RB,DEN,100.5,4.95,3.554499443981363,4,curve,,False
+jared goff,Jared Goff,QB,DET,101.0,4.9,3.5173559706581896,4,curve,,False
+houston defense,Houston Defense,DEF,HOU,101.5,4.85,3.4802837587672166,3,curve,,False
+patrick mahomes,Patrick Mahomes,QB,KC,101.5,4.85,3.4802837587672166,3,curve,,False
+dallas goedert,Dallas Goedert,TE,PHI,101.6,4.840000000000001,3.472877936608187,3,curve,,False
+matthew golden,Matthew Golden,WR,GB,102.2,4.779999999999999,3.42850388173956,3,curve,,False
+jacory croskey merritt,Jacory Croskey-Merritt,RB,WAS,102.7,4.7299999999999995,3.391605941235451,3,curve,,False
+deebo samuel,Deebo Samuel Sr.,WR,SF,103.5,4.65,3.33272353931206,3,curve,,False
+khalil shakir,Khalil Shakir,WR,BUF,107.9,4.209999999999999,3.012422561631202,3,curve,,False
+romeo doubs,Romeo Doubs,WR,NE,108.0,4.2,3.005215970061191,3,curve,,False
+aaron jones,Aaron Jones Sr.,RB,MIN,108.0,4.2,3.005215970061191,3,curve,,False
+justin herbert,Justin Herbert,QB,LAC,108.7,4.13,2.954864765901922,3,curve,,False
+minnesota defense,Minnesota Defense,DEF,MIN,109.5,4.05,2.8975269257499345,3,curve,,False
+makai lemon,Makai Lemon,WR,PHI,111.0,3.9,2.790628557061172,3,curve,,False
+bo nix,Bo Nix,QB,DEN,112.1,3.7900000000000005,2.712758883046019,3,curve,,False
+la rams defense,LA Rams Defense,DEF,LAR,112.3,3.7700000000000005,2.6986495814996414,3,curve,,False
+jordan mason,Jordan Mason,RB,MIN,114.8,3.5200000000000005,2.5236017253967966,3,curve,,False
+kc concepcion,KC Concepcion,WR,CLE,116.2,3.38,2.426690059306886,2,curve,,False
+jalen coker,Jalen Coker,WR,CAR,117.0,3.3,2.371691087556146,2,curve,,False
+sam laporta,Sam LaPorta,TE,DET,117.2,3.2799999999999994,2.357985677195109,2,curve,,False
+travis kelce,Travis Kelce,TE,KC,117.4,3.2599999999999993,2.344298262985107,2,curve,,False
+george kittle,George Kittle,TE,SF,118.2,3.1799999999999997,2.289731307853427,2,curve,,False
+rashid shaheed,Rashid Shaheed,WR,SEA,119.4,3.0599999999999996,2.2084448321150103,2,curve,,False
+jaxson dart,Jaxson Dart,QB,NYG,119.7,3.0299999999999994,2.188232233560368,2,curve,,False
+rachaad white,Rachaad White,RB,WAS,121.1,2.9633333333333334,2.1434761970117426,2,curve,,False
+blake corum,Blake Corum,RB,LAR,121.5,2.95,2.134552030883685,2,curve,,False
+mark andrews,Mark Andrews,TE,BAL,123.4,2.8866666666666663,2.0922879168175017,2,curve,,False
+jerry jeudy,Jerry Jeudy,WR,CLE,124.2,2.86,2.0745555767974926,2,curve,,False
+kaimi fairbairn,Ka'imi Fairbairn,PK,HOU,126.5,2.783333333333333,2.023788640488185,2,curve,,False
+detroit defense,Detroit Defense,DEF,DET,129.6,2.68,1.955881617108753,2,curve,,False
+rashod bateman,Rashod Bateman,WR,BAL,129.8,2.673333333333333,1.9515215665469725,2,curve,,False
+dezhaun stribling,De'Zhaun Stribling,WR,SF,130.8,2.6399999999999997,1.9297605085292413,2,curve,,False
+tre tucker,Tre Tucker,WR,LV,131.1,2.6300000000000003,1.9232450389313838,2,curve,,False
+new england defense,New England Defense,DEF,NE,131.7,2.6100000000000003,1.9102320848700785,2,curve,,False
+zach charbonnet,Zach Charbonnet,RB,SEA,132.6,2.58,1.8907580929773435,2,curve,,False
+brandon aubrey,Brandon Aubrey,PK,DAL,132.9,2.57,1.8842790090845054,2,curve,,False
+jayden higgins,Jayden Higgins,WR,HOU,133.2,2.5600000000000005,1.8778061036778912,2,curve,,False
+pittsburgh defense,Pittsburgh Defense,DEF,PIT,134.1,2.5300000000000002,1.8584247969665635,2,curve,,False
+keenan allen,Keenan Allen,WR,IND,134.4,2.5199999999999996,1.8519769461338225,2,curve,,False
+isaiah likely,Isaiah Likely,TE,NYG,134.4,2.5199999999999996,1.8519769461338225,2,curve,,False
+jalen mcmillan,Jalen McMillan,WR,TB,134.7,2.5100000000000002,1.8455354461662625,2,curve,,False
+baker mayfield,Baker Mayfield,QB,TB,135.2,2.4933333333333336,1.8348138231961029,2,curve,,False
+calvin ridley,Calvin Ridley,WR,TEN,136.1,2.4633333333333334,1.8155601477130832,2,curve,,False
+kyler murray,Kyler Murray,QB,MIN,137.1,2.43,1.794236461280822,2,curve,,False
+tyler shough,Tyler Shough,QB,NO,138.3,2.3899999999999997,1.7687462826557419,2,curve,,False
+tyjae spears,Tyjae Spears,RB,TEN,139.0,2.3666666666666667,1.7539274755276562,2,curve,,False
+woody marks,Woody Marks,RB,HOU,139.8,2.34,1.7370380750519536,2,curve,,False
+la chargers defense,LA Chargers Defense,DEF,LAC,140.7,2.3100000000000005,1.718097633622063,2,curve,,False
+jason myers,Jason Myers,PK,SEA,140.8,2.306666666666666,1.7159971209463294,2,curve,,False
+jauan jennings,Jauan Jennings,WR,MIN,141.7,2.2766666666666673,1.697128829160059,2,curve,,False
+denzel boston,Denzel Boston,WR,CLE,142.0,2.2666666666666666,1.6908540665192526,2,curve,,False
+philadelphia defense,Philadelphia Defense,DEF,PHI,142.9,2.2366666666666664,1.672074474400032,2,curve,,False
+jake ferguson,Jake Ferguson,TE,DAL,144.5,2.1833333333333336,1.638857649507415,2,curve,,False
+jalen nailor,Jalen Nailor,WR,LV,144.5,2.1833333333333336,1.638857649507415,2,curve,,False
+cameron dicker,Cameron Dicker,PK,LAC,144.7,2.176666666666667,1.6347210892219297,2,curve,,False
+jake bates,Jake Bates,PK,DET,145.5,2.15,1.6182101090474608,2,curve,,False
+emmett johnson,Emmett Johnson,RB,KC,145.6,2.146666666666667,1.6161502389464697,2,curve,,False
+malik washington,Malik Washington,WR,MIA,147.1,2.0966666666666667,1.5853610614108304,2,curve,,False
+tyler loop,Tyler Loop,PK,BAL,147.8,2.073333333333333,1.571064014123038,2,curve,,False
+sam darnold,Sam Darnold,QB,SEA,148.5,2.05,1.5568134489417358,2,curve,,False
+harrison mevis,Harrison Mevis,PK,LAR,150.4,1.9874999999999998,1.5188781508568843,2,curve,,False
+cam little,Cam Little,PK,JAX,151.1,1.9656250000000002,1.5056844130230607,2,curve,,False
+jordyn tyson,Jordyn Tyson,WR,NO,151.2,1.9625000000000004,1.5038032219508621,2,curve,,False
+jordan love,Jordan Love,QB,GB,151.5,1.953125,1.4981651467151849,1,curve,,False
+dalton kincaid,Dalton Kincaid,TE,BUF,151.5,1.953125,1.4981651467151849,1,curve,,False
+mike washington,Mike Washington Jr.,RB,LV,151.5,1.953125,1.4981651467151849,1,curve,,False
+chase mclaughlin,Chase McLaughlin,PK,TB,151.7,1.9468750000000004,1.4944110370585444,1,curve,,False
+alvin kamara,Alvin Kamara,RB,NO,152.3,1.9281249999999996,1.4831710511763165,1,curve,,False
+tank dell,Tank Dell,WR,HOU,152.9,1.9093749999999998,1.4719650280956635,1,curve,,False
+kaelon black,Kaelon Black,RB,SF,153.8,1.8812499999999996,1.4552209805670315,1,curve,,False
+cyrus allen,Cyrus Allen,WR,KC,154.0,1.875,1.451510850428089,1,curve,,False
+tyler allgeier,Tyler Allgeier,RB,ARI,154.5,1.859375,1.4422529355529847,1,curve,,False
+isiah pacheco,Isiah Pacheco,RB,DET,154.9,1.8468749999999998,1.4348647143667288,1,curve,,False
+tank bigsby,Tank Bigsby,RB,PHI,155.2,1.8375000000000004,1.4293342451886124,1,curve,,False
+cooper kupp,Cooper Kupp,WR,SEA,155.5,1.828125,1.4238130414355614,1,curve,,False
+chris rodriguez,Chris Rodriguez Jr.,RB,JAX,157.6,1.7625000000000002,1.3854317779375718,1,curve,,False
+keaton mitchell,Keaton Mitchell,RB,LAC,158.3,1.7406249999999996,1.3727455912111666,1,curve,,False
+blake grupe,Blake Grupe,PK,IND,159.9,1.6906249999999998,1.343961246622642,1,curve,,False
+wil lutz,Wil Lutz,PK,DEN,160.1,1.6843750000000002,1.3403846561179455,1,curve,,False
+adonai mitchell,Adonai Mitchell,WR,NYJ,161.3,1.6468749999999996,1.3190291493764315,1,curve,,False
+jacksonville defense,Jacksonville Defense,DEF,JAX,161.4,1.6437499999999998,1.317257736329543,1,curve,,False
+ryan flournoy,Ryan Flournoy,WR,DAL,162.2,1.6187500000000004,1.3031332388510335,1,curve,,False
+buffalo defense,Buffalo Defense,DEF,BUF,162.6,1.6062500000000002,1.2961027719743283,1,curve,,False
+cleveland defense,Cleveland Defense,DEF,CLE,162.8,1.5999999999999996,1.2925956449227494,1,curve,,False
+hunter henry,Hunter Henry,TE,NE,162.8,1.5999999999999996,1.2925956449227494,1,curve,,False
+cj stroud,C.J. Stroud,QB,HOU,162.8,1.5999999999999996,1.2925956449227494,1,curve,,False
+juwan johnson,Juwan Johnson,TE,NO,163.4,1.5812499999999998,1.2821072677835024,1,curve,,False
+travis hunter,Travis Hunter,WR,JAX,163.5,1.578125,1.280364083304158,1,curve,,False
+malik willis,Malik Willis,QB,MIA,163.7,1.5718750000000004,1.276881953309569,1,curve,,False
+eddy piñeiro,Eddy Piñeiro,PK,SF,163.9,1.5656249999999998,1.2734055190401299,1,curve,,False
+tyrone tracy,Tyrone Tracy Jr.,RB,NYG,164.1,1.5593750000000002,1.2699348339629473,1,curve,,False
+cam ward,Cam Ward,QB,TEN,164.2,1.5562500000000004,1.2682016643809617,1,curve,,False
+darius slayton,Darius Slayton,WR,NYG,164.9,1.5343749999999998,1.2561106943323832,1,curve,,False
+marshawn lloyd,MarShawn Lloyd,RB,GB,164.9,1.5343749999999998,1.2561106943323832,1,curve,,False
+kayshon boutte,Kayshon Boutte,WR,HOU,165.6,1.5125000000000002,1.2440936536162197,1,curve,,False
+harrison butker,Harrison Butker,PK,KC,166.0,1.5,1.2372609869997044,1,curve,,False
+will reichard,Will Reichard,PK,MIN,166.1,1.4968750000000002,1.235556789800547,1,curve,,False
+jonah coleman,Jonah Coleman,RB,DEN,166.1,1.4968750000000002,1.235556789800547,1,curve,,False
+daniel jones,Daniel Jones,QB,IND,166.2,1.4937500000000004,1.2338541972996888,1,curve,,False
+brian robinson,Brian Robinson,RB,ATL,166.2,1.4937500000000004,1.2338541972996888,1,curve,,False
+jakobi lane,Ja'Kobi Lane,WR,BAL,167.1,1.4656250000000002,1.2186045347710432,1,curve,,False
+baltimore defense,Baltimore Defense,DEF,BAL,167.7,1.4468750000000004,1.20851399676668,1,curve,,False
+devaughn vele,Devaughn Vele,WR,NO,167.9,1.4406249999999998,1.2051644241112833,1,curve,,False
+tj hockenson,T.J. Hockenson,TE,MIN,169.5,1.390625,1.178631383050981,1,curve,,False
+brenton strange,Brenton Strange,TE,JAX,170.1,1.3718750000000002,1.1688086952566457,1,curve,,False
+pat bryant,Pat Bryant,WR,DEN,170.5,1.359375,1.1623011117761735,1,curve,,False
+braelon allen,Braelon Allen,RB,NYJ,170.9,1.3468749999999998,1.1558273506987913,1,curve,,False
+dallas defense,Dallas Defense,DEF,DAL,170.9,1.3468749999999998,1.1558273506987913,1,curve,,False
+new orleans defense,New Orleans Defense,DEF,NO,171.3,1.3343749999999996,1.1493884459333743,1,curve,,False
+justice hill,Justice Hill,RB,BAL,171.4,1.3312499999999998,1.1477842938887806,1,curve,,False
+chicago defense,Chicago Defense,DEF,CHI,172.2,1.3062500000000004,1.135034207550928,1,curve,,False
+cairo santos,Cairo Santos,PK,CHI,172.7,1.2906250000000004,1.1271434701017418,1,curve,,False
+dylan sampson,Dylan Sampson,RB,CLE,172.9,1.2843749999999998,1.1240047402020765,1,curve,,False
+isaac teslaa,Isaac TeSlaa,WR,DET,173.8,1.2562499999999996,1.1100110408158494,1,curve,,False
+tennessee defense,Tennessee Defense,DEF,TEN,173.9,1.2531249999999998,1.1084699032855856,1,curve,,False
+dalton schultz,Dalton Schultz,TE,HOU,174.1,1.2468750000000002,1.1053962004458453,1,curve,,False
+chris boswell,Chris Boswell,PK,PIT,174.9,1.2218749999999998,1.0932203656675195,1,curve,,False
+kenyon sadiq,Kenyon Sadiq,TE,NYJ,175.7,1.1968750000000004,1.0812486997047985,1,curve,,False
+tre harris,Tre' Harris,WR,LAC,175.8,1.1937499999999996,1.0797676346645115,1,curve,,False
+trey smack,Trey Smack,PK,GB,176.0,1.1875,1.076816276176718,1,curve,,False
+andy borregales,Andy Borregales,PK,NE,177.5,1.140625,1.055182374187169,1,curve,,False
+dontayvion wicks,Dontayvion Wicks,WR,PHI,179.6,1.0750000000000002,1.026785959902246,1,curve,,False
+evan mcpherson,Evan McPherson,PK,CIN,181.1,1.0281250000000002,1.0086722967797146,1,curve,,False
+caleb douglas,Caleb Douglas,WR,MIA,181.2,1.0250000000000004,1.0075739015177034,1,curve,,False
+cincinnati defense,Cincinnati Defense,DEF,CIN,183.0,1.0,1.0,1,curve,,False
+atlanta defense,Atlanta Defense,DEF,ATL,184.2,1.0,1.0,1,curve,,False
+troy franklin,Troy Franklin,WR,DEN,185.5,1.0,1.0,1,curve,,False
+germie bernard,Germie Bernard,WR,PIT,192.8,1.0,1.0,1,curve,,False

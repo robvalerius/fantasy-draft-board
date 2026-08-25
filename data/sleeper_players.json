@@ -137,10 +137,10 @@
   "team": "JAX",
   "age": 24,
   "years_exp": 3,
-  "injury_status": "Questionable",
+  "injury_status": null,
   "status": "Active",
   "depth_chart_order": 1,
-  "search_rank": 74,
+  "search_rank": 72,
   "number": 11
  },
  "3342": {
@@ -176,7 +176,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 5,
-  "search_rank": 640,
+  "search_rank": 633,
   "number": 36
  },
  "6137": {
@@ -212,7 +212,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 1,
-  "search_rank": 10,
+  "search_rank": 9,
   "number": 88
  },
  "5038": {
@@ -248,7 +248,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 5,
-  "search_rank": 696,
+  "search_rank": 342,
   "number": 36
  },
  "6783": {
@@ -259,7 +259,7 @@
   "years_exp": 6,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 1,
+  "depth_chart_order": 2,
   "search_rank": 160,
   "number": 3
  },
@@ -267,7 +267,7 @@
   "full_name": "Tyren Montgomery",
   "position": "WR",
   "team": "TEN",
-  "age": null,
+  "age": 25,
   "years_exp": 0,
   "injury_status": null,
   "status": "Active",
@@ -283,7 +283,7 @@
   "years_exp": 2,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 7,
+  "depth_chart_order": 8,
   "search_rank": 999,
   "number": 6
  },
@@ -319,8 +319,8 @@
   "years_exp": 8,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 8,
-  "search_rank": 9999999,
+  "depth_chart_order": 9,
+  "search_rank": 467,
   "number": 87
  },
  "11155": {
@@ -338,12 +338,12 @@
  "9504": {
   "full_name": "Kayshon Boutte",
   "position": "WR",
-  "team": "NE",
+  "team": "HOU",
   "age": 24,
   "years_exp": 3,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 3,
+  "depth_chart_order": 2,
   "search_rank": 164,
   "number": 9
  },
@@ -403,8 +403,8 @@
   "years_exp": 3,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 6,
-  "search_rank": 999,
+  "depth_chart_order": 4,
+  "search_rank": 517,
   "number": 38
  },
  "11282": {
@@ -437,10 +437,10 @@
   "team": "BAL",
   "age": 22,
   "years_exp": 0,
-  "injury_status": null,
+  "injury_status": "Questionable",
   "status": "Active",
   "depth_chart_order": 3,
-  "search_rank": 372,
+  "search_rank": 366,
   "number": 23
  },
  "5718": {
@@ -524,7 +524,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 4,
-  "search_rank": 672,
+  "search_rank": 669,
   "number": 81
  },
  "13295": {
@@ -535,8 +535,8 @@
   "years_exp": 0,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 2,
-  "search_rank": 324,
+  "depth_chart_order": 3,
+  "search_rank": 632,
   "number": 15
  },
  "2320": {
@@ -608,7 +608,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 7,
-  "search_rank": 483,
+  "search_rank": 689,
   "number": 10
  },
  "13323": {
@@ -656,7 +656,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 1,
-  "search_rank": 68,
+  "search_rank": 69,
   "number": 8
  },
  "5143": {
@@ -752,7 +752,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 2,
-  "search_rank": 480,
+  "search_rank": 521,
   "number": 16
  },
  "13352": {
@@ -872,7 +872,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 2,
-  "search_rank": 290,
+  "search_rank": 528,
   "number": 81
  },
  "7944": {
@@ -1136,7 +1136,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 8,
-  "search_rank": 473,
+  "search_rank": 431,
   "number": 12
  },
  "6381": {
@@ -1171,8 +1171,8 @@
   "years_exp": 3,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 6,
-  "search_rank": 9999999,
+  "depth_chart_order": 7,
+  "search_rank": 298,
   "number": 87
  },
  "6908": {
@@ -1280,7 +1280,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 2,
-  "search_rank": 575,
+  "search_rank": 543,
   "number": 10
  },
  "12399": {
@@ -1340,7 +1340,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 5,
-  "search_rank": 517,
+  "search_rank": 599,
   "number": 43
  },
  "1743": {
@@ -1388,7 +1388,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 2,
-  "search_rank": 680,
+  "search_rank": 691,
   "number": 2
  },
  "2936": {
@@ -1460,7 +1460,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 371,
+  "search_rank": 477,
   "number": 82
  },
  "6966": {
@@ -1640,20 +1640,8 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 1,
-  "search_rank": 76,
+  "search_rank": 74,
   "number": 9
- },
- "11636": {
-  "full_name": "Johnny Wilson",
-  "position": "WR",
-  "team": "PHI",
-  "age": 25,
-  "years_exp": 2,
-  "injury_status": "Questionable",
-  "status": "Active",
-  "depth_chart_order": 9,
-  "search_rank": 999,
-  "number": 89
  },
  "8134": {
   "full_name": "Khalil Shakir",
@@ -1748,7 +1736,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 2,
-  "search_rank": 567,
+  "search_rank": 535,
   "number": 10
  },
  "5052": {
@@ -1808,7 +1796,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 2,
-  "search_rank": 243,
+  "search_rank": 229,
   "number": 43
  },
  "3524": {
@@ -1844,7 +1832,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 999,
+  "search_rank": 301,
   "number": 81
  },
  "12517": {
@@ -1856,7 +1844,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 1,
-  "search_rank": 39,
+  "search_rank": 37,
   "number": 84
  },
  "6081": {
@@ -2000,7 +1988,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 9999999,
+  "search_rank": 374,
   "number": 35
  },
  "2770": {
@@ -2084,7 +2072,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 2,
-  "search_rank": 481,
+  "search_rank": 529,
   "number": 4
  },
  "8194": {
@@ -2191,7 +2179,7 @@
   "years_exp": 3,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 2,
+  "depth_chart_order": 3,
   "search_rank": 658,
   "number": 46
  },
@@ -2240,7 +2228,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 360,
+  "search_rank": 534,
   "number": 30
  },
  "5550": {
@@ -2263,8 +2251,8 @@
   "years_exp": 1,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 7,
-  "search_rank": 494,
+  "depth_chart_order": 6,
+  "search_rank": 572,
   "number": 86
  },
  "7552": {
@@ -2312,7 +2300,7 @@
   "injury_status": "Questionable",
   "status": "Active",
   "depth_chart_order": 2,
-  "search_rank": 116,
+  "search_rank": 120,
   "number": 1
  },
  "6496": {
@@ -2336,7 +2324,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 1,
-  "search_rank": 191,
+  "search_rank": 182,
   "number": 6
  },
  "5024": {
@@ -2444,7 +2432,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 1,
-  "search_rank": 94,
+  "search_rank": 91,
   "number": 14
  },
  "5809": {
@@ -2468,7 +2456,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 7,
-  "search_rank": 387,
+  "search_rank": 660,
   "number": 15
  },
  "4026": {
@@ -2696,7 +2684,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 3,
-  "search_rank": 559,
+  "search_rank": 535,
   "number": 30
  },
  "7794": {
@@ -2719,8 +2707,8 @@
   "years_exp": 2,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 4,
-  "search_rank": 448,
+  "depth_chart_order": 5,
+  "search_rank": 450,
   "number": 23
  },
  "6323": {
@@ -2732,7 +2720,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 4,
-  "search_rank": 254,
+  "search_rank": 614,
   "number": 47
  },
  "7606": {
@@ -3020,7 +3008,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 6,
-  "search_rank": 592,
+  "search_rank": 560,
   "number": 6
  },
  "13805": {
@@ -3032,7 +3020,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 343,
+  "search_rank": 367,
   "number": 88
  },
  "5808": {
@@ -3074,13 +3062,13 @@
  "6045": {
   "full_name": "Gary Jennings",
   "position": "WR",
-  "team": null,
-  "age": 26,
-  "years_exp": 4,
+  "team": "LAC",
+  "age": 29,
+  "years_exp": 7,
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 9999999,
+  "search_rank": 291,
   "number": 86
  },
  "4821": {
@@ -3104,7 +3092,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 4,
-  "search_rank": 697,
+  "search_rank": 476,
   "number": 85
  },
  "13608": {
@@ -3116,7 +3104,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 657,
+  "search_rank": 565,
   "number": 36
  },
  "13282": {
@@ -3127,8 +3115,8 @@
   "years_exp": 0,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 4,
-  "search_rank": 434,
+  "depth_chart_order": 5,
+  "search_rank": 508,
   "number": 84
  },
  "6395": {
@@ -3175,8 +3163,8 @@
   "years_exp": 5,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 8,
-  "search_rank": 647,
+  "depth_chart_order": 7,
+  "search_rank": 690,
   "number": 40
  },
  "4227": {
@@ -3320,7 +3308,7 @@
   "injury_status": "Questionable",
   "status": "Active",
   "depth_chart_order": 3,
-  "search_rank": 478,
+  "search_rank": 524,
   "number": 32
  },
  "7526": {
@@ -3356,7 +3344,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 4,
-  "search_rank": 584,
+  "search_rank": 664,
   "number": 9
  },
  "8115": {
@@ -3392,7 +3380,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 5,
-  "search_rank": 675,
+  "search_rank": 595,
   "number": 31
  },
  "4508": {
@@ -3485,10 +3473,10 @@
   "team": "LAC",
   "age": 23,
   "years_exp": 0,
-  "injury_status": null,
+  "injury_status": "Questionable",
   "status": "Active",
   "depth_chart_order": 4,
-  "search_rank": 443,
+  "search_rank": 439,
   "number": 89
  },
  "13939": {
@@ -3607,8 +3595,8 @@
   "years_exp": 0,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 5,
-  "search_rank": 439,
+  "depth_chart_order": 4,
+  "search_rank": 428,
   "number": 80
  },
  "5169": {
@@ -3728,7 +3716,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 1,
-  "search_rank": 124,
+  "search_rank": 128,
   "number": 17
  },
  "8905": {
@@ -3800,7 +3788,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 2,
-  "search_rank": 336,
+  "search_rank": 323,
   "number": 82
  },
  "12250": {
@@ -3977,7 +3965,7 @@
   "team": "NE",
   "age": 23,
   "years_exp": 1,
-  "injury_status": null,
+  "injury_status": "Questionable",
   "status": "Active",
   "depth_chart_order": 1,
   "search_rank": 39,
@@ -4028,7 +4016,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 999,
+  "search_rank": 613,
   "number": 16
  },
  "12913": {
@@ -4195,7 +4183,7 @@
   "years_exp": 1,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 6,
+  "depth_chart_order": 4,
   "search_rank": 487,
   "number": 37
  },
@@ -4220,7 +4208,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 1,
-  "search_rank": 204,
+  "search_rank": 229,
   "number": 1
  },
  "6130": {
@@ -4289,23 +4277,11 @@
   "team": "DET",
   "age": 25,
   "years_exp": 2,
-  "injury_status": null,
+  "injury_status": "Questionable",
   "status": "Active",
   "depth_chart_order": 4,
-  "search_rank": 377,
+  "search_rank": 491,
   "number": 26
- },
- "13826": {
-  "full_name": "Caullin Lacy",
-  "position": "WR",
-  "team": "NYJ",
-  "age": 24,
-  "years_exp": 0,
-  "injury_status": null,
-  "status": "Active",
-  "depth_chart_order": null,
-  "search_rank": 9999999,
-  "number": 35
  },
  "6904": {
   "full_name": "Jalen Hurts",
@@ -4400,7 +4376,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 3,
-  "search_rank": 468,
+  "search_rank": 558,
   "number": 4
  },
  "7376": {
@@ -4508,7 +4484,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 1,
-  "search_rank": 39,
+  "search_rank": 38,
   "number": 15
  },
  "13347": {
@@ -4532,7 +4508,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 5,
-  "search_rank": 671,
+  "search_rank": 677,
   "number": 86
  },
  "8154": {
@@ -4574,7 +4550,7 @@
  "13331": {
   "full_name": "Dae'Quan Wright",
   "position": "TE",
-  "team": "CLE",
+  "team": null,
   "age": 22,
   "years_exp": 0,
   "injury_status": null,
@@ -4706,7 +4682,7 @@
  "14049": {
   "full_name": "Brandon Hayes",
   "position": "WR",
-  "team": null,
+  "team": "PHI",
   "age": null,
   "years_exp": 0,
   "injury_status": null,
@@ -4820,7 +4796,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 528,
+  "search_rank": 551,
   "number": 85
  },
  "13438": {
@@ -4892,7 +4868,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 1,
-  "search_rank": 63,
+  "search_rank": 62,
   "number": 15
  },
  "5289": {
@@ -5036,7 +5012,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 1,
-  "search_rank": 62,
+  "search_rank": 63,
   "number": 10
  },
  "3225": {
@@ -5141,10 +5117,10 @@
   "team": "NYG",
   "age": 30,
   "years_exp": 8,
-  "injury_status": null,
+  "injury_status": "Questionable",
   "status": "Active",
-  "depth_chart_order": 7,
-  "search_rank": 647,
+  "depth_chart_order": 9,
+  "search_rank": 682,
   "number": 87
  },
  "12360": {
@@ -5251,8 +5227,8 @@
   "years_exp": 4,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 7,
-  "search_rank": 616,
+  "depth_chart_order": 4,
+  "search_rank": 697,
   "number": 13
  },
  "9483": {
@@ -5312,7 +5288,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 2,
-  "search_rank": 538,
+  "search_rank": 565,
   "number": 83
  },
  "7496": {
@@ -5324,7 +5300,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 5,
-  "search_rank": 450,
+  "search_rank": 687,
   "number": 12
  },
  "11224": {
@@ -5348,7 +5324,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 459,
+  "search_rank": 612,
   "number": 38
  },
  "3634": {
@@ -5360,7 +5336,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 3,
-  "search_rank": 585,
+  "search_rank": 645,
   "number": 14
  },
  "12018": {
@@ -5385,7 +5361,7 @@
   "status": "Active",
   "depth_chart_order": 8,
   "search_rank": 9999999,
-  "number": 0
+  "number": 86
  },
  "11520": {
   "full_name": "Lucky Jackson",
@@ -5396,7 +5372,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 6,
-  "search_rank": 667,
+  "search_rank": 644,
   "number": 11
  },
  "2940": {
@@ -5419,7 +5395,7 @@
   "years_exp": 0,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 2,
+  "depth_chart_order": 1,
   "search_rank": 330,
   "number": 34
  },
@@ -5432,7 +5408,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 3,
-  "search_rank": 602,
+  "search_rank": 682,
   "number": 13
  },
  "14047": {
@@ -5660,7 +5636,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 2,
-  "search_rank": 620,
+  "search_rank": 684,
   "number": 88
  },
  "7812": {
@@ -5672,7 +5648,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 6,
-  "search_rank": 289,
+  "search_rank": 427,
   "number": 80
  },
  "12908": {
@@ -5684,7 +5660,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 3,
-  "search_rank": 499,
+  "search_rank": 534,
   "number": 15
  },
  "5217": {
@@ -5759,18 +5735,6 @@
   "search_rank": 999,
   "number": 16
  },
- "11921": {
-  "full_name": "Xavier Weaver",
-  "position": "WR",
-  "team": "ARI",
-  "age": 25,
-  "years_exp": 2,
-  "injury_status": "Questionable",
-  "status": "Active",
-  "depth_chart_order": 8,
-  "search_rank": 647,
-  "number": 89
- },
  "260": {
   "full_name": "Josh Johnson",
   "position": "QB",
@@ -5816,7 +5780,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 4,
-  "search_rank": 442,
+  "search_rank": 447,
   "number": 16
  },
  "13846": {
@@ -5828,7 +5792,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 9999999,
+  "search_rank": 665,
   "number": 84
  },
  "8182": {
@@ -5936,7 +5900,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 1,
-  "search_rank": 119,
+  "search_rank": 118,
   "number": 11
  },
  "10220": {
@@ -5945,10 +5909,10 @@
   "team": "IND",
   "age": 27,
   "years_exp": 3,
-  "injury_status": null,
+  "injury_status": "Questionable",
   "status": "Active",
   "depth_chart_order": 3,
-  "search_rank": 358,
+  "search_rank": 629,
   "number": 86
  },
  "12063": {
@@ -6068,7 +6032,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 2,
-  "search_rank": 270,
+  "search_rank": 310,
   "number": 8
  },
  "8108": {
@@ -6487,7 +6451,7 @@
   "years_exp": 2,
   "injury_status": "Questionable",
   "status": "Active",
-  "depth_chart_order": 4,
+  "depth_chart_order": null,
   "search_rank": 114,
   "number": 33
  },
@@ -6560,20 +6524,8 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 9999999,
+  "search_rank": 283,
   "number": 87
- },
- "10867": {
-  "full_name": "Jake Bobo",
-  "position": "WR",
-  "team": "SEA",
-  "age": 28,
-  "years_exp": 3,
-  "injury_status": null,
-  "status": "Active",
-  "depth_chart_order": 9,
-  "search_rank": 577,
-  "number": 19
  },
  "8131": {
   "full_name": "Isaiah Likely",
@@ -6584,7 +6536,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 1,
-  "search_rank": 113,
+  "search_rank": 109,
   "number": 9
  },
  "4046": {
@@ -6596,7 +6548,7 @@
   "injury_status": "Questionable",
   "status": "Active",
   "depth_chart_order": 1,
-  "search_rank": 36,
+  "search_rank": 37,
   "number": 15
  },
  "ARI": {
@@ -6656,7 +6608,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 4,
-  "search_rank": 504,
+  "search_rank": 650,
   "number": 18
  },
  "2315": {
@@ -6692,7 +6644,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 2,
-  "search_rank": 212,
+  "search_rank": 227,
   "number": 2
  },
  "6171": {
@@ -6836,7 +6788,7 @@
   "injury_status": "Questionable",
   "status": "Active",
   "depth_chart_order": 3,
-  "search_rank": 686,
+  "search_rank": 464,
   "number": 81
  },
  "13657": {
@@ -6920,7 +6872,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 1,
-  "search_rank": 179,
+  "search_rank": 161,
   "number": 2
  },
  "13802": {
@@ -7016,7 +6968,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 3,
-  "search_rank": 566,
+  "search_rank": 617,
   "number": 1
  },
  "7483": {
@@ -7040,7 +6992,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 1,
-  "search_rank": 30,
+  "search_rank": 31,
   "number": 10
  },
  "6849": {
@@ -7244,7 +7196,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 654,
+  "search_rank": 674,
   "number": 85
  },
  "812": {
@@ -7517,10 +7469,10 @@
   "team": "DET",
   "age": 25,
   "years_exp": 3,
-  "injury_status": "Questionable",
+  "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 4,
-  "search_rank": 583,
+  "depth_chart_order": 5,
+  "search_rank": 675,
   "number": 25
  },
  "13088": {
@@ -7579,7 +7531,7 @@
   "years_exp": 4,
   "injury_status": "Questionable",
   "status": "Active",
-  "depth_chart_order": 6,
+  "depth_chart_order": 7,
   "search_rank": 999,
   "number": 18
  },
@@ -7639,8 +7591,8 @@
   "years_exp": 3,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 4,
-  "search_rank": 481,
+  "depth_chart_order": 3,
+  "search_rank": 535,
   "number": 3
  },
  "7539": {
@@ -7688,7 +7640,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 3,
-  "search_rank": 563,
+  "search_rank": 662,
   "number": 11
  },
  "6469": {
@@ -7784,7 +7736,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 3,
-  "search_rank": 209,
+  "search_rank": 206,
   "number": 13
  },
  "1346": {
@@ -7856,7 +7808,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 516,
+  "search_rank": 596,
   "number": 87
  },
  "12455": {
@@ -7880,7 +7832,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 1,
-  "search_rank": 12,
+  "search_rank": 11,
   "number": 8
  },
  "10937": {
@@ -7916,7 +7868,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 9999999,
+  "search_rank": 629,
   "number": 24
  },
  "13428": {
@@ -7928,7 +7880,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 445,
+  "search_rank": 684,
   "number": 17
  },
  "10870": {
@@ -7961,7 +7913,7 @@
   "team": "PHI",
   "age": 23,
   "years_exp": 0,
-  "injury_status": null,
+  "injury_status": "Questionable",
   "status": "Active",
   "depth_chart_order": 2,
   "search_rank": 140,
@@ -8060,7 +8012,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 4,
-  "search_rank": 457,
+  "search_rank": 576,
   "number": 4
  },
  "3555": {
@@ -8096,7 +8048,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 1,
-  "search_rank": 201,
+  "search_rank": 200,
   "number": 8
  },
  "5872": {
@@ -8108,7 +8060,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 2,
-  "search_rank": 130,
+  "search_rank": 131,
   "number": 19
  },
  "8820": {
@@ -8204,7 +8156,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 1,
-  "search_rank": 84,
+  "search_rank": 85,
   "number": 6
  },
  "8536": {
@@ -8228,7 +8180,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 2,
-  "search_rank": 443,
+  "search_rank": 479,
   "number": 6
  },
  "6650": {
@@ -8288,7 +8240,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 9999999,
+  "search_rank": 334,
   "number": 38
  },
  "6985": {
@@ -8324,7 +8276,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 1,
-  "search_rank": 69,
+  "search_rank": 70,
   "number": 6
  },
  "4137": {
@@ -8366,7 +8318,7 @@
  "13432": {
   "full_name": "Khalil Dinkins",
   "position": "TE",
-  "team": null,
+  "team": "SF",
   "age": null,
   "years_exp": 0,
   "injury_status": null,
@@ -8456,7 +8408,7 @@
   "injury_status": "Questionable",
   "status": "Active",
   "depth_chart_order": 1,
-  "search_rank": 46,
+  "search_rank": 48,
   "number": 84
  },
  "8203": {
@@ -8504,7 +8456,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 357,
+  "search_rank": 628,
   "number": 81
  },
  "8893": {
@@ -8707,7 +8659,7 @@
   "years_exp": 5,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 5,
+  "depth_chart_order": 3,
   "search_rank": 660,
   "number": 35
  },
@@ -8780,7 +8732,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 6,
-  "search_rank": 536,
+  "search_rank": 580,
   "number": 17
  },
  "2346": {
@@ -8909,7 +8861,7 @@
   "team": "LAC",
   "age": 24,
   "years_exp": 1,
-  "injury_status": null,
+  "injury_status": "Questionable",
   "status": "Active",
   "depth_chart_order": 3,
   "search_rank": 179,
@@ -8969,7 +8921,7 @@
   "team": "JAX",
   "age": 29,
   "years_exp": 7,
-  "injury_status": null,
+  "injury_status": "Questionable",
   "status": "Active",
   "depth_chart_order": 3,
   "search_rank": 77,
@@ -9044,7 +8996,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 999,
+  "search_rank": 342,
   "number": 19
  },
  "2790": {
@@ -9080,7 +9032,7 @@
   "injury_status": "PUP",
   "status": "Active",
   "depth_chart_order": 5,
-  "search_rank": 418,
+  "search_rank": 678,
   "number": 31
  },
  "8613": {
@@ -9128,7 +9080,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 9999999,
+  "search_rank": 626,
   "number": 8
  },
  "6237": {
@@ -9176,7 +9128,7 @@
   "injury_status": "Questionable",
   "status": "Active",
   "depth_chart_order": 2,
-  "search_rank": 255,
+  "search_rank": 261,
   "number": 19
  },
  "8831": {
@@ -9295,7 +9247,7 @@
   "years_exp": 1,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 3,
+  "depth_chart_order": 4,
   "search_rank": 667,
   "number": 86
  },
@@ -9344,7 +9296,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 3,
-  "search_rank": 564,
+  "search_rank": 652,
   "number": 89
  },
  "11267": {
@@ -9512,7 +9464,7 @@
   "injury_status": "Questionable",
   "status": "Active",
   "depth_chart_order": 1,
-  "search_rank": 39,
+  "search_rank": 40,
   "number": 2
  },
  "7605": {
@@ -9644,7 +9596,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 5,
-  "search_rank": 999,
+  "search_rank": 380,
   "number": 24
  },
  "8090": {
@@ -9668,7 +9620,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 1,
-  "search_rank": 115,
+  "search_rank": 119,
   "number": 9
  },
  "12487": {
@@ -9716,7 +9668,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 8,
-  "search_rank": 327,
+  "search_rank": 683,
   "number": 11
  },
  "6195": {
@@ -9752,7 +9704,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 2,
-  "search_rank": 999,
+  "search_rank": 262,
   "number": 84
  },
  "6870": {
@@ -9776,7 +9728,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 1,
-  "search_rank": 100,
+  "search_rank": 99,
   "number": 27
  },
  "12884": {
@@ -9788,7 +9740,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 508,
+  "search_rank": 466,
   "number": 18
  },
  "8226": {
@@ -9848,7 +9800,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 4,
-  "search_rank": 559,
+  "search_rank": 620,
   "number": 11
  },
  "11457": {
@@ -9932,7 +9884,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 2,
-  "search_rank": 237,
+  "search_rank": 203,
   "number": 7
  },
  "6263": {
@@ -9980,7 +9932,7 @@
   "injury_status": "PUP",
   "status": "Active",
   "depth_chart_order": 6,
-  "search_rank": 271,
+  "search_rank": 490,
   "number": 15
  },
  "13852": {
@@ -9992,7 +9944,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 524,
+  "search_rank": 693,
   "number": 36
  },
  "5260": {
@@ -10040,7 +9992,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 2,
-  "search_rank": 591,
+  "search_rank": 690,
   "number": 5
  },
  "12735": {
@@ -10088,7 +10040,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 2,
-  "search_rank": 23,
+  "search_rank": 25,
   "number": 3
  },
  "5987": {
@@ -10196,7 +10148,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 6,
-  "search_rank": 529,
+  "search_rank": 679,
   "number": 13
  },
  "7694": {
@@ -10208,7 +10160,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 2,
-  "search_rank": 517,
+  "search_rank": 597,
   "number": 82
  },
  "8656": {
@@ -10268,7 +10220,7 @@
   "injury_status": "Questionable",
   "status": "Active",
   "depth_chart_order": 1,
-  "search_rank": 66,
+  "search_rank": 62,
   "number": 85
  },
  "10215": {
@@ -10280,7 +10232,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 4,
-  "search_rank": 520,
+  "search_rank": 655,
   "number": 14
  },
  "11597": {
@@ -10289,7 +10241,7 @@
   "team": "NYG",
   "age": 25,
   "years_exp": 2,
-  "injury_status": null,
+  "injury_status": "Questionable",
   "status": "Active",
   "depth_chart_order": 2,
   "search_rank": 144,
@@ -10385,9 +10337,9 @@
   "team": "PHI",
   "age": 26,
   "years_exp": 5,
-  "injury_status": "Questionable",
+  "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 7,
+  "depth_chart_order": 6,
   "search_rank": 700,
   "number": 19
  },
@@ -10399,7 +10351,7 @@
   "years_exp": 4,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 3,
+  "depth_chart_order": 5,
   "search_rank": 999,
   "number": 84
  },
@@ -10469,7 +10421,7 @@
   "team": "LAC",
   "age": 24,
   "years_exp": 3,
-  "injury_status": null,
+  "injury_status": "Questionable",
   "status": "Active",
   "depth_chart_order": 2,
   "search_rank": 148,
@@ -10493,7 +10445,7 @@
   "team": "MIA",
   "age": 22,
   "years_exp": 0,
-  "injury_status": "Questionable",
+  "injury_status": null,
   "status": "Active",
   "depth_chart_order": 4,
   "search_rank": 203,
@@ -10532,7 +10484,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 3,
-  "search_rank": 608,
+  "search_rank": 687,
   "number": 25
  },
  "7438": {
@@ -10556,7 +10508,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 2,
-  "search_rank": 592,
+  "search_rank": 564,
   "number": 87
  },
  "8186": {
@@ -10591,7 +10543,7 @@
   "years_exp": 4,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 5,
+  "depth_chart_order": 6,
   "search_rank": 999,
   "number": 28
  },
@@ -10712,7 +10664,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 345,
+  "search_rank": 476,
   "number": 34
  },
  "5938": {
@@ -10723,8 +10675,8 @@
   "years_exp": 7,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 7,
-  "search_rank": 550,
+  "depth_chart_order": 6,
+  "search_rank": 480,
   "number": 5
  },
  "8252": {
@@ -10759,7 +10711,7 @@
   "years_exp": 1,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 5,
+  "depth_chart_order": 4,
   "search_rank": 173,
   "number": 20
  },
@@ -10892,7 +10844,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 7,
-  "search_rank": 999,
+  "search_rank": 356,
   "number": 5
  },
  "4040": {
@@ -10927,8 +10879,8 @@
   "years_exp": 2,
   "injury_status": "Questionable",
   "status": "Active",
-  "depth_chart_order": 4,
-  "search_rank": 340,
+  "depth_chart_order": 5,
+  "search_rank": 669,
   "number": 44
  },
  "14061": {
@@ -10940,7 +10892,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 565,
+  "search_rank": 342,
   "number": 41
  },
  "11214": {
@@ -11060,7 +11012,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 4,
-  "search_rank": 307,
+  "search_rank": 558,
   "number": 4
  },
  "12224": {
@@ -11239,7 +11191,7 @@
   "years_exp": 1,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 4,
+  "depth_chart_order": 5,
   "search_rank": 663,
   "number": 15
  },
@@ -11275,7 +11227,7 @@
   "years_exp": 4,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 6,
+  "depth_chart_order": 7,
   "search_rank": 651,
   "number": 36
  },
@@ -11480,7 +11432,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 4,
-  "search_rank": 999,
+  "search_rank": 377,
   "number": 11
  },
  "8223": {
@@ -11492,7 +11444,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 6,
-  "search_rank": 503,
+  "search_rank": 549,
   "number": 33
  },
  "7094": {
@@ -11600,7 +11552,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 3,
-  "search_rank": 999,
+  "search_rank": 358,
   "number": 84
  },
  "12482": {
@@ -11612,7 +11564,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 4,
-  "search_rank": 642,
+  "search_rank": 679,
   "number": 83
  },
  "13190": {
@@ -11672,7 +11624,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 999,
+  "search_rank": 700,
   "number": 49
  },
  "13972": {
@@ -11695,8 +11647,8 @@
   "years_exp": 0,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 4,
-  "search_rank": 565,
+  "depth_chart_order": 5,
+  "search_rank": 544,
   "number": 29
  },
  "5929": {
@@ -11720,7 +11672,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 7,
-  "search_rank": 432,
+  "search_rank": 592,
   "number": 80
  },
  "4835": {
@@ -11780,7 +11732,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 3,
-  "search_rank": 475,
+  "search_rank": 439,
   "number": 20
  },
  "3445": {
@@ -11827,8 +11779,8 @@
   "years_exp": 4,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 9,
-  "search_rank": 644,
+  "depth_chart_order": 8,
+  "search_rank": 629,
   "number": 83
  },
  "745": {
@@ -11900,7 +11852,7 @@
   "injury_status": "Questionable",
   "status": "Active",
   "depth_chart_order": 9,
-  "search_rank": 343,
+  "search_rank": 469,
   "number": 18
  },
  "3695": {
@@ -12019,8 +11971,8 @@
   "years_exp": 9,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 6,
-  "search_rank": 999,
+  "depth_chart_order": 5,
+  "search_rank": 395,
   "number": 17
  },
  "11276": {
@@ -12127,8 +12079,8 @@
   "years_exp": 0,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 3,
-  "search_rank": 999,
+  "depth_chart_order": 4,
+  "search_rank": 510,
   "number": 10
  },
  "6490": {
@@ -12197,7 +12149,7 @@
   "team": "WAS",
   "age": 24,
   "years_exp": 2,
-  "injury_status": null,
+  "injury_status": "Questionable",
   "status": "Active",
   "depth_chart_order": 3,
   "search_rank": 672,
@@ -12284,7 +12236,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 1,
-  "search_rank": 91,
+  "search_rank": 96,
   "number": 1
  },
  "6885": {
@@ -12331,7 +12283,7 @@
   "years_exp": 7,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 4,
+  "depth_chart_order": 6,
   "search_rank": 455,
   "number": 21
  },
@@ -12344,7 +12296,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 4,
-  "search_rank": 693,
+  "search_rank": 429,
   "number": 13
  },
  "1974": {
@@ -12415,8 +12367,8 @@
   "years_exp": 6,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 5,
-  "search_rank": 346,
+  "depth_chart_order": 6,
+  "search_rank": 524,
   "number": 81
  },
  "5211": {
@@ -12488,7 +12440,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 370,
+  "search_rank": 609,
   "number": 38
  },
  "12019": {
@@ -12512,7 +12464,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 1,
-  "search_rank": 322,
+  "search_rank": 552,
   "number": 19
  },
  "10226": {
@@ -12524,7 +12476,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 3,
-  "search_rank": 499,
+  "search_rank": 536,
   "number": 80
  },
  "4285": {
@@ -12644,7 +12596,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 7,
-  "search_rank": 999,
+  "search_rank": 625,
   "number": 39
  },
  "6906": {
@@ -12797,10 +12749,10 @@
   "team": "SF",
   "age": 23,
   "years_exp": 0,
-  "injury_status": null,
+  "injury_status": "Questionable",
   "status": "Active",
   "depth_chart_order": 3,
-  "search_rank": 139,
+  "search_rank": 125,
   "number": 15
  },
  "8077": {
@@ -12859,8 +12811,8 @@
   "years_exp": 3,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 5,
-  "search_rank": 999,
+  "depth_chart_order": 4,
+  "search_rank": 422,
   "number": 9
  },
  "2373": {
@@ -12908,7 +12860,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 2,
-  "search_rank": 459,
+  "search_rank": 454,
   "number": 80
  },
  "7752": {
@@ -12932,7 +12884,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 3,
-  "search_rank": 496,
+  "search_rank": 686,
   "number": 28
  },
  "12540": {
@@ -12968,7 +12920,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 3,
-  "search_rank": 526,
+  "search_rank": 663,
   "number": 83
  },
  "3978": {
@@ -12992,7 +12944,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 1,
-  "search_rank": 18,
+  "search_rank": 19,
   "number": 1
  },
  "4034": {
@@ -13244,7 +13196,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 2,
-  "search_rank": 399,
+  "search_rank": 437,
   "number": 6
  },
  "8824": {
@@ -13327,8 +13279,8 @@
   "years_exp": 4,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 2,
-  "search_rank": 350,
+  "depth_chart_order": null,
+  "search_rank": 329,
   "number": 36
  },
  "2309": {
@@ -13448,7 +13400,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 999,
+  "search_rank": 478,
   "number": 13
  },
  "2921": {
@@ -13568,7 +13520,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 691,
+  "search_rank": 397,
   "number": 43
  },
  "12144": {
@@ -13604,7 +13556,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 5,
-  "search_rank": 622,
+  "search_rank": 516,
   "number": 27
  },
  "5140": {
@@ -13664,7 +13616,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 1,
-  "search_rank": 573,
+  "search_rank": 582,
   "number": 19
  },
  "5967": {
@@ -13712,7 +13664,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 359,
+  "search_rank": 589,
   "number": 89
  },
  "12048": {
@@ -13724,7 +13676,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 4,
-  "search_rank": 443,
+  "search_rank": 434,
   "number": 36
  },
  "10217": {
@@ -13748,7 +13700,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 13,
-  "search_rank": 999,
+  "search_rank": 502,
   "number": 83
  },
  "12641": {
@@ -13760,7 +13712,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 7,
-  "search_rank": 669,
+  "search_rank": 691,
   "number": 83
  },
  "3454": {
@@ -13820,7 +13772,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 9999999,
+  "search_rank": 671,
   "number": 84
  },
  "5916": {
@@ -13892,7 +13844,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 1,
-  "search_rank": 61,
+  "search_rank": 59,
   "number": 8
  },
  "10211": {
@@ -13952,7 +13904,7 @@
   "injury_status": "PUP",
   "status": "Active",
   "depth_chart_order": 1,
-  "search_rank": 93,
+  "search_rank": 94,
   "number": 14
  },
  "11298": {
@@ -14048,7 +14000,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 3,
-  "search_rank": 494,
+  "search_rank": 664,
   "number": 12
  },
  "3214": {
@@ -14132,7 +14084,7 @@
   "injury_status": "Questionable",
   "status": "Active",
   "depth_chart_order": 3,
-  "search_rank": 434,
+  "search_rank": 655,
   "number": 10
  },
  "13416": {
@@ -14144,7 +14096,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 670,
+  "search_rank": 691,
   "number": null
  },
  "12215": {
@@ -14179,7 +14131,7 @@
   "years_exp": 0,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 5,
+  "depth_chart_order": 6,
   "search_rank": 663,
   "number": 86
  },
@@ -14192,7 +14144,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 1,
-  "search_rank": 37,
+  "search_rank": 39,
   "number": 16
  },
  "8164": {
@@ -14228,7 +14180,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 9999999,
+  "search_rank": 599,
   "number": 37
  },
  "11605": {
@@ -14249,7 +14201,7 @@
   "team": "NYJ",
   "age": null,
   "years_exp": 0,
-  "injury_status": null,
+  "injury_status": "Questionable",
   "status": "Active",
   "depth_chart_order": null,
   "search_rank": 9999999,
@@ -14300,7 +14252,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 1,
-  "search_rank": 453,
+  "search_rank": 461,
   "number": 1
  },
  "11329": {
@@ -14324,7 +14276,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 356,
+  "search_rank": 538,
   "number": 30
  },
  "12533": {
@@ -14333,7 +14285,7 @@
   "team": "WAS",
   "age": 25,
   "years_exp": 1,
-  "injury_status": null,
+  "injury_status": "Questionable",
   "status": "Active",
   "depth_chart_order": 1,
   "search_rank": 95,
@@ -14359,8 +14311,8 @@
   "years_exp": 11,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 4,
-  "search_rank": 625,
+  "depth_chart_order": 3,
+  "search_rank": 504,
   "number": 85
  },
  "3164": {
@@ -14456,7 +14408,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 436,
+  "search_rank": 381,
   "number": 49
  },
  "4704": {
@@ -14480,7 +14432,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 4,
-  "search_rank": 663,
+  "search_rank": 660,
   "number": 18
  },
  "6932": {
@@ -14527,8 +14479,8 @@
   "years_exp": 4,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 3,
-  "search_rank": 999,
+  "depth_chart_order": 4,
+  "search_rank": 274,
   "number": 47
  },
  "9223": {
@@ -14597,7 +14549,7 @@
   "team": "MIN",
   "age": 23,
   "years_exp": 2,
-  "injury_status": null,
+  "injury_status": "Questionable",
   "status": "Active",
   "depth_chart_order": 2,
   "search_rank": 224,
@@ -14647,7 +14599,7 @@
   "years_exp": 4,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 9,
+  "depth_chart_order": 8,
   "search_rank": 658,
   "number": 35
  },
@@ -14684,7 +14636,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 2,
-  "search_rank": 151,
+  "search_rank": 146,
   "number": 22
  },
  "13285": {
@@ -14708,7 +14660,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 3,
-  "search_rank": 594,
+  "search_rank": 698,
   "number": 14
  },
  "5756": {
@@ -14732,7 +14684,7 @@
   "injury_status": "Questionable",
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 497,
+  "search_rank": 679,
   "number": 8
  },
  "11848": {
@@ -14828,7 +14780,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 1,
-  "search_rank": 171,
+  "search_rank": 164,
   "number": 16
  },
  "13300": {
@@ -14851,7 +14803,7 @@
   "years_exp": 6,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 9,
+  "depth_chart_order": 7,
   "search_rank": 9999999,
   "number": 89
  },
@@ -14861,7 +14813,7 @@
   "team": "LV",
   "age": 22,
   "years_exp": 1,
-  "injury_status": null,
+  "injury_status": "Questionable",
   "status": "Active",
   "depth_chart_order": 1,
   "search_rank": 12,
@@ -14875,8 +14827,8 @@
   "years_exp": 3,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 5,
-  "search_rank": 482,
+  "depth_chart_order": 6,
+  "search_rank": 650,
   "number": 81
  },
  "3516": {
@@ -14900,7 +14852,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 3,
-  "search_rank": 570,
+  "search_rank": 551,
   "number": 15
  },
  "12118": {
@@ -14960,7 +14912,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 9999999,
+  "search_rank": 499,
   "number": null
  },
  "12880": {
@@ -14996,7 +14948,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 2,
-  "search_rank": 138,
+  "search_rank": 129,
   "number": 24
  },
  "4051": {
@@ -15068,7 +15020,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 470,
+  "search_rank": 466,
   "number": 43
  },
  "5917": {
@@ -15079,7 +15031,7 @@
   "years_exp": 7,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 9,
+  "depth_chart_order": 8,
   "search_rank": 649,
   "number": 1
  },
@@ -15104,7 +15056,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 1,
-  "search_rank": 56,
+  "search_rank": 55,
   "number": 2
  },
  "12460": {
@@ -15284,7 +15236,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 999,
+  "search_rank": 338,
   "number": 16
  },
  "7556": {
@@ -15428,7 +15380,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 2,
-  "search_rank": 208,
+  "search_rank": 182,
   "number": 26
  },
  "1689": {
@@ -15464,7 +15416,7 @@
   "injury_status": "Questionable",
   "status": "Active",
   "depth_chart_order": 3,
-  "search_rank": 416,
+  "search_rank": 468,
   "number": 89
  },
  "12085": {
@@ -15512,7 +15464,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 8,
-  "search_rank": 421,
+  "search_rank": 646,
   "number": 27
  },
  "12392": {
@@ -15644,7 +15596,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 9999999,
+  "search_rank": 600,
   "number": 47
  },
  "12495": {
@@ -15653,10 +15605,10 @@
   "team": "MIA",
   "age": 22,
   "years_exp": 1,
-  "injury_status": null,
+  "injury_status": "Questionable",
   "status": "Active",
   "depth_chart_order": 3,
-  "search_rank": 441,
+  "search_rank": 425,
   "number": 0
  },
  "1170": {
@@ -15728,7 +15680,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 4,
-  "search_rank": 679,
+  "search_rank": 619,
   "number": 83
  },
  "7586": {
@@ -15944,7 +15896,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 3,
-  "search_rank": 669,
+  "search_rank": 645,
   "number": 83
  },
  "12852": {
@@ -16028,7 +15980,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 4,
-  "search_rank": 448,
+  "search_rank": 424,
   "number": 9
  },
  "7885": {
@@ -16085,10 +16037,10 @@
   "team": "MIN",
   "age": 25,
   "years_exp": 1,
-  "injury_status": "Questionable",
+  "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 3,
-  "search_rank": 585,
+  "depth_chart_order": 4,
+  "search_rank": 432,
   "number": 12
  },
  "12901": {
@@ -16160,7 +16112,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 3,
-  "search_rank": 341,
+  "search_rank": 405,
   "number": 12
  },
  "7573": {
@@ -16292,7 +16244,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 3,
-  "search_rank": 999,
+  "search_rank": 335,
   "number": 16
  },
  "JAX": {
@@ -16349,7 +16301,7 @@
   "team": "DEN",
   "age": 24,
   "years_exp": 3,
-  "injury_status": "Questionable",
+  "injury_status": null,
   "status": "Active",
   "depth_chart_order": 5,
   "search_rank": 192,
@@ -16457,7 +16409,7 @@
   "team": "TEN",
   "age": 21,
   "years_exp": 0,
-  "injury_status": "Questionable",
+  "injury_status": null,
   "status": "Active",
   "depth_chart_order": 1,
   "search_rank": 61,
@@ -16484,7 +16436,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 1,
-  "search_rank": 441,
+  "search_rank": 426,
   "number": 88
  },
  "LAR": {
@@ -16544,7 +16496,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 7,
-  "search_rank": 391,
+  "search_rank": 454,
   "number": 35
  },
  "7848": {
@@ -16568,7 +16520,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 999,
+  "search_rank": 386,
   "number": 84
  },
  "5248": {
@@ -16868,7 +16820,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 2,
-  "search_rank": 667,
+  "search_rank": 290,
   "number": 82
  },
  "13830": {
@@ -16925,10 +16877,10 @@
   "team": "PHI",
   "age": 27,
   "years_exp": 5,
-  "injury_status": "Questionable",
+  "injury_status": null,
   "status": "Active",
   "depth_chart_order": 1,
-  "search_rank": 35,
+  "search_rank": 34,
   "number": 6
  },
  "12530": {
@@ -16940,7 +16892,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 4,
-  "search_rank": 118,
+  "search_rank": 116,
   "number": 12
  },
  "2918": {
@@ -16975,8 +16927,8 @@
   "years_exp": 3,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 3,
-  "search_rank": 560,
+  "depth_chart_order": 2,
+  "search_rank": 569,
   "number": 16
  },
  "8433": {
@@ -16997,7 +16949,7 @@
   "team": "NO",
   "age": 23,
   "years_exp": 1,
-  "injury_status": null,
+  "injury_status": "Questionable",
   "status": "Active",
   "depth_chart_order": 3,
   "search_rank": 169,
@@ -17035,8 +16987,8 @@
   "years_exp": 1,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 3,
-  "search_rank": 478,
+  "depth_chart_order": 4,
+  "search_rank": 468,
   "number": 18
  },
  "8002": {
@@ -17048,7 +17000,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 2,
-  "search_rank": 621,
+  "search_rank": 326,
   "number": 6
  },
  "11554": {
@@ -17144,7 +17096,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 4,
-  "search_rank": 999,
+  "search_rank": 613,
   "number": 25
  },
  "8769": {
@@ -17225,7 +17177,7 @@
   "team": "DAL",
   "age": 22,
   "years_exp": 1,
-  "injury_status": "Questionable",
+  "injury_status": null,
   "status": "Active",
   "depth_chart_order": 3,
   "search_rank": 189,
@@ -17480,7 +17432,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 1,
-  "search_rank": 16,
+  "search_rank": 17,
   "number": 5
  },
  "11632": {
@@ -17503,7 +17455,7 @@
   "years_exp": 9,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 5,
+  "depth_chart_order": 4,
   "search_rank": 697,
   "number": 13
  },
@@ -17528,7 +17480,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 9999999,
+  "search_rank": 407,
   "number": 87
  },
  "13825": {
@@ -17671,7 +17623,7 @@
   "years_exp": 1,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 3,
+  "depth_chart_order": 5,
   "search_rank": 999,
   "number": 86
  },
@@ -17708,7 +17660,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 3,
-  "search_rank": 605,
+  "search_rank": 602,
   "number": 13
  },
  "2733": {
@@ -17744,7 +17696,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 2,
-  "search_rank": 415,
+  "search_rank": 463,
   "number": 5
  },
  "6770": {
@@ -17780,7 +17732,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 7,
-  "search_rank": 674,
+  "search_rank": 407,
   "number": 19
  },
  "8624": {
@@ -17839,8 +17791,8 @@
   "years_exp": 3,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 3,
-  "search_rank": 368,
+  "depth_chart_order": 2,
+  "search_rank": 564,
   "number": 87
  },
  "10214": {
@@ -17852,7 +17804,7 @@
   "injury_status": "Questionable",
   "status": "Active",
   "depth_chart_order": 4,
-  "search_rank": 334,
+  "search_rank": 567,
   "number": 87
  },
  "8153": {
@@ -17900,7 +17852,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 2,
-  "search_rank": 649,
+  "search_rank": 687,
   "number": 6
  },
  "13888": {
@@ -17936,7 +17888,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 3,
-  "search_rank": 336,
+  "search_rank": 362,
   "number": 12
  },
  "6037": {
@@ -18043,7 +17995,7 @@
   "years_exp": 3,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 2,
+  "depth_chart_order": 3,
   "search_rank": 999,
   "number": 86
  },
@@ -18092,7 +18044,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 646,
+  "search_rank": 440,
   "number": 32
  },
  "3327": {
@@ -18152,7 +18104,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 1,
-  "search_rank": 1,
+  "search_rank": 2,
   "number": 0
  },
  "3486": {
@@ -18314,14 +18266,14 @@
  "12151": {
   "full_name": "Julian Hicks",
   "position": "WR",
-  "team": null,
+  "team": "SEA",
   "age": 26,
   "years_exp": 2,
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
   "search_rank": 573,
-  "number": 89
+  "number": 1
  },
  "4832": {
   "full_name": "Andrew Price",
@@ -18368,7 +18320,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 3,
-  "search_rank": 206,
+  "search_rank": 205,
   "number": 10
  },
  "3688": {
@@ -18458,12 +18410,12 @@
  "6223": {
   "full_name": "Juwann Winfree",
   "position": "WR",
-  "team": "HOU",
+  "team": null,
   "age": 29,
   "years_exp": 7,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 7,
+  "depth_chart_order": null,
   "search_rank": 9999999,
   "number": 11
  },
@@ -18476,7 +18428,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 9999999,
+  "search_rank": 308,
   "number": 82
  },
  "12800": {
@@ -18536,14 +18488,14 @@
   "injury_status": "Questionable",
   "status": "Active",
   "depth_chart_order": 5,
-  "search_rank": 560,
+  "search_rank": 651,
   "number": 9
  },
  "13776": {
   "full_name": "Hank Beatty",
   "position": "WR",
   "team": "TEN",
-  "age": null,
+  "age": 22,
   "years_exp": 0,
   "injury_status": null,
   "status": "Active",
@@ -18560,7 +18512,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 599,
+  "search_rank": 624,
   "number": 42
  },
  "2578": {
@@ -18584,7 +18536,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 4,
-  "search_rank": 588,
+  "search_rank": 277,
   "number": 87
  },
  "11158": {
@@ -18728,7 +18680,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 5,
-  "search_rank": 434,
+  "search_rank": 669,
   "number": 49
  },
  "7503": {
@@ -18848,7 +18800,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 6,
-  "search_rank": 539,
+  "search_rank": 615,
   "number": 12
  },
  "818": {
@@ -18980,7 +18932,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 1,
-  "search_rank": 135,
+  "search_rank": 134,
   "number": 39
  },
  "8247": {
@@ -19004,7 +18956,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 300,
+  "search_rank": 683,
   "number": 85
  },
  "4408": {
@@ -19052,7 +19004,7 @@
   "injury_status": "Questionable",
   "status": "Active",
   "depth_chart_order": 4,
-  "search_rank": 376,
+  "search_rank": 667,
   "number": 19
  },
  "7090": {
@@ -19169,10 +19121,10 @@
   "team": "SF",
   "age": 32,
   "years_exp": 9,
-  "injury_status": "PUP",
+  "injury_status": "Questionable",
   "status": "Active",
   "depth_chart_order": 1,
-  "search_rank": 90,
+  "search_rank": 88,
   "number": 85
  },
  "12100": {
@@ -19205,9 +19157,9 @@
   "team": "NO",
   "age": 23,
   "years_exp": 1,
-  "injury_status": null,
+  "injury_status": "Questionable",
   "status": "Active",
-  "depth_chart_order": 5,
+  "depth_chart_order": 4,
   "search_rank": 999,
   "number": 80
  },
@@ -19256,7 +19208,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 5,
-  "search_rank": 559,
+  "search_rank": 369,
   "number": 32
  },
  "11628": {
@@ -19291,8 +19243,8 @@
   "years_exp": 3,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 5,
-  "search_rank": 629,
+  "depth_chart_order": 6,
+  "search_rank": 615,
   "number": 36
  },
  "2306": {
@@ -19304,7 +19256,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 2,
-  "search_rank": 495,
+  "search_rank": 489,
   "number": 19
  },
  "4924": {
@@ -19340,7 +19292,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 3,
-  "search_rank": 205,
+  "search_rank": 198,
   "number": 10
  },
  "5699": {
@@ -19520,7 +19472,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 4,
-  "search_rank": 999,
+  "search_rank": 412,
   "number": 14
  },
  "7899": {
@@ -19543,8 +19495,8 @@
   "years_exp": 6,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 4,
-  "search_rank": 9999999,
+  "depth_chart_order": 5,
+  "search_rank": 300,
   "number": 44
  },
  "5117": {
@@ -19615,8 +19567,8 @@
   "years_exp": 0,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 6,
-  "search_rank": 649,
+  "depth_chart_order": 5,
+  "search_rank": 656,
   "number": 19
  },
  "11595": {
@@ -19628,7 +19580,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 4,
-  "search_rank": 618,
+  "search_rank": 678,
   "number": 12
  },
  "12531": {
@@ -19640,7 +19592,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 4,
-  "search_rank": 438,
+  "search_rank": 690,
   "number": 23
  },
  "4790": {
@@ -19820,7 +19772,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 1,
-  "search_rank": 330,
+  "search_rank": 216,
   "number": 28
  },
  "4839": {
@@ -19838,12 +19790,12 @@
  "11808": {
   "full_name": "Jha'Quan Jackson",
   "position": "WR",
-  "team": "HOU",
+  "team": null,
   "age": 26,
   "years_exp": 2,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 8,
+  "depth_chart_order": null,
   "search_rank": 999,
   "number": 88
  },
@@ -19879,7 +19831,7 @@
   "years_exp": 1,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 5,
+  "depth_chart_order": 6,
   "search_rank": 999,
   "number": 82
  },
@@ -20060,7 +20012,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 9999999,
+  "search_rank": 559,
   "number": null
  },
  "13275": {
@@ -20072,7 +20024,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 2,
-  "search_rank": 237,
+  "search_rank": 227,
   "number": 15
  },
  "7087": {
@@ -20093,10 +20045,10 @@
   "team": "NE",
   "age": 24,
   "years_exp": 1,
-  "injury_status": null,
+  "injury_status": "Questionable",
   "status": "Active",
-  "depth_chart_order": 6,
-  "search_rank": 999,
+  "depth_chart_order": 4,
+  "search_rank": 611,
   "number": 34
  },
  "8423": {
@@ -20204,7 +20156,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 548,
+  "search_rank": 638,
   "number": 5
  },
  "14037": {
@@ -20216,7 +20168,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 9999999,
+  "search_rank": 559,
   "number": 35
  },
  "12007": {
@@ -20408,7 +20360,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 2,
-  "search_rank": 520,
+  "search_rank": 691,
   "number": 89
  },
  "13269": {
@@ -20420,7 +20372,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 1,
-  "search_rank": 82,
+  "search_rank": 87,
   "number": 15
  },
  "1338": {
@@ -20444,7 +20396,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 5,
-  "search_rank": 446,
+  "search_rank": 436,
   "number": 18
  },
  "8634": {
@@ -20539,7 +20491,7 @@
   "years_exp": 1,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 9,
+  "depth_chart_order": 7,
   "search_rank": 999,
   "number": 17
  },
@@ -20647,7 +20599,7 @@
   "years_exp": 5,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 8,
+  "depth_chart_order": 9,
   "search_rank": 654,
   "number": 86
  },
@@ -20672,7 +20624,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 8,
-  "search_rank": 329,
+  "search_rank": 587,
   "number": 4
  },
  "7103": {
@@ -20780,7 +20732,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 3,
-  "search_rank": 683,
+  "search_rank": 480,
   "number": 38
  },
  "3542": {
@@ -20816,7 +20768,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 3,
-  "search_rank": 646,
+  "search_rank": 682,
   "number": 34
  },
  "11385": {
@@ -20936,7 +20888,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 1,
-  "search_rank": 18,
+  "search_rank": 19,
   "number": 9
  },
  "13773": {
@@ -20972,7 +20924,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 6,
-  "search_rank": 539,
+  "search_rank": 510,
   "number": 3
  },
  "12003": {
@@ -21152,7 +21104,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 3,
-  "search_rank": 999,
+  "search_rank": 592,
   "number": 19
  },
  "11474": {
@@ -21164,7 +21116,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 4,
-  "search_rank": 9999999,
+  "search_rank": 251,
   "number": 81
  },
  "13063": {
@@ -21284,7 +21236,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 4,
-  "search_rank": 181,
+  "search_rank": 174,
   "number": 13
  },
  "6059": {
@@ -21308,7 +21260,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 999,
+  "search_rank": 244,
   "number": 9
  },
  "13677": {
@@ -21344,7 +21296,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 3,
-  "search_rank": 651,
+  "search_rank": 618,
   "number": 7
  },
  "7176": {
@@ -21380,7 +21332,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 4,
-  "search_rank": 480,
+  "search_rank": 678,
   "number": 4
  },
  "2024": {
@@ -21440,7 +21392,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 5,
-  "search_rank": 660,
+  "search_rank": 647,
   "number": 42
  },
  "5224": {
@@ -21533,7 +21485,7 @@
   "team": "PHI",
   "age": 26,
   "years_exp": 4,
-  "injury_status": "Questionable",
+  "injury_status": null,
   "status": "Active",
   "depth_chart_order": 4,
   "search_rank": 666,
@@ -21571,7 +21523,7 @@
   "years_exp": 0,
   "injury_status": "Doubtful",
   "status": "Active",
-  "depth_chart_order": 3,
+  "depth_chart_order": 2,
   "search_rank": 62,
   "number": 0
  },
@@ -21644,7 +21596,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 2,
-  "search_rank": 362,
+  "search_rank": 366,
   "number": 10
  },
  "8201": {
@@ -21668,7 +21620,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 408,
+  "search_rank": 697,
   "number": 88
  },
  "5032": {
@@ -21686,14 +21638,14 @@
  "4080": {
   "full_name": "Zay Jones",
   "position": "WR",
-  "team": null,
-  "age": 30,
+  "team": "HOU",
+  "age": 31,
   "years_exp": 9,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": null,
-  "search_rank": 9999999,
-  "number": 17
+  "depth_chart_order": 5,
+  "search_rank": 296,
+  "number": 18
  },
  "4147": {
   "full_name": "Samaje Perine",
@@ -21704,7 +21656,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 2,
-  "search_rank": 460,
+  "search_rank": 432,
   "number": 34
  },
  "5837": {
@@ -21776,7 +21728,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 3,
-  "search_rank": 293,
+  "search_rank": 561,
   "number": 4
  },
  "4050": {
@@ -21812,7 +21764,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 5,
-  "search_rank": 414,
+  "search_rank": 643,
   "number": 3
  },
  "11867": {
@@ -21884,7 +21836,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 386,
+  "search_rank": 469,
   "number": 6
  },
  "6973": {
@@ -21968,7 +21920,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 6,
-  "search_rank": 352,
+  "search_rank": 658,
   "number": 20
  },
  "12492": {
@@ -22004,7 +21956,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 2,
-  "search_rank": 564,
+  "search_rank": 530,
   "number": 85
  },
  "6161": {
@@ -22064,7 +22016,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 1,
-  "search_rank": 35,
+  "search_rank": 36,
   "number": 4
  },
  "2528": {
@@ -22160,7 +22112,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 1,
-  "search_rank": 476,
+  "search_rank": 643,
   "number": 10
  },
  "2394": {
@@ -22256,7 +22208,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 9999999,
+  "search_rank": 360,
   "number": 23
  },
  "8089": {
@@ -22375,7 +22327,7 @@
   "years_exp": 1,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 4,
+  "depth_chart_order": 3,
   "search_rank": 999,
   "number": 85
  },
@@ -22436,7 +22388,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 9999999,
+  "search_rank": 621,
   "number": 86
  },
  "12170": {
@@ -22556,8 +22508,8 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 2,
-  "search_rank": 116,
-  "number": 18
+  "search_rank": 114,
+  "number": 3
  },
  "7522": {
   "full_name": "Hunter Thedford",
@@ -22604,7 +22556,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 999,
+  "search_rank": 487,
   "number": 49
  },
  "13804": {
@@ -22616,7 +22568,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 313,
+  "search_rank": 544,
   "number": 17
  },
  "7793": {
@@ -22676,7 +22628,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 3,
-  "search_rank": 999,
+  "search_rank": 319,
   "number": 89
  },
  "1841": {
@@ -22795,7 +22747,7 @@
   "years_exp": 4,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 6,
+  "depth_chart_order": 4,
   "search_rank": 9999999,
   "number": 85
  },
@@ -23012,7 +22964,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 3,
-  "search_rank": 505,
+  "search_rank": 469,
   "number": 81
  },
  "1029": {
@@ -23057,10 +23009,10 @@
   "team": "BAL",
   "age": 25,
   "years_exp": 2,
-  "injury_status": "Questionable",
+  "injury_status": null,
   "status": "Active",
   "depth_chart_order": 4,
-  "search_rank": 443,
+  "search_rank": 517,
   "number": 26
  },
  "12534": {
@@ -23121,7 +23073,7 @@
   "status": "Active",
   "depth_chart_order": null,
   "search_rank": 9999999,
-  "number": 46
+  "number": 6
  },
  "4218": {
   "full_name": "Trent Taylor",
@@ -23156,7 +23108,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 999,
+  "search_rank": 255,
   "number": 43
  },
  "1675": {
@@ -23180,7 +23132,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 379,
+  "search_rank": 606,
   "number": 2
  },
  "8849": {
@@ -23191,7 +23143,7 @@
   "years_exp": 4,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 5,
+  "depth_chart_order": 4,
   "search_rank": 681,
   "number": 48
  },
@@ -23300,7 +23252,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 7,
-  "search_rank": 537,
+  "search_rank": 511,
   "number": 19
  },
  "5189": {
@@ -23312,7 +23264,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 1,
-  "search_rank": 168,
+  "search_rank": 171,
   "number": 18
  },
  "2600": {
@@ -23359,7 +23311,7 @@
   "years_exp": 1,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 9,
+  "depth_chart_order": 8,
   "search_rank": 999,
   "number": 84
  },
@@ -23396,7 +23348,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 2,
-  "search_rank": 69,
+  "search_rank": 71,
   "number": 7
  },
  "5358": {
@@ -23444,7 +23396,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 1,
-  "search_rank": 48,
+  "search_rank": 47,
   "number": 32
  },
  "2559": {
@@ -23492,7 +23444,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 9999999,
+  "search_rank": 509,
   "number": 82
  },
  "6007": {
@@ -23576,7 +23528,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 7,
-  "search_rank": 698,
+  "search_rank": 376,
   "number": 35
  },
  "13150": {
@@ -23588,7 +23540,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 5,
-  "search_rank": 355,
+  "search_rank": 658,
   "number": 80
  },
  "5692": {
@@ -23611,8 +23563,8 @@
   "years_exp": 3,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 4,
-  "search_rank": 562,
+  "depth_chart_order": 5,
+  "search_rank": 270,
   "number": 37
  },
  "11583": {
@@ -23624,7 +23576,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 2,
-  "search_rank": 90,
+  "search_rank": 89,
   "number": 25
  },
  "13710": {
@@ -23815,7 +23767,7 @@
   "years_exp": 0,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 6,
+  "depth_chart_order": 7,
   "search_rank": 999,
   "number": 32
  },
@@ -23828,7 +23780,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 999,
+  "search_rank": 405,
   "number": 40
  },
  "4274": {
@@ -23839,8 +23791,8 @@
   "years_exp": 9,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 5,
-  "search_rank": 9999999,
+  "depth_chart_order": 6,
+  "search_rank": 576,
   "number": 83
  },
  "13179": {
@@ -23852,7 +23804,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 677,
+  "search_rank": 359,
   "number": 86
  },
  "8217": {
@@ -23912,7 +23864,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 3,
-  "search_rank": 318,
+  "search_rank": 477,
   "number": 10
  },
  "4305": {
@@ -23972,7 +23924,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 4,
-  "search_rank": 999,
+  "search_rank": 243,
   "number": 86
  },
  "2268": {
@@ -24080,7 +24032,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 4,
-  "search_rank": 543,
+  "search_rank": 699,
   "number": 82
  },
  "6618": {
@@ -24128,7 +24080,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 3,
-  "search_rank": 642,
+  "search_rank": 337,
   "number": 89
  },
  "1329": {
@@ -24236,7 +24188,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 11,
-  "search_rank": 999,
+  "search_rank": 265,
   "number": 84
  },
  "11590": {
@@ -24259,7 +24211,7 @@
   "years_exp": 0,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 4,
+  "depth_chart_order": 5,
   "search_rank": 9999999,
   "number": 89
  },
@@ -24272,7 +24224,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 999,
+  "search_rank": 427,
   "number": 45
  },
  "4878": {
@@ -24367,7 +24319,7 @@
   "years_exp": 3,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 12,
+  "depth_chart_order": 11,
   "search_rank": 531,
   "number": 88
  },
@@ -24380,7 +24332,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 1,
-  "search_rank": 54,
+  "search_rank": 53,
   "number": 17
  },
  "7554": {
@@ -24392,7 +24344,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 5,
-  "search_rank": 380,
+  "search_rank": 492,
   "number": 46
  },
  "12308": {
@@ -24511,7 +24463,7 @@
   "years_exp": 8,
   "injury_status": "Questionable",
   "status": "Active",
-  "depth_chart_order": 4,
+  "depth_chart_order": 5,
   "search_rank": 210,
   "number": 3
  },
@@ -24596,7 +24548,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 6,
-  "search_rank": 999,
+  "search_rank": 372,
   "number": 83
  },
  "2223": {
@@ -24620,7 +24572,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 3,
-  "search_rank": 632,
+  "search_rank": 673,
   "number": 17
  },
  "284": {
@@ -24668,7 +24620,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 1,
-  "search_rank": 38,
+  "search_rank": 37,
   "number": 44
  },
  "3621": {
@@ -24703,8 +24655,8 @@
   "years_exp": 3,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 3,
-  "search_rank": 343,
+  "depth_chart_order": 5,
+  "search_rank": 628,
   "number": 19
  },
  "8019": {
@@ -24800,7 +24752,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 3,
-  "search_rank": 677,
+  "search_rank": 648,
   "number": 88
  },
  "5915": {
@@ -24872,7 +24824,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 3,
-  "search_rank": 999,
+  "search_rank": 324,
   "number": 80
  },
  "6365": {
@@ -24974,13 +24926,13 @@
  "13227": {
   "full_name": "Mitch Van Vooren",
   "position": "WR",
-  "team": null,
+  "team": "DAL",
   "age": null,
   "years_exp": 1,
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 999,
+  "search_rank": 355,
   "number": 46
  },
  "13411": {
@@ -24992,7 +24944,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 5,
-  "search_rank": 454,
+  "search_rank": 446,
   "number": 81
  },
  "2319": {
@@ -25064,7 +25016,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 4,
-  "search_rank": 445,
+  "search_rank": 472,
   "number": 30
  },
  "4229": {
@@ -25196,7 +25148,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 4,
-  "search_rank": 573,
+  "search_rank": 624,
   "number": 5
  },
  "7035": {
@@ -25279,9 +25231,9 @@
   "years_exp": 1,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 6,
+  "depth_chart_order": 5,
   "search_rank": 195,
-  "number": 8
+  "number": 18
  },
  "5125": {
   "full_name": "Damoun Patterson",
@@ -25459,7 +25411,7 @@
   "years_exp": 4,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 5,
+  "depth_chart_order": 6,
   "search_rank": 999,
   "number": 26
  },
@@ -25495,8 +25447,8 @@
   "years_exp": 10,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 4,
-  "search_rank": 449,
+  "depth_chart_order": 3,
+  "search_rank": 633,
   "number": 11
  },
  "188": {
@@ -25544,7 +25496,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 1,
-  "search_rank": 240,
+  "search_rank": 233,
   "number": 88
  },
  "8527": {
@@ -25555,7 +25507,7 @@
   "years_exp": 4,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 8,
+  "depth_chart_order": 7,
   "search_rank": 676,
   "number": 81
  },
@@ -25580,7 +25532,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 2,
-  "search_rank": 553,
+  "search_rank": 528,
   "number": 25
  },
  "6002": {
@@ -25639,8 +25591,8 @@
   "years_exp": 1,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 9,
-  "search_rank": 619,
+  "depth_chart_order": 6,
+  "search_rank": 666,
   "number": 81
  },
  "331": {
@@ -25676,7 +25628,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 3,
-  "search_rank": 999,
+  "search_rank": 513,
   "number": 15
  },
  "4922": {
@@ -25711,8 +25663,8 @@
   "years_exp": 3,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 3,
-  "search_rank": 394,
+  "depth_chart_order": 4,
+  "search_rank": 521,
   "number": 81
  },
  "11381": {
@@ -25748,7 +25700,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 1,
-  "search_rank": 112,
+  "search_rank": 113,
   "number": 2
  },
  "5201": {
@@ -25805,10 +25757,10 @@
   "team": "DET",
   "age": 25,
   "years_exp": 2,
-  "injury_status": null,
+  "injury_status": "Questionable",
   "status": "Active",
-  "depth_chart_order": 5,
-  "search_rank": 452,
+  "depth_chart_order": 4,
+  "search_rank": 527,
   "number": 33
  },
  "11483": {
@@ -25892,7 +25844,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 2,
-  "search_rank": 439,
+  "search_rank": 522,
   "number": 2
  },
  "8230": {
@@ -25901,7 +25853,7 @@
   "team": "NO",
   "age": 28,
   "years_exp": 4,
-  "injury_status": null,
+  "injury_status": "Questionable",
   "status": "Active",
   "depth_chart_order": 4,
   "search_rank": 648,
@@ -25916,7 +25868,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 3,
-  "search_rank": 338,
+  "search_rank": 489,
   "number": 15
  },
  "5089": {
@@ -26108,7 +26060,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 9999999,
+  "search_rank": 489,
   "number": 11
  },
  "4942": {
@@ -26129,10 +26081,10 @@
   "team": "CAR",
   "age": 25,
   "years_exp": 2,
-  "injury_status": null,
+  "injury_status": "Questionable",
   "status": "Active",
   "depth_chart_order": 3,
-  "search_rank": 556,
+  "search_rank": 540,
   "number": 17
  },
  "4146": {
@@ -26156,7 +26108,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 5,
-  "search_rank": 630,
+  "search_rank": 617,
   "number": 34
  },
  "11637": {
@@ -26252,7 +26204,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 4,
-  "search_rank": 672,
+  "search_rank": 450,
   "number": 20
  },
  "13408": {
@@ -26276,7 +26228,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 5,
-  "search_rank": 999,
+  "search_rank": 323,
   "number": 88
  },
  "5700": {
@@ -26312,7 +26264,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 2,
-  "search_rank": 569,
+  "search_rank": 692,
   "number": 87
  },
  "13066": {
@@ -26323,7 +26275,7 @@
   "years_exp": 1,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 1,
+  "depth_chart_order": 2,
   "search_rank": 326,
   "number": 30
  },
@@ -26333,10 +26285,10 @@
   "team": "MIA",
   "age": 23,
   "years_exp": 1,
-  "injury_status": "Questionable",
+  "injury_status": null,
   "status": "Active",
   "depth_chart_order": 2,
-  "search_rank": 472,
+  "search_rank": 545,
   "number": 14
  },
  "6730": {
@@ -26408,7 +26360,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 7,
-  "search_rank": 670,
+  "search_rank": 699,
   "number": 81
  },
  "3347": {
@@ -26432,7 +26384,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 1,
-  "search_rank": 17,
+  "search_rank": 16,
   "number": 30
  },
  "13889": {
@@ -26480,7 +26432,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 5,
-  "search_rank": 533,
+  "search_rank": 638,
   "number": 16
  },
  "11073": {
@@ -26504,7 +26456,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 4,
-  "search_rank": 640,
+  "search_rank": 644,
   "number": 86
  },
  "12521": {
@@ -26516,7 +26468,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 2,
-  "search_rank": 447,
+  "search_rank": 429,
   "number": 18
  },
  "6357": {
@@ -26573,9 +26525,9 @@
   "team": "PHI",
   "age": 24,
   "years_exp": 1,
-  "injury_status": null,
+  "injury_status": "Questionable",
   "status": "Active",
-  "depth_chart_order": 6,
+  "depth_chart_order": null,
   "search_rank": 999,
   "number": 45
  },
@@ -26615,18 +26567,6 @@
   "search_rank": 9999999,
   "number": 37
  },
- "12484": {
-  "full_name": "Jayden Higgins",
-  "position": "WR",
-  "team": "HOU",
-  "age": 23,
-  "years_exp": 1,
-  "injury_status": "IR",
-  "status": "Active",
-  "depth_chart_order": 7,
-  "search_rank": 126,
-  "number": 81
- },
  "8234": {
   "full_name": "Jaivon Heiligh",
   "position": "WR",
@@ -26660,7 +26600,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 374,
+  "search_rank": 619,
   "number": 0
  },
  "6074": {
@@ -26684,7 +26624,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 4,
-  "search_rank": 464,
+  "search_rank": 477,
   "number": 14
  },
  "6308": {
@@ -26756,7 +26696,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 5,
-  "search_rank": 479,
+  "search_rank": 605,
   "number": 80
  },
  "13436": {
@@ -26780,7 +26720,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 2,
-  "search_rank": 430,
+  "search_rank": 315,
   "number": 81
  },
  "3336": {
@@ -26804,7 +26744,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 1,
-  "search_rank": 11,
+  "search_rank": 12,
   "number": 18
  },
  "391": {
@@ -26863,8 +26803,8 @@
   "years_exp": 3,
   "injury_status": "PUP",
   "status": "Active",
-  "depth_chart_order": 5,
-  "search_rank": 464,
+  "depth_chart_order": 6,
+  "search_rank": 675,
   "number": 14
  },
  "11184": {
@@ -27032,7 +26972,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 1,
-  "search_rank": 154,
+  "search_rank": 155,
   "number": 36
  },
  "6553": {
@@ -27079,7 +27019,7 @@
   "years_exp": 3,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 4,
+  "depth_chart_order": 3,
   "search_rank": 677,
   "number": 16
  },
@@ -27200,7 +27140,7 @@
   "injury_status": "Questionable",
   "status": "Active",
   "depth_chart_order": 2,
-  "search_rank": 103,
+  "search_rank": 105,
   "number": 1
  },
  "5760": {
@@ -27271,7 +27211,7 @@
   "years_exp": 0,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 3,
+  "depth_chart_order": 4,
   "search_rank": 167,
   "number": 32
  },
@@ -27356,7 +27296,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 8,
-  "search_rank": 566,
+  "search_rank": 625,
   "number": 2
  },
  "5587": {
@@ -27500,7 +27440,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 3,
-  "search_rank": 643,
+  "search_rank": 300,
   "number": 37
  },
  "13210": {
@@ -27511,8 +27451,8 @@
   "years_exp": 1,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 4,
-  "search_rank": 9999999,
+  "depth_chart_order": 3,
+  "search_rank": 409,
   "number": 49
  },
  "6446": {
@@ -27619,7 +27559,7 @@
   "years_exp": 2,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 7,
+  "depth_chart_order": 5,
   "search_rank": 999,
   "number": 83
  },
@@ -27764,7 +27704,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 10,
-  "search_rank": 662,
+  "search_rank": 657,
   "number": 84
  },
  "3655": {
@@ -27812,7 +27752,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 4,
-  "search_rank": 677,
+  "search_rank": 616,
   "number": 32
  },
  "12471": {
@@ -27824,7 +27764,7 @@
   "injury_status": "Questionable",
   "status": "Active",
   "depth_chart_order": 2,
-  "search_rank": 570,
+  "search_rank": 541,
   "number": 21
  },
  "12467": {
@@ -27836,7 +27776,7 @@
   "injury_status": "Questionable",
   "status": "Active",
   "depth_chart_order": 3,
-  "search_rank": 244,
+  "search_rank": 231,
   "number": 29
  },
  "2909": {
@@ -27920,7 +27860,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 1,
-  "search_rank": 30,
+  "search_rank": 31,
   "number": 12
  },
  "13305": {
@@ -27956,7 +27896,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 999,
+  "search_rank": 680,
   "number": 41
  },
  "4984": {
@@ -27968,7 +27908,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 1,
-  "search_rank": 4,
+  "search_rank": 3,
   "number": 17
  },
  "11053": {
@@ -28016,7 +27956,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 644,
+  "search_rank": 393,
   "number": 13
  },
  "7579": {
@@ -28160,7 +28100,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 2,
-  "search_rank": 110,
+  "search_rank": 107,
   "number": 2
  },
  "11762": {
@@ -28195,8 +28135,8 @@
   "years_exp": 1,
   "injury_status": "Questionable",
   "status": "Active",
-  "depth_chart_order": 7,
-  "search_rank": 999,
+  "depth_chart_order": 5,
+  "search_rank": 690,
   "number": 31
  },
  "12357": {
@@ -28279,8 +28219,8 @@
   "years_exp": 0,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 3,
-  "search_rank": 369,
+  "depth_chart_order": 5,
+  "search_rank": 666,
   "number": 33
  },
  "1048": {
@@ -28316,7 +28256,7 @@
   "injury_status": "Questionable",
   "status": "Active",
   "depth_chart_order": 2,
-  "search_rank": 553,
+  "search_rank": 539,
   "number": 26
  },
  "6803": {
@@ -28327,7 +28267,7 @@
   "years_exp": 6,
   "injury_status": "DNR",
   "status": "Active",
-  "depth_chart_order": 5,
+  "depth_chart_order": 4,
   "search_rank": 177,
   "number": 11
  },
@@ -28340,7 +28280,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 9999999,
+  "search_rank": 500,
   "number": 49
  },
  "12544": {
@@ -28352,7 +28292,7 @@
   "injury_status": "Questionable",
   "status": "Active",
   "depth_chart_order": 3,
-  "search_rank": 468,
+  "search_rank": 526,
   "number": 5
  },
  "11249": {
@@ -28520,7 +28460,7 @@
   "injury_status": "Sus",
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 597,
+  "search_rank": 670,
   "number": 89
  },
  "12506": {
@@ -28622,13 +28562,13 @@
  "11421": {
   "full_name": "Ryan Miller",
   "position": "WR",
-  "team": "NYG",
+  "team": null,
   "age": 26,
   "years_exp": 3,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 11,
-  "search_rank": 532,
+  "depth_chart_order": null,
+  "search_rank": 509,
   "number": 5
  },
  "7050": {
@@ -28639,7 +28579,7 @@
   "years_exp": 6,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 4,
+  "depth_chart_order": null,
   "search_rank": 999,
   "number": 47
  },
@@ -28784,7 +28724,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 312,
+  "search_rank": 633,
   "number": 43
  },
  "2914": {
@@ -28820,7 +28760,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 5,
-  "search_rank": 551,
+  "search_rank": 314,
   "number": 19
  },
  "6853": {
@@ -28832,7 +28772,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 8,
-  "search_rank": 999,
+  "search_rank": 383,
   "number": 12
  },
  "8775": {
@@ -28880,7 +28820,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 3,
-  "search_rank": 162,
+  "search_rank": 158,
   "number": 6
  },
  "11537": {
@@ -28937,7 +28877,7 @@
   "team": "TB",
   "age": 27,
   "years_exp": 4,
-  "injury_status": null,
+  "injury_status": "Questionable",
   "status": "Active",
   "depth_chart_order": 7,
   "search_rank": 9999999,
@@ -29120,7 +29060,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 6,
-  "search_rank": 546,
+  "search_rank": 608,
   "number": 23
  },
  "2446": {
@@ -29215,7 +29155,7 @@
   "years_exp": 3,
   "injury_status": "Questionable",
   "status": "Active",
-  "depth_chart_order": 10,
+  "depth_chart_order": 8,
   "search_rank": 686,
   "number": 13
  },
@@ -29324,7 +29264,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 5,
-  "search_rank": 999,
+  "search_rank": 289,
   "number": 20
  },
  "7594": {
@@ -29431,7 +29371,7 @@
   "years_exp": 2,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 2,
+  "depth_chart_order": 3,
   "search_rank": 209,
   "number": 14
  },
@@ -29621,10 +29561,10 @@
   "team": "BUF",
   "age": 24,
   "years_exp": 0,
-  "injury_status": "Questionable",
+  "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 6,
-  "search_rank": 380,
+  "depth_chart_order": 5,
+  "search_rank": 378,
   "number": 13
  },
  "8127": {
@@ -29636,7 +29576,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 3,
-  "search_rank": 614,
+  "search_rank": 661,
   "number": 88
  },
  "12883": {
@@ -29648,7 +29588,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 4,
-  "search_rank": 9999999,
+  "search_rank": 297,
   "number": 47
  },
  "12156": {
@@ -29690,14 +29630,14 @@
  "3200": {
   "full_name": "Sterling Shepard",
   "position": "WR",
-  "team": null,
+  "team": "HOU",
   "age": 33,
   "years_exp": 10,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": null,
-  "search_rank": 375,
-  "number": 17
+  "depth_chart_order": 7,
+  "search_rank": 505,
+  "number": 15
  },
  "4089": {
   "full_name": "Gerald Everett",
@@ -29815,7 +29755,7 @@
   "years_exp": 9,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 5,
+  "depth_chart_order": 4,
   "search_rank": 685,
   "number": 32
  },
@@ -29851,7 +29791,7 @@
   "years_exp": 5,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 6,
+  "depth_chart_order": 7,
   "search_rank": 999,
   "number": 9
  },
@@ -29897,10 +29837,10 @@
   "team": "NO",
   "age": 25,
   "years_exp": 2,
-  "injury_status": null,
+  "injury_status": "Questionable",
   "status": "Active",
   "depth_chart_order": 4,
-  "search_rank": 388,
+  "search_rank": 449,
   "number": 16
  },
  "5744": {
@@ -29966,14 +29906,14 @@
  "13725": {
   "full_name": "Dominic Richardson",
   "position": "RB",
-  "team": null,
+  "team": "NYJ",
   "age": 25,
   "years_exp": 0,
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
   "search_rank": 9999999,
-  "number": 43
+  "number": 35
  },
  "8745": {
   "full_name": "Lance McCutcheon",
@@ -29999,18 +29939,6 @@
   "search_rank": 150,
   "number": 33
  },
- "8255": {
-  "full_name": "Raheem Blackshear",
-  "position": "RB",
-  "team": "DET",
-  "age": 28,
-  "years_exp": 4,
-  "injury_status": null,
-  "status": "Active",
-  "depth_chart_order": 4,
-  "search_rank": 654,
-  "number": 42
- },
  "8915": {
   "full_name": "Drew Plitt",
   "position": "QB",
@@ -30032,7 +29960,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 2,
-  "search_rank": 401,
+  "search_rank": 440,
   "number": 87
  },
  "2639": {
@@ -30200,7 +30128,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 2,
-  "search_rank": 580,
+  "search_rank": 548,
   "number": 20
  },
  "7941": {
@@ -30260,7 +30188,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 3,
-  "search_rank": 661,
+  "search_rank": 582,
   "number": 15
  },
  "8573": {
@@ -30308,7 +30236,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 999,
+  "search_rank": 271,
   "number": 18
  },
  "1290": {
@@ -30332,7 +30260,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 4,
-  "search_rank": 532,
+  "search_rank": 671,
   "number": 23
  },
  "248": {
@@ -30356,7 +30284,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 293,
+  "search_rank": 457,
   "number": 30
  },
  "3451": {
@@ -30368,7 +30296,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 1,
-  "search_rank": 135,
+  "search_rank": 131,
   "number": 15
  },
  "2074": {
@@ -30392,7 +30320,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 7,
-  "search_rank": 457,
+  "search_rank": 252,
   "number": 13
  },
  "12278": {
@@ -30440,7 +30368,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 2,
-  "search_rank": 490,
+  "search_rank": 537,
   "number": 82
  },
  "8196": {
@@ -30488,7 +30416,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 6,
-  "search_rank": 424,
+  "search_rank": 695,
   "number": 21
  },
  "9490": {
@@ -30583,7 +30511,7 @@
   "years_exp": 6,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 7,
+  "depth_chart_order": 8,
   "search_rank": 442,
   "number": 17
  },
@@ -30644,7 +30572,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 9999999,
+  "search_rank": 570,
   "number": 80
  },
  "2905": {
@@ -30787,7 +30715,7 @@
   "years_exp": 1,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 5,
+  "depth_chart_order": 3,
   "search_rank": 191,
   "number": 27
  },
@@ -30896,7 +30824,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 6,
-  "search_rank": 429,
+  "search_rank": 498,
   "number": 81
  },
  "13308": {
@@ -30907,8 +30835,8 @@
   "years_exp": 0,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 2,
-  "search_rank": 364,
+  "depth_chart_order": 4,
+  "search_rank": 472,
   "number": 84
  },
  "12097": {
@@ -30931,7 +30859,7 @@
   "years_exp": 2,
   "injury_status": "PUP",
   "status": "Active",
-  "depth_chart_order": 4,
+  "depth_chart_order": 3,
   "search_rank": 9999999,
   "number": 87
  },
@@ -30953,10 +30881,10 @@
   "team": "NO",
   "age": 23,
   "years_exp": 0,
-  "injury_status": null,
+  "injury_status": "Questionable",
   "status": "Active",
-  "depth_chart_order": 4,
-  "search_rank": 360,
+  "depth_chart_order": 3,
+  "search_rank": 413,
   "number": 88
  },
  "6763": {
@@ -31019,18 +30947,6 @@
   "search_rank": 274,
   "number": 0
  },
- "5113": {
-  "full_name": "Cedrick Wilson",
-  "position": "WR",
-  "team": "DET",
-  "age": 30,
-  "years_exp": 8,
-  "injury_status": null,
-  "status": "Active",
-  "depth_chart_order": 5,
-  "search_rank": 683,
-  "number": 86
- },
  "11783": {
   "full_name": "Ryan Flournoy",
   "position": "WR",
@@ -31052,7 +30968,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 544,
+  "search_rank": 644,
   "number": 14
  },
  "11197": {
@@ -31292,7 +31208,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 4,
-  "search_rank": 432,
+  "search_rank": 669,
   "number": 86
  },
  "7309": {
@@ -31400,7 +31316,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 1,
-  "search_rank": 128,
+  "search_rank": 127,
   "number": 5
  },
  "12443": {
@@ -31424,7 +31340,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 1,
-  "search_rank": 183,
+  "search_rank": 184,
   "number": 7
  },
  "11413": {
@@ -31496,7 +31412,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 1,
-  "search_rank": 94,
+  "search_rank": 98,
   "number": 7
  },
  "3199": {
@@ -31580,7 +31496,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 2,
-  "search_rank": 999,
+  "search_rank": 305,
   "number": 2
  },
  "12026": {
@@ -31687,7 +31603,7 @@
   "years_exp": 3,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 6,
+  "depth_chart_order": 4,
   "search_rank": 679,
   "number": 30
  },
@@ -31796,7 +31712,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 4,
-  "search_rank": 284,
+  "search_rank": 390,
   "number": 83
  },
  "12133": {
@@ -31820,7 +31736,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 4,
-  "search_rank": 515,
+  "search_rank": 585,
   "number": 8
  },
  "1652": {
@@ -31904,7 +31820,7 @@
   "injury_status": "Questionable",
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 424,
+  "search_rank": 491,
   "number": 30
  },
  "13075": {
@@ -31916,7 +31832,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 5,
-  "search_rank": 349,
+  "search_rank": 595,
   "number": 4
  },
  "2753": {
@@ -32035,8 +31951,8 @@
   "years_exp": 3,
   "injury_status": "Questionable",
   "status": "Active",
-  "depth_chart_order": 2,
-  "search_rank": 176,
+  "depth_chart_order": 3,
+  "search_rank": 175,
   "number": 1
  },
  "5397": {
@@ -32096,7 +32012,7 @@
   "injury_status": "Questionable",
   "status": "Active",
   "depth_chart_order": 2,
-  "search_rank": 437,
+  "search_rank": 508,
   "number": 8
  },
  "8178": {
@@ -32132,7 +32048,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 1,
-  "search_rank": 153,
+  "search_rank": 144,
   "number": 39
  },
  "11056": {
@@ -32144,7 +32060,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 682,
+  "search_rank": 622,
   "number": 89
  },
  "1466": {
@@ -32156,7 +32072,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 1,
-  "search_rank": 94,
+  "search_rank": 92,
   "number": 87
  },
  "11932": {
@@ -32181,7 +32097,7 @@
   "status": "Active",
   "depth_chart_order": null,
   "search_rank": 999,
-  "number": 45
+  "number": 44
  },
  "5612": {
   "full_name": "Anthony Mahoungou",
@@ -32210,7 +32126,7 @@
  "11378": {
   "full_name": "Jordan Mims",
   "position": "RB",
-  "team": null,
+  "team": "PHI",
   "age": 27,
   "years_exp": 3,
   "injury_status": null,
@@ -32228,7 +32144,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 2,
-  "search_rank": 578,
+  "search_rank": 556,
   "number": 18
  },
  "3515": {
@@ -32336,7 +32252,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 1,
-  "search_rank": 331,
+  "search_rank": 314,
   "number": 4
  },
  "4464": {
@@ -32348,7 +32264,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 2,
-  "search_rank": 493,
+  "search_rank": 570,
   "number": 14
  },
  "13011": {
@@ -32396,19 +32312,19 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 3,
-  "search_rank": 507,
+  "search_rank": 515,
   "number": 19
  },
  "8139": {
   "full_name": "Zamir White",
   "position": "RB",
-  "team": "SF",
+  "team": "NO",
   "age": 26,
   "years_exp": 4,
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 7,
-  "search_rank": 558,
+  "search_rank": 547,
   "number": 30
  },
  "11588": {
@@ -32420,20 +32336,20 @@
   "injury_status": "Questionable",
   "status": "Active",
   "depth_chart_order": 3,
-  "search_rank": 654,
+  "search_rank": 643,
   "number": 25
  },
  "5095": {
   "full_name": "Daniel Carlson",
   "position": "K",
-  "team": null,
+  "team": "NO",
   "age": 31,
   "years_exp": 8,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": null,
-  "search_rank": 999,
-  "number": 8
+  "depth_chart_order": 2,
+  "search_rank": 543,
+  "number": 48
  },
  "7098": {
   "full_name": "Ty'Son Williams",
@@ -32516,7 +32432,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 3,
-  "search_rank": 488,
+  "search_rank": 476,
   "number": 6
  },
  "13772": {
@@ -32552,7 +32468,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 1,
-  "search_rank": 425,
+  "search_rank": 403,
   "number": 35
  },
  "2422": {
@@ -32647,8 +32563,8 @@
   "years_exp": 3,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 7,
-  "search_rank": 385,
+  "depth_chart_order": 5,
+  "search_rank": 546,
   "number": 86
  },
  "12045": {
@@ -32660,7 +32576,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 5,
-  "search_rank": 999,
+  "search_rank": 352,
   "number": 37
  },
  "13191": {
@@ -32732,7 +32648,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 5,
-  "search_rank": 604,
+  "search_rank": 648,
   "number": 84
  },
  "4750": {
@@ -32792,7 +32708,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 3,
-  "search_rank": 561,
+  "search_rank": 545,
   "number": 15
  },
  "13034": {
@@ -32828,7 +32744,7 @@
   "injury_status": "Questionable",
   "status": "Active",
   "depth_chart_order": 2,
-  "search_rank": 529,
+  "search_rank": 552,
   "number": 17
  },
  "4958": {
@@ -32849,10 +32765,10 @@
   "team": "GB",
   "age": 23,
   "years_exp": 0,
-  "injury_status": null,
+  "injury_status": "Questionable",
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 473,
+  "search_rank": 601,
   "number": 87
  },
  "6148": {
@@ -32887,8 +32803,8 @@
   "years_exp": 8,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 7,
-  "search_rank": 630,
+  "depth_chart_order": 5,
+  "search_rank": 459,
   "number": 11
  },
  "11568": {
@@ -32924,7 +32840,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 5,
-  "search_rank": 348,
+  "search_rank": 683,
   "number": 45
  },
  "11911": {
@@ -32936,7 +32852,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 6,
-  "search_rank": 999,
+  "search_rank": 266,
   "number": 82
  },
  "1433": {
@@ -33127,8 +33043,8 @@
   "years_exp": 0,
   "injury_status": "Questionable",
   "status": "Active",
-  "depth_chart_order": 3,
-  "search_rank": 476,
+  "depth_chart_order": 2,
+  "search_rank": 553,
   "number": 18
  },
  "4150": {
@@ -33200,7 +33116,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 621,
+  "search_rank": 666,
   "number": 3
  },
  "3780": {
@@ -33247,7 +33163,7 @@
   "years_exp": 0,
   "injury_status": "Questionable",
   "status": "Active",
-  "depth_chart_order": 6,
+  "depth_chart_order": 4,
   "search_rank": 9999999,
   "number": 48
  },
@@ -33266,14 +33182,14 @@
  "13661": {
   "full_name": "Ethan Conner",
   "position": "TE",
-  "team": null,
+  "team": "MIA",
   "age": null,
   "years_exp": 0,
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
   "search_rank": 9999999,
-  "number": 48
+  "number": 30
  },
  "8436": {
   "full_name": "Neil Pau'u",
@@ -33344,7 +33260,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 433,
+  "search_rank": 549,
   "number": 80
  },
  "899": {
@@ -33392,7 +33308,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 3,
-  "search_rank": 462,
+  "search_rank": 422,
   "number": 4
  },
  "5880": {
@@ -33439,8 +33355,8 @@
   "years_exp": 9,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 4,
-  "search_rank": 9999999,
+  "depth_chart_order": 5,
+  "search_rank": 312,
   "number": 83
  },
  "7527": {
@@ -33470,14 +33386,14 @@
  "13806": {
   "full_name": "Matt Lauter",
   "position": "TE",
-  "team": "TEN",
+  "team": "MIN",
   "age": null,
   "years_exp": 0,
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
   "search_rank": 9999999,
-  "number": null
+  "number": 46
  },
  "12421": {
   "full_name": "David Wallis",
@@ -33512,20 +33428,20 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 317,
+  "search_rank": 606,
   "number": 12
  },
  "9505": {
   "full_name": "Deuce Vaughn",
   "position": "RB",
-  "team": null,
+  "team": "HOU",
   "age": 24,
   "years_exp": 3,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": null,
-  "search_rank": 999,
-  "number": 42
+  "depth_chart_order": 4,
+  "search_rank": 694,
+  "number": 31
  },
  "862": {
   "full_name": "Blaine Gabbert",
@@ -33620,7 +33536,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 6,
-  "search_rank": 486,
+  "search_rank": 598,
   "number": 10
  },
  "7157": {
@@ -33643,8 +33559,8 @@
   "years_exp": 0,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 4,
-  "search_rank": 343,
+  "depth_chart_order": 3,
+  "search_rank": 326,
   "number": 16
  },
  "7082": {
@@ -33680,7 +33596,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 999,
+  "search_rank": 411,
   "number": 37
  },
  "11566": {
@@ -33715,7 +33631,7 @@
   "years_exp": 7,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 6,
+  "depth_chart_order": 5,
   "search_rank": 653,
   "number": 85
  },
@@ -33737,10 +33653,10 @@
   "team": "MIA",
   "age": 22,
   "years_exp": 0,
-  "injury_status": "Questionable",
+  "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 6,
-  "search_rank": 578,
+  "depth_chart_order": 7,
+  "search_rank": 546,
   "number": 83
  },
  "13251": {
@@ -33764,7 +33680,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 3,
-  "search_rank": 679,
+  "search_rank": 630,
   "number": 87
  },
  "12015": {
@@ -33896,7 +33812,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 8,
-  "search_rank": 376,
+  "search_rank": 669,
   "number": 15
  },
  "1312": {
@@ -34088,7 +34004,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 3,
-  "search_rank": 415,
+  "search_rank": 398,
   "number": 85
  },
  "5806": {
@@ -34148,7 +34064,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 667,
+  "search_rank": 609,
   "number": 18
  },
  "12324": {
@@ -34172,7 +34088,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 431,
+  "search_rank": 500,
   "number": 82
  },
  "13708": {
@@ -34244,7 +34160,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 378,
+  "search_rank": 592,
   "number": 85
  },
  "4029": {
@@ -34274,13 +34190,13 @@
  "13813": {
   "full_name": "Laith Marjan",
   "position": "K",
-  "team": "PIT",
+  "team": null,
   "age": null,
   "years_exp": 0,
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 653,
+  "search_rank": 689,
   "number": 34
  },
  "13750": {
@@ -34303,7 +34219,7 @@
   "years_exp": 8,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 5,
+  "depth_chart_order": 6,
   "search_rank": 695,
   "number": 84
  },
@@ -34412,7 +34328,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 3,
-  "search_rank": 541,
+  "search_rank": 520,
   "number": 88
  },
  "3497": {
@@ -34459,21 +34375,9 @@
   "years_exp": 0,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 2,
-  "search_rank": 114,
+  "depth_chart_order": 1,
+  "search_rank": 115,
   "number": 1
- },
- "13873": {
-  "full_name": "Sam Scott",
-  "position": "RB",
-  "team": "NYJ",
-  "age": null,
-  "years_exp": 0,
-  "injury_status": null,
-  "status": "Active",
-  "depth_chart_order": null,
-  "search_rank": 9999999,
-  "number": 25
  },
  "13861": {
   "full_name": "Daniel Sobkowicz",
@@ -34522,6 +34426,18 @@
   "depth_chart_order": null,
   "search_rank": 544,
   "number": 81
+ },
+ "14082": {
+  "full_name": "Alex Tecza",
+  "position": "RB",
+  "team": "PIT",
+  "age": null,
+  "years_exp": 0,
+  "injury_status": null,
+  "status": "Active",
+  "depth_chart_order": null,
+  "search_rank": 302,
+  "number": 34
  },
  "7502": {
   "full_name": "Dominique Dafney",
@@ -34580,7 +34496,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 1,
-  "search_rank": 98,
+  "search_rank": 94,
   "number": 1
  },
  "13783": {
@@ -34603,8 +34519,8 @@
   "years_exp": 8,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 5,
-  "search_rank": 999,
+  "depth_chart_order": 4,
+  "search_rank": 329,
   "number": 87
  },
  "13663": {
@@ -34616,7 +34532,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 531,
+  "search_rank": 608,
   "number": 18
  },
  "12361": {
@@ -34640,7 +34556,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 5,
-  "search_rank": 271,
+  "search_rank": 419,
   "number": 81
  },
  "12256": {
@@ -34651,8 +34567,8 @@
   "years_exp": 2,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 5,
-  "search_rank": 480,
+  "depth_chart_order": null,
+  "search_rank": 431,
   "number": 83
  },
  "7233": {
@@ -34695,11 +34611,11 @@
   "full_name": "Tyler Johnson",
   "position": "WR",
   "team": "DAL",
-  "age": 27,
+  "age": 28,
   "years_exp": 6,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 6,
+  "depth_chart_order": 7,
   "search_rank": 538,
   "number": 15
  },
@@ -34712,7 +34628,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 5,
-  "search_rank": 999,
+  "search_rank": 257,
   "number": 82
  },
  "1215": {
@@ -34736,7 +34652,7 @@
   "injury_status": "Questionable",
   "status": "Active",
   "depth_chart_order": 2,
-  "search_rank": 100,
+  "search_rank": 103,
   "number": 11
  },
  "11575": {
@@ -34784,7 +34700,7 @@
   "injury_status": "Questionable",
   "status": "Active",
   "depth_chart_order": 5,
-  "search_rank": 657,
+  "search_rank": 674,
   "number": 15
  },
  "8885": {
@@ -34855,8 +34771,8 @@
   "years_exp": 0,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 6,
-  "search_rank": 678,
+  "depth_chart_order": 8,
+  "search_rank": 520,
   "number": 82
  },
  "11284": {
@@ -34880,7 +34796,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 9999999,
+  "search_rank": 312,
   "number": 45
  },
  "12738": {
@@ -34891,8 +34807,8 @@
   "years_exp": 1,
   "injury_status": "Questionable",
   "status": "Active",
-  "depth_chart_order": 4,
-  "search_rank": 621,
+  "depth_chart_order": 5,
+  "search_rank": 665,
   "number": 37
  },
  "6387": {
@@ -35105,10 +35021,10 @@
   "team": "HOU",
   "age": 24,
   "years_exp": 0,
-  "injury_status": null,
+  "injury_status": "Questionable",
   "status": "Active",
-  "depth_chart_order": 5,
-  "search_rank": 557,
+  "depth_chart_order": 6,
+  "search_rank": 401,
   "number": 26
  },
  "322": {
@@ -35168,7 +35084,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 999,
+  "search_rank": 700,
   "number": 23
  },
  "KC": {
@@ -35216,7 +35132,7 @@
   "injury_status": "Questionable",
   "status": "Active",
   "depth_chart_order": 2,
-  "search_rank": 999,
+  "search_rank": 699,
   "number": 87
  },
  "2325": {
@@ -35318,13 +35234,13 @@
  "14064": {
   "full_name": "Roydell Williams",
   "position": "RB",
-  "team": null,
+  "team": "DET",
   "age": 24,
   "years_exp": 0,
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 565,
+  "search_rank": 697,
   "number": 36
  },
  "2730": {
@@ -35552,7 +35468,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": null,
-  "search_rank": 541,
+  "search_rank": 699,
   "number": 48
  },
  "8581": {
@@ -35755,7 +35671,7 @@
   "years_exp": 2,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 4,
+  "depth_chart_order": 3,
   "search_rank": 659,
   "number": 82
  },
@@ -35888,7 +35804,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 3,
-  "search_rank": 486,
+  "search_rank": 531,
   "number": 2
  },
  "5241": {
@@ -36041,10 +35957,10 @@
   "team": "PHI",
   "age": 22,
   "years_exp": 0,
-  "injury_status": "Questionable",
+  "injury_status": null,
   "status": "Active",
   "depth_chart_order": 2,
-  "search_rank": 85,
+  "search_rank": 87,
   "number": 9
  },
  "8876": {
@@ -36067,8 +35983,8 @@
   "years_exp": 1,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 5,
-  "search_rank": 999,
+  "depth_chart_order": 4,
+  "search_rank": 457,
   "number": 36
  },
  "6233": {
@@ -36176,7 +36092,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 5,
-  "search_rank": 644,
+  "search_rank": 686,
   "number": 11
  },
  "4917": {
@@ -36200,7 +36116,7 @@
   "injury_status": null,
   "status": "Active",
   "depth_chart_order": 3,
-  "search_rank": 122,
+  "search_rank": 123,
   "number": 0
  },
  "3309": {
@@ -36379,8 +36295,8 @@
   "years_exp": 9,
   "injury_status": null,
   "status": "Active",
-  "depth_chart_order": 7,
-  "search_rank": 542,
+  "depth_chart_order": null,
+  "search_rank": 634,
   "number": 33
  },
  "11223": {

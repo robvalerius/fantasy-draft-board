@@ -203,6 +203,15 @@ TARGETS: dict[str, tuple[str, str]] = {
         "Chain-moving tight end on a good offense. His profile is short receptions "
         "that convert, which is precisely what this scoring pays for.",
     ),
+    "George Kittle": (
+        "value",
+        "Came off PUP this week and the market has not repriced him at all - he is "
+        "still carried at a backup's price. Nobody at the position converts "
+        "receptions into first downs at his rate, which is the single thing this "
+        "scoring pays most for. Still carrying a questionable tag, so confirm he "
+        "practices before the draft, but at this price the flier is nearly free and "
+        "he is cheap enough to start in REC_FLEX.",
+    ),
     "Tucker Kraft": (
         "value",
         "Grabbed the job and never gave it back. Priced as a backup tight end.",
