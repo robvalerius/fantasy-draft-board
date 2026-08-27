@@ -13,6 +13,7 @@ from __future__ import annotations
 import json
 import math
 import shutil
+import time
 from pathlib import Path
 
 import pandas as pd
@@ -79,13 +80,22 @@ def players_payload(draft: Draft) -> list[dict]:
     return out
 
 
+# A phone that has already loaded the board will keep serving a cached data.js
+# on an ordinary refresh, because the page requests it by bare filename. That
+# silently pins the board to whatever the budget and prices were the first time
+# it was opened. Stamping the asset URLs makes every rebuild a new URL, so a
+# normal reload always picks up fresh numbers. Empty for the Yahoo board, whose
+# deployed HTML is meant to stay byte-for-byte what it was.
+_V = "" if LEAGUE_SLUG == "yahoo_belt" else "?v=" + time.strftime("%Y%m%d%H%M%S")
+
+
 def build_html() -> str:
     html = Path("templates/index.html").read_text(encoding="utf-8")
 
     # The shim must replace fetch before the page's own <script> runs.
     html = html.replace(
         "<script>",
-        '<script src="data.js"></script>\n<script src="shim.js"></script>\n<script>',
+        f'<script src="data.js{_V}"></script>\n<script src="shim.js{_V}"></script>\n<script>',
         1,
     )
     # No server means no shared state; say so rather than implying sync.
@@ -98,7 +108,7 @@ def build_html() -> str:
     # the deployed Yahoo board's HTML is untouched.
     if LEAGUE_SLUG != "yahoo_belt" and LIVE_SYNC_JS.exists():
         html = html.replace(
-            "</body>", '<script src="sleeper.js"></script>\n</body>', 1)
+            "</body>", f'<script src="sleeper.js{_V}"></script>\n</body>', 1)
     return html
 
 
@@ -138,13 +148,13 @@ def main() -> None:
     # A single self-contained file needs no hosting at all: AirDrop or email it
     # to a phone and open it from Files. Same board, fully offline.
     single = (build_html()
-              .replace('<script src="data.js"></script>',
+              .replace(f'<script src="data.js{_V}"></script>',
                        "<script>" + (OUT / "data.js").read_text(encoding="utf-8") + "</script>")
-              .replace('<script src="shim.js"></script>',
+              .replace(f'<script src="shim.js{_V}"></script>',
                        "<script>" + Path("static_shim.js").read_text(encoding="utf-8") + "</script>"))
     if LEAGUE_SLUG != "yahoo_belt" and LIVE_SYNC_JS.exists():
         single = single.replace(
-            '<script src="sleeper.js"></script>',
+            f'<script src="sleeper.js{_V}"></script>',
             "<script>" + LIVE_SYNC_JS.read_text(encoding="utf-8") + "</script>")
     Path(STANDALONE_HTML).write_text(single, encoding="utf-8")
 

@@ -266,8 +266,8 @@
     body.v-log #footer { display: flex; flex-direction: column; align-items: stretch; gap: 8px; }
   }
 </style>
-<script src="data.js"></script>
-<script src="shim.js"></script>
+<script src="data.js?v=20260826202612"></script>
+<script src="shim.js?v=20260826202612"></script>
 <script>
   // Applied before first paint so a dark-mode user never sees a white flash.
   (function () {
@@ -566,6 +566,6 @@ document.body.className = 'v-players';
 fetch('/api/state').then(r => r.json()).then(paint);
 load();
 </script>
-<script src="sleeper.js"></script>
+<script src="sleeper.js?v=20260826202612"></script>
 </body>
 </html>
