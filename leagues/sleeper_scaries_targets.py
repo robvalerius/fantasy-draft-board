@@ -29,7 +29,7 @@ from __future__ import annotations
 # ---------------------------------------------------------------- the plan
 
 PLAN = [
-    ("RB",   "30-70", "Three backs is the shape, and it is worth roughly fifty points "
+    ("RB",   "38-88", "Three backs is the shape, and it is worth roughly fifty points "
                       "a season over two - a rushing first down pays 1.75 here against "
                       "0.25 in a normal league, so the backfield is where points live. "
                       "How you BUY those three is open, though. An elite anchor plus two "
@@ -37,34 +37,34 @@ PLAN = [
                       "of points of each other, so do not panic if the anchor gets away "
                       "from you. Win the room's one bidding war or skip it entirely; "
                       "just do not end up with two backs."),
-    ("RB",   "15-40", "Second every-week starter with a clean backfield. Committee "
+    ("RB",   "19-50", "Second every-week starter with a clean backfield. Committee "
                       "backs never clear the first-down threshold."),
-    ("WR",   "25-38", "One receiver you start without thinking. Only one - and if you "
+    ("WR",   "31-48", "One receiver you start without thinking. Only one - and if you "
                       "spent big on the backfield, even this one is optional."),
-    ("WR",   "1-10",  "Second and third starters. Half PPR plus a rushing-first-down "
+    ("WR",   "1-13",  "Second and third starters. Half PPR plus a rushing-first-down "
                       "premium means the receiver room is where the market overpays. "
                       "Take whoever falls rather than paying for a name."),
-    ("TE",   "2-8",   "Cheap. The tight-end first-down bonus lifts the WHOLE "
+    ("TE",   "3-10",  "Cheap. The tight-end first-down bonus lifts the WHOLE "
                       "position, so the gap between the elite tier and a starting "
                       "chain-mover is small while the price gap is enormous. The top "
                       "two are still fine buys if nobody else notices them - but the "
                       "cheap tier captures most of the edge for a fraction of it."),
-    ("QB",   "2-10",  "Do not wait until the end, and do not pay up either. "
+    ("QB",   "3-13",  "Do not wait until the end, and do not pay up either. "
                       "Completions, attempts, passing first downs and the "
                       "25-completion bonus mean every volume passer clears a big "
                       "number, so the position is deep, not top-heavy. The elite arm "
                       "costs several times a near-equal one. Buy the near-equal one."),
-    ("FLEX", "12-20", "The third back. This slot is an RB, not a WR."),
-    ("REC_FLEX", "2-6", "The quiet structural edge: this slot takes a TIGHT END. A "
+    ("FLEX", "15-25", "The third back. This slot is an RB, not a WR."),
+    ("REC_FLEX", "3-8", "The quiet structural edge: this slot takes a TIGHT END. A "
                         "second cheap TE here scores close to the WR3 you would "
                         "otherwise start, and frees most of that money for the "
                         "backfield. Do not spend WR3 money on this slot."),
     ("K/DEF", "2",    "Minimum bid, both. Neither is projected and neither should be."),
-    ("BN",   "12-22", "Four spots. Handcuff your anchor first, then dart throws."),
+    ("BN",   "15-28", "Four spots. Handcuff your anchor first, then dart throws."),
 ]
 
 BUDGET_NOTE = (
-    "Twelve teams and a $200 cap means $2,400 chasing 168 players, so the room is "
+    "Twelve teams and a $250 cap means $3,000 chasing 168 players, so the room is "
     "shallower than a 14-team league and stars cost relatively more. The scoring "
     "hands you one big structural edge: consensus ADP is format-blind, so it prices "
     "quarterbacks and tight ends as if the volume and first-down bonuses did not "
@@ -109,9 +109,12 @@ TARGETS: dict[str, tuple[str, str]] = {
         "an unusual number of short-yardage first downs.",
     ),
     "Puka Nacua": (
-        "anchor",
-        "The one receiver worth anchor money. Target share and yards after catch "
-        "generate reception first downs at a rate nobody else at the position matches.",
+        "avoid",
+        "A price objection, not a player objection - he really does generate "
+        "reception first downs at a rate nobody else at the position matches. "
+        "But the bigger budget inflated receiver bidding faster than it moved his "
+        "value, and the model now has him a full tier above his worth. Let someone "
+        "else pay the premium and take the back instead.",
     ),
 
     # ---------------------------------------------------------- value

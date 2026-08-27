@@ -7,7 +7,7 @@
   "league_id": "1384568263651897344",
   "metadata": {
    "allow_pn": "on",
-   "allow_sms": "off",
+   "allow_sms": "on",
    "mention_pn": "on"
   },
   "settings": null,
@@ -131,6 +131,8 @@
   "league_id": "1384568263651897344",
   "metadata": {
    "allow_pn": "on",
+   "allow_sms": "on",
+   "avatar": "https://sleepercdn.com/uploads/23bb2ec20ab94c4137abe4a1f6fe8f69",
    "mention_pn": "on"
   },
   "settings": null,
