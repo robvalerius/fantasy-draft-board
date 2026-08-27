@@ -29,7 +29,7 @@ from __future__ import annotations
 # ---------------------------------------------------------------- the plan
 
 PLAN = [
-    ("RB",   "38-88", "Three backs is the shape, and it is worth roughly fifty points "
+    ("RB",   "62-88", "Three backs is the shape, and it is worth roughly fifty points "
                       "a season over two - a rushing first down pays 1.75 here against "
                       "0.25 in a normal league, so the backfield is where points live. "
                       "How you BUY those three is open, though. An elite anchor plus two "
@@ -37,25 +37,28 @@ PLAN = [
                       "of points of each other, so do not panic if the anchor gets away "
                       "from you. Win the room's one bidding war or skip it entirely; "
                       "just do not end up with two backs."),
-    ("RB",   "19-50", "Second every-week starter with a clean backfield. Committee "
-                      "backs never clear the first-down threshold."),
-    ("WR",   "31-48", "One receiver you start without thinking. Only one - and if you "
-                      "spent big on the backfield, even this one is optional."),
-    ("WR",   "1-13",  "Second and third starters. Half PPR plus a rushing-first-down "
+    ("RB",   "22-62", "Second every-week starter with a clean backfield. Committee "
+                      "backs never clear the first-down threshold. The range is wide "
+                      "on purpose: if you landed the anchor cheap, spend here."),
+    ("WR",   "7-40",  "One receiver you start without thinking - and the loosest slot "
+                      "on the board. If the backfield went to plan this is a cheap "
+                      "complementary piece; only if BOTH of the backs you wanted got "
+                      "away does paying up here become correct."),
+    ("WR",   "1-11",  "Second starter. Half PPR plus a rushing-first-down "
                       "premium means the receiver room is where the market overpays. "
                       "Take whoever falls rather than paying for a name."),
-    ("TE",   "3-10",  "Cheap. The tight-end first-down bonus lifts the WHOLE "
-                      "position, so the gap between the elite tier and a starting "
-                      "chain-mover is small while the price gap is enormous. The top "
-                      "two are still fine buys if nobody else notices them - but the "
-                      "cheap tier captures most of the edge for a fraction of it."),
-    ("QB",   "3-13",  "Do not wait until the end, and do not pay up either. "
-                      "Completions, attempts, passing first downs and the "
-                      "25-completion bonus mean every volume passer clears a big "
-                      "number, so the position is deep, not top-heavy. The elite arm "
-                      "costs several times a near-equal one. Buy the near-equal one."),
-    ("FLEX", "15-25", "The third back. This slot is an RB, not a WR."),
-    ("REC_FLEX", "3-8", "The quiet structural edge: this slot takes a TIGHT END. A "
+    ("TE",   "23-27", "Pay this. Correcting earlier guidance: the first-down bonus "
+                      "lifts the whole position, but the top of it is genuinely worth "
+                      "real money and every run of the optimizer buys a tight end in "
+                      "this range. It is still a bargain relative to what the position "
+                      "produces - just not a single-digit one."),
+    ("QB",   "3-32",  "Do not wait until the end. Completions, attempts, passing "
+                      "first downs and the 25-completion bonus mean every volume "
+                      "passer clears a big number, so a cheap arm is usually right. "
+                      "But if the backfield came in under budget, the elite arm is a "
+                      "legitimate place to put the savings rather than reaching at WR."),
+    ("FLEX", "19-38", "The third back. This slot is an RB, not a WR."),
+    ("REC_FLEX", "3-11", "The quiet structural edge: this slot takes a TIGHT END. A "
                         "second cheap TE here scores close to the WR3 you would "
                         "otherwise start, and frees most of that money for the "
                         "backfield. Do not spend WR3 money on this slot."),
@@ -69,13 +72,13 @@ BUDGET_NOTE = (
     "hands you one big structural edge: consensus ADP is format-blind, so it prices "
     "quarterbacks and tight ends as if the volume and first-down bonuses did not "
     "exist. Both positions are nearly free, and REC_FLEX accepts a tight end. "
-    "The optimizer is emphatic about the SHAPE - three backs, two tight ends or a "
-    "cheap third receiver, single digits at quarterback - and relaxed about the "
+    "The optimizer is emphatic about the SHAPE - three backs, a real tight end "
+    "plus a cheap second one in REC_FLEX, receivers last - and relaxed about the "
     "SPEND. Anchoring the backfield and spreading it across three mid-priced backs "
     "finish within a handful of points, so treat the one big-ticket bid as optional "
     "rather than mandatory, and let the room decide which path you take. Nominate "
     "the expensive receivers early to drain other rosters while the cheap passers "
-    "and tight ends sit untouched."
+    "sit untouched."
 )
 
 # ---------------------------------------------------------------- targets
