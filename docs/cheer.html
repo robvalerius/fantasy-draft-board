@@ -102,6 +102,7 @@
   .stat{font-size:10.5px;font-weight:700;padding:2px 7px;border-radius:5px;white-space:nowrap;
     color:var(--statTxt);background:var(--statBg);border:1px solid var(--statBd)}
   .stat.bad{color:var(--pillBadTxt);background:var(--pillBadBg);border-color:var(--pillBadBd)}
+  .stat.good{color:var(--pillGoodTxt);background:var(--pillGoodBg);border-color:var(--pillGoodBd)}
   .livebar{display:none;align-items:center;gap:8px;flex-wrap:wrap;margin:-2px 0 10px;
     font-size:11.5px;color:var(--dim)}
   .livebar.show{display:flex}
@@ -170,7 +171,7 @@
     <div class="hdrrow">
       <div>
         <h1>🏈 Sunday Cheer Tracker <span class="sub">— Week 1</span></h1>
-        <div class="sub">Who to scream for, who to boo, and when they play. All times Pacific. <span style="opacity:.6">· build 14 · demo fix</span></div>
+        <div class="sub">Who to scream for, who to boo, and when they play. All times Pacific. <span style="opacity:.6">· build 15 · turnover stats</span></div>
       </div>
       <button class="tg" id="themeBtn" title="Toggle light / dark">🌙</button>
     </div>
@@ -233,7 +234,7 @@
     </ul>
     Inside a bucket, the flame and thumb count just sorts by league size — 4 = SHERIFF, 3 = VALERIAN, 2 = CHAMP or Guest of Honor, 1 = bench. League is never its own bucket; use the league chips up top if you want to filter to one.
     <br><br><b>Bubbles:</b> a <span class="pill mine">green</span> bubble is a league where he's on your roster, a <span class="pill opp">red</span> bubble is a league where he's on the team you're playing. Faded bubbles are bench spots. A player with both is flagged <b class="warn">⚔</b> and sits on whichever side matters more.
-    <br><br><b>Live stats:</b> tap <b>📡 Live stats</b> to pull real NFL box-score numbers from Sleeper's public feed every 60 seconds — passing and rushing and receiving yards, catches, TDs, kicking points and misses. Only numbers above zero ever appear, so a quiet row means a quiet day. These are raw stats, not fantasy points, so they are the same no matter which league you are looking at.<br><br><b>All kickoff times are Pacific.</b> Use the <b>When</b> row to zero in on a single window — tap one to see just that slate, tap more to add them.
+    <br><br><b>Live stats:</b> tap <b>📡 Live stats</b> to pull real NFL box-score numbers from Sleeper's public feed every 60 seconds — passing and rushing and receiving yards, catches, TDs, kicking points and misses. Only numbers above zero ever appear, so a quiet row means a quiet day. Production is <span class="stat">blue</span>, mistakes are <span class="stat bad">red</span> — fumbles lost, interceptions, pick 6s and sacks taken. For a <b>D/ST</b> those same events flip <span class="stat good">green</span>, since the defense caused them, and the only red chip is TDs allowed. These are raw stats, not fantasy points, so they are the same no matter which league you are looking at.<br><br><b>All kickoff times are Pacific.</b> Use the <b>When</b> row to zero in on a single window — tap one to see just that slate, tap more to add them.
   </div>
 </div>
 
@@ -531,6 +532,8 @@ const SID = {
 
 /* ---------------- live stats (Sleeper public API, no auth, CORS *) ---------------- */
 // Only the counting stats Rob asked for. Anything zero or missing is never drawn.
+// Production stats are neutral. Turnovers and sacks are red on offence, because they
+// hurt the guy you are watching, and green on a defence, which is credited for causing them.
 const STAT_DEFS = [
   {k:"pass_yd", lbl:"pass yd"},
   {k:"pass_td", lbl:"pass TD"},
@@ -540,7 +543,22 @@ const STAT_DEFS = [
   {k:"rec_yd",  lbl:"rec yd"},
   {k:"rec_td",  lbl:"rec TD"},
   {k:"kick_pts",lbl:"K pts"},
-  {k:"_miss",   lbl:"K miss", bad:true}
+  {k:"_miss",   lbl:"K miss", tone:"bad"}
+];
+const OFF_BAD = [
+  {k:"fum_lost",    lbl:"fum lost"},
+  {k:"pass_int",    lbl:"INT"},
+  {k:"pass_int_td", lbl:"pick 6"},
+  {k:"pass_sack",   lbl:"sacked"}
+];
+// A defence is the beneficiary of these, so the same events read as good news.
+const DEF_GOOD = [
+  {k:"int",     lbl:"INT"},
+  {k:"sack",    lbl:"sack"},
+  {k:"def_td",  lbl:"def TD"},   // pick 6 or fumble return; `td` on a defence is TDs allowed
+  {k:"ff",      lbl:"FF"},
+  {k:"fum_rec", lbl:"fum rec"},
+  {k:"blk_kick",lbl:"blk kick"}
 ];
 let STATS = {};              // sleeper_id -> raw stat object
 let liveOn = localStorage.getItem("ct-live") === "1";
@@ -551,13 +569,19 @@ function statChips(p){
   const id = SID[p.name];
   const s = id && STATS[id];
   if (!s) return "";
-  const miss = (Number(s.fga||0) - Number(s.fgm||0)) + (Number(s.xpa||0) - Number(s.xpm||0));
   const out = [];
-  for (const d of STAT_DEFS){
-    const v = d.k === "_miss" ? miss : Number(s[d.k]||0);
-    if (!(v > 0)) continue;                       // only greater than zero
+  const add = (v, lbl, tone) => {
+    if (!(v > 0)) return;                          // only greater than zero
     const n = Number.isInteger(v) ? v : v.toFixed(1);
-    out.push(`<span class="stat${d.bad?" bad":""}">${n} ${d.lbl}</span>`);
+    out.push(`<span class="stat${tone?" "+tone:""}">${n} ${lbl}</span>`);
+  };
+  if (p.pos === "DEF"){
+    for (const d of DEF_GOOD) add(Number(s[d.k]||0), d.lbl, "good");
+    add(Number(s.td||0), "TD allowed", "bad");     // the one thing that is genuinely bad for a defence
+  } else {
+    const miss = (Number(s.fga||0) - Number(s.fgm||0)) + (Number(s.xpa||0) - Number(s.xpm||0));
+    for (const d of STAT_DEFS) add(d.k === "_miss" ? miss : Number(s[d.k]||0), d.lbl, d.tone);
+    for (const d of OFF_BAD)   add(Number(s[d.k]||0), d.lbl, "bad");
   }
   return out.length ? `<div class="stats">${out.join("")}</div>` : "";
 }
@@ -579,12 +603,7 @@ async function pullStats(){
     const bust = Math.floor(Date.now()/30000);
     const url = `https://api.sleeper.app/v1/stats/nfl/${type}/${season}/${week}?_=${bust}`;
     STATS = await (await fetch(url, {cache:"no-store"})).json() || {};
-    const n = ALL.filter(p=>{
-      const s = STATS[SID[p.name]]; if(!s) return false;
-      return STAT_DEFS.some(d=> d.k==="_miss"
-        ? ((+s.fga||0)-(+s.fgm||0))+((+s.xpa||0)-(+s.xpm||0)) > 0
-        : (+s[d.k]||0) > 0);
-    }).length;
+    const n = ALL.filter(p => statChips(p) !== "").length;
     dot.className = "dot ok";
     const stamp = new Date().toLocaleTimeString([], {hour:"numeric",minute:"2-digit"});
     txt.textContent = demoOn
