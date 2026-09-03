@@ -109,6 +109,8 @@
   .dot{width:8px;height:8px;border-radius:50%;background:var(--faint);flex:none}
   .dot.ok{background:var(--good);box-shadow:0 0 0 3px color-mix(in srgb,var(--good) 25%,transparent)}
   .dot.err{background:var(--fire)}
+  .livebar.demo{color:var(--gold)}
+  .livebar.demo .dot.ok{background:var(--gold);box-shadow:0 0 0 3px color-mix(in srgb,var(--gold) 25%,transparent)}
   .dead{margin-top:22px;border-top:1px dashed var(--line);padding-top:12px}
   .dead summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px;flex-wrap:wrap;
     font-size:12px;font-weight:700;letter-spacing:.3px;text-transform:uppercase;color:var(--dim);
@@ -168,7 +170,7 @@
     <div class="hdrrow">
       <div>
         <h1>🏈 Sunday Cheer Tracker <span class="sub">— Week 1</span></h1>
-        <div class="sub">Who to scream for, who to boo, and when they play. All times Pacific. <span style="opacity:.6">· build 12 · live stats</span></div>
+        <div class="sub">Who to scream for, who to boo, and when they play. All times Pacific. <span style="opacity:.6">· build 13 · demo mode</span></div>
       </div>
       <button class="tg" id="themeBtn" title="Toggle light / dark">🌙</button>
     </div>
@@ -187,6 +189,7 @@
     <input type="search" id="q" placeholder="Search player / team…">
     <div class="sep"></div>
     <button class="tg" id="liveBtn" title="Poll live NFL stats from Sleeper">📡 Live stats</button>
+    <button class="tg" id="demoBtn" title="Preview the layout using real 2025 Week 1 box scores">🧪 Demo</button>
   </div>
 
   <div class="livebar" id="livebar"><span class="dot" id="liveDot"></span><span id="liveTxt">starting…</span><span class="livehint">updates every 60s · only stats above zero are shown</span></div>
@@ -541,6 +544,7 @@ const STAT_DEFS = [
 ];
 let STATS = {};              // sleeper_id -> raw stat object
 let liveOn = localStorage.getItem("ct-live") === "1";
+let demoOn = new URLSearchParams(location.search).has("demo") || localStorage.getItem("ct-demo") === "1";
 let liveTimer = null, liveWeek = null;
 
 function statChips(p){
@@ -562,11 +566,19 @@ async function pullStats(){
   const dot = document.getElementById("liveDot");
   const txt = document.getElementById("liveTxt");
   try{
-    const st = await (await fetch("https://api.sleeper.app/v1/state/nfl")).json();
-    const season = st.season, week = st.display_week || st.week || 1;
+    let season, week, type = "regular";
+    if (demoOn){
+      // A finished week of real box scores, so the layout can be judged before kickoff.
+      season = "2025"; week = 1;
+    } else {
+      const st = await (await fetch("https://api.sleeper.app/v1/state/nfl")).json();
+      season = st.season; week = st.display_week || st.week || 1; type = st.season_type || "regular";
+    }
     liveWeek = week;
-    const url = `https://api.sleeper.app/v1/stats/nfl/${st.season_type||"regular"}/${season}/${week}`;
-    STATS = await (await fetch(url)).json() || {};
+    // Sleeper's CDN caches this response, so vary the URL every 30s to force a fresh edge fetch.
+    const bust = Math.floor(Date.now()/30000);
+    const url = `https://api.sleeper.app/v1/stats/nfl/${type}/${season}/${week}?_=${bust}`;
+    STATS = await (await fetch(url, {cache:"no-store"})).json() || {};
     const n = ALL.filter(p=>{
       const s = STATS[SID[p.name]]; if(!s) return false;
       return STAT_DEFS.some(d=> d.k==="_miss"
@@ -574,9 +586,11 @@ async function pullStats(){
         : (+s[d.k]||0) > 0);
     }).length;
     dot.className = "dot ok";
-    txt.textContent = n
-      ? `${season} wk ${week} · ${n} with stats · ${new Date().toLocaleTimeString([], {hour:"numeric",minute:"2-digit"})}`
-      : `${season} wk ${week} · no stats yet`;
+    const stamp = new Date().toLocaleTimeString([], {hour:"numeric",minute:"2-digit"});
+    txt.textContent = demoOn
+      ? `DEMO · real ${season} wk ${week} box scores · ${n} players with stats`
+      : (n ? `${season} wk ${week} · ${n} with stats · ${stamp}`
+           : `${season} wk ${week} · no stats yet · ${stamp}`);
   }catch(e){
     dot.className = "dot err";
     txt.textContent = "offline — will retry";
@@ -588,9 +602,16 @@ function setLive(on){
   localStorage.setItem("ct-live", on ? "1" : "0");
   document.getElementById("liveBtn").classList.toggle("on", on);
   document.getElementById("livebar").classList.toggle("show", on);
+  document.getElementById("demoBtn").classList.toggle("on", demoOn);
+  document.getElementById("livebar").classList.toggle("demo", on && demoOn);
   clearInterval(liveTimer); liveTimer = null;
   if (on){ pullStats(); liveTimer = setInterval(pullStats, 60000); }
   else { STATS = {}; render(); }
+}
+function setDemo(on){
+  demoOn = on;
+  localStorage.setItem("ct-demo", on ? "1" : "0");
+  setLive(on ? true : liveOn);   // turning demo on implies you want stats visible
 }
 // Don't burn requests on a backgrounded phone; catch up when the tab returns.
 document.addEventListener("visibilitychange", ()=>{
@@ -743,6 +764,7 @@ document.querySelectorAll(".mtabs button").forEach(b=>b.onclick=()=>{
 });
 document.getElementById("q").oninput=e=>{q=e.target.value;render();};
 document.getElementById("liveBtn").onclick=()=>setLive(!liveOn);
+document.getElementById("demoBtn").onclick=()=>setDemo(!demoOn);
 document.body.dataset.side="cheer";
 syncSlotButtons();
 applyTheme(theme);
