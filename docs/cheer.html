@@ -98,11 +98,15 @@
   .game{font-size:11px;color:var(--dim);min-width:66px;text-align:right;font-variant-numeric:tabular-nums}
   .note{color:var(--dim);font-size:11.5px;margin:-2px 0 10px}
   .empty{color:var(--faint);font-size:12px;padding:6px 2px}
-  .stats{display:flex;flex-wrap:wrap;gap:4px;margin-top:5px}
-  .stat{font-size:10.5px;font-weight:700;padding:2px 7px;border-radius:5px;white-space:nowrap;
-    color:var(--statTxt);background:var(--statBg);border:1px solid var(--statBd)}
-  .stat.bad{color:var(--pillBadTxt);background:var(--pillBadBg);border-color:var(--pillBadBd)}
-  .stat.good{color:var(--pillGoodTxt);background:var(--pillGoodBg);border-color:var(--pillGoodBd)}
+  /* Stat line: typographic, not bubbles. Big tabular number, tiny caps label. */
+  .stats{display:flex;flex-wrap:wrap;gap:2px 14px;margin-top:6px;padding-top:5px;
+    border-top:1px solid var(--bd)}
+  .stat{display:inline-flex;align-items:baseline;gap:3px;white-space:nowrap;
+    font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--faint)}
+  .stat b{font-size:13px;font-weight:800;letter-spacing:0;color:var(--statTxt);
+    font-variant-numeric:tabular-nums;line-height:1}
+  .stat.bad b{color:var(--pillBadTxt)}
+  .stat.good b{color:var(--pillGoodTxt)}
   .livebar{display:none;align-items:center;gap:8px;flex-wrap:wrap;margin:-2px 0 10px;
     font-size:11.5px;color:var(--dim)}
   .livebar.show{display:flex}
@@ -171,7 +175,7 @@
     <div class="hdrrow">
       <div>
         <h1>🏈 Sunday Cheer Tracker <span class="sub">— Week 1</span></h1>
-        <div class="sub">Who to scream for, who to boo, and when they play. All times Pacific. <span style="opacity:.6">· build 16 · defense allowed</span></div>
+        <div class="sub">Who to scream for, who to boo, and when they play. All times Pacific. <span style="opacity:.6">· build 17 · stat typography</span></div>
       </div>
       <button class="tg" id="themeBtn" title="Toggle light / dark">🌙</button>
     </div>
@@ -234,7 +238,7 @@
     </ul>
     Inside a bucket, the flame and thumb count just sorts by league size — 4 = SHERIFF, 3 = VALERIAN, 2 = CHAMP or Guest of Honor, 1 = bench. League is never its own bucket; use the league chips up top if you want to filter to one.
     <br><br><b>Bubbles:</b> a <span class="pill mine">green</span> bubble is a league where he's on your roster, a <span class="pill opp">red</span> bubble is a league where he's on the team you're playing. Faded bubbles are bench spots. A player with both is flagged <b class="warn">⚔</b> and sits on whichever side matters more.
-    <br><br><b>Live stats:</b> tap <b>📡 Live stats</b> to pull real NFL box-score numbers from Sleeper's public feed every 60 seconds — passing and rushing and receiving yards, catches, TDs, kicking points and misses. Only numbers above zero ever appear, so a quiet row means a quiet day. Production is <span class="stat">blue</span>, mistakes are <span class="stat bad">red</span> — fumbles lost, interceptions, pick 6s and sacks taken. For a <b>D/ST</b> those same events flip <span class="stat good">green</span>, since the defense caused them, and the red chips are points and yards allowed. These are raw stats, not fantasy points, so they are the same no matter which league you are looking at.<br><br><b>All kickoff times are Pacific.</b> Use the <b>When</b> row to zero in on a single window — tap one to see just that slate, tap more to add them.
+    <br><br><b>Live stats:</b> tap <b>📡 Live stats</b> to pull real NFL box-score numbers from Sleeper's public feed every 60 seconds — passing and rushing and receiving yards, catches, TDs, kicking points and misses. Only numbers above zero ever appear, so a quiet row means a quiet day. Production is blue <span class="stat"><b>128</b>rush yd</span>, mistakes are red <span class="stat bad"><b>1</b>fum lost</span> — fumbles lost, interceptions, pick 6s and sacks taken. For a <b>D/ST</b> those same events flip green <span class="stat good"><b>4</b>sack</span>, since the defense caused them, and the red chips are points and yards allowed. These are raw stats, not fantasy points, so they are the same no matter which league you are looking at.<br><br><b>All kickoff times are Pacific.</b> Use the <b>When</b> row to zero in on a single window — tap one to see just that slate, tap more to add them.
   </div>
 </div>
 
@@ -570,10 +574,11 @@ function statChips(p){
   const s = id && STATS[id];
   if (!s) return "";
   const out = [];
+  const chip = (n, lbl, tone) =>
+    `<span class="stat${tone?" "+tone:""}"><b>${n}</b>${lbl}</span>`;
   const add = (v, lbl, tone) => {
     if (!(v > 0)) return;                          // only greater than zero
-    const n = Number.isInteger(v) ? v : v.toFixed(1);
-    out.push(`<span class="stat${tone?" "+tone:""}">${n} ${lbl}</span>`);
+    out.push(chip(Number.isInteger(v) ? v : v.toFixed(1), lbl, tone));
   };
   if (p.pos === "DEF"){
     for (const d of DEF_GOOD) add(Number(s[d.k]||0), d.lbl, "good");
@@ -581,8 +586,8 @@ function statChips(p){
     // shutout still reads "0 pts allow" rather than vanishing.
     const yds = Number(s.yds_allow||0), pts = Number(s.pts_allow||0);
     if (yds > 0 || pts > 0){
-      out.push(`<span class="stat bad">${pts} pts allow</span>`);
-      out.push(`<span class="stat bad">${yds} yds allow</span>`);
+      out.push(chip(pts, "pts allow", "bad"));
+      out.push(chip(yds, "yds allow", "bad"));
     }
   } else {
     const miss = (Number(s.fga||0) - Number(s.fgm||0)) + (Number(s.xpa||0) - Number(s.xpm||0));
