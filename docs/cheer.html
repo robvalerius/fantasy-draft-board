@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="cache-control" content="no-store">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0d1117" id="themeColor">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Cheer Tracker">
+<meta name="description" content="Who to cheer for and boo across four fantasy leagues, sorted by kickoff window.">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='40' fill='%230d1117'/%3E%3Ctext x='90' y='128' font-size='104' text-anchor='middle'%3E%F0%9F%94%A5%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%94%A5%3C/text%3E%3C/svg%3E">
+<title>Sunday Cheer Tracker — Week 1</title>
+<style>
+  :root{
+    --bg:#0d1117; --panel:#161b22; --panel2:#1c2330; --line:#2a3140;
+    --txt:#e6edf3; --dim:#8b949e; --faint:#586069;
+    --good:#3fb950; --gold:#d29922; --fire:#f85149; --blue:#58a6ff;
+    --onblue:#04121f; --hdrTop:#151c27; --hdrBot:#0d1117; --oppTxt:#ff7b72;
+    --pillGoodTxt:#56d364; --pillGoodBd:#2ea04366; --pillGoodBg:#2ea04326;
+    --pillBadTxt:#ff8a80;  --pillBadBd:#f8514966;  --pillBadBg:#f8514922;
+    --shadow:0 1px 0 rgba(0,0,0,.2);
+  }
+  html[data-theme="light"]{
+    --bg:#f6f8fa; --panel:#ffffff; --panel2:#eef1f5; --line:#d6dde5;
+    --txt:#1f2328; --dim:#59636e; --faint:#818b96;
+    --good:#1a7f37; --gold:#9a6700; --fire:#cf222e; --blue:#0969da;
+    --onblue:#ffffff; --hdrTop:#ffffff; --hdrBot:#f6f8fa; --oppTxt:#cf222e;
+    --pillGoodTxt:#0f5c2a; --pillGoodBd:#1a7f3766; --pillGoodBg:#1a7f3714;
+    --pillBadTxt:#a40e26;  --pillBadBd:#cf222e66;  --pillBadBg:#cf222e12;
+    --shadow:0 1px 2px rgba(31,35,40,.06);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--txt);-webkit-text-size-adjust:100%;
+    font:14px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  header{padding:16px 16px 10px;padding-top:max(16px,env(safe-area-inset-top));border-bottom:1px solid var(--line);
+    background:linear-gradient(180deg,var(--hdrTop),var(--hdrBot))}
+  h1{margin:0 0 2px;font-size:20px;letter-spacing:.3px}
+  .sub{color:var(--dim);font-size:12px}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 16px 60px;
+  padding-left:max(16px,env(safe-area-inset-left));padding-right:max(16px,env(safe-area-inset-right))}
+  .leagues{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin:14px 0}
+  .lg{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 12px;
+    border-left-width:4px;box-shadow:var(--shadow)}
+  .lg .rank{font-size:10px;letter-spacing:.8px;text-transform:uppercase;color:var(--dim)}
+  .lg .nm{font-weight:700;font-size:15px;margin:2px 0}
+  .lg .vs{font-size:12px;color:var(--dim)}
+  .lg .vs b{color:var(--oppTxt);font-weight:600}
+  .controls{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:14px 0 6px;
+    position:sticky;top:0;background:var(--bg);padding:10px 0;z-index:5;border-bottom:1px solid var(--line)}
+  button.tg{background:var(--panel2);color:var(--txt);border:1px solid var(--line);
+    border-radius:20px;padding:6px 13px;font-size:12px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+  button.tg.on{background:var(--blue);border-color:var(--blue);color:var(--onblue);font-weight:700}
+  input[type=search]{background:var(--panel2);border:1px solid var(--line);color:var(--txt);
+    border-radius:20px;padding:6px 13px;font-size:16px;min-width:170px;outline:none}
+  .sep{width:1px;height:20px;background:var(--line)}
+  .slotbar{position:static;border-bottom:none;margin:0 0 4px;padding:0 0 8px}
+  .barlbl{font-size:11px;text-transform:uppercase;letter-spacing:.9px;color:var(--dim)}
+  #themeBtn{margin-left:auto;font-size:14px;line-height:1;padding:6px 10px}
+  .mtabs{display:none;gap:8px;margin:12px 0 4px}
+  .mtabs button{flex:1;padding:11px 8px;font-size:14px;font-weight:700;border-radius:10px;
+    border:1px solid var(--line);background:var(--panel);color:var(--dim);cursor:pointer}
+  .mtabs button.on[data-side="cheer"]{background:var(--good);border-color:var(--good);color:#fff}
+  .mtabs button.on[data-side="boo"]{background:var(--fire);border-color:var(--fire);color:#fff}
+  h2.sec{font-size:13px;letter-spacing:1.2px;text-transform:uppercase;color:var(--dim);
+    margin:26px 0 8px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+  h2.sec span.cnt{color:var(--faint);font-weight:400}
+  .board{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}
+  .col{min-width:0}
+  .colhdr{position:sticky;top:52px;z-index:4;background:var(--bg);padding:10px 0 8px;
+    border-bottom:2px solid;margin-bottom:4px}
+  .colhdr .big{font-size:17px;font-weight:800;letter-spacing:.3px}
+  .colhdr .sm{font-size:11.5px;color:var(--dim)}
+  .key{display:flex;flex-wrap:wrap;align-items:center;gap:5px;margin-top:6px}
+  .keytxt{font-size:10.5px;color:var(--dim)}
+  .col.cheer .colhdr{border-color:var(--good)} .col.cheer .big{color:var(--good)}
+  .col.boo   .colhdr{border-color:var(--fire)} .col.boo   .big{color:var(--fire)}
+  .row{display:flex;align-items:flex-start;gap:10px;background:var(--panel);border:1px solid var(--line);
+    border-radius:9px;padding:9px 11px;margin-bottom:6px;border-left-width:4px;box-shadow:var(--shadow)}
+  .row:hover{background:var(--panel2)}
+  .rate{font-size:11px;letter-spacing:-2px;min-width:56px;line-height:1.6}
+  .who{flex:1;min-width:0}
+  .who .nm{font-weight:650}
+  .who .nm .pos{font-weight:400;color:var(--dim);font-size:11.5px}
+  .who .meta{font-size:11.5px;color:var(--dim);margin-top:1px}
+  .warn{color:var(--gold)}
+  .pills{display:flex;flex-wrap:wrap;gap:4px;margin-top:5px}
+  .pill{font-size:10.5px;padding:2px 8px;border-radius:20px;border:1px solid;white-space:nowrap;font-weight:600}
+  .pill.mine{color:var(--pillGoodTxt);border-color:var(--pillGoodBd);background:var(--pillGoodBg)}
+  .pill.opp {color:var(--pillBadTxt); border-color:var(--pillBadBd); background:var(--pillBadBg)}
+  .pill.bench{font-weight:400;opacity:.62;background:transparent}
+  .game{font-size:11px;color:var(--dim);min-width:66px;text-align:right;font-variant-numeric:tabular-nums}
+  .note{color:var(--dim);font-size:11.5px;margin:-2px 0 10px}
+  .empty{color:var(--faint);font-size:12px;padding:6px 2px}
+  .legend{font-size:11.5px;color:var(--dim);margin-top:20px;padding-top:12px;border-top:1px solid var(--line)}
+  .legend b{color:var(--txt)}
+  .legend ul{margin:6px 0;padding-left:18px} .legend li{margin:2px 0}
+
+  /* ---------- phone ---------- */
+  @media(max-width:860px){
+    header{padding:12px 14px 9px}
+    h1{font-size:17px}
+    .wrap{padding:0 12px 44px}
+    .leagues{grid-template-columns:1fr 1fr;gap:7px;margin:10px 0}
+    .lg{padding:7px 9px;border-radius:8px}
+    .lg .rank{font-size:9px} .lg .nm{font-size:13px;margin:1px 0} .lg .vs{font-size:11px}
+    .controls{gap:6px;padding:8px 0;overflow-x:auto;flex-wrap:nowrap;
+      scrollbar-width:none;-ms-overflow-style:none}
+    .controls::-webkit-scrollbar{display:none}
+    .controls>*{flex:0 0 auto}
+    button.tg{padding:7px 12px}
+    input[type=search]{min-width:140px}
+    .sep{display:none}
+    #themeBtn{margin-left:0;position:sticky;right:0;background:var(--bg);box-shadow:-10px 0 10px var(--bg)}
+    .mtabs{display:flex;position:sticky;top:47px;z-index:4;background:var(--bg);padding:8px 0}
+    .board{grid-template-columns:1fr;gap:0}
+    .colhdr{position:static;padding:2px 0 8px;border-bottom-width:1px}
+    .colhdr .big{font-size:13px}
+    .col{display:none}
+    body[data-side="cheer"] .col.cheer{display:block}
+    body[data-side="boo"]   .col.boo{display:block}
+    h2.sec{margin:18px 0 6px;font-size:11.5px;letter-spacing:.8px}
+    .row{padding:9px 10px;gap:8px;flex-wrap:wrap}
+    .rate{min-width:0;order:1}
+    .game{order:2;margin-left:auto;min-width:0;font-weight:600;color:var(--txt)}
+    .who{order:3;flex:1 0 100%}
+    .who .nm{font-size:15px}
+    .who .nm .pos{display:block;font-size:11px;margin-top:1px}
+    .who .meta{font-size:11.5px}
+    .note{font-size:11px}
+    .legend{font-size:11px}
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap" style="padding-bottom:0">
+    <h1>🏈 Sunday Cheer Tracker <span class="sub">— Week 1</span></h1>
+    <div class="sub">Who to scream for, who to boo, and when they play. All times Pacific. <span style="opacity:.6">· build 9 · published</span></div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="leagues" id="leagues"></div>
+
+  <div class="controls">
+    <button class="tg on" data-view="priority">By priority</button>
+    <button class="tg" data-view="kickoff">By kickoff</button>
+    <div class="sep"></div>
+    <span id="lgfilters"></span>
+    <div class="sep"></div>
+    <input type="search" id="q" placeholder="Search player / team…">
+    <button class="tg" id="themeBtn" title="Toggle light / dark">🌙</button>
+  </div>
+
+  <div class="controls slotbar">
+    <span class="barlbl">When:</span>
+    <button class="tg on" id="allSlots">All games</button>
+    <span id="slotfilters"></span>
+  </div>
+
+  <div class="mtabs">
+    <button data-side="cheer" class="on">🙌 Cheer (<span id="cheerTab">0</span>)</button>
+    <button data-side="boo">🙅 Boo (<span id="booTab">0</span>)</button>
+  </div>
+
+  <div class="board">
+    <div class="col cheer">
+      <div class="colhdr">
+        <div class="big">🙌 CHEER FOR &nbsp;<span style="font-weight:400;color:#8b949e">(<span id="cheerCount">0</span>)</span></div>
+        <div class="sm">More flames = more of your lineups need this guy to go off.</div>
+        <div class="key"><span class="pill mine">green</span><span class="keytxt">on your team</span><span class="pill opp">red</span><span class="keytxt">on your opponent</span></div>
+      </div>
+      <div id="cheerCol"></div>
+    </div>
+    <div class="col boo">
+      <div class="colhdr">
+        <div class="big">🙅 BOO &nbsp;<span style="font-weight:400;color:#8b949e">(<span id="booCount">0</span>)</span></div>
+        <div class="sm">More thumbs = the more it hurts you if he goes off.</div>
+        <div class="key"><span class="pill mine">green</span><span class="keytxt">on your team</span><span class="pill opp">red</span><span class="keytxt">on your opponent</span></div>
+      </div>
+      <div id="booCol"></div>
+    </div>
+  </div>
+
+  <div class="legend">
+    <b>Three buckets per side — that's it:</b>
+    <ul>
+      <li><b>🔥 Must-watch / ☠️ Big threat</b> — in more than one starting lineup</li>
+      <li><b>✅ In your lineup / 👎 Starting against you</b> — in exactly one lineup</li>
+      <li><b>👀 Bench / 💤 Their bench</b> — nobody is starting him, so he can't move a single matchup</li>
+    </ul>
+    Inside a bucket, the flame and thumb count just sorts by league size — 4 = SHERIFF, 3 = VALERIAN, 2 = CHAMP or Guest of Honor, 1 = bench. League is never its own bucket; use the league chips up top if you want to filter to one.
+    <br><br><b>Bubbles:</b> a <span class="pill mine">green</span> bubble is a league where he's on your roster, a <span class="pill opp">red</span> bubble is a league where he's on the team you're playing. Faded bubbles are bench spots. A player with both is flagged <b class="warn">⚔</b> and sits on whichever side matters more.
+    <br><br><b>All kickoff times are Pacific.</b> Use the <b>When</b> row to zero in on a single window — tap one to see just that slate, tap more to add them.
+  </div>
+</div>
+
+<script>
+const LEAGUES = [
+  {id:"L1", name:"SHERIFF",         site:"Yahoo",   opp:"The LaMaury Show", w:4, color:"#f85149", light:"#cf222e", rank:"Most important"},
+  {id:"L2", name:"VALERIAN",        site:"Sleeper", opp:"Team Markinsoles", w:3, color:"#e3b341", light:"#9a6700", rank:"2nd"},
+  {id:"L3", name:"CHAMP",           site:"Yahoo",   opp:"I respect Justin", w:2, color:"#58a6ff", light:"#0969da", rank:"3rd"},
+  {id:"L4", name:"Guest of Honor",  site:"ESPN",    opp:"Vintage Michele",  w:1, color:"#a371f7", light:"#8250df", rank:"For fun"}
+];
+
+// Kickoff windows (Pacific)
+const SLOTS = {
+  WED520:{lbl:"Wed 5:20p", short:"Wed", ord:1},
+  THU535:{lbl:"Thu 5:35p", short:"Thu", ord:2},
+  SUN10 :{lbl:"Sun 10:00a",short:"Sun 10a", ord:3},
+  SUN125:{lbl:"Sun 1:25p", short:"Sun 1:25", ord:4},
+  SUN520:{lbl:"Sun 5:20p", short:"Sun night", ord:5},
+  MON515:{lbl:"Mon 5:15p", short:"Mon", ord:6},
+  TBD   :{lbl:"TBD",       short:"TBD", ord:9}
+};
+
+// side: "for" (my roster) | "vs" (opponent roster)   slot: S=starter, B=bench, IR
+const R = [];
+const add=(lg,side,slot,name,team,pos,opp,gs)=>R.push({lg,side,slot,name,team,pos,opp,gs});
+
+/* ---------- LEAGUE 1 · SHERIFF (Yahoo) ---------- */
+add("L1","for","S","Jayden Daniels","WAS","QB","@ PHI","SUN125");
+add("L1","for","S","Jahmyr Gibbs","DET","RB","vs NO","SUN10");
+add("L1","for","S","De'Von Achane","MIA","RB","@ LV","SUN125");
+add("L1","for","S","Carnell Tate","TEN","WR","vs NYJ","SUN10");
+add("L1","for","S","Alec Pierce","IND","WR","vs BAL","SUN10");
+add("L1","for","S","Sam LaPorta","DET","TE","vs NO","SUN10");
+add("L1","for","S","Jayden Reed","GB","WR","@ MIN","SUN125");
+add("L1","for","S","Ashton Jeanty","LV","RB","vs MIA","SUN125");
+add("L1","for","S","Cam Little","JAX","K","vs CLE","SUN10");
+add("L1","for","S","Eagles D/ST","PHI","DEF","vs WAS","SUN125");
+add("L1","for","B","Jakobi Meyers","JAX","WR","vs CLE","SUN10");
+add("L1","for","B","Jalen Nailor","LV","WR","vs MIA","SUN125");
+add("L1","for","B","Mike Washington Jr.","LV","RB","vs MIA","SUN125");
+add("L1","vs","S","Lamar Jackson","BAL","QB","@ IND","SUN10");
+add("L1","vs","S","Derrick Henry","BAL","RB","@ IND","SUN10");
+add("L1","vs","S","MarShawn Lloyd","GB","RB","@ MIN","SUN125");
+add("L1","vs","S","DeVonta Smith","PHI","WR","vs WAS","SUN125");
+add("L1","vs","S","Chris Godwin Jr.","TB","WR","@ CIN","SUN10");
+add("L1","vs","S","Colston Loveland","CHI","TE","vs CAR","SUN10");
+add("L1","vs","S","Josh Downs","IND","WR","vs BAL","SUN10");
+add("L1","vs","S","Jonathon Brooks","CAR","RB","@ CHI","SUN10");
+add("L1","vs","S","Brandon Aubrey","DAL","K","vs NYG","SUN520");
+add("L1","vs","S","Jaguars D/ST","JAX","DEF","vs CLE","SUN10");
+add("L1","vs","B","Blake Corum","LAR","RB","@ SF","THU535");
+add("L1","vs","B","Wan'Dale Robinson","TEN","WR","vs NYJ","SUN10");
+add("L1","vs","B","Juwan Johnson","NO","TE","@ DET","SUN10");
+
+/* ---------- LEAGUE 2 · VALERIAN (Sleeper) ---------- */
+add("L2","for","S","Jaxson Dart","NYG","QB","@ DAL","SUN520");
+add("L2","for","S","De'Von Achane","MIA","RB","@ LV","SUN125");
+add("L2","for","S","Saquon Barkley","PHI","RB","vs WAS","SUN125");
+add("L2","for","S","Rashee Rice","KC","WR","@ DEN","MON515");
+add("L2","for","S","Malik Nabers","NYG","WR","@ DAL","SUN520");
+add("L2","for","S","George Kittle","SF","TE","vs LAR","THU535");
+add("L2","for","S","Marvin Harrison Jr.","ARI","WR","@ LAC","SUN125");
+add("L2","for","S","Stefon Diggs","WAS","WR","@ PHI","SUN125");
+add("L2","for","S","Cam Little","JAX","K","vs CLE","SUN10");
+add("L2","for","S","Raiders D/ST","LV","DEF","vs MIA","SUN125");
+add("L2","for","B","Chris Rodriguez Jr.","JAX","RB","vs CLE","SUN10");
+add("L2","for","B","D. Stribling","SF","WR","vs LAR","THU535");
+add("L2","for","B","Alec Pierce","IND","WR","vs BAL","SUN10");
+add("L2","for","B","Broncos D/ST","DEN","DEF","vs KC","MON515");
+add("L2","vs","S","Lamar Jackson","BAL","QB","@ IND","SUN10");
+add("L2","vs","S","Jeremiyah Love","ARI","RB","@ LAC","SUN125");
+add("L2","vs","S","Jaylen Warren","PIT","RB","—","TBD");
+add("L2","vs","S","Jaxon Smith-Njigba","SEA","WR","vs NE","WED520");
+add("L2","vs","S","Tetairoa McMillan","CAR","WR","@ CHI","SUN10");
+add("L2","vs","S","Sam LaPorta","DET","TE","vs NO","SUN10");
+add("L2","vs","S","Bhayshul Tuten","JAX","RB","vs CLE","SUN10");
+add("L2","vs","S","Terry McLaurin","WAS","WR","@ PHI","SUN125");
+add("L2","vs","S","Titans D/ST","TEN","DEF","vs NYJ","SUN10");
+add("L2","vs","B","TreVeyon Henderson","NE","RB","@ SEA","WED520");
+add("L2","vs","B","Aaron Jones","MIN","RB","vs GB","SUN125");
+add("L2","vs","B","Tyler Allgeier","ATL","RB","—","TBD");
+add("L2","vs","B","Josh Downs","IND","WR","vs BAL","SUN10");
+add("L2","vs","B","Quentin Johnston","LAC","WR","vs ARI","SUN125");
+
+/* ---------- LEAGUE 3 · CHAMP (Yahoo) ---------- */
+add("L3","for","S","Trevor Lawrence","JAX","QB","vs CLE","SUN10");
+add("L3","for","S","James Cook III","BUF","RB","@ HOU","SUN10");
+add("L3","for","S","De'Von Achane","MIA","RB","@ LV","SUN125");
+add("L3","for","S","Ladd McConkey","LAC","WR","vs ARI","SUN125");
+add("L3","for","S","Parker Washington","JAX","WR","vs CLE","SUN10");
+add("L3","for","S","Tyler Warren","IND","TE","vs BAL","SUN10");
+add("L3","for","S","Breece Hall","NYJ","RB","@ TEN","SUN10");
+add("L3","for","S","Trey Smack","GB","K","@ MIN","SUN125");
+add("L3","for","S","Chargers D/ST","LAC","DEF","vs ARI","SUN125");
+add("L3","for","B","Chris Godwin Jr.","TB","WR","@ CIN","SUN10");
+add("L3","for","B","Michael Wilson","ARI","WR","@ LAC","SUN125");
+add("L3","for","B","Jayden Reed","GB","WR","@ MIN","SUN125");
+add("L3","for","B","KC Concepcion","CLE","WR","@ JAX","SUN10");
+add("L3","vs","S","Caleb Williams","CHI","QB","vs CAR","SUN10");
+add("L3","vs","S","Javonte Williams","DAL","RB","vs NYG","SUN520");
+add("L3","vs","S","David Montgomery","HOU","RB","vs BUF","SUN10");
+add("L3","vs","S","Ja'Marr Chase","CIN","WR","vs TB","SUN10");
+add("L3","vs","S","George Pickens","DAL","WR","vs NYG","SUN520");
+add("L3","vs","S","Isaiah Likely","NYG","TE","@ DAL","SUN520");
+add("L3","vs","S","Emeka Egbuka","TB","WR","@ CIN","SUN10");
+add("L3","vs","S","Harrison Mevis","LAR","K","@ SF","THU535");
+add("L3","vs","S","Seahawks D/ST","SEA","DEF","vs NE","WED520");
+add("L3","vs","B","Marvin Harrison Jr.","ARI","WR","@ LAC","SUN125");
+add("L3","vs","B","MarShawn Lloyd","GB","RB","@ MIN","SUN125");
+add("L3","vs","B","Chris Rodriguez Jr.","JAX","RB","vs CLE","SUN10");
+add("L3","vs","B","Jakobi Meyers","JAX","WR","vs CLE","SUN10");
+
+/* ---------- LEAGUE 4 · Guest of Honor (ESPN) ---------- */
+add("L4","for","S","Trevor Lawrence","JAX","QB","vs CLE","SUN10");
+add("L4","for","S","Christian McCaffrey","SF","RB","vs LAR","THU535");
+add("L4","for","S","Chase Brown","CIN","RB","vs TB","SUN10");
+add("L4","for","S","Emeka Egbuka","TB","WR","@ CIN","SUN10");
+add("L4","for","S","Tee Higgins","CIN","WR","vs TB","SUN10");
+add("L4","for","S","Sam LaPorta","DET","TE","vs NO","SUN10");
+add("L4","for","S","Jeremiyah Love","ARI","RB","@ LAC","SUN125");
+add("L4","for","S","Breece Hall","NYJ","RB","@ TEN","SUN10");
+add("L4","for","B","Parker Washington","JAX","WR","vs CLE","SUN10");
+add("L4","for","B","Michael Wilson","ARI","WR","@ LAC","SUN125");
+add("L4","for","B","Jaxson Dart","NYG","QB","@ DAL","SUN520");
+add("L4","for","B","Wan'Dale Robinson","TEN","WR","vs NYJ","SUN10");
+add("L4","for","B","Brenton Strange","JAX","TE","vs CLE","SUN10");
+add("L4","for","B","Jalen McMillan","TB","WR","@ CIN","SUN10");
+add("L4","for","B","Chris Rodriguez Jr.","JAX","RB","vs CLE","SUN10");
+add("L4","for","B","Tre Tucker","LV","WR","vs MIA","SUN125");
+add("L4","for","IR","Josh Jacobs","GB","RB","@ MIN","SUN125");
+add("L4","vs","S","Matthew Stafford","LAR","QB","@ SF","THU535");
+add("L4","vs","S","Saquon Barkley","PHI","RB","vs WAS","SUN125");
+add("L4","vs","S","Travis Etienne Jr.","NO","RB","@ DET","SUN10");
+add("L4","vs","S","Puka Nacua","LAR","WR","@ SF","THU535");
+add("L4","vs","S","Rashee Rice","KC","WR","@ DEN","MON515");
+add("L4","vs","S","Harold Fannin Jr.","CLE","TE","@ JAX","SUN10");
+add("L4","vs","S","Quinshon Judkins","CLE","RB","@ JAX","SUN10");
+add("L4","vs","S","David Montgomery","HOU","RB","vs BUF","SUN10");
+add("L4","vs","B","Marvin Harrison Jr.","ARI","WR","@ LAC","SUN125");
+add("L4","vs","B","Brian Thomas Jr.","JAX","WR","vs CLE","SUN10");
+add("L4","vs","B","Jakobi Meyers","JAX","WR","vs CLE","SUN10");
+add("L4","vs","B","J.K. Dobbins","DEN","RB","vs KC","MON515");
+add("L4","vs","B","Travis Kelce","KC","TE","@ DEN","MON515");
+add("L4","vs","B","Baker Mayfield","TB","QB","@ CIN","SUN10");
+add("L4","vs","B","Juwan Johnson","NO","TE","@ DET","SUN10");
+add("L4","vs","B","Devaughn Vele","NO","WR","@ DET","SUN10");
+
+/* ---------------- aggregate ---------------- */
+const LG = Object.fromEntries(LEAGUES.map(l=>[l.id,l]));
+const players = {};
+for (const e of R){
+  if(!players[e.name]) players[e.name] = {name:e.name, team:e.team, pos:e.pos, opp:e.opp, gs:e.gs, tags:[]};
+  const p = players[e.name];
+  if (p.gs==="TBD" || SLOTS[e.gs].ord < SLOTS[p.gs].ord) { p.gs=e.gs; p.opp=e.opp; }
+  p.tags.push({lg:e.lg, side:e.side, slot:e.slot});
+}
+
+const byWeight = a => a.sort((x,y)=>LG[y].w-LG[x].w);
+const names = ids => ids.map(i=>LG[i].name).join(" + ");
+
+const ALL = Object.values(players).map(p=>{
+  p.startFor = byWeight([...new Set(p.tags.filter(t=>t.side==="for" && t.slot==="S").map(t=>t.lg))]);
+  p.benchFor = byWeight([...new Set(p.tags.filter(t=>t.side==="for" && t.slot!=="S").map(t=>t.lg))]);
+  p.startVs  = byWeight([...new Set(p.tags.filter(t=>t.side==="vs"  && t.slot==="S").map(t=>t.lg))]);
+  p.benchVs  = byWeight([...new Set(p.tags.filter(t=>t.side==="vs"  && t.slot!=="S").map(t=>t.lg))]);
+
+  // ---- simple 1-5 cheer level ----
+  let c=0, why="";
+  if (p.startFor.length>=3){ c=5; why=`Starting in ${p.startFor.length} of your 4 lineups`; }
+  else if (p.startFor.length===2){ c=4; why=`Starting in 2 lineups — ${names(p.startFor)}`; }
+  else if (p.startFor[0]==="L1"){ c=4; why="Starting in SHERIFF, your most important league"; }
+  else if (p.startFor[0]==="L2"){ c=3; why="Starting in VALERIAN"; }
+  else if (p.startFor.length===1){ c=2; why=`Starting in ${LG[p.startFor[0]].name}`; }
+  else if (p.benchFor.length){ c=1; why=`Only on your bench — ${names(p.benchFor)}`; }
+  if (c && p.benchFor.length && p.startFor.length) why += ` · bench in ${names(p.benchFor)}`;
+
+  // ---- simple 1-5 boo level (only guys actually IN an opponent lineup can rank high) ----
+  let b=0, bwhy="";
+  if (p.startVs.length>=2){ b=5; bwhy=`Starting against you in ${p.startVs.length} leagues — ${names(p.startVs)}`; }
+  else if (p.startVs[0]==="L1"){ b=4; bwhy="Starting against you in SHERIFF"; }
+  else if (p.startVs[0]==="L2"){ b=3; bwhy="Starting against you in VALERIAN"; }
+  else if (p.startVs.length===1){ b=2; bwhy=`Starting against you in ${LG[p.startVs[0]].name}`; }
+  else if (p.benchVs.length){ b=1; bwhy=`Only riding an opponent's bench — ${names(p.benchVs)}`; }
+  if (b>1 && p.benchVs.length) bwhy += ` · also benched by ${names(p.benchVs)}`;
+
+  p.cheer=c; p.boo=b; p.why=why; p.bwhy=bwhy;
+  p.conflict = c>0 && b>0;
+  p.side = c>=b ? "cheer" : "boo";
+  p.level = p.side==="cheer" ? c : b;
+  // buckets are about how many lineups he's in — never about which league
+  const n = p.side==="cheer" ? p.startFor.length : p.startVs.length;
+  p.bucket = n>=2 ? 3 : n===1 ? 2 : 1;
+  return p;
+}).sort((a,b)=> b.bucket-a.bucket || b.level-a.level || a.name.localeCompare(b.name));
+
+const CHEER_TIERS = [
+  {n:3, t:"🔥 MUST-WATCH",       d:"In more than one of your starting lineups."},
+  {n:2, t:"✅ IN YOUR LINEUP",   d:"Starting for you somewhere. More flames = bigger league."},
+  {n:1, t:"👀 BENCH / WATCHLIST",d:"Not in any of your lineups this week."}
+];
+const BOO_TIERS = [
+  {n:3, t:"☠️ BIG THREAT",            d:"Starting against you in more than one league."},
+  {n:2, t:"👎 STARTING AGAINST YOU",  d:"In an opponent's lineup. More thumbs = bigger league."},
+  {n:1, t:"💤 THEIR BENCH",           d:"Not in anyone's lineup. Can't hurt you this week."}
+];
+
+/* ---------------- render ---------------- */
+let view="priority", activeLg=new Set(LEAGUES.map(l=>l.id)), q="";
+const USED_SLOTS = Object.keys(SLOTS)
+  .filter(s=>ALL.some(p=>p.gs===s))
+  .sort((a,b)=>SLOTS[a].ord-SLOTS[b].ord);
+let activeSlots = new Set(USED_SLOTS);
+
+/* theme */
+const themeBtn = document.getElementById("themeBtn");
+function applyTheme(t){
+  document.documentElement.setAttribute("data-theme", t);
+  themeBtn.textContent = t==="light" ? "☀️" : "🌙";
+  document.getElementById("themeColor").setAttribute("content", t==="light" ? "#f6f8fa" : "#0d1117");
+  try{ localStorage.setItem("cheerTheme", t); }catch(e){}
+  if (typeof render === "function") render();
+}
+let theme = (()=>{ try{ return localStorage.getItem("cheerTheme"); }catch(e){ return null; } })()
+  || (window.matchMedia && matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+themeBtn.onclick = ()=> applyTheme(document.documentElement.getAttribute("data-theme")==="light" ? "dark" : "light");
+
+function lgColor(l){
+  return document.documentElement.getAttribute("data-theme")==="light" ? l.light : l.color;
+}
+function pillsFor(p){
+  return p.tags
+    .sort((a,b)=> (a.side===b.side ? LG[b.lg].w - LG[a.lg].w : a.side==="for" ? -1 : 1))
+    .map(t=>{
+      const l=LG[t.lg];
+      const mine = t.side==="for";
+      const bench = t.slot!=="S";
+      const suffix = bench ? (t.slot==="IR" ? " · IR" : " · bench") : "";
+      const tip = (mine ? "On your team" : "On your opponent") + " in " + l.name + (bench ? (t.slot==="IR" ? " (IR)" : " (bench)") : "");
+      return `<span class="pill ${mine?"mine":"opp"}${bench?" bench":""}" title="${tip}">${l.name}${suffix}</span>`;
+    }).join("");
+}
+function rowHTML(p){
+  const cheering = p.side==="cheer";
+  const icon = cheering ? "🔥" : "👎";
+  const col  = p.conflict ? "var(--gold)" : cheering ? "var(--good)" : "var(--fire)";
+  const tip = [p.why, p.bwhy].filter(Boolean).join(" · ").replace(/"/g,"&quot;");
+  return `<div class="row" title="${tip}" style="border-left-color:${col}">
+    <div class="rate" title="Level ${p.level} of 5">${icon.repeat(p.level)}</div>
+    <div class="who">
+      <div class="nm">${p.conflict?'<span class="warn" title="On one of your teams AND an opponent\'s">⚔ </span>':""}${p.name} <span class="pos">${p.pos} · ${p.team} ${p.opp}</span></div>
+      <div class="pills">${pillsFor(p)}</div>
+    </div>
+    <div class="game">${SLOTS[p.gs].lbl}</div>
+  </div>`;
+}
+function visible(){
+  const s=q.trim().toLowerCase();
+  return ALL.filter(p=>{
+    if (!p.tags.some(t=>activeLg.has(t.lg))) return false;
+    if (!activeSlots.has(p.gs)) return false;
+    if (s && !(p.name.toLowerCase().includes(s)||p.team.toLowerCase().includes(s)||p.pos.toLowerCase().includes(s))) return false;
+    return true;
+  });
+}
+function column(list, tiers){
+  let html="";
+  if (view==="priority"){
+    for (const t of tiers){
+      const g=list.filter(p=>p.bucket===t.n);
+      if(!g.length) continue;
+      html += `<h2 class="sec">${t.t} <span class="cnt">· ${g.length}</span></h2><div class="note">${t.d}</div>`;
+      html += g.map(rowHTML).join("");
+    }
+  } else {
+    for (const s of Object.keys(SLOTS).sort((a,b)=>SLOTS[a].ord-SLOTS[b].ord)){
+      const g=list.filter(p=>p.gs===s).sort((x,y)=>y.bucket-x.bucket||y.level-x.level);
+      if(!g.length) continue;
+      html += `<h2 class="sec">${SLOTS[s].lbl} <span class="cnt">· ${g.length}</span></h2>`;
+      html += g.map(rowHTML).join("");
+    }
+  }
+  return html || `<div class="empty">Nobody here.</div>`;
+}
+function render(){
+  const list = visible();
+  const cheer = list.filter(p=>p.side==="cheer");
+  const boo   = list.filter(p=>p.side==="boo");
+  document.getElementById("cheerCount").textContent = cheer.length;
+  document.getElementById("booCount").textContent   = boo.length;
+  document.getElementById("cheerTab").textContent   = cheer.length;
+  document.getElementById("booTab").textContent     = boo.length;
+  document.getElementById("cheerCol").innerHTML = column(cheer, CHEER_TIERS);
+  document.getElementById("booCol").innerHTML   = column(boo,   BOO_TIERS);
+  document.getElementById("leagues").innerHTML = LEAGUES.map(l=>`
+    <div class="lg" style="border-left-color:${lgColor(l)}">
+      <div class="rank">${l.rank} · ${l.site}</div>
+      <div class="nm" style="color:${lgColor(l)}">${l.name}</div>
+      <div class="vs">vs <b>${l.opp}</b></div>
+    </div>`).join("");
+}
+document.getElementById("lgfilters").innerHTML = LEAGUES.map(l=>
+  `<button class="tg on lgf" data-lg="${l.id}">${l.name}</button>`).join(" ");
+document.getElementById("slotfilters").innerHTML = USED_SLOTS.map(s=>
+  `<button class="tg slf" data-slot="${s}">${SLOTS[s].short}</button>`).join(" ");
+
+function syncSlotButtons(){
+  const all = activeSlots.size===USED_SLOTS.length;
+  document.getElementById("allSlots").classList.toggle("on", all);
+  document.querySelectorAll(".slf").forEach(b=>
+    b.classList.toggle("on", !all && activeSlots.has(b.dataset.slot)));
+}
+document.getElementById("allSlots").onclick=()=>{
+  activeSlots=new Set(USED_SLOTS); syncSlotButtons(); render();
+};
+document.querySelectorAll(".slf").forEach(b=>b.onclick=()=>{
+  const s=b.dataset.slot;
+  if (activeSlots.size===USED_SLOTS.length) activeSlots=new Set([s]);   // first pick = solo
+  else if (activeSlots.has(s)){ activeSlots.delete(s); if(!activeSlots.size) activeSlots=new Set(USED_SLOTS); }
+  else activeSlots.add(s);
+  syncSlotButtons(); render();
+});
+document.querySelectorAll("[data-view]").forEach(b=>b.onclick=()=>{
+  view=b.dataset.view;
+  document.querySelectorAll("[data-view]").forEach(x=>x.classList.toggle("on",x===b));
+  render();
+});
+document.querySelectorAll(".lgf").forEach(b=>b.onclick=()=>{
+  const id=b.dataset.lg;
+  if(activeLg.has(id)&&activeLg.size>1){activeLg.delete(id);b.classList.remove("on");}
+  else {activeLg.add(id);b.classList.add("on");}
+  render();
+});
+document.querySelectorAll(".mtabs button").forEach(b=>b.onclick=()=>{
+  document.body.dataset.side=b.dataset.side;
+  document.querySelectorAll(".mtabs button").forEach(x=>x.classList.toggle("on",x===b));
+  window.scrollTo({top:0,behavior:"smooth"});
+});
+document.getElementById("q").oninput=e=>{q=e.target.value;render();};
+document.body.dataset.side="cheer";
+syncSlotButtons();
+applyTheme(theme);
+</script>
+</body>
+</html>
