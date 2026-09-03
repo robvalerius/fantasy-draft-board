@@ -94,6 +94,18 @@
   .game{font-size:11px;color:var(--dim);min-width:66px;text-align:right;font-variant-numeric:tabular-nums}
   .note{color:var(--dim);font-size:11.5px;margin:-2px 0 10px}
   .empty{color:var(--faint);font-size:12px;padding:6px 2px}
+  .dead{margin-top:22px;border-top:1px dashed var(--line);padding-top:12px}
+  .dead summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+    font-size:12px;font-weight:700;letter-spacing:.3px;text-transform:uppercase;color:var(--dim);
+    padding:8px 11px;border:1px solid var(--line);border-radius:8px;background:var(--panel);
+    -webkit-tap-highlight-color:transparent}
+  .dead summary::-webkit-details-marker{display:none}
+  .dead summary::before{content:"\25B8";font-size:11px;transition:transform .15s}
+  .dead[open] summary::before{transform:rotate(90deg)}
+  .deadhint{margin-left:auto;font-weight:400;text-transform:none;letter-spacing:0;font-size:11px;opacity:.8}
+  .dead > .note{margin:10px 0 8px}
+  .dead .row{opacity:.6}
+  .dead .row:hover{opacity:1}
   .legend{font-size:11.5px;color:var(--dim);margin-top:20px;padding-top:12px;border-top:1px solid var(--line)}
   .legend b{color:var(--txt)}
   .legend ul{margin:6px 0;padding-left:18px} .legend li{margin:2px 0}
@@ -138,7 +150,7 @@
 <header>
   <div class="wrap" style="padding-bottom:0">
     <h1>🏈 Sunday Cheer Tracker <span class="sub">— Week 1</span></h1>
-    <div class="sub">Who to scream for, who to boo, and when they play. All times Pacific. <span style="opacity:.6">· build 9 · published</span></div>
+    <div class="sub">Who to scream for, who to boo, and when they play. All times Pacific. <span style="opacity:.6">· build 10 · bench drawer</span></div>
   </div>
 </header>
 
@@ -186,11 +198,11 @@
   </div>
 
   <div class="legend">
-    <b>Three buckets per side — that's it:</b>
+    <b>Two buckets that matter, plus a drawer for everyone else:</b>
     <ul>
       <li><b>🔥 Must-watch / ☠️ Big threat</b> — in more than one starting lineup</li>
       <li><b>✅ In your lineup / 👎 Starting against you</b> — in exactly one lineup</li>
-      <li><b>👀 Bench / 💤 Their bench</b> — nobody is starting him, so he can't move a single matchup</li>
+      <li><b>👀 Bench / 💤 Their bench</b> — single flame or thumb, nobody is starting him, so his points don't count anywhere. Tucked into a collapsed drawer at the bottom of each column and dimmed. Tap the header to open it.</li>
     </ul>
     Inside a bucket, the flame and thumb count just sorts by league size — 4 = SHERIFF, 3 = VALERIAN, 2 = CHAMP or Guest of Honor, 1 = bench. League is never its own bucket; use the league chips up top if you want to filter to one.
     <br><br><b>Bubbles:</b> a <span class="pill mine">green</span> bubble is a league where he's on your roster, a <span class="pill opp">red</span> bubble is a league where he's on the team you're playing. Faded bubbles are bench spots. A player with both is flagged <b class="warn">⚔</b> and sits on whichever side matters more.
@@ -392,14 +404,16 @@ const ALL = Object.values(players).map(p=>{
 
 const CHEER_TIERS = [
   {n:3, t:"🔥 MUST-WATCH",       d:"In more than one of your starting lineups."},
-  {n:2, t:"✅ IN YOUR LINEUP",   d:"Starting for you somewhere. More flames = bigger league."},
-  {n:1, t:"👀 BENCH / WATCHLIST",d:"Not in any of your lineups this week."}
+  {n:2, t:"✅ IN YOUR LINEUP",   d:"Starting for you somewhere. More flames = bigger league."}
 ];
 const BOO_TIERS = [
   {n:3, t:"☠️ BIG THREAT",            d:"Starting against you in more than one league."},
-  {n:2, t:"👎 STARTING AGAINST YOU",  d:"In an opponent's lineup. More thumbs = bigger league."},
-  {n:1, t:"💤 THEIR BENCH",           d:"Not in anyone's lineup. Can't hurt you this week."}
+  {n:2, t:"👎 STARTING AGAINST YOU",  d:"In an opponent's lineup. More thumbs = bigger league."}
 ];
+const DEAD_HDR = {
+  cheer:{t:"👀 Bench / watchlist", d:"Not in any of your lineups — their points don't count for you."},
+  boo:  {t:"💤 Their bench",       d:"Not in anyone's lineup — they can't hurt you this week."}
+};
 
 /* ---------------- render ---------------- */
 let view="priority", activeLg=new Set(LEAGUES.map(l=>l.id)), q="";
@@ -459,35 +473,46 @@ function visible(){
     return true;
   });
 }
-function column(list, tiers){
+function column(list, tiers, sideKey){
+  const live = list.filter(p=>p.bucket>=2);
+  const dead = list.filter(p=>p.bucket===1);
   let html="";
   if (view==="priority"){
     for (const t of tiers){
-      const g=list.filter(p=>p.bucket===t.n);
+      const g=live.filter(p=>p.bucket===t.n);
       if(!g.length) continue;
       html += `<h2 class="sec">${t.t} <span class="cnt">· ${g.length}</span></h2><div class="note">${t.d}</div>`;
       html += g.map(rowHTML).join("");
     }
   } else {
     for (const s of Object.keys(SLOTS).sort((a,b)=>SLOTS[a].ord-SLOTS[b].ord)){
-      const g=list.filter(p=>p.gs===s).sort((x,y)=>y.bucket-x.bucket||y.level-x.level);
+      const g=live.filter(p=>p.gs===s).sort((x,y)=>y.bucket-x.bucket||y.level-x.level);
       if(!g.length) continue;
       html += `<h2 class="sec">${SLOTS[s].lbl} <span class="cnt">· ${g.length}</span></h2>`;
       html += g.map(rowHTML).join("");
     }
   }
-  return html || `<div class="empty">Nobody here.</div>`;
+  if (!html) html = `<div class="empty">Nobody here.</div>`;
+  if (dead.length){
+    const h = DEAD_HDR[sideKey];
+    const rows = dead.slice().sort((x,y)=>y.level-x.level||x.name.localeCompare(y.name)).map(rowHTML).join("");
+    html += `<details class="dead"><summary>${h.t} <span class="cnt">· ${dead.length}</span>
+      <span class="deadhint">doesn't count for points</span></summary>
+      <div class="note">${h.d}</div>${rows}</details>`;
+  }
+  return html;
 }
 function render(){
   const list = visible();
   const cheer = list.filter(p=>p.side==="cheer");
   const boo   = list.filter(p=>p.side==="boo");
-  document.getElementById("cheerCount").textContent = cheer.length;
-  document.getElementById("booCount").textContent   = boo.length;
-  document.getElementById("cheerTab").textContent   = cheer.length;
-  document.getElementById("booTab").textContent     = boo.length;
-  document.getElementById("cheerCol").innerHTML = column(cheer, CHEER_TIERS);
-  document.getElementById("booCol").innerHTML   = column(boo,   BOO_TIERS);
+  const live  = a => a.filter(p=>p.bucket>=2).length;
+  document.getElementById("cheerCount").textContent = live(cheer);
+  document.getElementById("booCount").textContent   = live(boo);
+  document.getElementById("cheerTab").textContent   = live(cheer);
+  document.getElementById("booTab").textContent     = live(boo);
+  document.getElementById("cheerCol").innerHTML = column(cheer, CHEER_TIERS, "cheer");
+  document.getElementById("booCol").innerHTML   = column(boo,   BOO_TIERS,   "boo");
   document.getElementById("leagues").innerHTML = LEAGUES.map(l=>`
     <div class="lg" style="border-left-color:${lgColor(l)}">
       <div class="rank">${l.rank} · ${l.site}</div>
