@@ -170,7 +170,7 @@
     <div class="hdrrow">
       <div>
         <h1>🏈 Sunday Cheer Tracker <span class="sub">— Week 1</span></h1>
-        <div class="sub">Who to scream for, who to boo, and when they play. All times Pacific. <span style="opacity:.6">· build 13 · demo mode</span></div>
+        <div class="sub">Who to scream for, who to boo, and when they play. All times Pacific. <span style="opacity:.6">· build 14 · demo fix</span></div>
       </div>
       <button class="tg" id="themeBtn" title="Toggle light / dark">🌙</button>
     </div>
@@ -768,7 +768,7 @@ document.getElementById("demoBtn").onclick=()=>setDemo(!demoOn);
 document.body.dataset.side="cheer";
 syncSlotButtons();
 applyTheme(theme);
-setLive(liveOn);
+setLive(liveOn || demoOn);   // arriving with ?demo=1 should show stats without a second tap
 </script>
 </body>
 </html>
