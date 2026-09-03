@@ -20,6 +20,7 @@
     --good:#3fb950; --gold:#d29922; --fire:#f85149; --blue:#58a6ff;
     --onblue:#04121f; --hdrTop:#151c27; --hdrBot:#0d1117; --oppTxt:#ff7b72;
     --pillGoodTxt:#56d364; --pillGoodBd:#2ea04366; --pillGoodBg:#2ea04326;
+    --statTxt:#79c0ff; --statBd:#388bfd55; --statBg:#388bfd26;
     --pillBadTxt:#ff8a80;  --pillBadBd:#f8514966;  --pillBadBg:#f8514922;
     --shadow:0 1px 0 rgba(0,0,0,.2);
   }
@@ -30,6 +31,7 @@
     --onblue:#ffffff; --hdrTop:#ffffff; --hdrBot:#f6f8fa; --oppTxt:#cf222e;
     --pillGoodTxt:#0f5c2a; --pillGoodBd:#1a7f3766; --pillGoodBg:#1a7f3714;
     --pillBadTxt:#a40e26;  --pillBadBd:#cf222e66;  --pillBadBg:#cf222e12;
+    --statTxt:#0969da; --statBd:#0969da55; --statBg:#0969da12;
     --shadow:0 1px 2px rgba(31,35,40,.06);
   }
   *{box-sizing:border-box}
@@ -58,7 +60,9 @@
   .sep{width:1px;height:20px;background:var(--line)}
   .slotbar{position:static;border-bottom:none;margin:0 0 4px;padding:0 0 8px}
   .barlbl{font-size:11px;text-transform:uppercase;letter-spacing:.9px;color:var(--dim)}
-  #themeBtn{margin-left:auto;font-size:14px;line-height:1;padding:6px 10px}
+  .hdrrow{display:flex;align-items:flex-start;gap:12px}
+  .hdrrow > div{min-width:0}
+  #themeBtn{flex:none;margin-left:auto;font-size:15px;line-height:1;padding:7px 11px}
   .mtabs{display:none;gap:8px;margin:12px 0 4px}
   .mtabs button{flex:1;padding:11px 8px;font-size:14px;font-weight:700;border-radius:10px;
     border:1px solid var(--line);background:var(--panel);color:var(--dim);cursor:pointer}
@@ -94,6 +98,17 @@
   .game{font-size:11px;color:var(--dim);min-width:66px;text-align:right;font-variant-numeric:tabular-nums}
   .note{color:var(--dim);font-size:11.5px;margin:-2px 0 10px}
   .empty{color:var(--faint);font-size:12px;padding:6px 2px}
+  .stats{display:flex;flex-wrap:wrap;gap:4px;margin-top:5px}
+  .stat{font-size:10.5px;font-weight:700;padding:2px 7px;border-radius:5px;white-space:nowrap;
+    color:var(--statTxt);background:var(--statBg);border:1px solid var(--statBd)}
+  .stat.bad{color:var(--pillBadTxt);background:var(--pillBadBg);border-color:var(--pillBadBd)}
+  .livebar{display:none;align-items:center;gap:8px;flex-wrap:wrap;margin:-2px 0 10px;
+    font-size:11.5px;color:var(--dim)}
+  .livebar.show{display:flex}
+  .livehint{opacity:.7}
+  .dot{width:8px;height:8px;border-radius:50%;background:var(--faint);flex:none}
+  .dot.ok{background:var(--good);box-shadow:0 0 0 3px color-mix(in srgb,var(--good) 25%,transparent)}
+  .dot.err{background:var(--fire)}
   .dead{margin-top:22px;border-top:1px dashed var(--line);padding-top:12px}
   .dead summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px;flex-wrap:wrap;
     font-size:12px;font-weight:700;letter-spacing:.3px;text-transform:uppercase;color:var(--dim);
@@ -125,7 +140,8 @@
     button.tg{padding:7px 12px}
     input[type=search]{min-width:140px}
     .sep{display:none}
-    #themeBtn{margin-left:0;position:sticky;right:0;background:var(--bg);box-shadow:-10px 0 10px var(--bg)}
+    #themeBtn{padding:7px 11px}
+    .hdrrow{gap:8px}
     .mtabs{display:flex;position:sticky;top:47px;z-index:4;background:var(--bg);padding:8px 0}
     .board{grid-template-columns:1fr;gap:0}
     .colhdr{position:static;padding:2px 0 8px;border-bottom-width:1px}
@@ -149,8 +165,13 @@
 <body>
 <header>
   <div class="wrap" style="padding-bottom:0">
-    <h1>🏈 Sunday Cheer Tracker <span class="sub">— Week 1</span></h1>
-    <div class="sub">Who to scream for, who to boo, and when they play. All times Pacific. <span style="opacity:.6">· build 10 · bench drawer</span></div>
+    <div class="hdrrow">
+      <div>
+        <h1>🏈 Sunday Cheer Tracker <span class="sub">— Week 1</span></h1>
+        <div class="sub">Who to scream for, who to boo, and when they play. All times Pacific. <span style="opacity:.6">· build 12 · live stats</span></div>
+      </div>
+      <button class="tg" id="themeBtn" title="Toggle light / dark">🌙</button>
+    </div>
   </div>
 </header>
 
@@ -164,8 +185,11 @@
     <span id="lgfilters"></span>
     <div class="sep"></div>
     <input type="search" id="q" placeholder="Search player / team…">
-    <button class="tg" id="themeBtn" title="Toggle light / dark">🌙</button>
+    <div class="sep"></div>
+    <button class="tg" id="liveBtn" title="Poll live NFL stats from Sleeper">📡 Live stats</button>
   </div>
+
+  <div class="livebar" id="livebar"><span class="dot" id="liveDot"></span><span id="liveTxt">starting…</span><span class="livehint">updates every 60s · only stats above zero are shown</span></div>
 
   <div class="controls slotbar">
     <span class="barlbl">When:</span>
@@ -206,7 +230,7 @@
     </ul>
     Inside a bucket, the flame and thumb count just sorts by league size — 4 = SHERIFF, 3 = VALERIAN, 2 = CHAMP or Guest of Honor, 1 = bench. League is never its own bucket; use the league chips up top if you want to filter to one.
     <br><br><b>Bubbles:</b> a <span class="pill mine">green</span> bubble is a league where he's on your roster, a <span class="pill opp">red</span> bubble is a league where he's on the team you're playing. Faded bubbles are bench spots. A player with both is flagged <b class="warn">⚔</b> and sits on whichever side matters more.
-    <br><br><b>All kickoff times are Pacific.</b> Use the <b>When</b> row to zero in on a single window — tap one to see just that slate, tap more to add them.
+    <br><br><b>Live stats:</b> tap <b>📡 Live stats</b> to pull real NFL box-score numbers from Sleeper's public feed every 60 seconds — passing and rushing and receiving yards, catches, TDs, kicking points and misses. Only numbers above zero ever appear, so a quiet row means a quiet day. These are raw stats, not fantasy points, so they are the same no matter which league you are looking at.<br><br><b>All kickoff times are Pacific.</b> Use the <b>When</b> row to zero in on a single window — tap one to see just that slate, tap more to add them.
   </div>
 </div>
 
@@ -415,6 +439,165 @@ const DEAD_HDR = {
   boo:  {t:"💤 Their bench",       d:"Not in anyone's lineup — they can't hurt you this week."}
 };
 
+const SID = {
+  "Aaron Jones":"4199",
+  "Alec Pierce":"8142",
+  "Ashton Jeanty":"12527",
+  "Baker Mayfield":"4892",
+  "Bhayshul Tuten":"12490",
+  "Blake Corum":"11586",
+  "Brandon Aubrey":"11533",
+  "Breece Hall":"8155",
+  "Brenton Strange":"9480",
+  "Brian Thomas Jr.":"11631",
+  "Broncos D/ST":"DEN",
+  "Caleb Williams":"11560",
+  "Cam Little":"11786",
+  "Carnell Tate":"13279",
+  "Chargers D/ST":"LAC",
+  "Chase Brown":"9224",
+  "Chris Godwin Jr.":"4037",
+  "Chris Rodriguez Jr.":"10219",
+  "Christian McCaffrey":"4034",
+  "Colston Loveland":"12517",
+  "D. Stribling":"13417",
+  "David Montgomery":"5892",
+  "De'Von Achane":"9226",
+  "DeVonta Smith":"7525",
+  "Derrick Henry":"3198",
+  "Devaughn Vele":"11834",
+  "Eagles D/ST":"PHI",
+  "Emeka Egbuka":"12514",
+  "George Kittle":"4217",
+  "George Pickens":"8137",
+  "Harold Fannin Jr.":"12506",
+  "Harrison Mevis":"12015",
+  "Isaiah Likely":"8131",
+  "J.K. Dobbins":"6806",
+  "Ja'Marr Chase":"7564",
+  "Jaguars D/ST":"JAX",
+  "Jahmyr Gibbs":"9221",
+  "Jakobi Meyers":"5947",
+  "Jalen McMillan":"11618",
+  "Jalen Nailor":"8180",
+  "James Cook III":"8138",
+  "Javonte Williams":"7588",
+  "Jaxon Smith-Njigba":"9488",
+  "Jaxson Dart":"12508",
+  "Jayden Daniels":"11566",
+  "Jayden Reed":"10222",
+  "Jaylen Warren":"8228",
+  "Jeremiyah Love":"13287",
+  "Jonathon Brooks":"11583",
+  "Josh Downs":"9500",
+  "Josh Jacobs":"5850",
+  "Juwan Johnson":"7002",
+  "KC Concepcion":"13298",
+  "Ladd McConkey":"11635",
+  "Lamar Jackson":"4881",
+  "Malik Nabers":"11632",
+  "MarShawn Lloyd":"11581",
+  "Marvin Harrison Jr.":"11628",
+  "Matthew Stafford":"421",
+  "Michael Wilson":"10232",
+  "Mike Washington Jr.":"13305",
+  "Parker Washington":"9487",
+  "Puka Nacua":"9493",
+  "Quentin Johnston":"9754",
+  "Quinshon Judkins":"12512",
+  "Raiders D/ST":"LV",
+  "Rashee Rice":"10229",
+  "Sam LaPorta":"10859",
+  "Saquon Barkley":"4866",
+  "Seahawks D/ST":"SEA",
+  "Stefon Diggs":"2449",
+  "Tee Higgins":"6801",
+  "Terry McLaurin":"5927",
+  "Tetairoa McMillan":"12526",
+  "Titans D/ST":"TEN",
+  "Travis Etienne Jr.":"7543",
+  "Travis Kelce":"1466",
+  "Tre Tucker":"10213",
+  "TreVeyon Henderson":"12529",
+  "Trevor Lawrence":"7523",
+  "Trey Smack":"13545",
+  "Tyler Allgeier":"8132",
+  "Tyler Warren":"12518",
+  "Wan'Dale Robinson":"8126"
+};
+
+/* ---------------- live stats (Sleeper public API, no auth, CORS *) ---------------- */
+// Only the counting stats Rob asked for. Anything zero or missing is never drawn.
+const STAT_DEFS = [
+  {k:"pass_yd", lbl:"pass yd"},
+  {k:"pass_td", lbl:"pass TD"},
+  {k:"rush_yd", lbl:"rush yd"},
+  {k:"rush_td", lbl:"rush TD"},
+  {k:"rec",     lbl:"rec"},
+  {k:"rec_yd",  lbl:"rec yd"},
+  {k:"rec_td",  lbl:"rec TD"},
+  {k:"kick_pts",lbl:"K pts"},
+  {k:"_miss",   lbl:"K miss", bad:true}
+];
+let STATS = {};              // sleeper_id -> raw stat object
+let liveOn = localStorage.getItem("ct-live") === "1";
+let liveTimer = null, liveWeek = null;
+
+function statChips(p){
+  const id = SID[p.name];
+  const s = id && STATS[id];
+  if (!s) return "";
+  const miss = (Number(s.fga||0) - Number(s.fgm||0)) + (Number(s.xpa||0) - Number(s.xpm||0));
+  const out = [];
+  for (const d of STAT_DEFS){
+    const v = d.k === "_miss" ? miss : Number(s[d.k]||0);
+    if (!(v > 0)) continue;                       // only greater than zero
+    const n = Number.isInteger(v) ? v : v.toFixed(1);
+    out.push(`<span class="stat${d.bad?" bad":""}">${n} ${d.lbl}</span>`);
+  }
+  return out.length ? `<div class="stats">${out.join("")}</div>` : "";
+}
+
+async function pullStats(){
+  const dot = document.getElementById("liveDot");
+  const txt = document.getElementById("liveTxt");
+  try{
+    const st = await (await fetch("https://api.sleeper.app/v1/state/nfl")).json();
+    const season = st.season, week = st.display_week || st.week || 1;
+    liveWeek = week;
+    const url = `https://api.sleeper.app/v1/stats/nfl/${st.season_type||"regular"}/${season}/${week}`;
+    STATS = await (await fetch(url)).json() || {};
+    const n = ALL.filter(p=>{
+      const s = STATS[SID[p.name]]; if(!s) return false;
+      return STAT_DEFS.some(d=> d.k==="_miss"
+        ? ((+s.fga||0)-(+s.fgm||0))+((+s.xpa||0)-(+s.xpm||0)) > 0
+        : (+s[d.k]||0) > 0);
+    }).length;
+    dot.className = "dot ok";
+    txt.textContent = n
+      ? `${season} wk ${week} · ${n} with stats · ${new Date().toLocaleTimeString([], {hour:"numeric",minute:"2-digit"})}`
+      : `${season} wk ${week} · no stats yet`;
+  }catch(e){
+    dot.className = "dot err";
+    txt.textContent = "offline — will retry";
+  }
+  render();
+}
+function setLive(on){
+  liveOn = on;
+  localStorage.setItem("ct-live", on ? "1" : "0");
+  document.getElementById("liveBtn").classList.toggle("on", on);
+  document.getElementById("livebar").classList.toggle("show", on);
+  clearInterval(liveTimer); liveTimer = null;
+  if (on){ pullStats(); liveTimer = setInterval(pullStats, 60000); }
+  else { STATS = {}; render(); }
+}
+// Don't burn requests on a backgrounded phone; catch up when the tab returns.
+document.addEventListener("visibilitychange", ()=>{
+  if (!liveOn) return;
+  if (document.hidden){ clearInterval(liveTimer); liveTimer = null; }
+  else if (!liveTimer){ pullStats(); liveTimer = setInterval(pullStats, 60000); }
+});
 /* ---------------- render ---------------- */
 let view="priority", activeLg=new Set(LEAGUES.map(l=>l.id)), q="";
 const USED_SLOTS = Object.keys(SLOTS)
@@ -460,6 +643,7 @@ function rowHTML(p){
     <div class="who">
       <div class="nm">${p.conflict?'<span class="warn" title="On one of your teams AND an opponent\'s">⚔ </span>':""}${p.name} <span class="pos">${p.pos} · ${p.team} ${p.opp}</span></div>
       <div class="pills">${pillsFor(p)}</div>
+      ${statChips(p)}
     </div>
     <div class="game">${SLOTS[p.gs].lbl}</div>
   </div>`;
@@ -558,9 +742,11 @@ document.querySelectorAll(".mtabs button").forEach(b=>b.onclick=()=>{
   window.scrollTo({top:0,behavior:"smooth"});
 });
 document.getElementById("q").oninput=e=>{q=e.target.value;render();};
+document.getElementById("liveBtn").onclick=()=>setLive(!liveOn);
 document.body.dataset.side="cheer";
 syncSlotButtons();
 applyTheme(theme);
+setLive(liveOn);
 </script>
 </body>
 </html>
