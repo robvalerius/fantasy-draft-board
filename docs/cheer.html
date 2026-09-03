@@ -171,7 +171,7 @@
     <div class="hdrrow">
       <div>
         <h1>🏈 Sunday Cheer Tracker <span class="sub">— Week 1</span></h1>
-        <div class="sub">Who to scream for, who to boo, and when they play. All times Pacific. <span style="opacity:.6">· build 15 · turnover stats</span></div>
+        <div class="sub">Who to scream for, who to boo, and when they play. All times Pacific. <span style="opacity:.6">· build 16 · defense allowed</span></div>
       </div>
       <button class="tg" id="themeBtn" title="Toggle light / dark">🌙</button>
     </div>
@@ -234,7 +234,7 @@
     </ul>
     Inside a bucket, the flame and thumb count just sorts by league size — 4 = SHERIFF, 3 = VALERIAN, 2 = CHAMP or Guest of Honor, 1 = bench. League is never its own bucket; use the league chips up top if you want to filter to one.
     <br><br><b>Bubbles:</b> a <span class="pill mine">green</span> bubble is a league where he's on your roster, a <span class="pill opp">red</span> bubble is a league where he's on the team you're playing. Faded bubbles are bench spots. A player with both is flagged <b class="warn">⚔</b> and sits on whichever side matters more.
-    <br><br><b>Live stats:</b> tap <b>📡 Live stats</b> to pull real NFL box-score numbers from Sleeper's public feed every 60 seconds — passing and rushing and receiving yards, catches, TDs, kicking points and misses. Only numbers above zero ever appear, so a quiet row means a quiet day. Production is <span class="stat">blue</span>, mistakes are <span class="stat bad">red</span> — fumbles lost, interceptions, pick 6s and sacks taken. For a <b>D/ST</b> those same events flip <span class="stat good">green</span>, since the defense caused them, and the only red chip is TDs allowed. These are raw stats, not fantasy points, so they are the same no matter which league you are looking at.<br><br><b>All kickoff times are Pacific.</b> Use the <b>When</b> row to zero in on a single window — tap one to see just that slate, tap more to add them.
+    <br><br><b>Live stats:</b> tap <b>📡 Live stats</b> to pull real NFL box-score numbers from Sleeper's public feed every 60 seconds — passing and rushing and receiving yards, catches, TDs, kicking points and misses. Only numbers above zero ever appear, so a quiet row means a quiet day. Production is <span class="stat">blue</span>, mistakes are <span class="stat bad">red</span> — fumbles lost, interceptions, pick 6s and sacks taken. For a <b>D/ST</b> those same events flip <span class="stat good">green</span>, since the defense caused them, and the red chips are points and yards allowed. These are raw stats, not fantasy points, so they are the same no matter which league you are looking at.<br><br><b>All kickoff times are Pacific.</b> Use the <b>When</b> row to zero in on a single window — tap one to see just that slate, tap more to add them.
   </div>
 </div>
 
@@ -577,7 +577,13 @@ function statChips(p){
   };
   if (p.pos === "DEF"){
     for (const d of DEF_GOOD) add(Number(s[d.k]||0), d.lbl, "good");
-    add(Number(s.td||0), "TD allowed", "bad");     // the one thing that is genuinely bad for a defence
+    // Points and yards surrendered. Shown whenever the game is under way, so a
+    // shutout still reads "0 pts allow" rather than vanishing.
+    const yds = Number(s.yds_allow||0), pts = Number(s.pts_allow||0);
+    if (yds > 0 || pts > 0){
+      out.push(`<span class="stat bad">${pts} pts allow</span>`);
+      out.push(`<span class="stat bad">${yds} yds allow</span>`);
+    }
   } else {
     const miss = (Number(s.fga||0) - Number(s.fgm||0)) + (Number(s.xpa||0) - Number(s.xpm||0));
     for (const d of STAT_DEFS) add(d.k === "_miss" ? miss : Number(s[d.k]||0), d.lbl, d.tone);
