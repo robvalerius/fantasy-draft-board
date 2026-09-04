@@ -142,6 +142,12 @@
   .sbmargin{margin-top:4px;font-size:11px;font-weight:800;font-variant-numeric:tabular-nums;color:var(--dim)}
   .sbcard.win .sbmargin{color:var(--pillGoodTxt)}
   .sbcard.lose .sbmargin{color:var(--pillBadTxt)}
+  .sbleft{display:flex;gap:7px;margin-top:2px;font-size:9.5px;font-weight:700;color:var(--faint);
+    font-variant-numeric:tabular-nums;letter-spacing:.03em}
+  .sbleft>span:last-child{margin-left:auto;text-align:right;white-space:nowrap}
+  .sbleft b{font-weight:800;color:var(--dim)}
+  .sbleft .edge b{color:var(--good)}
+  .sbleft .live{color:var(--gold);font-style:normal}
   .sbwait{flex:1 1 100%;font-size:10.5px;color:var(--faint);padding:2px}
   .dot{width:8px;height:8px;border-radius:50%;background:var(--faint);flex:none}
   .dot.ok{background:var(--good);box-shadow:0 0 0 3px color-mix(in srgb,var(--good) 25%,transparent)}
@@ -199,6 +205,7 @@
     .sbscore .sbdash{font-size:11px}
     .sbwho{font-size:8.5px;margin-top:1px}
     .sbmargin{margin-top:2px;font-size:10px}
+    .sbleft{font-size:8.5px;margin-top:1px}
     .sbwait{grid-column:1 / -1}
   }
 </style>
@@ -280,6 +287,32 @@ const SLOTS = {
   MON515:{lbl:"Mon 5:15p", short:"Mon", ord:6},
   TBD   :{lbl:"TBD",       short:"TBD", ord:9}
 };
+
+// Actual Week 1 kickoffs, so "who is left to play" can be answered off the clock rather than
+// off snap counts — that works before a single stat exists, which is when it matters most.
+const KICK = {
+  WED520:"2026-09-09T17:20:00-07:00",
+  THU535:"2026-09-10T17:35:00-07:00",
+  SUN10 :"2026-09-13T10:00:00-07:00",
+  SUN125:"2026-09-13T13:25:00-07:00",
+  SUN520:"2026-09-13T17:20:00-07:00",
+  MON515:"2026-09-14T17:15:00-07:00"
+};
+const GAME_MS = 3.25 * 60 * 60 * 1000;   // a broadcast window, near enough
+
+// Demo replays a finished week, so freeze its clock mid-Sunday afternoon — otherwise every
+// game reads as "not started" and the counts show nothing worth looking at.
+function nowMs(){
+  return demoOn ? Date.parse(KICK.SUN125) + 40*60*1000 : Date.now();
+}
+// "left" = has not kicked off, "live" = in its window, "done" = over.
+function playState(p, now){
+  const k = KICK[p.gs];
+  if (!k) return "left";                 // TBD window — assume still to come
+  const t = Date.parse(k);
+  if (now < t) return "left";
+  return now < t + GAME_MS ? "live" : "done";
+}
 
 // side: "for" (my roster) | "vs" (opponent roster)   slot: S=starter, B=bench, IR
 const R = [];
@@ -764,11 +797,27 @@ function renderScoreboard(){
   const cards = LEAGUES.filter(l => SCORING[l.id]).map(l => {
     const tbl = SCORING[l.id];
     const sum = arr => arr.reduce((a,p)=>a + leaguePts(p, tbl), 0);
-    const mine = sum(ALL.filter(p => p.startFor.includes(l.id)));
-    const them = sum(ALL.filter(p => p.startVs.includes(l.id)));
+    const myStart = ALL.filter(p => p.startFor.includes(l.id));
+    const opStart = ALL.filter(p => p.startVs.includes(l.id));
+    const mine = sum(myStart);
+    const them = sum(opStart);
     const d    = mine - them;
     const cls  = d > 0 ? "win" : d < 0 ? "lose" : "";
     const sign = d > 0 ? "+" : "";
+
+    // Ammo left: a deficit means very different things with four guys still to play.
+    const now = nowMs();
+    const tally = arr => {
+      const st = arr.map(p => playState(p, now));
+      return {left: st.filter(x=>x==="left").length, live: st.filter(x=>x==="live").length};
+    };
+    const a = tally(myStart), b = tally(opStart);
+    const side = t => `<b>${t.left}</b> left${t.live ? ` <i class="live">${t.live} on</i>` : ""}`;
+    const row = (a.left + a.live + b.left + b.live)
+      ? `<div class="sbleft"><span class="${a.left>b.left?"edge":""}">${side(a)}</span>`
+        + `<span class="${b.left>a.left?"edge":""}">${side(b)}</span></div>`
+      : "";
+
     return `<div class="sbcard ${cls}" style="--lgc:${lgColor(l)}" data-sblg="${l.id}"
       role="button" tabindex="0" title="Show only this matchup">
       <div class="sbname">${l.name}</div>
@@ -776,6 +825,7 @@ function renderScoreboard(){
       <div class="sbscore"><b>${mine.toFixed(1)}</b><span class="sbdash">–</span><b>${them.toFixed(1)}</b></div>
       <div class="sbwho">you<span>${l.opp}</span></div>
       <div class="sbmargin">${sign}${d.toFixed(1)}</div>
+      ${row}
     </div>`;
   }).join("");
   const pending = LEAGUES.filter(l => !SCORING[l.id]).map(l=>l.name).join(", ");
