@@ -93,6 +93,8 @@
   .pill.mine{color:var(--pillGoodTxt);border-color:var(--pillGoodBd);background:var(--pillGoodBg)}
   .pill.opp {color:var(--pillBadTxt); border-color:var(--pillBadBd); background:var(--pillBadBg)}
   .pill.bench{font-weight:400;opacity:.62;background:transparent}
+  .pill b{font-weight:700;font-variant-numeric:tabular-nums;margin-left:5px;
+    padding-left:5px;border-left:1px solid currentColor;opacity:.85}
   .game{font-size:11px;color:var(--dim);min-width:66px;text-align:right;font-variant-numeric:tabular-nums}
   .note{color:var(--dim);font-size:11.5px;margin:-2px 0 10px}
   .empty{color:var(--faint);font-size:12px;padding:6px 2px}
@@ -193,7 +195,7 @@
     <div class="hdrrow">
       <div>
         <h1>🏈 Sunday Cheer Tracker <span class="sub">— Week 1</span></h1>
-        <div class="sub">Who to scream for, who to boo, and when they play. All times Pacific. <span style="opacity:.6">· build 22 · all four leagues scored</span></div>
+        <div class="sub">Who to scream for, who to boo, and when they play. All times Pacific. <span style="opacity:.6">· build 23 · per-league points on each player</span></div>
       </div>
       <button class="tg" id="themeBtn" title="Toggle light / dark">🌙</button>
     </div>
@@ -860,6 +862,7 @@ function lgColor(l){
   return document.documentElement.getAttribute("data-theme")==="light" ? l.light : l.color;
 }
 function pillsFor(p){
+  const played = SID[p.name] && STATS[SID[p.name]];
   return p.tags
     .sort((a,b)=> (a.side===b.side ? LG[b.lg].w - LG[a.lg].w : a.side==="for" ? -1 : 1))
     .map(t=>{
@@ -867,8 +870,14 @@ function pillsFor(p){
       const mine = t.side==="for";
       const bench = t.slot!=="S";
       const suffix = bench ? (t.slot==="IR" ? " · IR" : " · bench") : "";
-      const tip = (mine ? "On your team" : "On your opponent") + " in " + l.name + (bench ? (t.slot==="IR" ? " (IR)" : " (bench)") : "");
-      return `<span class="pill ${mine?"mine":"opp"}${bench?" bench":""}" title="${tip}">${l.name}${suffix}</span>`;
+      // Each league scores the same box score differently, so the number rides on its own pill.
+      const tbl = SCORING[t.lg];
+      const pts = (played && tbl) ? leaguePts(p, tbl) : null;
+      const num = pts===null ? "" : `<b>${pts.toFixed(1)}</b>`;
+      const tip = (mine ? "On your team" : "On your opponent") + " in " + l.name
+        + (bench ? (t.slot==="IR" ? " (IR)" : " (bench)") : "")
+        + (pts===null ? "" : ` — ${pts.toFixed(2)} pts by ${l.name} scoring`);
+      return `<span class="pill ${mine?"mine":"opp"}${bench?" bench":""}" title="${tip}">${l.name}${suffix}${num}</span>`;
     }).join("");
 }
 function rowHTML(p){
