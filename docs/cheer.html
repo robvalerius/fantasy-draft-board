@@ -277,7 +277,8 @@ const LEAGUES = [
   {id:"L4", name:"Guest of Honor",  site:"ESPN",    opp:"Vintage Michele",  icon:"🎖️", w:1, color:"#a371f7", light:"#8250df", rank:"For fun"}
 ];
 
-// Kickoff windows (Pacific)
+// Kickoff windows (Pacific). These are the fallback; once the real schedule loads, every
+// player's window is replaced by their actual kickoff, so this only has to be close enough.
 const SLOTS = {
   WED520:{lbl:"Wed 5:20p", short:"Wed", ord:1},
   THU535:{lbl:"Thu 5:35p", short:"Thu", ord:2},
@@ -300,16 +301,33 @@ const KICK = {
 };
 const GAME_MS = 3.25 * 60 * 60 * 1000;   // a broadcast window, near enough
 
+// A slot key generated from a real kickoff time. Doing it this way means the board is not
+// pinned to a hand-typed Week 1 schedule — any week's times slot themselves in.
+const PT = {timeZone:"America/Los_Angeles"};
+function slotFor(ms){
+  const key = "T" + ms;
+  if (!SLOTS[key]){
+    const d = new Date(ms);
+    const day = d.toLocaleDateString("en-US",{...PT, weekday:"short"});
+    const tm  = d.toLocaleTimeString("en-US",{...PT, hour:"numeric", minute:"2-digit"})
+                 .replace(" AM","a").replace(" PM","p").replace(":00","");
+    SLOTS[key] = {lbl:`${day} ${tm}`, short:`${day} ${tm}`, ord:ms};
+    KICK[key]  = ms;
+  }
+  return key;
+}
+
 // Demo replays a finished week, so freeze its clock mid-Sunday afternoon — otherwise every
 // game reads as "not started" and the counts show nothing worth looking at.
+const kickMs = k => typeof k === "number" ? k : Date.parse(k);
 function nowMs(){
-  return demoOn ? Date.parse(KICK.SUN125) + 40*60*1000 : Date.now();
+  return demoOn ? kickMs(KICK.SUN125) + 40*60*1000 : Date.now();
 }
 // "left" = has not kicked off, "live" = in its window, "done" = over.
 function playState(p, now){
   const k = KICK[p.gs];
-  if (!k) return "left";                 // TBD window — assume still to come
-  const t = Date.parse(k);
+  if (k == null) return "left";          // TBD window — assume still to come
+  const t = kickMs(k);
   if (now < t) return "left";
   return now < t + GAME_MS ? "live" : "done";
 }
@@ -441,22 +459,36 @@ add("L4","vs","B","Devaughn Vele","NO","WR","@ DET","SUN10");
 
 /* ---------------- aggregate ---------------- */
 const LG = Object.fromEntries(LEAGUES.map(l=>[l.id,l]));
-const players = {};
-for (const e of R){
-  if(!players[e.name]) players[e.name] = {name:e.name, team:e.team, pos:e.pos, opp:e.opp, gs:e.gs, tags:[]};
-  const p = players[e.name];
-  if (p.gs==="TBD" || SLOTS[e.gs].ord < SLOTS[p.gs].ord) { p.gs=e.gs; p.opp=e.opp; }
-  p.tags.push({lg:e.lg, side:e.side, slot:e.slot});
-}
-
 const byWeight = a => a.sort((x,y)=>LG[y].w-LG[x].w);
 const names = ids => ids.map(i=>LG[i].name).join(" + ");
 
-const ALL = Object.values(players).map(p=>{
-  p.startFor = byWeight([...new Set(p.tags.filter(t=>t.side==="for" && t.slot==="S").map(t=>t.lg))]);
-  p.benchFor = byWeight([...new Set(p.tags.filter(t=>t.side==="for" && t.slot!=="S").map(t=>t.lg))]);
-  p.startVs  = byWeight([...new Set(p.tags.filter(t=>t.side==="vs"  && t.slot==="S").map(t=>t.lg))]);
-  p.benchVs  = byWeight([...new Set(p.tags.filter(t=>t.side==="vs"  && t.slot!=="S").map(t=>t.lg))]);
+// The same human is "Chris Godwin Jr." in one league's export and "Chris Godwin" in another,
+// and the entire point of this board is noticing when one man sits in several of your lineups.
+// So merge on a Sleeper id wherever we have one and a stripped name otherwise — never raw text.
+const norm = n => String(n).toLowerCase().replace(/\b(jr|sr|ii|iii|iv)\b/g,"").replace(/[^a-z]/g,"");
+const sidOf = e => e.sid || SID[e.name] || null;
+
+let ALL = [], USED_SLOTS = [];
+
+function buildAll(){
+  const players = {};
+  for (const e of R){
+    const k = sidOf(e) || norm(e.name);
+    if(!players[k]) players[k] = {name:e.name, team:e.team, pos:e.pos, opp:e.opp, gs:e.gs,
+                                  sid:sidOf(e), tags:[]};
+    const p = players[k];
+    if (!p.sid) p.sid = sidOf(e);
+    // A player can sit in four leagues with four transcriptions of the same game; keep the earliest.
+    const ord = s => SLOTS[s] ? SLOTS[s].ord : Number.MAX_SAFE_INTEGER;
+    if (ord(e.gs) < ord(p.gs)) { p.gs=e.gs; p.opp=e.opp; }
+    p.tags.push({lg:e.lg, side:e.side, slot:e.slot});
+  }
+
+  ALL = Object.values(players).map(p=>{
+    p.startFor = byWeight([...new Set(p.tags.filter(t=>t.side==="for" && t.slot==="S").map(t=>t.lg))]);
+    p.benchFor = byWeight([...new Set(p.tags.filter(t=>t.side==="for" && t.slot!=="S").map(t=>t.lg))]);
+    p.startVs  = byWeight([...new Set(p.tags.filter(t=>t.side==="vs"  && t.slot==="S").map(t=>t.lg))]);
+    p.benchVs  = byWeight([...new Set(p.tags.filter(t=>t.side==="vs"  && t.slot!=="S").map(t=>t.lg))]);
 
   // ---- simple 1-5 cheer level ----
   let c=0, why="";
@@ -485,7 +517,12 @@ const ALL = Object.values(players).map(p=>{
   const n = p.side==="cheer" ? p.startFor.length : p.startVs.length;
   p.bucket = n>=2 ? 3 : n===1 ? 2 : 1;
   return p;
-}).sort((a,b)=> b.bucket-a.bucket || b.level-a.level || a.name.localeCompare(b.name));
+  }).sort((a,b)=> b.bucket-a.bucket || b.level-a.level || a.name.localeCompare(b.name));
+
+  USED_SLOTS = Object.keys(SLOTS)
+    .filter(s=>ALL.some(p=>p.gs===s))
+    .sort((a,b)=>SLOTS[a].ord-SLOTS[b].ord);
+}
 
 const CHEER_TIERS = [
   {n:3, t:"▲ MUST-WATCH",     d:""},
@@ -587,6 +624,8 @@ const SID = {
   "Wan'Dale Robinson":"8126"
 };
 
+buildAll();   // SID has to exist first — it is what lets one player merge across four leagues
+
 /* ---------------- live stats (Sleeper public API, no auth, CORS *) ---------------- */
 // Only the counting stats Rob asked for. Anything zero or missing is never drawn.
 // Production stats are neutral. Turnovers and sacks are red on offence, because they
@@ -655,7 +694,7 @@ function pace(p, s){
 }
 
 function statChips(p){
-  const id = SID[p.name];
+  const id = p.sid;
   const s = id && STATS[id];
   if (!s) return "";
   const out = [];
@@ -784,7 +823,7 @@ function derived(s){
   return d;
 }
 function leaguePts(p, tbl){
-  const s = STATS[SID[p.name]];
+  const s = STATS[p.sid];
   if (!s) return 0;
   const d = derived(s);
   let t = 0;
@@ -820,7 +859,7 @@ function renderScoreboard(){
 
     return `<div class="sbcard ${cls}" style="--lgc:${lgColor(l)}" data-sblg="${l.id}"
       role="button" tabindex="0" title="Show only this matchup">
-      <div class="sbname">${l.name}</div>
+      <div class="sbname">${l.name}${l.synced?' <span title="Roster reads itself from the league">⟳</span>':""}</div>
       <div class="sbemblem">${l.icon}</div>
       <div class="sbscore"><b>${mine.toFixed(1)}</b><span class="sbdash">–</span><b>${them.toFixed(1)}</b></div>
       <div class="sbwho">you<span>${l.opp}</span></div>
@@ -919,7 +958,7 @@ function primaryLg(p){
   return pool.slice().sort((a,b)=>LG[b.lg].w - LG[a.lg].w)[0].lg;
 }
 function primaryPts(p){
-  const s = SID[p.name] && STATS[SID[p.name]];
+  const s = p.sid && STATS[p.sid];
   if (!s) return null;
   const lg = primaryLg(p), tbl = SCORING[lg];
   return tbl ? leaguePts(p, tbl) : null;
@@ -974,9 +1013,6 @@ function deltaHTML(p){
 }
 /* ---------------- render ---------------- */
 let view="priority", activeLg=new Set(LEAGUES.map(l=>l.id)), q="";
-const USED_SLOTS = Object.keys(SLOTS)
-  .filter(s=>ALL.some(p=>p.gs===s))
-  .sort((a,b)=>SLOTS[a].ord-SLOTS[b].ord);
 let activeSlots = new Set(USED_SLOTS);
 
 /* theme */
@@ -1085,8 +1121,19 @@ function render(){
 document.getElementById("lgfilters").innerHTML = LEAGUES.map(l=>
   `<button class="tg on lgf" data-lg="${l.id}" style="--lgc:${lgColor(l)}"
      title="${l.rank} · ${l.site} — you play ${l.opp}">${l.name}</button>`).join(" ");
-document.getElementById("slotfilters").innerHTML = USED_SLOTS.map(s=>
-  `<button class="tg slf" data-slot="${s}">${SLOTS[s].short}</button>`).join(" ");
+function renderSlotFilters(){
+  document.getElementById("slotfilters").innerHTML = USED_SLOTS.map(s=>
+    `<button class="tg slf" data-slot="${s}">${SLOTS[s].short}</button>`).join(" ");
+  document.querySelectorAll(".slf").forEach(b=>b.onclick=()=>{
+    const s=b.dataset.slot;
+    if (activeSlots.size===USED_SLOTS.length) activeSlots=new Set([s]);   // first pick = solo
+    else if (activeSlots.has(s)){ activeSlots.delete(s); if(!activeSlots.size) activeSlots=new Set(USED_SLOTS); }
+    else activeSlots.add(s);
+    syncSlotButtons(); render();
+  });
+  syncSlotButtons();
+}
+renderSlotFilters();
 
 function syncSlotButtons(){
   const all = activeSlots.size===USED_SLOTS.length;
@@ -1097,13 +1144,6 @@ function syncSlotButtons(){
 document.getElementById("allSlots").onclick=()=>{
   activeSlots=new Set(USED_SLOTS); syncSlotButtons(); render();
 };
-document.querySelectorAll(".slf").forEach(b=>b.onclick=()=>{
-  const s=b.dataset.slot;
-  if (activeSlots.size===USED_SLOTS.length) activeSlots=new Set([s]);   // first pick = solo
-  else if (activeSlots.has(s)){ activeSlots.delete(s); if(!activeSlots.size) activeSlots=new Set(USED_SLOTS); }
-  else activeSlots.add(s);
-  syncSlotButtons(); render();
-});
 document.querySelectorAll("[data-view]").forEach(b=>b.onclick=()=>{
   view=b.dataset.view;
   document.querySelectorAll("[data-view]").forEach(x=>x.classList.toggle("on",x===b));
@@ -1127,6 +1167,109 @@ document.body.dataset.side="cheer";
 syncSlotButtons();
 applyTheme(theme);
 setLive(liveOn || demoOn);   // arriving with ?demo=1 should show stats without a second tap
+
+/* ---------------- self-updating rosters ---------------- */
+// The rosters below were typed in by hand, which is fine for one week and useless by the next.
+// Sleeper hands VALERIAN over for free, so that league re-reads itself on every load. Yahoo and
+// ESPN need a login a static page cannot hold, so those stay hand-kept for now.
+const SLEEPER_LG = "1384568263651897344";
+const MY_ROSTER  = 3;
+const ESPN_SEASON = 2026;
+
+// The three feeds disagree about a few abbreviations; normalise before matching on team.
+const TEAM_FIX = {WSH:"WAS", JAC:"JAX", LA:"LAR", ARZ:"ARI"};
+const fixTm = t => TEAM_FIX[String(t||"").toUpperCase()] || String(t||"").toUpperCase();
+const getJSON = u => fetch(u, {cache:"no-store"}).then(r=>{ if(!r.ok) throw new Error(r.status); return r.json(); });
+
+// Real kickoff times for every pro team, which is what turns "Sun 10a" from a hand-typed guess
+// into something that stays correct in week 9.
+async function loadSchedule(week){
+  const j = await getJSON(`https://lm-api-reads.fantasy.espn.com/apis/v3/games/ffl/seasons/${ESPN_SEASON}?view=proTeamSchedules_wl`);
+  const teams = (j.settings && j.settings.proTeams) || [];
+  const abbr = {}; teams.forEach(t=>abbr[t.id]=fixTm(t.abbrev));
+  const map = {};
+  for (const t of teams){
+    const g = ((t.proGamesByScoringPeriod||{})[week]||[])[0];
+    if (!g || g.startTimeTBD || !g.date) continue;
+    const me = fixTm(t.abbrev), home = abbr[g.homeProTeamId], away = abbr[g.awayProTeamId];
+    map[me] = {kick:g.date, opp: me===home ? `vs ${away}` : `@ ${home}`};
+  }
+  return map;
+}
+
+function applySchedule(map){
+  // A partial map would scatter players into wrong windows, so take it whole or not at all.
+  if (Object.keys(map).length < 24) return 0;
+  let n = 0;
+  for (const e of R){
+    const g = map[fixTm(e.team)];
+    if (!g) continue;
+    e.gs = slotFor(g.kick); e.opp = g.opp; n++;
+  }
+  return n;
+}
+
+async function refreshValerian(week){
+  const base = `https://api.sleeper.app/v1/league/${SLEEPER_LG}`;
+  const [mus, rosters, users, pmap] = await Promise.all([
+    getJSON(`${base}/matchups/${week}`), getJSON(`${base}/rosters`),
+    getJSON(`${base}/users`), getJSON("players.json")
+  ]);
+  const me = mus.find(m=>m.roster_id===MY_ROSTER);
+  if (!me) throw new Error("roster not in this week's matchups");
+  const opp = mus.find(m=>m.matchup_id===me.matchup_id && m.roster_id!==MY_ROSTER);
+
+  const rows = [];
+  const take = (m, side) => {
+    if (!m) return;
+    const starting = new Set(m.starters || []);
+    for (const id of (m.players || [])){
+      const rec = pmap[id];
+      if (!rec) continue;                       // a player Sleeper added after this map was built
+      const [name, team, pos] = rec.split("|");
+      rows.push({lg:"L2", side, slot: starting.has(id) ? "S" : "B",
+                 name, team, pos, opp:"", gs:"TBD", sid:id});
+    }
+  };
+  take(me, "for"); take(opp, "vs");
+
+  // Refuse a half-empty lineup rather than wipe out good hand-typed data with it.
+  if (rows.filter(r=>r.side==="for" && r.slot==="S").length < 8)
+    throw new Error("lineup looks unset");
+
+  for (let i=R.length-1; i>=0; i--) if (R[i].lg==="L2") R.splice(i,1);
+  R.push(...rows);
+
+  if (opp){
+    const ro = rosters.find(r=>r.roster_id===opp.roster_id);
+    const u  = ro && users.find(x=>x.user_id===ro.owner_id);
+    if (u) LG.L2.opp = (u.metadata && u.metadata.team_name) || u.display_name || LG.L2.opp;
+  }
+  LG.L2.synced = true;
+  return rows.length;
+}
+
+async function syncRosters(){
+  let week = 1;
+  try{
+    const st = await getJSON("https://api.sleeper.app/v1/state/nfl");
+    week = Number(st.display_week || st.week) || 1;
+  }catch(e){}
+
+  // Independent on purpose: a dead ESPN schedule should not cost us the Sleeper roster.
+  const [sched, valerian] = await Promise.allSettled([loadSchedule(week), refreshValerian(week)]);
+  if (valerian.status === "rejected") console.warn("VALERIAN sync skipped:", valerian.reason);
+  if (sched.status === "fulfilled") applySchedule(sched.value);
+  else console.warn("schedule sync skipped:", sched.reason);
+  if (sched.status !== "fulfilled" && valerian.status !== "fulfilled") return;
+
+  buildAll();
+  activeSlots = new Set(USED_SLOTS);
+  renderSlotFilters();
+  renderScoreboard();
+  render();
+}
+syncRosters();
 </script>
 </body>
 </html>
