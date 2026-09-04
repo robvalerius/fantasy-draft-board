@@ -126,7 +126,12 @@
   .scoreboard{display:none;gap:8px;flex-wrap:wrap;margin:0 0 12px}
   .scoreboard.show{display:flex}
   .sbcard{flex:1 1 210px;min-width:0;background:var(--panel);border:1px solid var(--line);
-    border-left:4px solid var(--lgc);border-radius:10px;padding:8px 11px;box-shadow:var(--shadow)}
+    border-left:4px solid var(--lgc);border-radius:10px;padding:8px 11px;box-shadow:var(--shadow);
+    cursor:pointer;transition:border-color .15s,transform .1s;-webkit-tap-highlight-color:transparent}
+  .sbcard:hover{border-color:var(--lgc)}
+  .sbcard:active{transform:scale(.985)}
+  .sbcard.only{border-color:var(--lgc);box-shadow:0 0 0 2px var(--lgc) inset,var(--shadow)}
+  .sbcard.only .sbname::after{content:" · only";color:var(--lgc)}
   .sbname{font-size:9.5px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--dim)}
   .sbscore{display:flex;align-items:baseline;gap:7px;font-variant-numeric:tabular-nums}
   .sbscore b{font-size:21px;font-weight:800;letter-spacing:-.4px}
@@ -202,7 +207,7 @@
     <div class="hdrrow">
       <div>
         <h1>🏈 Sunday Cheer Tracker <span class="sub">— Week 1</span></h1>
-        <div class="sub">Who to scream for, who to boo, and when they play. All times Pacific. <span style="opacity:.6">· build 24 · live scoring alerts</span></div>
+        <div class="sub">Who to scream for, who to boo, and when they play. All times Pacific. <span style="opacity:.6">· build 25 · tap a score to filter</span></div>
       </div>
       <button class="tg" id="themeBtn" title="Toggle light / dark">🌙</button>
     </div>
@@ -778,7 +783,8 @@ function renderScoreboard(){
     const d    = mine - them;
     const cls  = d > 0 ? "win" : d < 0 ? "lose" : "";
     const sign = d > 0 ? "+" : "";
-    return `<div class="sbcard ${cls}" style="--lgc:${lgColor(l)}">
+    return `<div class="sbcard ${cls}" style="--lgc:${lgColor(l)}" data-sblg="${l.id}"
+      role="button" tabindex="0" title="Show only this matchup">
       <div class="sbname">${l.name}</div>
       <div class="sbscore"><b>${mine.toFixed(1)}</b><span class="sbdash">–</span><b>${them.toFixed(1)}</b></div>
       <div class="sbwho">you<span>${l.opp}</span></div>
@@ -790,6 +796,24 @@ function renderScoreboard(){
     ? cards + (pending ? `<div class="sbwait">Waiting on scoring rules for ${pending}</div>` : "")
     : "";
   box.classList.toggle("show", !!cards && Object.keys(STATS).length > 0);
+  // A card is a shortcut into the league filter: tap to isolate that matchup, tap again for all.
+  box.querySelectorAll("[data-sblg]").forEach(c=>{
+    const go = ()=>{
+      const id = c.dataset.sblg;
+      const only = activeLg.size===1 && activeLg.has(id);
+      activeLg = new Set(only ? LEAGUES.map(l=>l.id) : [id]);
+      syncLgChips();
+      renderScoreboard();
+      render();
+    };
+    c.onclick = go;
+    c.onkeydown = e=>{ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); go(); } };
+  });
+  box.querySelectorAll("[data-sblg]").forEach(c=>
+    c.classList.toggle("only", activeLg.size===1 && activeLg.has(c.dataset.sblg)));
+}
+function syncLgChips(){
+  document.querySelectorAll(".lgf").forEach(b=>b.classList.toggle("on", activeLg.has(b.dataset.lg)));
 }
 
 async function pullStats(){
@@ -1054,6 +1078,7 @@ document.querySelectorAll(".lgf").forEach(b=>b.onclick=()=>{
   const id=b.dataset.lg;
   if(activeLg.has(id)&&activeLg.size>1){activeLg.delete(id);b.classList.remove("on");}
   else {activeLg.add(id);b.classList.add("on");}
+  renderScoreboard();
   render();
 });
 document.querySelectorAll(".mtabs button").forEach(b=>b.onclick=()=>{
