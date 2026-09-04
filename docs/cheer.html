@@ -186,6 +186,17 @@
     .who .nm{font-size:15px}
     .who .nm .pos{display:block;font-size:11px;margin-top:1px}
     .who .meta{font-size:11.5px}
+    /* Four cards side by side eat most of a phone screen, so wrap them into a 2x2 block. */
+    .scoreboard{display:none;gap:6px}
+    .scoreboard.show{display:grid;grid-template-columns:1fr 1fr}
+    .sbcard{padding:6px 8px;border-left-width:3px;border-radius:8px}
+    .sbname{font-size:8.5px;letter-spacing:.06em}
+    .sbscore{gap:4px}
+    .sbscore b{font-size:16px}
+    .sbscore .sbdash{font-size:11px}
+    .sbwho{font-size:8.5px;margin-top:1px}
+    .sbmargin{margin-top:2px;font-size:10px}
+    .sbwait{grid-column:1 / -1}
   }
 </style>
 </head>
