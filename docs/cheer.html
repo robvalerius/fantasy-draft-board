@@ -96,6 +96,13 @@
   .pill b{font-weight:700;font-variant-numeric:tabular-nums;margin-left:5px;
     padding-left:5px;border-left:1px solid currentColor;opacity:.85}
   .game{font-size:11px;color:var(--dim);min-width:66px;text-align:right;font-variant-numeric:tabular-nums}
+  .delta{margin-top:6px;line-height:1.15}
+  .delta b{display:block;font-size:16px;font-weight:800;font-variant-numeric:tabular-nums}
+  .delta span{font-size:9px;text-transform:uppercase;letter-spacing:.4px;color:var(--dim)}
+  .delta.good b{color:var(--good)}
+  .delta.bad  b{color:var(--fire)}
+  @keyframes pop{from{opacity:0;transform:translateY(-3px)}to{opacity:1;transform:none}}
+  .delta{animation:pop .35s ease}
   .note{color:var(--dim);font-size:11.5px;margin:-2px 0 10px}
   .empty{color:var(--faint);font-size:12px;padding:6px 2px}
   /* Stat line: typographic, not bubbles. Big tabular number, tiny caps label. */
@@ -195,7 +202,7 @@
     <div class="hdrrow">
       <div>
         <h1>🏈 Sunday Cheer Tracker <span class="sub">— Week 1</span></h1>
-        <div class="sub">Who to scream for, who to boo, and when they play. All times Pacific. <span style="opacity:.6">· build 23 · per-league points on each player</span></div>
+        <div class="sub">Who to scream for, who to boo, and when they play. All times Pacific. <span style="opacity:.6">· build 24 · live scoring alerts</span></div>
       </div>
       <button class="tg" id="themeBtn" title="Toggle light / dark">🌙</button>
     </div>
@@ -802,6 +809,7 @@ async function pullStats(){
     const bust = Math.floor(Date.now()/30000);
     const url = `https://api.sleeper.app/v1/stats/nfl/${type}/${season}/${week}?_=${bust}`;
     STATS = await (await fetch(url, {cache:"no-store"})).json() || {};
+    recordPoints();
     const n = ALL.filter(p => statChips(p) !== "").length;
     dot.className = "dot ok";
     const stamp = new Date().toLocaleTimeString([], {hour:"numeric",minute:"2-digit"});
@@ -825,7 +833,7 @@ function setLive(on){
   document.getElementById("livebar").classList.toggle("demo", on && demoOn);
   clearInterval(liveTimer); liveTimer = null;
   if (on){ pullStats(); liveTimer = setInterval(pullStats, 60000); }
-  else { STATS = {}; render(); renderScoreboard(); }
+  else { STATS = {}; HIST = {}; render(); renderScoreboard(); }
 }
 function setDemo(on){
   demoOn = on;
@@ -838,6 +846,72 @@ document.addEventListener("visibilitychange", ()=>{
   if (document.hidden){ clearInterval(liveTimer); liveTimer = null; }
   else if (!liveTimer){ pullStats(); liveTimer = setInterval(pullStats, 60000); }
 });
+/* ---------------- recent scoring ---------------- */
+// Ten refreshes at 60s, so a burst of points stays visible for about ten minutes.
+const HIST_MS = 10*60*1000;
+let HIST = {};   // player name -> [{t, pts}] most recent last
+
+// A player can be in several leagues at once. Points differ per league, so report the
+// league that matters most: the highest-weight one where he's actually in the lineup.
+function primaryLg(p){
+  const started = p.tags.filter(t=>t.slot==="S");
+  const pool = started.length ? started : p.tags;
+  return pool.slice().sort((a,b)=>LG[b.lg].w - LG[a.lg].w)[0].lg;
+}
+function primaryPts(p){
+  const s = SID[p.name] && STATS[SID[p.name]];
+  if (!s) return null;
+  const lg = primaryLg(p), tbl = SCORING[lg];
+  return tbl ? leaguePts(p, tbl) : null;
+}
+function recordPoints(){
+  const now = Date.now();
+  ALL.forEach(p=>{
+    const pts = primaryPts(p);
+    if (pts === null) return;
+    const h = HIST[p.name] || (HIST[p.name] = []);
+    const last = h[h.length-1];
+    // Only append when the number actually moves, so the window holds real events
+    // rather than ten identical samples.
+    if (!last || Math.abs(last.pts - pts) > 0.009) h.push({t:now, pts});
+    while (h.length > 2 && h[1].t < now - HIST_MS) h.shift();
+  });
+  if (demoOn) demoScoring(now);
+}
+// Demo replays a finished week, so the numbers never move on their own. Invent a
+// plausible last-few-minutes swing for a handful of players so the feature is visible.
+function demoScoring(now){
+  const chunks = [6, 6.6, 3, 1.2, 2.4, 0.9, -2, 7.5];
+  ALL.forEach((p,i)=>{
+    const h = HIST[p.name];
+    if (!h || h.length !== 1) return;
+    if ((i + Math.floor(now/60000)) % 5 !== 0) return;
+    const d = chunks[(i + Math.floor(now/60000)) % chunks.length];
+    const ago = (i % 9) * 60000;
+    h[0].t = now - ago;
+    h.unshift({t: now - ago - 60000, pts: h[0].pts - d});
+  });
+}
+// The newest jump inside the window, or null when nothing has happened lately.
+function recentDelta(p){
+  const h = HIST[p.name];
+  if (!h || h.length < 2) return null;
+  const cur = h[h.length-1], prev = h[h.length-2];
+  if (Date.now() - cur.t > HIST_MS) return null;
+  const d = cur.pts - prev.pts;
+  return Math.abs(d) < 0.05 ? null : {d, t:cur.t};
+}
+function deltaHTML(p){
+  const r = recentDelta(p);
+  if (!r) return "";
+  const mins = Math.floor((Date.now() - r.t)/60000);
+  const ago = mins < 1 ? "just now" : mins + "m ago";
+  // Green means good news for Rob: his guy scored, or the guy he's booing lost ground.
+  const good = p.side==="cheer" ? r.d > 0 : r.d < 0;
+  const sign = r.d > 0 ? "+" : "−";
+  return `<div class="delta ${good?"good":"bad"}" title="${primaryLg(p)==null?"":LG[primaryLg(p)].name} scoring">
+    <b>${sign}${Math.abs(r.d).toFixed(1)}</b><span>${ago}</span></div>`;
+}
 /* ---------------- render ---------------- */
 let view="priority", activeLg=new Set(LEAGUES.map(l=>l.id)), q="";
 const USED_SLOTS = Object.keys(SLOTS)
@@ -892,7 +966,7 @@ function rowHTML(p){
       <div class="pills">${pillsFor(p)}</div>
       ${statChips(p)}
     </div>
-    <div class="game">${SLOTS[p.gs].lbl}</div>
+    <div class="game">${SLOTS[p.gs].lbl}${deltaHTML(p)}</div>
   </div>`;
 }
 function visible(){
