@@ -193,7 +193,7 @@
     <div class="hdrrow">
       <div>
         <h1>🏈 Sunday Cheer Tracker <span class="sub">— Week 1</span></h1>
-        <div class="sub">Who to scream for, who to boo, and when they play. All times Pacific. <span style="opacity:.6">· build 21 · live scoreboard</span></div>
+        <div class="sub">Who to scream for, who to boo, and when they play. All times Pacific. <span style="opacity:.6">· build 22 · all four leagues scored</span></div>
       </div>
       <button class="tg" id="themeBtn" title="Toggle light / dark">🌙</button>
     </div>
@@ -658,9 +658,44 @@ function statChips(p){
 /* ---------------- league scoring (exact, pulled from each platform) ---------------- */
 // VALERIAN's full rule set, read straight off Sleeper's league API, so its score is exact
 // rather than a PPR guess. The other three leagues sit dark until Rob sends their rules.
+// Yahoo publishes its rules as prose, so these are hand-mapped onto the same Sleeper stat
+// keys. Yardage bonuses ("3 points at 500 yards") become the derived _keys handled below,
+// and Yahoo stacks thresholds, so a 500-yard passer collects the 400 bonus as well.
 const SCORING = {
-  L2: {"sack":1,"fgm_40_49":4,"fgm_yds":0.1,"def_forced_punts":0.25,"pass_int":-3,"pts_allow_0":15,
-  "bonus_pass_yd_400":4,"pass_2pt":3,"yds_allow_450_499":-3,"blk_kick_ret_yd":0.025,"st_td":6,
+  L1: {  // SHERIFF — Yahoo
+    pass_cmp:0.1, pass_inc:-0.25, pass_yd:0.04, _pass400:1.5, _pass500:3,
+    pass_td:5, pass_int:-3, pass_sack:-1, pass_int_td:-2, pass_cmp_40p:1,
+    rush_att:0.1, rush_yd:0.1, _rush200:1.5, _rush250:3, rush_td:6, rush_40p:1, rush_fd:0.25,
+    rec:0.5, rec_yd:0.1, _rec200:1.5, _rec250:3, rec_td:6, rec_40p:1, rec_fd:0.25,
+    pass_2pt:3, rush_2pt:3, rec_2pt:3,
+    fum:-1, fum_lost:-2, fum_rec_td:6,
+    kr_td:10, pr_td:10, st_td:10,
+    // defence / special teams
+    sack:1, int:3, fum_rec:2, def_td:6, safe:3, blk_kick:2, def_st_td:6,
+    pts_allow_0:15, pts_allow_1_6:7, pts_allow_7_13:4, pts_allow_14_20:1,
+    pts_allow_21_27:0, pts_allow_28_34:-3, pts_allow_35p:-7,
+    def_4_and_stop:1, tkl_loss:0.25, def_3_and_out:0.25,
+    yds_allow_0_100:5, yds_allow_100_199:2,
+    yds_allow_400_449:-2.5, yds_allow_450_499:-2.5,
+    yds_allow_500_549:-5, yds_allow_550p:-5,
+    // kicking — 50+ is split across the 50-59 / 60+ keys so the two never double count
+    fgm_0_19:3, fgm_20_29:3, fgm_30_39:3, fgm_40_49:4, fgm_50_59:5, fgm_60p:5,
+    fgmiss_0_19:-4, fgmiss_20_29:-3.5, fgmiss_30_39:-3, fgmiss_40_49:-2.5, fgmiss_50p:-2,
+    xpm:1, xpmiss:-1.75, fgm_yds:0.01
+  },
+  L3: {  // CHAMP — Yahoo
+    pass_yd:0.04, pass_td:4, pass_int:-1,
+    rush_yd:0.1, rush_td:6,
+    rec:0.5, rec_yd:0.1, rec_td:6,
+    kr_td:6, pr_td:6, st_td:6,
+    pass_2pt:2, rush_2pt:2, rec_2pt:2,
+    fum_lost:-2, fum_rec_td:6,
+    fgm_0_19:3, fgm_20_29:3, fgm_30_39:3, fgm_40_49:4, fgm_50_59:5, fgm_60p:5, xpm:1,
+    sack:1, int:2, fum_rec:2, def_td:6, safe:2, blk_kick:2, def_st_td:6,
+    pts_allow_0:10, pts_allow_1_6:7, pts_allow_7_13:4, pts_allow_14_20:1,
+    pts_allow_21_27:0, pts_allow_28_34:-1, pts_allow_35p:-4
+  },
+  L2: {"sack":1,"fgm_40_49":4,"fgm_yds":0.1,"def_forced_punts":0.25,"pass_int":-3,"pts_allow_0":15,  "bonus_pass_yd_400":4,"pass_2pt":3,"yds_allow_450_499":-3,"blk_kick_ret_yd":0.025,"st_td":6,
   "def_pr_yd":0.016666666666666666,"sack_yd":0.02,"fgm_yds_over_30":0.15,"rec_td":6,
   "yds_allow_400_449":-2,"fgm_30_39":3,"fgm_50_59":5,"xpmiss":-2.5,"rush_td_50p":3,"rush_td":6,
   "def_kr_yd":0.016666666666666666,"bonus_fd_wr":0.25,"pts_allow":-0.1,"def_4_and_stop":0.5,
@@ -675,15 +710,52 @@ const SCORING = {
   "yds_allow_100_199":5,"bonus_fd_qb":0.1,"rush_yd":0.1,"yds_allow_0_100":10,"rush_40p":1,
   "pr_yd":0.04,"fum":-1,"pts_allow_28_34":-3,"pts_allow_35p":-5,"fum_rec_td":6,"rec_yd":0.1,
   "rush_td_40p":2,"bonus_fd_te":0.25,"bonus_fd_rb":0.25,"fum_ret_yd":0.02,"def_st_ff":2,
-  "pass_inc":-0.15,"pts_allow_7_13":7,"st_ff":2,"rec_2pt":3,"bonus_pass_cmp_25":2}
+  "pass_inc":-0.15,"pts_allow_7_13":7,"st_ff":2,"rec_2pt":3,"bonus_pass_cmp_25":2},
+  L4: {  // Guest of Honor — ESPN
+    pass_yd:0.05, pass_td:6, pass_int:-2, pass_2pt:2,
+    rush_yd:0.1, rush_td:6, rush_2pt:2,
+    rec:1, rec_yd:0.1, rec_td:6, rec_2pt:2,
+    fum_lost:-2, fum_rec_td:6, kr_td:6, pr_td:6,
+    xpm:1, fgmiss:-1,
+    fgm_0_19:3, fgm_20_29:3, fgm_30_39:3, fgm_40_49:4, fgm_50_59:5, fgm_60p:6,
+    // defence / special teams
+    sack:1, int:2, fum_rec:2, safe:2, def_td:6, blk_kick:2, blk_kick_ret_td:6, def_st_td:6,
+    _pa0:5, _pa1_6:4, _pa7_13:3, _pa14_17:1, _pa28_34:-1, _pa35_45:-3, _pa46p:-5,
+    _ya100:5, _ya199:3, _ya299:2, _ya399:-1, _ya449:-3, _ya499:-5, _ya549:-6, _ya550:-7
+  }
 };
 
-// A league's rules are just weights over the same stat keys Sleeper already publishes.
+// A league's rules are just weights over the same stat keys Sleeper already publishes,
+// plus a few thresholds Sleeper doesn't flag directly.
+function derived(s){
+  const py = Number(s.pass_yd)||0, ry = Number(s.rush_yd)||0, cy = Number(s.rec_yd)||0;
+  const d = {
+    _pass400: py>=400?1:0, _pass500: py>=500?1:0,
+    _rush200: ry>=200?1:0, _rush250: ry>=250?1:0,
+    _rec200:  cy>=200?1:0, _rec250:  cy>=250?1:0
+  };
+  // ESPN slices points and yards allowed differently than Sleeper's own buckets do, so
+  // read the raw totals and cut them ourselves rather than approximating with the wrong tier.
+  if ("pts_allow" in s){
+    const p = Number(s.pts_allow)||0;
+    d._pa0=p===0?1:0; d._pa1_6=p>=1&&p<=6?1:0; d._pa7_13=p>=7&&p<=13?1:0;
+    d._pa14_17=p>=14&&p<=17?1:0; d._pa28_34=p>=28&&p<=34?1:0;
+    d._pa35_45=p>=35&&p<=45?1:0; d._pa46p=p>=46?1:0;
+  }
+  if ("yds_allow" in s){
+    const y = Number(s.yds_allow)||0;
+    d._ya100=y<100?1:0; d._ya199=y>=100&&y<=199?1:0; d._ya299=y>=200&&y<=299?1:0;
+    d._ya399=y>=350&&y<=399?1:0; d._ya449=y>=400&&y<=449?1:0; d._ya499=y>=450&&y<=499?1:0;
+    d._ya549=y>=500&&y<=549?1:0; d._ya550=y>=550?1:0;
+  }
+  return d;
+}
 function leaguePts(p, tbl){
   const s = STATS[SID[p.name]];
   if (!s) return 0;
+  const d = derived(s);
   let t = 0;
-  for (const k in tbl) t += (Number(s[k]) || 0) * tbl[k];
+  for (const k in tbl) t += (k[0]==="_" ? (d[k]||0) : (Number(s[k])||0)) * tbl[k];
   return t;
 }
 
