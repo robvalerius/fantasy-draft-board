@@ -149,6 +149,8 @@
   .sbleft .edge b{color:var(--good)}
   .sbleft .live{color:var(--gold);font-style:normal}
   .sbwait{flex:1 1 100%;font-size:10.5px;color:var(--faint);padding:2px}
+  .unmatched{font-size:11px;color:var(--fire);border:1px solid var(--fire);border-radius:8px;
+    padding:6px 9px;margin:0 0 12px;line-height:1.4}
   .dot{width:8px;height:8px;border-radius:50%;background:var(--faint);flex:none}
   .dot.ok{background:var(--good);box-shadow:0 0 0 3px color-mix(in srgb,var(--good) 25%,transparent)}
   .dot.err{background:var(--fire)}
@@ -215,7 +217,7 @@
   <div class="wrap" style="padding-bottom:0">
     <div class="hdrrow">
       <div>
-        <h1>🏈 Sunday Cheer Tracker <span class="sub">— Week 1</span></h1>
+        <h1>🏈 Sunday Cheer Tracker <span class="sub" id="wk">— Week 1</span></h1>
       </div>
       <button class="tg" id="themeBtn" title="Toggle light / dark">🌙</button>
     </div>
@@ -251,6 +253,7 @@
   <div class="livebar" id="livebar"><span class="dot" id="liveDot"></span><span id="liveTxt">starting…</span></div>
 
   <div class="scoreboard" id="scoreboard"></div>
+  <div class="unmatched" id="unmatched" style="display:none"></div>
 
   <div class="board">
     <div class="col cheer">
@@ -333,8 +336,11 @@ function playState(p, now){
 }
 
 // side: "for" (my roster) | "vs" (opponent roster)   slot: S=starter, B=bench, IR
+// opp and gs are optional — the real schedule fills them in, so a weekly lineup update only
+// ever needs name, team and position.
 const R = [];
-const add=(lg,side,slot,name,team,pos,opp,gs)=>R.push({lg,side,slot,name,team,pos,opp,gs});
+const add=(lg,side,slot,name,team,pos,opp,gs)=>R.push({lg,side,slot,name,team,pos,
+  opp:opp||"", gs:gs||"TBD"});
 
 /* ---------- LEAGUE 1 · SHERIFF (Yahoo) ---------- */
 add("L1","for","S","Jayden Daniels","WAS","QB","@ PHI","SUN125");
@@ -465,8 +471,37 @@ const names = ids => ids.map(i=>LG[i].name).join(" + ");
 // The same human is "Chris Godwin Jr." in one league's export and "Chris Godwin" in another,
 // and the entire point of this board is noticing when one man sits in several of your lineups.
 // So merge on a Sleeper id wherever we have one and a stripped name otherwise — never raw text.
+// The three feeds disagree about a few abbreviations; normalise before matching on team.
+const TEAM_FIX = {WSH:"WAS", JAC:"JAX", LA:"LAR", ARZ:"ARI"};
+const fixTm = t => TEAM_FIX[String(t||"").toUpperCase()] || String(t||"").toUpperCase();
+
 const norm = n => String(n).toLowerCase().replace(/\b(jr|sr|ii|iii|iv)\b/g,"").replace(/[^a-z]/g,"");
-const sidOf = e => e.sid || SID[e.name] || null;
+
+// Sleeper ids are what let one man merge across four leagues, but hand-keeping a name-to-id
+// table for 84 players that churn every week is exactly the kind of chore that rots. So the
+// ids get looked up from Sleeper's own directory, and SID below is only a manual override
+// for the handful of cases a lookup cannot settle.
+let NAMEIDX = {};
+function buildNameIndex(pmap){
+  const idx = {}, dup = {};
+  for (const id in pmap){
+    const [name, team, pos] = pmap[id].split("|");
+    const n = norm(name);
+    for (const k of [`${n}|${pos}|${fixTm(team)}`, `${n}|${pos}`, n]){
+      if (k in idx && idx[k] !== id) dup[k] = true;   // ambiguous: refuse to guess
+      else if (!(k in idx)) idx[k] = id;
+    }
+  }
+  for (const k in dup) delete idx[k];
+  NAMEIDX = idx;
+}
+function lookupSid(e){
+  const n = norm(e.name);
+  // A defence is written a dozen ways ("Broncos D/ST", "Denver"); its Sleeper id is just the team.
+  if (e.pos === "DEF") return fixTm(e.team) || null;
+  return NAMEIDX[`${n}|${e.pos}|${fixTm(e.team)}`] || NAMEIDX[`${n}|${e.pos}`] || NAMEIDX[n] || null;
+}
+const sidOf = e => e.sid || SID[e.name] || lookupSid(e);
 
 let ALL = [], USED_SLOTS = [];
 
@@ -1176,10 +1211,11 @@ const SLEEPER_LG = "1384568263651897344";
 const MY_ROSTER  = 3;
 const ESPN_SEASON = 2026;
 
-// The three feeds disagree about a few abbreviations; normalise before matching on team.
-const TEAM_FIX = {WSH:"WAS", JAC:"JAX", LA:"LAR", ARZ:"ARI"};
-const fixTm = t => TEAM_FIX[String(t||"").toUpperCase()] || String(t||"").toUpperCase();
 const getJSON = u => fetch(u, {cache:"no-store"}).then(r=>{ if(!r.ok) throw new Error(r.status); return r.json(); });
+
+// 89 KB of directory; fetch it once and let both the id lookup and the roster pull share it.
+let PMAP = null;
+const playerMap = async () => PMAP || (PMAP = await getJSON("players.json"));
 
 // Real kickoff times for every pro team, which is what turns "Sun 10a" from a hand-typed guess
 // into something that stays correct in week 9.
@@ -1213,7 +1249,7 @@ async function refreshValerian(week){
   const base = `https://api.sleeper.app/v1/league/${SLEEPER_LG}`;
   const [mus, rosters, users, pmap] = await Promise.all([
     getJSON(`${base}/matchups/${week}`), getJSON(`${base}/rosters`),
-    getJSON(`${base}/users`), getJSON("players.json")
+    getJSON(`${base}/users`), playerMap()
   ]);
   const me = mus.find(m=>m.roster_id===MY_ROSTER);
   if (!me) throw new Error("roster not in this week's matchups");
@@ -1255,19 +1291,37 @@ async function syncRosters(){
     const st = await getJSON("https://api.sleeper.app/v1/state/nfl");
     week = Number(st.display_week || st.week) || 1;
   }catch(e){}
+  document.getElementById("wk").textContent = `— Week ${week}`;
+
+  // The name index has to exist before anything rebuilds, otherwise hand-typed players
+  // resolve to no id and quietly lose their live stats.
+  let indexed = false;
+  try{ buildNameIndex(await playerMap()); indexed = true; }
+  catch(e){ console.warn("player directory unavailable:", e); }
 
   // Independent on purpose: a dead ESPN schedule should not cost us the Sleeper roster.
   const [sched, valerian] = await Promise.allSettled([loadSchedule(week), refreshValerian(week)]);
   if (valerian.status === "rejected") console.warn("VALERIAN sync skipped:", valerian.reason);
   if (sched.status === "fulfilled") applySchedule(sched.value);
   else console.warn("schedule sync skipped:", sched.reason);
-  if (sched.status !== "fulfilled" && valerian.status !== "fulfilled") return;
+  if (!indexed && sched.status !== "fulfilled" && valerian.status !== "fulfilled") return;
 
   buildAll();
   activeSlots = new Set(USED_SLOTS);
   renderSlotFilters();
   renderScoreboard();
   render();
+  if (indexed) reportUnmatched();
+}
+
+// A misspelt name in a hand-typed lineup is invisible: the row still draws, it just never
+// shows a stat all afternoon. Say so out loud instead.
+function reportUnmatched(){
+  const bad = ALL.filter(p=>!p.sid);
+  const box = document.getElementById("unmatched");
+  if (!bad.length){ box.style.display="none"; return; }
+  box.style.display = "block";
+  box.textContent = `No stats for: ${bad.map(p=>`${p.name} (${p.team} ${p.pos})`).join(", ")}`;
 }
 syncRosters();
 </script>
