@@ -129,6 +129,7 @@
   .sbcard.only{border-color:var(--lgc);box-shadow:0 0 0 2px var(--lgc) inset,var(--shadow)}
   .sbcard.only .sbname::after{content:" · only";color:var(--lgc)}
   .sbname{font-size:9.5px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--dim)}
+  .sbicon{font-size:13px;margin-right:5px;vertical-align:-1px;letter-spacing:0}
   .sbscore{display:flex;align-items:baseline;gap:7px;font-variant-numeric:tabular-nums}
   .sbscore b{font-size:21px;font-weight:800;letter-spacing:-.4px}
   .sbscore b:first-of-type{color:var(--good)}
@@ -191,6 +192,7 @@
     .scoreboard.show{display:grid;grid-template-columns:1fr 1fr}
     .sbcard{padding:6px 8px;border-left-width:3px;border-radius:8px}
     .sbname{font-size:8.5px;letter-spacing:.06em}
+    .sbicon{font-size:11px;margin-right:3px}
     .sbscore{gap:4px}
     .sbscore b{font-size:16px}
     .sbscore .sbdash{font-size:11px}
@@ -261,10 +263,10 @@
 
 <script>
 const LEAGUES = [
-  {id:"L1", name:"SHERIFF",         site:"Yahoo",   opp:"The LaMaury Show", w:4, color:"#f85149", light:"#cf222e", rank:"Most important"},
-  {id:"L2", name:"VALERIAN",        site:"Sleeper", opp:"Team Markinsoles", w:3, color:"#e3b341", light:"#9a6700", rank:"2nd"},
-  {id:"L3", name:"CHAMP",           site:"Yahoo",   opp:"I respect Justin", w:2, color:"#58a6ff", light:"#0969da", rank:"3rd"},
-  {id:"L4", name:"Guest of Honor",  site:"ESPN",    opp:"Vintage Michele",  w:1, color:"#a371f7", light:"#8250df", rank:"For fun"}
+  {id:"L1", name:"SHERIFF",         site:"Yahoo",   opp:"The LaMaury Show", icon:"🤠", w:4, color:"#f85149", light:"#cf222e", rank:"Most important"},
+  {id:"L2", name:"VALERIAN",        site:"Sleeper", opp:"Team Markinsoles", icon:"🏛️", w:3, color:"#e3b341", light:"#9a6700", rank:"2nd"},
+  {id:"L3", name:"CHAMP",           site:"Yahoo",   opp:"I respect Justin", icon:"🥊", w:2, color:"#58a6ff", light:"#0969da", rank:"3rd"},
+  {id:"L4", name:"Guest of Honor",  site:"ESPN",    opp:"Vintage Michele",  icon:"🎖️", w:1, color:"#a371f7", light:"#8250df", rank:"For fun"}
 ];
 
 // Kickoff windows (Pacific)
@@ -768,7 +770,7 @@ function renderScoreboard(){
     const sign = d > 0 ? "+" : "";
     return `<div class="sbcard ${cls}" style="--lgc:${lgColor(l)}" data-sblg="${l.id}"
       role="button" tabindex="0" title="Show only this matchup">
-      <div class="sbname">${l.name}</div>
+      <div class="sbname"><span class="sbicon">${l.icon}</span>${l.name}</div>
       <div class="sbscore"><b>${mine.toFixed(1)}</b><span class="sbdash">–</span><b>${them.toFixed(1)}</b></div>
       <div class="sbwho">you<span>${l.opp}</span></div>
       <div class="sbmargin">${sign}${d.toFixed(1)}</div>
