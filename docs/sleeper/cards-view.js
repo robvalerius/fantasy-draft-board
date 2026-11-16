@@ -3,6 +3,7 @@
 (function () {
   const $ = id => document.getElementById(id);
   let report;
+  let purchased = new Set(), purchasesAvailable = false;
   const node = (tag, text, className) => {
     const element = document.createElement(tag);
     if (text !== undefined) element.textContent = text;
@@ -11,6 +12,34 @@
   };
   const plural = count => count === 1 ? 'card' : 'cards';
   const teamName = id => report.teams.find(team => team.id === id).name;
+
+  function purchaseCheckbox(debt, checked) {
+    const label = node('label', undefined, 'purchase-toggle');
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.checked = checked;
+    checkbox.disabled = !purchasesAvailable;
+    checkbox.setAttribute('aria-label',
+      `${checked ? 'Mark still owed' : 'Mark purchased'}: ${debt.player}, week ${debt.week}, ${teamName(debt.from)} to ${teamName(debt.to)}`);
+    checkbox.addEventListener('change', () => {
+      const next = new Set(purchased);
+      if (checkbox.checked) next.add(debt.id);
+      else next.delete(debt.id);
+      try {
+        SleeperCards.writePurchased(localStorage, report.leagueId, report.season, next);
+      } catch (error) {
+        checkbox.checked = checked;
+        $('purchase-error').textContent = `Could not save purchased status: ${error.message} Your change was not applied.`;
+        return;
+      }
+      purchased = next;
+      $('purchase-error').textContent = '';
+      renderTotals();
+      renderLedger();
+    });
+    label.append(checkbox, document.createTextNode('Purchased'));
+    return label;
+  }
 
   function playerPhoto(debt) {
     const frame = node('span', undefined, 'photo');
@@ -33,11 +62,13 @@
 
   function renderLedger() {
     const team = $('team').value, week = $('week').value, direction = $('direction').value;
-    const debts = report.debts.filter(debt =>
+    const matching = report.debts.filter(debt =>
       (!week || String(debt.week) === week) && (!team ||
         (direction !== 'receives' && String(debt.from) === team) ||
         (direction !== 'owes' && String(debt.to) === team)));
-    $('count').textContent = `${debts.length} ${plural(debts.length)} in this view`;
+    const debts = matching.filter(debt => !purchased.has(debt.id));
+    const bought = matching.filter(debt => purchased.has(debt.id));
+    $('count').textContent = `${debts.length} still owed / ${bought.length} purchased in this view`;
     $('ledger').replaceChildren();
     const managers = new Map();
     for (const debt of debts) {
@@ -60,7 +91,8 @@
         player.append(node('strong', debt.player),
           node('small', `Week ${debt.week} / ${debt.position} / 1 card`),
           node('div', `Deliver to ${teamName(debt.to)}`, 'recipient'),
-          node('span', `${debt.points} pts`, 'points'));
+          node('span', `${debt.points} pts`, 'points'),
+          purchaseCheckbox(debt, false));
         item.append(playerPhoto(debt), player);
         items.append(item);
       }
@@ -69,7 +101,40 @@
     }
     if (!debts.length) $('ledger').append(node('p', report.warnings.length
       ? 'No confirmed cards match these filters. Review the data warnings above.'
-      : 'No cards owed for these filters.', 'muted'));
+      : 'No cards still owed for these filters.', 'muted'));
+    $('purchased-cards').replaceChildren();
+    for (const debt of bought) {
+      const row = node('tr');
+      const card = node('td', debt.player);
+      card.append(node('small', `Week ${debt.week} / ${debt.position}`));
+      const route = node('td', teamName(debt.from));
+      route.append(node('small', `For ${teamName(debt.to)}`));
+      const action = node('td');
+      action.append(purchaseCheckbox(debt, true));
+      row.append(card, route, action);
+      $('purchased-cards').append(row);
+    }
+    $('purchased-empty').hidden = bought.length > 0;
+    $('purchased-table').hidden = bought.length === 0;
+  }
+
+  function renderTotals() {
+    const outstanding = report.debts.filter(debt => !purchased.has(debt.id));
+    $('total').textContent = outstanding.length;
+    $('purchased-total').textContent = report.debts.length - outstanding.length;
+    $('owing').textContent = new Set(outstanding.map(debt => debt.from)).size;
+    $('incurred').textContent = `${report.debts.length} cards incurred across completed weeks. Purchased status is saved only in this browser, not shared with the league.`;
+    $('teams').replaceChildren();
+    const totals = report.teams.map(team => ({
+      ...team, owes: outstanding.filter(debt => debt.from === team.id).length,
+      receives: outstanding.filter(debt => debt.to === team.id).length,
+    })).sort((a, b) => b.owes - a.owes || a.name.localeCompare(b.name));
+    for (const team of totals) {
+      const row = node('tr'), name = node('td', team.name);
+      name.append(node('small', team.manager));
+      row.append(name, node('td', team.owes), node('td', team.receives));
+      $('teams').append(row);
+    }
   }
 
   function render() {
@@ -82,24 +147,12 @@
     for (const { week } of report.coverage) $('week').add(new Option(`Week ${week}`, String(week)));
     if ([...$('team').options].some(option => option.value === oldTeam)) $('team').value = oldTeam;
     if ([...$('week').options].some(option => option.value === oldWeek)) $('week').value = oldWeek;
-    $('total').textContent = report.debts.length;
-    $('owing').textContent = new Set(report.debts.map(debt => debt.from)).size;
+    renderTotals();
     $('games').textContent = report.coverage.reduce((sum, row) => sum + row.games, 0);
     $('warnings').replaceChildren();
     if (report.warnings.length) {
       $('warnings').append(node('strong', 'Incomplete data: totals below include confirmed cards only.'));
       for (const warning of report.warnings) $('warnings').append(node('p', warning));
-    }
-    $('teams').replaceChildren();
-    const totals = report.teams.map(team => ({
-      ...team, owes: report.debts.filter(debt => debt.from === team.id).length,
-      receives: report.debts.filter(debt => debt.to === team.id).length,
-    })).sort((a, b) => b.owes - a.owes || a.name.localeCompare(b.name));
-    for (const team of totals) {
-      const row = node('tr'), name = node('td', team.name);
-      name.append(node('small', team.manager));
-      row.append(name, node('td', team.owes), node('td', team.receives));
-      $('teams').append(row);
     }
     $('coverage').textContent = report.coverage.map(row =>
       `Week ${row.week}: ${row.games} matchups${row.byes ? `, ${row.byes} byes` : ''}`).join(' / ') ||
@@ -115,6 +168,15 @@
     $('status').textContent = 'Loading completed matchups from Sleeper...';
     try {
       report = await SleeperCards.loadReport();
+      purchasesAvailable = false;
+      purchased = new Set();
+      $('purchase-error').textContent = '';
+      try {
+        purchased = SleeperCards.readPurchased(localStorage, report.leagueId, report.season);
+        purchasesAvailable = true;
+      } catch (error) {
+        $('purchase-error').textContent = `Could not read purchased status: ${error.message} Checkboxes are disabled; the list below shows all incurred cards. Enable browser storage and refresh.`;
+      }
       render();
       const range = report.coverage.length
         ? `Weeks ${report.coverage[0].week}-${report.through} analyzed.`

@@ -1,6 +1,6 @@
 const { test } = require('node:test');
 const assert = require('node:assert/strict');
-const { analyze, completedThrough, loadReport } = require('./docs/sleeper/cards.js');
+const { analyze, completedThrough, loadReport, readPurchased, writePurchased } = require('./docs/sleeper/cards.js');
 
 const league = {
   league_id: '1384568263651897344', name: 'Test league', season: '2026', status: 'in_season',
@@ -118,4 +118,35 @@ test('loader fetches every completed week, never current or future weeks, and su
   assert.equal(paths.filter(path => path.includes('/matchups/')).length, 9);
   assert.ok(!paths.some(path => path.endsWith('/10')));
   await assert.rejects(loadReport(async () => ({ ok: false, status: 503 })), /HTTP 503/);
+});
+
+test('purchased cards persist by stable obligation ID, can be undone, and stay isolated by league and season', () => {
+  const data = new Map(), storage = {
+    getItem: key => data.get(key) ?? null,
+    setItem: (key, value) => data.set(key, value),
+  };
+  const rows = analyze(fixture()).debts;
+  const id = rows[0].id;
+  const purchased = readPurchased(storage, league.league_id, '2026');
+  purchased.add(id);
+  writePurchased(storage, league.league_id, '2026', purchased);
+  const restored = readPurchased(storage, league.league_id, '2026');
+  assert.ok(restored.has(id));
+  assert.equal(rows.filter(row => !restored.has(row.id)).length, 3);
+  assert.equal(rows.filter(row => restored.has(row.id)).length, 1);
+  assert.equal(readPurchased(storage, league.league_id, '2027').size, 0);
+  assert.equal(readPurchased(storage, 'another-league', '2026').size, 0);
+  restored.delete(id);
+  writePurchased(storage, league.league_id, '2026', restored);
+  assert.equal(readPurchased(storage, league.league_id, '2026').size, 0);
+});
+
+test('corrupt or unavailable browser storage is surfaced, not silently reset', () => {
+  for (const value of ['invalid json', '{}', '[null]', '["another-league:1:1:qb"]']) {
+    assert.throws(() => readPurchased({ getItem: () => value }, league.league_id, '2026'));
+  }
+  assert.throws(() => readPurchased({ getItem() { throw new Error('Storage blocked'); } },
+    league.league_id, '2026'), /Storage blocked/);
+  assert.throws(() => writePurchased({ setItem() { throw new Error('Quota exceeded'); } },
+    league.league_id, '2026', new Set()), /Quota exceeded/);
 });

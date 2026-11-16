@@ -144,7 +144,22 @@
       fetchedAt: new Date().toISOString() };
   }
 
-  const exported = { analyze, completedThrough, loadReport };
+  function readPurchased(storage, leagueId, season) {
+    const raw = storage.getItem(`sleeper-cards:purchased:${leagueId}:${season}`);
+    if (raw === null) return new Set();
+    const ids = JSON.parse(raw);
+    if (!Array.isArray(ids) || !ids.every(id =>
+      typeof id === 'string' && id.startsWith(`${leagueId}:`))) {
+      throw new Error('Saved purchased-card data is invalid.');
+    }
+    return new Set(ids);
+  }
+
+  function writePurchased(storage, leagueId, season, ids) {
+    storage.setItem(`sleeper-cards:purchased:${leagueId}:${season}`, JSON.stringify([...ids]));
+  }
+
+  const exported = { analyze, completedThrough, loadReport, readPurchased, writePurchased };
   if (typeof module !== 'undefined' && module.exports) module.exports = exported;
   else root.SleeperCards = exported;
 })(globalThis);

@@ -109,12 +109,20 @@ cards are grouped under the owing manager with NFL player photos (or team logos
 for defenses), recipients, scores, and weeks. Unavailable photos show an explicit
 placeholder.
 
+Check **Purchased** on a card to remove it from the owed list and move it into
+the **Already purchased** side table (below the ledger on phones). Uncheck it
+there to undo. Remaining totals update immediately, and both lists use the same
+filters. This status is stored only in this browser's localStorage, scoped to
+the league and season; it survives reloads but is not shared across devices or
+league members and is lost if site data is cleared. Purchasing does not confirm
+delivery. Storage failures are shown explicitly rather than pretending to save.
+
 Only completed weeks through Sleeper's `last_scored_leg` are analyzed; the
 current NFL week is conservatively excluded until the following week starts.
 Refresh reloads the source scores, including corrections. Missing scores produce
 visible warnings rather than false zeroes; failed/incomplete matchup requests
-produce an error instead of a partial ledger. Totals represent obligations
-incurred, not verified outstanding deliveries. Team/manager labels use current
+produce an error instead of a partial ledger. Incurred totals come from Sleeper;
+remaining totals subtract only cards marked purchased locally. Team/manager labels use current
 Sleeper ownership; weekly opponents and starters come from historical matchups.
 
 The page and its scripts live directly in `docs/sleeper` and survive draft-board
