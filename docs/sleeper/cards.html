@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Card debts - Sunday Scaries Society</title>
+<style>
+  :root { color-scheme: dark; font: 15px/1.5 -apple-system, "Segoe UI", sans-serif;
+    background: #0d1117; color: #e6edf3; }
+  * { box-sizing: border-box; }
+  body { margin: 0; }
+  main { max-width: 1000px; margin: auto; padding: 24px 16px 48px; }
+  a { color: #79c0ff; }
+  nav { display: flex; flex-wrap: wrap; gap: 18px; font-size: 13px; margin-bottom: 24px; }
+  h1 { font-size: clamp(26px, 5vw, 36px); margin: 0; }
+  h2 { font-size: 20px; margin: 0 0 12px; }
+  p { margin: 8px 0 16px; }
+  .muted, small { color: #9da7b3; }
+  .eyebrow { color: #a5d6ff; text-transform: uppercase; letter-spacing: 1.5px; font-size: 12px; }
+  .panel, details { background: #161b22; border: 1px solid #30363d; border-radius: 10px; padding: 18px; margin-top: 16px; }
+  #metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 22px 0; }
+  .metric { padding: 16px; background: #161b22; border: 1px solid #30363d; border-radius: 10px; }
+  .metric b { display: block; font-size: 30px; color: #a5d6ff; }
+  .metric span { color: #9da7b3; font-size: 12px; }
+  .filters { display: flex; gap: 14px; align-items: end; flex-wrap: wrap; }
+  label { display: grid; gap: 6px; flex: 1; min-width: 140px; font-size: 13px; color: #9da7b3; }
+  select, button { font: inherit; background: #21262d; color: #e6edf3; border: 1px solid #484f58;
+    border-radius: 6px; padding: 9px 12px; min-height: 42px; max-width: 100%; }
+  select { width: 100%; }
+  button { cursor: pointer; }
+  button:disabled { opacity: .6; cursor: wait; }
+  :focus-visible { outline: 2px solid #79c0ff; outline-offset: 3px; }
+  #status { margin-top: 16px; }
+  .error, #warnings { color: #ffb4a9; }
+  #warnings:empty { display: none; }
+  .debt { margin: 10px 0; padding: 0; }
+  summary { padding: 16px; cursor: pointer; overflow-wrap: anywhere; }
+  summary strong { color: #a5d6ff; }
+  .items { list-style: none; margin: 0; padding: 0 16px 8px; }
+  .items li { display: flex; gap: 14px; align-items: center;
+    border-top: 1px solid #30363d; padding: 12px 0; }
+  .photo { width: 64px; height: 64px; flex-shrink: 0; border-radius: 8px;
+    background: #21262d; position: relative; overflow: hidden; }
+  .photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
+  .photo-placeholder { display: flex; align-items: center; justify-content: center;
+    width: 100%; height: 100%; text-align: center; font-size: 10px; color: #9da7b3; }
+  .card-info { min-width: 0; overflow-wrap: anywhere; }
+  .recipient { color: #a5d6ff; font-size: 13px; margin-top: 3px; }
+  .points { color: #ffb4a9; font-variant-numeric: tabular-nums; }
+  .table-wrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; text-align: left; }
+  th, td { padding: 10px 8px; border-bottom: 1px solid #30363d; overflow-wrap: anywhere; }
+  th { color: #9da7b3; font-size: 12px; }
+  td:not(:first-child), th:not(:first-child) { text-align: right; }
+  small { display: block; font-size: 12px; }
+  [hidden] { display: none !important; }
+  @media (max-width: 480px) {
+    main { padding: 18px 12px 36px; }
+    .panel { padding: 14px; }
+    #metrics { gap: 6px; }
+    .metric { padding: 12px 8px; }
+    .metric b { font-size: 25px; }
+    th, td { padding: 9px 4px; font-size: 13px; }
+  }
+</style>
+<script src="cards.js" defer></script>
+<script src="cards-view.js" defer></script>
+</head>
+<body>
+<main>
+  <nav aria-label="League navigation">
+    <a href="index.html">Draft board</a>
+    <a href="standings.html">Draft grades</a>
+    <a href="https://sleeper.com/leagues/1384568263651897344">Sleeper league</a>
+  </nav>
+  <div class="eyebrow">Sunday Scaries Society / 2026</div>
+  <h1>Who owes cards?</h1>
+  <p class="muted">Start a player at 0 or below? Buy their card for that week's opponent.</p>
+  <div class="panel">
+    Includes kickers and team defenses. Only actual starters count, not the bench or empty slots.
+    Each qualifying starter costs one card, even if your team won. Opposite-direction debts are
+    kept separate; league-median games and bye weeks don't create a recipient.
+    <small>Completed weeks only. The current NFL week is excluded until the next week begins.
+      Refresh for scoring corrections. This is a record of cards incurred, not a delivery tracker.</small>
+  </div>
+  <div id="status" role="status" aria-live="polite">Loading completed matchups from Sleeper...</div>
+  <button id="refresh" type="button" disabled>Refresh from Sleeper</button>
+  <div id="report" hidden>
+    <div id="metrics">
+      <div class="metric"><b id="total">0</b><span>Cards incurred</span></div>
+      <div class="metric"><b id="owing">0</b><span>Teams owing</span></div>
+      <div class="metric"><b id="games">0</b><span>Matchups checked</span></div>
+    </div>
+    <div id="warnings" role="alert" class="panel"></div>
+    <section class="panel" aria-labelledby="ledger-title">
+      <h2 id="ledger-title">Cards owed by manager</h2>
+      <div class="filters">
+        <label>Team<select id="team"><option value="">All teams</option></select></label>
+        <label>Direction<select id="direction">
+          <option value="either">Owes or receives</option>
+          <option value="owes">Owes cards</option>
+          <option value="receives">Receives cards</option>
+        </select></label>
+        <label>Week<select id="week"><option value="">All completed weeks</option></select></label>
+      </div>
+      <p id="count" class="muted" aria-live="polite"></p>
+      <div id="ledger"></div>
+    </section>
+    <section class="panel" aria-labelledby="teams-title">
+      <h2 id="teams-title">Season totals by team</h2>
+      <p class="muted">Full-season totals, unaffected by the filters above.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th scope="col">Team / manager</th><th scope="col">Owes</th><th scope="col">Receives</th></tr></thead>
+          <tbody id="teams"></tbody>
+        </table>
+      </div>
+    </section>
+    <details><summary>Weeks analyzed</summary><p id="coverage" class="muted"></p></details>
+  </div>
+  <noscript><p>Enable JavaScript to load the public Sleeper matchup data.</p></noscript>
+</main>
+</body>
+</html>

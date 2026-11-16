@@ -109,6 +109,11 @@ def build_html() -> str:
     if LEAGUE_SLUG != "yahoo_belt" and LIVE_SYNC_JS.exists():
         html = html.replace(
             "</body>", f'<script src="sleeper.js{_V}"></script>\n</body>', 1)
+    if LEAGUE_SLUG == "sleeper_scaries":
+        html = html.replace(
+            '<div id="bar">',
+            '<nav style="padding:8px 14px"><a href="cards.html">'
+            'Who owes cards?</a></nav>\n<div id="bar">', 1)
     return html
 
 

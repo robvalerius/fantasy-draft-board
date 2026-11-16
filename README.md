@@ -93,6 +93,33 @@ All free, no auth: [nflverse](https://github.com/nflverse/nflverse-data) (stats)
 [Sleeper](https://docs.sleeper.com) (player DB, injuries),
 [FantasyFootballCalculator](https://fantasyfootballcalculator.com) (market ADP).
 
+## Sleeper card debts
+
+Open `docs/sleeper/cards.html` on the static site (or serve `docs` locally with
+`python -m http.server 5055 --directory docs` and visit
+<http://localhost:5055/sleeper/cards.html>). The Sleeper draft boards link to it.
+No login, password, API key, or Python data build is needed.
+
+The view reads Sunday Scaries Society's **2026** league directly from Sleeper.
+Each starter scoring **0 or less**, including kickers and team defenses, incurs
+one card payable to that week's head-to-head opponent. Benched players, empty
+slots, byes, and league-median games do not incur cards. Opposite-direction
+obligations are not netted. Filters show cards owed or received by team and week;
+cards are grouped under the owing manager with NFL player photos (or team logos
+for defenses), recipients, scores, and weeks. Unavailable photos show an explicit
+placeholder.
+
+Only completed weeks through Sleeper's `last_scored_leg` are analyzed; the
+current NFL week is conservatively excluded until the following week starts.
+Refresh reloads the source scores, including corrections. Missing scores produce
+visible warnings rather than false zeroes; failed/incomplete matchup requests
+produce an error instead of a partial ledger. Totals represent obligations
+incurred, not verified outstanding deliveries. Team/manager labels use current
+Sleeper ownership; weekly opponents and starters come from historical matchups.
+
+The page and its scripts live directly in `docs/sleeper` and survive draft-board
+rebuilds. Run the focused analysis tests with `npm test` (Node.js, no dependencies).
+
 ## Yahoo API
 
 `yahoo_client.py` and `auth.py` are a working OAuth2 client, but Yahoo closed
