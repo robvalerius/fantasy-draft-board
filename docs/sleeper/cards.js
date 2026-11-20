@@ -159,35 +159,23 @@
     storage.setItem(`sleeper-cards:purchased:${leagueId}:${season}`, JSON.stringify([...ids]));
   }
 
-  // These listings were found in the search index, not verified live at checkout.
-  const INDEXED_LISTINGS = {
-    '11625': [
-      { title: 'Amazon: 2024 Donruss #343 Adonai Mitchell Rated Rookie',
-        url: 'https://www.amazon.com/Mitchell-Indianapolis-Official-Football-Condition/dp/B0DZS94VK8' },
-      { title: 'Fun find on Amazon: 2024 Score-A-Treat Green Bats Adonai Mitchell',
-        url: 'https://www.amazon.com/SCORE-TREAT-RISING-ADONAI-MITCHELL/dp/B0DF6KG3SD' },
-    ],
-    '4881': [
-      { title: 'Amazon: 2024 Prestige #20 Lamar Jackson',
-        url: 'https://www.amazon.com/Prestige-Baltimore-Official-Panini-Condition/dp/B0DP42FR2C' },
-      { title: 'Fun find on Etsy: Lamar Jackson custom trading art card (unofficial)',
-        url: 'https://www.etsy.com/listing/4491020615/lamar-jackson-custom-rc-trading-art-card' },
-    ],
-  };
-
   function shoppingOptions(debt) {
-    const name = debt.player.replace(/\s+(?:Jr\.?|Sr\.?|III|II)$/i, '');
-    const query = `${name} NFL football ${debt.position === 'DEF' ? 'team ' : ''}trading card single`;
+    const catalog = typeof module !== 'undefined' && module.exports
+      ? require('./card-products.js') : root.SleeperCardProducts;
+    if (!catalog) throw new Error('The verified card-product catalog could not be loaded. Reload the page.');
+    const normalize = name => name.toLowerCase().replace(/[^a-z0-9]/g, '');
+    const substitution = debt.position === 'DEF' && Object.hasOwn(catalog.defensePlayers, debt.playerId)
+      ? catalog.defensePlayers[debt.playerId] : null;
+    const player = substitution ? substitution.player : debt.player;
+    const listings = catalog.products.filter(product =>
+      product.playerId === debt.playerId && normalize(product.player) === normalize(player))
+      .map(product => ({ ...product }))
+      .sort((a, b) => a.price - b.price || a.title.localeCompare(b.title));
     return {
-      searches: [
-        { title: 'Amazon: price low to high',
-          url: `https://www.amazon.com/s?k=${encodeURIComponent(query)}&s=price-asc-rank` },
-        { title: 'Etsy: price low to high',
-          url: `https://www.etsy.com/search?q=${encodeURIComponent(query)}&order=price_asc` },
-        { title: 'Fun: custom / parody cards',
-          url: `https://www.etsy.com/search?q=${encodeURIComponent(`${name} football custom parody physical trading card`)}` },
-      ],
-      listings: (INDEXED_LISTINGS[debt.playerId] || []).map(listing => ({ ...listing })),
+      checkedAt: catalog.checkedAt,
+      substitution: substitution ? { ...substitution } : null,
+      listings,
+      unavailable: ['Amazon', 'Etsy', 'eBay'].filter(shop => !listings.some(product => product.marketplace === shop)),
     };
   }
 

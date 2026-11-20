@@ -105,20 +105,37 @@ Each starter scoring **0 or less**, including kickers and team defenses, incurs
 one card payable to that week's head-to-head opponent. Benched players, empty
 slots, byes, and league-median games do not incur cards. Opposite-direction
 obligations are not netted. Filters show cards owed or received by team and week;
-cards are grouped under the owing manager with NFL player photos (or team logos
-for defenses), recipients, scores, and weeks. Unavailable photos show an explicit
-placeholder.
+cards are grouped under the owing manager with listing photos, recipients,
+scores, and weeks. When no verified product exists, a labeled player photo or
+team logo is shown instead. Unavailable photos show an explicit placeholder.
 
-Every owed or purchased card includes player-specific Amazon and Etsy searches
-sorted by item price, plus an Etsy custom/parody physical-card search. These are
-search links, not verified cheapest offers: shipping, location, stock, and search
-relevance can change the total or show unrelated/digital items. Custom/parody
-cards are permitted. Specific Adonai Mitchell and Lamar Jackson listings found
-in the search index on November 20, 2026 are also linked, with their live price
-and availability explicitly unverified. Marketplace pages blocked live access,
-so no price or product-photo claims are fabricated: labeled player photos/team
-logos remain until an actual matching listing photo can be verified. Sleeper
-auto-refresh does not refresh these manually researched listing links.
+Amazon, Etsy, and eBay shopping links use the reviewed catalog in
+`docs/sleeper/card-products.js`, not generated searches (which returned unrelated
+players). Each included product
+page was checked in a normal browser on November 20, 2026 for the matching player,
+availability, and a loading product image. The primary photo and every option's
+thumbnail come from the linked listing. Prices are USD item-price snapshots,
+sorted low to high among the verified options, not a guarantee of the cheapest
+delivered card. Custom/reprint options are labeled, and seller autograph claims
+are not independently certified. Missing matches show "no verified matching
+card" instead of an unrelated search result or a guessed product/photo.
+
+For defense debts, the catalog selects a current defensive standout: Philadelphia
+Eagles - Jalen Carter; Houston Texans - Will Anderson Jr.; Green Bay Packers -
+Micah Parsons. These are curated picks, not an automated player ranking.
+Both outstanding and purchased entries identify the substitute while retaining
+the original D/ST, week, points, opponent, and debt ID, so existing checkmarks
+remain valid. Older cards may show the player's former team. New defenses need
+an explicitly reviewed mapping and product rather than a guessed substitute.
+eBay options are checked Buy It Now single-card listings, not auctions or
+pick-your-card variations.
+
+The static site cannot read arbitrary marketplace search pages across origins.
+It intentionally does not scrape the first result on page load: sponsored,
+irrelevant, or unavailable items could be shown. Catalog updates require
+revalidating the actual product pages and photos; Sleeper auto-refresh does not
+update marketplace prices or stock. Unavailable product photos show an explicit
+message rather than silently switching to an unrelated image.
 
 Check **Purchased** on a card to remove it from the owed list and move it into
 the **Already purchased** side table (below the ledger on phones). Uncheck it

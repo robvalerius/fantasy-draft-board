@@ -51,22 +51,27 @@
   .items { list-style: none; margin: 0; padding: 0 16px 8px; }
   .items li { display: flex; gap: 14px; align-items: center;
     border-top: 1px solid #30363d; padding: 12px 0; }
-  .card-photo { margin: 0; width: 64px; flex-shrink: 0; text-align: center; }
+  .card-photo { margin: 0; width: 80px; flex-shrink: 0; text-align: center; align-self: flex-start; }
   .card-photo figcaption { color: #9da7b3; font-size: 10px; margin-top: 4px; }
-  .photo { display: block; width: 64px; height: 64px; flex-shrink: 0; border-radius: 8px;
+  .photo { display: block; width: 80px; height: 112px; flex-shrink: 0; border-radius: 8px;
     background: #21262d; position: relative; overflow: hidden; }
   .photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
   .photo-placeholder { display: flex; align-items: center; justify-content: center;
     width: 100%; height: 100%; text-align: center; font-size: 10px; color: #9da7b3; }
   .card-info { min-width: 0; overflow-wrap: anywhere; }
   .shopping { margin-top: 8px; }
-  .shopping-links { display: flex; flex-wrap: wrap; gap: 6px; }
+  .shopping-links { display: grid; gap: 8px; }
   .shopping-links a { border: 1px solid #484f58; border-radius: 6px; padding: 6px 8px;
     background: #21262d; font-size: 12px; text-decoration: none; }
   .shopping-links a:hover { background: #30363d; text-decoration: underline; }
-  .shopping-listings { background: none; padding: 0; border: 0; margin-top: 8px; }
-  .shopping-listings summary { padding: 4px 0; font-size: 12px; }
-  .shopping-listings a { display: block; margin-top: 6px; font-size: 12px; }
+  .product-link { display: flex; gap: 8px; align-items: flex-start; }
+  .product-link > span { min-width: 0; overflow-wrap: anywhere; }
+  .product-link img { flex-shrink: 0; object-fit: contain; background: #0d1117; }
+  .product-link small { font-size: 11px; }
+  .product-notice { color: #ffcc80; }
+  .purchased-shopping { background: none; padding: 0; border: 0; margin-top: 8px; }
+  .purchased-shopping summary { padding: 4px 0; font-size: 12px; }
+  .purchased-shopping .product-link { flex-wrap: wrap; }
   .recipient { color: #a5d6ff; font-size: 13px; margin-top: 3px; }
   .points { color: #ffb4a9; font-variant-numeric: tabular-nums; }
   .table-wrap { overflow-x: auto; }
@@ -88,8 +93,9 @@
     th, td { padding: 9px 4px; font-size: 13px; }
   }
 </style>
-<script src="cards.js?v=4" defer></script>
-<script src="cards-view.js?v=4" defer></script>
+<script src="card-products.js?v=1" defer></script>
+<script src="cards.js?v=5" defer></script>
+<script src="cards-view.js?v=5" defer></script>
 </head>
 <body>
 <main>
@@ -105,6 +111,8 @@
     Includes kickers and team defenses. Only actual starters count, not the bench or empty slots.
     Each qualifying starter costs one card, even if your team won. Opposite-direction debts are
     kept separate; league-median games and bye weeks don't create a recipient.
+    For D/ST debts, buy a card of our selected defensive standout:
+    Eagles - Jalen Carter; Texans - Will Anderson Jr.; Packers - Micah Parsons.
     <small>Completed weeks only. The current NFL week is excluded until the next week begins.
       Refresh for scoring corrections. Mark purchased cards below; purchasing does not confirm delivery.</small>
   </div>
@@ -112,12 +120,14 @@
   <button id="refresh" type="button" disabled>Refresh from Sleeper</button>
   <p class="muted">Refreshes automatically every 5 minutes while this tab is visible, and when you return to it.
     Purchased checkmarks stay saved in this browser.</p>
-  <p class="muted">Shopping links open player-specific searches, not guaranteed cheapest offers.
-    Compare the total including shipping, and choose a physical card of the correct player.
-    Custom/parody cards are allowed. Specific listings are included where found in the search index;
-    current prices and stock are unverified. Images remain labeled player photos or team logos,
-    not product photos, because matching listing photos could not be verified.
-    Sleeper refresh does not update marketplace prices or listings.</p>
+  <p class="muted">Amazon, Etsy, and eBay card options link directly to product pages checked for the correct player,
+    availability, and a loading product photo on November 20, 2026. Prices are USD item-price snapshots,
+    not guaranteed cheapest totals; shipping, tax, and stock may change.
+    Photos come from the linked listings, not an unfiltered first search result.
+    Custom/reprint cards are labeled; seller autograph/authenticity claims are not independently certified.
+    Defensive standouts were selected from current team rosters; older cards may show a former team's uniform.
+    Where no matching listing was verified, no shopping link is offered.
+    Sleeper auto-refresh does not recheck marketplace listings.</p>
   <div id="report" hidden>
     <div id="metrics">
       <div class="metric"><b id="total">0</b><span>Cards still owed</span></div>

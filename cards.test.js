@@ -151,33 +151,93 @@ test('corrupt or unavailable browser storage is surfaced, not silently reset', (
     league.league_id, '2026', new Set()), /Quota exceeded/);
 });
 
-test('shopping searches are player-specific, price-sorted where promised, and safely encode names', () => {
-  for (const player of ['Brian Robinson Jr.', 'Chris Godwin Jr.', "A&B #1? <player>", 'Reggie Virgil']) {
-    const options = shoppingOptions({ player, playerId: 'unknown', position: 'WR' });
-    const [amazon, etsy, fun] = options.searches.map(option => new URL(option.url));
-    const name = player.replace(/\s+(?:Jr\.?|Sr\.?|III|II)$/i, '');
-    assert.equal(amazon.hostname, 'www.amazon.com');
-    assert.equal(amazon.searchParams.get('k'), `${name} NFL football trading card single`);
-    assert.equal(amazon.searchParams.get('s'), 'price-asc-rank');
-    assert.equal(etsy.hostname, 'www.etsy.com');
-    assert.equal(etsy.searchParams.get('q'), `${name} NFL football trading card single`);
-    assert.equal(etsy.searchParams.get('order'), 'price_asc');
-    assert.equal(fun.searchParams.get('q'), `${name} football custom parody physical trading card`);
-    assert.equal(options.listings.length, 0, 'unresearched players must not get invented listings');
-    assert.ok(options.searches.every(option => !/cheapest/i.test(option.title)));
+test('unknown players or mismatched identities never get fabricated or wrong-player shopping links', () => {
+  for (const debt of [
+    { player: 'Unknown rookie', playerId: 'unknown' },
+    { player: 'Odell Beckham Jr.', playerId: '11625' },
+    { player: '<script>wrong player</script>', playerId: '4881' },
+    { player: 'Marvin Harrison Sr.', playerId: '11628' },
+  ]) {
+    const options = shoppingOptions(debt);
+    assert.deepEqual(options.listings, []);
+    assert.deepEqual(options.unavailable, ['Amazon', 'Etsy', 'eBay']);
+    assert.equal(options.searches, undefined, 'do not fall back to unverified search results');
   }
 });
 
-test('defense searches request team cards; indexed singles match the researched player', () => {
-  const defense = shoppingOptions({ player: 'Green Bay Packers', playerId: 'GB', position: 'DEF' });
-  assert.match(new URL(defense.searches[0].url).searchParams.get('k'), /Green Bay Packers NFL football team trading card/);
+test('verified catalog links and photos stay paired with the right player and marketplace', () => {
+  const { products } = require('./docs/sleeper/card-products.js');
+  const normalize = name => name.replace(/\s+(?:Jr\.?|Sr\.?|III|II)$/i, '')
+    .toLowerCase().replace(/[^a-z0-9]/g, '');
+  const urls = new Set();
+  for (const product of products) {
+    const url = new URL(product.url), image = new URL(product.image);
+    assert.equal(url.protocol, 'https:');
+    assert.equal(image.protocol, 'https:');
+    assert.ok(normalize(product.title).includes(normalize(product.player)), product.title);
+    assert.ok(Number.isFinite(product.price) && product.price > 0);
+    assert.ok(!urls.has(product.url), 'avoid duplicate recommendations');
+    urls.add(product.url);
+    if (product.marketplace === 'Amazon') {
+      assert.equal(url.hostname, 'www.amazon.com');
+      assert.match(url.pathname, /\/dp\/[A-Z0-9]{10}$/);
+      assert.equal(image.hostname, 'm.media-amazon.com');
+    } else if (product.marketplace === 'Etsy') {
+      assert.equal(url.hostname, 'www.etsy.com');
+      assert.match(url.pathname, /^\/listing\/\d+\//);
+      assert.equal(image.hostname, 'i.etsystatic.com');
+    } else {
+      assert.equal(product.marketplace, 'eBay');
+      assert.equal(url.hostname, 'www.ebay.com');
+      assert.match(url.pathname, /^\/itm\/\d+$/);
+      assert.equal(image.hostname, 'i.ebayimg.com');
+      assert.doesNotMatch(product.title, /\b(pick|choose|minimum|min|lot|packs?|box|digital)\b/i,
+        'recommend an individual physical card without minimum-order conditions');
+    }
+    if (product.playerId === '11628') assert.match(product.title, /harrison\s+jr/i);
+  }
+});
+
+test('verified options are price ordered, include exact listing images, and do not mutate the catalog', () => {
   const mitchell = shoppingOptions({ player: 'Adonai Mitchell', playerId: '11625', position: 'WR' });
-  assert.equal(mitchell.listings.length, 2);
-  assert.ok(mitchell.listings.every(listing => /Adonai Mitchell/.test(listing.title)));
-  assert.match(mitchell.listings[1].title, /Green Bats/);
+  assert.ok(mitchell.listings.length > 0);
+  assert.ok(mitchell.listings.every(listing => /Adonai Mitchell/i.test(listing.title)));
+  assert.ok(mitchell.listings.some(listing => listing.marketplace === 'eBay'));
+  assert.deepEqual(mitchell.listings.map(listing => listing.price),
+    mitchell.listings.map(listing => listing.price).sort((a, b) => a - b));
+  const image = mitchell.listings[0].image;
+  assert.equal(image, require('./docs/sleeper/card-products.js').products
+    .find(product => product.url === mitchell.listings[0].url).image);
+  mitchell.listings[0].image = 'not-a-real-image';
+  assert.equal(shoppingOptions({ player: 'Adonai Mitchell', playerId: '11625' }).listings[0].image, image);
   const lamar = shoppingOptions({ player: 'Lamar Jackson', playerId: '4881', position: 'QB' });
-  assert.ok(lamar.listings.some(listing => new URL(listing.url).hostname === 'www.etsy.com'));
-  assert.ok(lamar.listings.every(listing => /Lamar Jackson/.test(listing.title)));
+  assert.ok(lamar.listings.some(listing => listing.marketplace === 'Etsy' && listing.fun));
+});
+
+test('defense shopping uses selected standout players without changing debts or existing purchases', () => {
+  for (const [playerId, team, player] of [
+    ['PHI', 'Philadelphia Eagles', 'Jalen Carter'],
+    ['HOU', 'Houston Texans', 'Will Anderson Jr.'],
+    ['GB', 'Green Bay Packers', 'Micah Parsons'],
+  ]) {
+    const input = fixture();
+    input.players = { ...input.players, [playerId]: { full_name: team, position: 'DEF' } };
+    input.weeks[0].matchups[0].starters[2] = playerId;
+    const debt = analyze(input).debts.find(row => row.playerId === playerId);
+    const original = { ...debt }, saved = new Map();
+    const storage = { getItem: key => saved.get(key), setItem: (key, value) => saved.set(key, value) };
+    writePurchased(storage, league.league_id, '2026', new Set([debt.id]));
+    const options = shoppingOptions(debt);
+    assert.deepEqual(options.substitution, { team, player });
+    assert.ok(options.listings.length > 0);
+    assert.ok(options.listings.every(listing => listing.player === player));
+    assert.deepEqual(debt, original, 'shopping cannot change the original team, score, recipient, or ID');
+    assert.ok(readPurchased(storage, league.league_id, '2026').has(debt.id));
+    assert.equal(debt.id, `${league.league_id}:1:1:${playerId}`);
+  }
+  const unknown = shoppingOptions({ player: 'Another defense', playerId: 'XXX', position: 'DEF' });
+  assert.equal(unknown.substitution, null);
+  assert.deepEqual(unknown.listings, [], 'do not guess a star for an unreviewed defense');
 });
 
 test('view auto-refreshes only when visible, prevents overlapping loads, and preserves purchases after retries', async () => {

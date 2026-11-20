@@ -18,28 +18,34 @@
     const options = SleeperCards.shoppingOptions(debt);
     const section = node('div', undefined, 'shopping');
     const links = node('div', undefined, 'shopping-links');
-    for (const option of options.searches) {
-      const link = node('a', option.title);
+    for (const option of options.listings) {
+      const link = node('a', undefined, 'product-link');
       link.href = option.url;
       link.target = '_blank';
       link.rel = 'noopener noreferrer';
-      link.setAttribute('aria-label', `${option.title} for ${debt.player} (opens in a new tab)`);
+      link.setAttribute('aria-label', `${option.marketplace}: ${option.title} (opens in a new tab)`);
+      const photo = document.createElement('img');
+      photo.src = option.image;
+      photo.alt = option.title;
+      photo.loading = 'lazy';
+      photo.width = 40;
+      photo.height = 56;
+      const description = node('span');
+      const badge = `${option.fun ? 'Fun pick / ' : ''}${option.marketplace} / $${option.price.toFixed(2)}`;
+      description.append(node('strong', badge), node('small', option.title));
+      if (/custom|reprint|facsimile|replica/i.test(option.title)) {
+        description.append(node('small', 'Custom/reprint: read the listing', 'product-notice'));
+      }
+      photo.addEventListener('error', () => {
+        photo.remove();
+        description.append(node('small', 'Listing photo unavailable', 'product-notice'));
+      }, { once: true });
+      link.append(photo, description);
       links.append(link);
     }
     section.append(links);
-    if (options.listings.length) {
-      const listings = node('details', undefined, 'shopping-listings');
-      listings.append(node('summary', 'Specific listings found in search'));
-      listings.append(node('small',
-        'Indexed results checked Nov 20, 2026. Current price, shipping, stock, and product photos could not be verified.'));
-      for (const option of options.listings) {
-        const link = node('a', option.title);
-        link.href = option.url;
-        link.target = '_blank';
-        link.rel = 'noopener noreferrer';
-        listings.append(link);
-      }
-      section.append(listings);
+    for (const shop of options.unavailable) {
+      section.append(node('small', `${shop}: no verified matching card.`, 'muted'));
     }
     return section;
   }
@@ -73,23 +79,31 @@
   }
 
   function playerPhoto(debt) {
+    const product = SleeperCards.shoppingOptions(debt).listings[0];
     const figure = node('figure', undefined, 'card-photo');
-    const frame = node('span', undefined, 'photo');
+    const frame = node(product ? 'a' : 'span', undefined, 'photo');
+    if (product) {
+      frame.href = product.url;
+      frame.target = '_blank';
+      frame.rel = 'noopener noreferrer';
+      frame.setAttribute('aria-label', `View ${product.title} on ${product.marketplace} (opens in a new tab)`);
+    }
     const placeholder = node('span', debt.position, 'photo-placeholder');
     const image = document.createElement('img');
-    image.alt = '';
+    image.alt = product ? product.title : '';
     image.loading = 'lazy';
     image.width = 64;
     image.height = 64;
-    image.src = debt.position === 'DEF'
+    image.src = product ? product.image : debt.position === 'DEF'
       ? `https://sleepercdn.com/images/team_logos/nfl/${encodeURIComponent(debt.playerId.toLowerCase())}.png`
       : `https://sleepercdn.com/content/nfl/players/${encodeURIComponent(debt.playerId)}.jpg`;
     image.addEventListener('error', () => {
       image.remove();
-      placeholder.textContent = `${debt.position} / no photo`;
+      placeholder.textContent = product ? 'Listing photo unavailable' : `${debt.position} / no photo`;
     }, { once: true });
     frame.append(placeholder, image);
-    figure.append(frame, node('figcaption', debt.position === 'DEF' ? 'Team logo' : 'Player photo'));
+    figure.append(frame, node('figcaption', product ? `${product.marketplace} listing photo`
+      : `${debt.position === 'DEF' ? 'Team logo' : 'Player photo'} / no verified card`));
     return figure;
   }
 
@@ -124,9 +138,13 @@
         player.append(node('strong', debt.player),
           node('small', `Week ${debt.week} / ${debt.position} / 1 card`),
           node('div', `Deliver to ${teamName(debt.to)}`, 'recipient'),
-          node('span', `${debt.points} pts`, 'points'),
-          shoppingLinks(debt),
-          purchaseCheckbox(debt, false));
+          node('span', `${debt.points} pts`, 'points'));
+        const substitution = SleeperCards.shoppingOptions(debt).substitution;
+        if (substitution) {
+          player.append(node('small',
+            `Defense substitute: buy a ${substitution.player} card (${substitution.team}).`, 'product-notice'));
+        }
+        player.append(shoppingLinks(debt), purchaseCheckbox(debt, false));
         item.append(playerPhoto(debt), player);
         items.append(item);
       }
@@ -140,7 +158,11 @@
     for (const debt of bought) {
       const row = node('tr');
       const card = node('td', debt.player);
-      card.append(node('small', `Week ${debt.week} / ${debt.position}`), shoppingLinks(debt));
+      const substitution = SleeperCards.shoppingOptions(debt).substitution;
+      if (substitution) card.append(node('small', `Card: ${substitution.player}`, 'product-notice'));
+      const shopping = node('details', undefined, 'purchased-shopping');
+      shopping.append(node('summary', 'Card options'), shoppingLinks(debt));
+      card.append(node('small', `Week ${debt.week} / ${debt.position}`), shopping);
       const route = node('td', teamName(debt.from));
       route.append(node('small', `For ${teamName(debt.to)}`));
       const action = node('td');
