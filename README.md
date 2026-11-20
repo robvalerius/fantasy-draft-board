@@ -109,6 +109,17 @@ cards are grouped under the owing manager with NFL player photos (or team logos
 for defenses), recipients, scores, and weeks. Unavailable photos show an explicit
 placeholder.
 
+Every owed or purchased card includes player-specific Amazon and Etsy searches
+sorted by item price, plus an Etsy custom/parody physical-card search. These are
+search links, not verified cheapest offers: shipping, location, stock, and search
+relevance can change the total or show unrelated/digital items. Custom/parody
+cards are permitted. Specific Adonai Mitchell and Lamar Jackson listings found
+in the search index on November 20, 2026 are also linked, with their live price
+and availability explicitly unverified. Marketplace pages blocked live access,
+so no price or product-photo claims are fabricated: labeled player photos/team
+logos remain until an actual matching listing photo can be verified. Sleeper
+auto-refresh does not refresh these manually researched listing links.
+
 Check **Purchased** on a card to remove it from the owed list and move it into
 the **Already purchased** side table (below the ledger on phones). Uncheck it
 there to undo. Remaining totals update immediately, and both lists use the same

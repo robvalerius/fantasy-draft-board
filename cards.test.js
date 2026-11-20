@@ -1,6 +1,6 @@
 const { test } = require('node:test');
 const assert = require('node:assert/strict');
-const { analyze, completedThrough, loadReport, readPurchased, writePurchased } = require('./docs/sleeper/cards.js');
+const { analyze, completedThrough, loadReport, readPurchased, writePurchased, shoppingOptions } = require('./docs/sleeper/cards.js');
 
 const league = {
   league_id: '1384568263651897344', name: 'Test league', season: '2026', status: 'in_season',
@@ -149,6 +149,35 @@ test('corrupt or unavailable browser storage is surfaced, not silently reset', (
     league.league_id, '2026'), /Storage blocked/);
   assert.throws(() => writePurchased({ setItem() { throw new Error('Quota exceeded'); } },
     league.league_id, '2026', new Set()), /Quota exceeded/);
+});
+
+test('shopping searches are player-specific, price-sorted where promised, and safely encode names', () => {
+  for (const player of ['Brian Robinson Jr.', 'Chris Godwin Jr.', "A&B #1? <player>", 'Reggie Virgil']) {
+    const options = shoppingOptions({ player, playerId: 'unknown', position: 'WR' });
+    const [amazon, etsy, fun] = options.searches.map(option => new URL(option.url));
+    const name = player.replace(/\s+(?:Jr\.?|Sr\.?|III|II)$/i, '');
+    assert.equal(amazon.hostname, 'www.amazon.com');
+    assert.equal(amazon.searchParams.get('k'), `${name} NFL football trading card single`);
+    assert.equal(amazon.searchParams.get('s'), 'price-asc-rank');
+    assert.equal(etsy.hostname, 'www.etsy.com');
+    assert.equal(etsy.searchParams.get('q'), `${name} NFL football trading card single`);
+    assert.equal(etsy.searchParams.get('order'), 'price_asc');
+    assert.equal(fun.searchParams.get('q'), `${name} football custom parody physical trading card`);
+    assert.equal(options.listings.length, 0, 'unresearched players must not get invented listings');
+    assert.ok(options.searches.every(option => !/cheapest/i.test(option.title)));
+  }
+});
+
+test('defense searches request team cards; indexed singles match the researched player', () => {
+  const defense = shoppingOptions({ player: 'Green Bay Packers', playerId: 'GB', position: 'DEF' });
+  assert.match(new URL(defense.searches[0].url).searchParams.get('k'), /Green Bay Packers NFL football team trading card/);
+  const mitchell = shoppingOptions({ player: 'Adonai Mitchell', playerId: '11625', position: 'WR' });
+  assert.equal(mitchell.listings.length, 2);
+  assert.ok(mitchell.listings.every(listing => /Adonai Mitchell/.test(listing.title)));
+  assert.match(mitchell.listings[1].title, /Green Bats/);
+  const lamar = shoppingOptions({ player: 'Lamar Jackson', playerId: '4881', position: 'QB' });
+  assert.ok(lamar.listings.some(listing => new URL(listing.url).hostname === 'www.etsy.com'));
+  assert.ok(lamar.listings.every(listing => /Lamar Jackson/.test(listing.title)));
 });
 
 test('view auto-refreshes only when visible, prevents overlapping loads, and preserves purchases after retries', async () => {

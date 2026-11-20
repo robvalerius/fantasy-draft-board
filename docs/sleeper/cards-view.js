@@ -14,6 +14,36 @@
   const plural = count => count === 1 ? 'card' : 'cards';
   const teamName = id => report.teams.find(team => team.id === id).name;
 
+  function shoppingLinks(debt) {
+    const options = SleeperCards.shoppingOptions(debt);
+    const section = node('div', undefined, 'shopping');
+    const links = node('div', undefined, 'shopping-links');
+    for (const option of options.searches) {
+      const link = node('a', option.title);
+      link.href = option.url;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      link.setAttribute('aria-label', `${option.title} for ${debt.player} (opens in a new tab)`);
+      links.append(link);
+    }
+    section.append(links);
+    if (options.listings.length) {
+      const listings = node('details', undefined, 'shopping-listings');
+      listings.append(node('summary', 'Specific listings found in search'));
+      listings.append(node('small',
+        'Indexed results checked Nov 20, 2026. Current price, shipping, stock, and product photos could not be verified.'));
+      for (const option of options.listings) {
+        const link = node('a', option.title);
+        link.href = option.url;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        listings.append(link);
+      }
+      section.append(listings);
+    }
+    return section;
+  }
+
   function purchaseCheckbox(debt, checked) {
     const label = node('label', undefined, 'purchase-toggle');
     const checkbox = document.createElement('input');
@@ -43,6 +73,7 @@
   }
 
   function playerPhoto(debt) {
+    const figure = node('figure', undefined, 'card-photo');
     const frame = node('span', undefined, 'photo');
     const placeholder = node('span', debt.position, 'photo-placeholder');
     const image = document.createElement('img');
@@ -58,7 +89,8 @@
       placeholder.textContent = `${debt.position} / no photo`;
     }, { once: true });
     frame.append(placeholder, image);
-    return frame;
+    figure.append(frame, node('figcaption', debt.position === 'DEF' ? 'Team logo' : 'Player photo'));
+    return figure;
   }
 
   function renderLedger() {
@@ -93,6 +125,7 @@
           node('small', `Week ${debt.week} / ${debt.position} / 1 card`),
           node('div', `Deliver to ${teamName(debt.to)}`, 'recipient'),
           node('span', `${debt.points} pts`, 'points'),
+          shoppingLinks(debt),
           purchaseCheckbox(debt, false));
         item.append(playerPhoto(debt), player);
         items.append(item);
@@ -107,7 +140,7 @@
     for (const debt of bought) {
       const row = node('tr');
       const card = node('td', debt.player);
-      card.append(node('small', `Week ${debt.week} / ${debt.position}`));
+      card.append(node('small', `Week ${debt.week} / ${debt.position}`), shoppingLinks(debt));
       const route = node('td', teamName(debt.from));
       route.append(node('small', `For ${teamName(debt.to)}`));
       const action = node('td');
