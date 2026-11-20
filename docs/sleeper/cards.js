@@ -186,7 +186,7 @@
     return [...groups].map(group => ({ ...group.product })).sort(compare);
   }
 
-  function shoppingOptions(debt) {
+  function shoppingOptions(debt, debts = [debt]) {
     const catalog = typeof module !== 'undefined' && module.exports
       ? require('./card-products.js') : root.SleeperCardProducts;
     if (!catalog) throw new Error('The verified card-product catalog could not be loaded. Reload the page.');
@@ -204,7 +204,14 @@
     const preference = catalog.recipientAlternatives.find(pick =>
       pick.rosterId === debt.to && debt.id?.startsWith(`${pick.leagueId}:`));
     if (preference) {
-      const product = catalog.products.find(product => product.url === preference.productUrl);
+      // Include purchased and filtered-out debts so their picks do not get reassigned.
+      const incoming = debts.filter(item =>
+        item.to === debt.to && item.id?.startsWith(`${preference.leagueId}:`))
+        .sort((a, b) => a.week - b.week || a.id.localeCompare(b.id));
+      const index = incoming.findIndex(item => item.id === debt.id);
+      if (index < 0) throw new Error('The card debt is missing from the recipient shopping report.');
+      const url = preference.productUrls[index % preference.productUrls.length];
+      const product = catalog.products.find(product => product.url === url);
       if (!product?.fun || !product.cardId || product.game) {
         throw new Error(`The fun alternative for ${preference.label} is missing from the card catalog.`);
       }

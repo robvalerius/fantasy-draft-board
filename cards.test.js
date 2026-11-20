@@ -315,7 +315,7 @@ test('kicker game-card name matches are separate optional gifts, never replaceme
 
 test('recipient fun alternatives target incoming debts while preserving the original card and kicker choices', () => {
   for (const [to, from, expectedPlayer] of [
-    [4, 3, 'Caleb Williams'], [3, 4, 'Trevor Lawrence'],
+    [4, 3, 'Caleb Williams'], [3, 4, 'Brian Thomas Jr.'],
   ]) {
     const debt = { id: `${league.league_id}:1:${from}:13545`, from, to,
       playerId: '13545', player: 'Trey Smack', position: 'K', week: 1, points: 0 };
@@ -325,7 +325,6 @@ test('recipient fun alternatives target incoming debts while preserving the orig
     const choice = options.recipientListings[0];
     assert.equal(choice.player, expectedPlayer);
     assert.ok(choice.fun);
-    assert.match(choice.title, /Pumpkin/);
     assert.ok(choice.recipientLabel);
     assert.ok(options.listings.every(listing => listing.player === 'Trey Smack'));
     assert.ok(options.funListings.some(listing => listing.cardName === 'Thwackey'));
@@ -346,6 +345,45 @@ test('recipient alternatives do not apply to outgoing debts, other recipients, o
   ]) {
     const debt = { ...base, from, to, id: `${leagueId}:1:${from}:${base.playerId}` };
     assert.deepEqual(shoppingOptions(debt).recipientListings, []);
+  }
+});
+
+test('recipient pools use distinct designs before repeating, independent of report order and later weeks', () => {
+  const catalog = require('./docs/sleeper/card-products.js');
+  for (const preference of catalog.recipientAlternatives) {
+    const count = preference.productUrls.length;
+    assert.ok(count >= 3);
+    const debts = Array.from({ length: count + 1 }, (_, index) => ({
+      id: `${league.league_id}:${index + 1}:1:13545`, week: index + 1, from: 1,
+      to: preference.rosterId, playerId: '13545', player: 'Trey Smack', position: 'K',
+    }));
+    const original = JSON.stringify(debts);
+    const choices = debts.map(debt => shoppingOptions(debt, debts).recipientListings[0]);
+    assert.equal(new Set(choices.slice(0, count).map(choice => choice.cardId)).size, count);
+    assert.equal(new Set(choices.slice(0, count).map(choice => choice.image)).size, count);
+    assert.equal(choices[count].url, choices[0].url, 'repeat only after the pool is exhausted');
+    assert.ok(choices.every(choice => choice.fun && !choice.game));
+    if (preference.rosterId === 4) {
+      assert.equal(count, 5, 'cover all five current incoming debts with distinct Caleb designs');
+      assert.ok(choices.every(choice => choice.player === 'Caleb Williams'));
+    } else {
+      assert.deepEqual(new Set(choices.map(choice => choice.player)),
+        new Set(['Brian Thomas Jr.', 'Travis Hunter', 'Trevor Lawrence']));
+    }
+    const reordered = [...debts].reverse();
+    const unrelated = { ...debts[0], id: 'another-league:1:1:13545' };
+    for (let index = 0; index < count; index++) {
+      const debt = debts[index];
+      assert.equal(shoppingOptions(debt, [...reordered, unrelated]).recipientListings[0].url,
+        choices[index].url);
+      assert.equal(shoppingOptions(debt, debts.slice(0, count)).recipientListings[0].url,
+        choices[index].url, 'a new later week does not reassign existing picks');
+    }
+    const sameWeek = debts.slice(0, count).map(debt => ({ ...debt, week: 1 }));
+    assert.equal(new Set(sameWeek.map(debt =>
+      shoppingOptions(debt, sameWeek).recipientListings[0].url)).size, count);
+    assert.equal(JSON.stringify(debts), original);
+    assert.throws(() => shoppingOptions(debts[0], []), /missing from the recipient shopping report/);
   }
 });
 
@@ -403,13 +441,19 @@ test('view keeps recipient picks last and unique in owed and purchased cards thr
   ];
   const checkboxFor = (row, debt) => walk(row).find(item =>
     item.tag === 'input' && item['aria-label'].includes(`${debt.player}, week ${debt.week},`));
-  function verifyChoices() {
-    assert.equal(rows().length, debts.length);
-    for (const debt of debts) {
+  const expectedUrls = [
+    'https://www.amazon.com/dp/B0G2MT6XKL',
+    'https://www.etsy.com/listing/4356445503/brian-thomas-jr-zebra-shock-prizm-91',
+    'https://www.ebay.com/itm/860039761200',
+    'https://www.etsy.com/listing/4439253180/travis-hunter-by-storm-absolute-rookie',
+    undefined,
+  ];
+  function verifyChoices(expectedDebts = debts) {
+    assert.equal(rows().length, expectedDebts.length);
+    for (const debt of expectedDebts) {
       const row = rows().find(row => checkboxFor(row, debt));
       const links = walk(row).filter(item => item.className === 'product-link');
-      const recipientUrl = { 4: 'https://www.amazon.com/dp/B0G2MT6XKL',
-        3: 'https://www.amazon.com/dp/B0FRG3CJC9' }[debt.to];
+      const recipientUrl = expectedUrls[debts.indexOf(debt)];
       if (recipientUrl) {
         assert.equal(links.at(-1).href, recipientUrl);
         assert.equal(links.filter(link => link.href === recipientUrl).length, 1);
@@ -417,10 +461,18 @@ test('view keeps recipient picks last and unique in owed and purchased cards thr
           assert.ok(links.slice(0, -1).some(link => link['aria-label'].includes('Thwackey')));
         }
       } else {
-        assert.ok(links.every(link => !/B0G2MT6XKL|B0FRG3CJC9/.test(link.href)));
+        assert.ok(links.every(link => !expectedUrls.includes(link.href)));
       }
     }
   }
+  verifyChoices();
+  elements.get('team').value = '4';
+  elements.get('direction').value = 'receives';
+  elements.get('team').listeners.change();
+  verifyChoices(debts.filter(debt => debt.to === 4));
+  elements.get('team').value = '';
+  elements.get('direction').value = '';
+  elements.get('team').listeners.change();
   verifyChoices();
   const debt = debts[0];
   let checkbox = checkboxFor(rows().find(row => checkboxFor(row, debt)), debt);

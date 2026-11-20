@@ -15,7 +15,7 @@
   const teamName = id => report.teams.find(team => team.id === id).name;
 
   function shoppingLinks(debt) {
-    const options = SleeperCards.shoppingOptions(debt);
+    const options = SleeperCards.shoppingOptions(debt, report.debts);
     const section = node('div', undefined, 'shopping');
     const links = node('div', undefined, 'shopping-links');
     const recipientUrls = new Set(options.recipientListings.map(option => option.url));
@@ -97,7 +97,7 @@
   }
 
   function playerPhoto(debt) {
-    const product = SleeperCards.shoppingOptions(debt).listings[0];
+    const product = SleeperCards.shoppingOptions(debt, report.debts).listings[0];
     const figure = node('figure', undefined, 'card-photo');
     const frame = node(product ? 'a' : 'span', undefined, 'photo');
     if (product) {
@@ -157,7 +157,7 @@
           node('small', `Week ${debt.week} / ${debt.position} / 1 card`),
           node('div', `Deliver to ${teamName(debt.to)}`, 'recipient'),
           node('span', `${debt.points} pts`, 'points'));
-        const substitution = SleeperCards.shoppingOptions(debt).substitution;
+        const substitution = SleeperCards.shoppingOptions(debt, report.debts).substitution;
         if (substitution) {
           player.append(node('small',
             `Defense substitute: buy a ${substitution.player} card (${substitution.team}).`, 'product-notice'));
@@ -176,7 +176,7 @@
     for (const debt of bought) {
       const row = node('tr');
       const card = node('td', debt.player);
-      const substitution = SleeperCards.shoppingOptions(debt).substitution;
+      const substitution = SleeperCards.shoppingOptions(debt, report.debts).substitution;
       if (substitution) card.append(node('small', `Card: ${substitution.player}`, 'product-notice'));
       const shopping = node('details', undefined, 'purchased-shopping');
       shopping.append(node('summary', 'Card options'), shoppingLinks(debt));
