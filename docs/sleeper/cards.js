@@ -159,6 +159,33 @@
     storage.setItem(`sleeper-cards:purchased:${leagueId}:${season}`, JSON.stringify([...ids]));
   }
 
+  function cheapestUniqueListings(products) {
+    const groups = new Set(), byKey = new Map();
+    const compare = (a, b) => a.price - b.price || a.title.localeCompare(b.title);
+    for (const product of products) {
+      const image = new URL(product.image);
+      // CDN resize/format variants still refer to the same listing photo.
+      const photo = image.hostname + image.pathname
+        .replace(/\._[^/]+_\.(?:jpe?g|png|webp)$/i, '')
+        .replace(/\.(?:jpe?g|png|webp)$/i, '')
+        .replace(/\/il_(?:fullxfull|\d+x(?:\d+|N))\./i, '/')
+        .replace(/\/s-l\d+$/i, '');
+      const keys = new Set([`${product.playerId}:photo:${photo}`]);
+      if (product.cardId) keys.add(`${product.playerId}:card:${product.cardId}`);
+      const matches = new Set([...keys].map(key => byKey.get(key)).filter(Boolean));
+      let cheapest = product;
+      for (const match of matches) {
+        if (compare(match.product, cheapest) <= 0) cheapest = match.product;
+        for (const key of match.keys) keys.add(key);
+        groups.delete(match);
+      }
+      const group = { keys, product: cheapest };
+      groups.add(group);
+      for (const key of keys) byKey.set(key, group);
+    }
+    return [...groups].map(group => ({ ...group.product })).sort(compare);
+  }
+
   function shoppingOptions(debt) {
     const catalog = typeof module !== 'undefined' && module.exports
       ? require('./card-products.js') : root.SleeperCardProducts;
@@ -167,19 +194,24 @@
     const substitution = debt.position === 'DEF' && Object.hasOwn(catalog.defensePlayers, debt.playerId)
       ? catalog.defensePlayers[debt.playerId] : null;
     const player = substitution ? substitution.player : debt.player;
-    const listings = catalog.products.filter(product =>
-      product.playerId === debt.playerId && normalize(product.player) === normalize(player))
-      .map(product => ({ ...product }))
-      .sort((a, b) => a.price - b.price || a.title.localeCompare(b.title));
+    const matching = catalog.products.filter(product =>
+      product.playerId === debt.playerId && normalize(product.player) === normalize(player));
+    const football = matching.filter(product => !product.game);
+    const fun = debt.position === 'K' ? matching.filter(product => product.game) : [];
+    const listings = cheapestUniqueListings(football);
+    const funListings = cheapestUniqueListings(fun);
     return {
       checkedAt: catalog.checkedAt,
       substitution: substitution ? { ...substitution } : null,
       listings,
-      unavailable: ['Amazon', 'Etsy', 'eBay'].filter(shop => !listings.some(product => product.marketplace === shop)),
+      funListings,
+      hiddenDuplicates: football.length + fun.length - listings.length - funListings.length,
+      unavailable: ['Amazon', 'Etsy', 'eBay'].filter(shop => !football.some(product => product.marketplace === shop)),
     };
   }
 
-  const exported = { analyze, completedThrough, loadReport, readPurchased, writePurchased, shoppingOptions };
+  const exported = { analyze, completedThrough, loadReport, readPurchased, writePurchased,
+    shoppingOptions, cheapestUniqueListings };
   if (typeof module !== 'undefined' && module.exports) module.exports = exported;
   else root.SleeperCards = exported;
 })(globalThis);

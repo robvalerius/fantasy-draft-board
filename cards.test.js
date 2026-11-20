@@ -1,6 +1,7 @@
 const { test } = require('node:test');
 const assert = require('node:assert/strict');
-const { analyze, completedThrough, loadReport, readPurchased, writePurchased, shoppingOptions } = require('./docs/sleeper/cards.js');
+const { analyze, completedThrough, loadReport, readPurchased, writePurchased,
+  shoppingOptions, cheapestUniqueListings } = require('./docs/sleeper/cards.js');
 
 const league = {
   league_id: '1384568263651897344', name: 'Test league', season: '2026', status: 'in_season',
@@ -160,6 +161,7 @@ test('unknown players or mismatched identities never get fabricated or wrong-pla
   ]) {
     const options = shoppingOptions(debt);
     assert.deepEqual(options.listings, []);
+    assert.deepEqual(options.funListings, []);
     assert.deepEqual(options.unavailable, ['Amazon', 'Etsy', 'eBay']);
     assert.equal(options.searches, undefined, 'do not fall back to unverified search results');
   }
@@ -174,7 +176,13 @@ test('verified catalog links and photos stay paired with the right player and ma
     const url = new URL(product.url), image = new URL(product.image);
     assert.equal(url.protocol, 'https:');
     assert.equal(image.protocol, 'https:');
-    assert.ok(normalize(product.title).includes(normalize(product.player)), product.title);
+    if (product.game) {
+      assert.ok(['Pokemon', 'Magic: The Gathering'].includes(product.game));
+      assert.ok(product.nameMatch);
+      assert.ok(normalize(product.title).includes(normalize(product.cardName)), product.title);
+    } else {
+      assert.ok(normalize(product.title).includes(normalize(product.player)), product.title);
+    }
     assert.ok(Number.isFinite(product.price) && product.price > 0);
     assert.ok(!urls.has(product.url), 'avoid duplicate recommendations');
     urls.add(product.url);
@@ -186,6 +194,12 @@ test('verified catalog links and photos stay paired with the right player and ma
       assert.equal(url.hostname, 'www.etsy.com');
       assert.match(url.pathname, /^\/listing\/\d+\//);
       assert.equal(image.hostname, 'i.etsystatic.com');
+    } else if (product.marketplace === 'Card Kingdom') {
+      assert.ok(product.game, 'Card Kingdom offers are name-match game cards, not NFL recommendations');
+      assert.equal(url.hostname, 'www.cardkingdom.com');
+      assert.match(url.pathname, /^\/mtg\/[a-z0-9-]+\/[a-z0-9-]+$/);
+      assert.equal(image.hostname, 'www.cardkingdom.com');
+      assert.match(image.pathname, /^\/images\/magic-the-gathering\/.*\.jpg$/);
     } else {
       assert.equal(product.marketplace, 'eBay');
       assert.equal(url.hostname, 'www.ebay.com');
@@ -231,6 +245,9 @@ test('defense shopping uses selected standout players without changing debts or 
     assert.deepEqual(options.substitution, { team, player });
     assert.ok(options.listings.length > 0);
     assert.ok(options.listings.every(listing => listing.player === player));
+    assert.deepEqual(new Set(options.listings.map(listing => listing.marketplace)),
+      new Set(['Amazon', 'Etsy', 'eBay']));
+    assert.deepEqual(options.unavailable, []);
     assert.deepEqual(debt, original, 'shopping cannot change the original team, score, recipient, or ID');
     assert.ok(readPurchased(storage, league.league_id, '2026').has(debt.id));
     assert.equal(debt.id, `${league.league_id}:1:1:${playerId}`);
@@ -238,6 +255,61 @@ test('defense shopping uses selected standout players without changing debts or 
   const unknown = shoppingOptions({ player: 'Another defense', playerId: 'XXX', position: 'DEF' });
   assert.equal(unknown.substitution, null);
   assert.deepEqual(unknown.listings, [], 'do not guess a star for an unreviewed defense');
+});
+
+test('duplicate card editions keep the cheaper offer without hiding distinct cards or claiming a source is missing', () => {
+  for (const [playerId, player, position] of [
+    ['650', 'Nick Folk', 'K'], ['13276', 'Omar Cooper Jr.', 'WR'],
+    ['12481', 'Cam Skattebo', 'RB'], ['13330', 'Kenyon Sadiq', 'TE'],
+  ]) {
+    const options = shoppingOptions({ playerId, player, position });
+    assert.equal(options.hiddenDuplicates, 1);
+    assert.ok(!options.listings.some(listing => listing.marketplace === 'Amazon'));
+    assert.ok(options.listings.some(listing => listing.marketplace === 'eBay' && listing.price === 0.99));
+    assert.ok(!options.unavailable.includes('Amazon'), 'a duplicate is not an unverified source');
+  }
+});
+
+test('duplicate photo variants and connected card/photo matches choose the cheapest without mutating inputs', () => {
+  const products = [
+    { playerId: 'k', title: 'First photo', cardId: 'base', price: 4,
+      image: 'https://m.media-amazon.com/images/I/example._AC_SL1200_.jpg' },
+    { playerId: 'k', title: 'Other photo', price: 1,
+      image: 'https://i.ebayimg.com/images/g/example/s-l400.jpg' },
+    { playerId: 'k', title: 'Connecting offer', cardId: 'base', price: 5,
+      image: 'https://i.ebayimg.com/images/g/example/s-l1600.webp?width=500' },
+    { playerId: 'k', title: 'Distinct foil', cardId: 'foil', price: 2,
+      image: 'https://i.etsystatic.com/shop/il_1080xN.foil.jpg' },
+    { playerId: 'k', title: 'Same foil photo resized', price: 3,
+      image: 'https://i.etsystatic.com/shop/il_340x270.foil.jpg' },
+    { playerId: 'k', title: 'Same Amazon photo resized', price: 6,
+      image: 'https://m.media-amazon.com/images/I/example._AC_UL320_.jpg' },
+  ];
+  const original = structuredClone(products);
+  const chosen = cheapestUniqueListings(products);
+  assert.deepEqual(chosen.map(product => [product.title, product.price]),
+    [['Other photo', 1], ['Distinct foil', 2]]);
+  chosen[0].price = 99;
+  assert.deepEqual(products, original);
+});
+
+test('kicker game-card name matches are separate optional gifts, never replacement NFL player listings', () => {
+  for (const [playerId, player, cardName] of [
+    ['13545', 'Trey Smack', 'Thwackey'], ['650', 'Nick Folk', 'Nickit'],
+    ['2747', 'Jason Myers', 'Jace, Mirror Mage'], ['11792', 'Will Reichard', 'Will, Scion of Peace'],
+    ['12015', 'Harrison Mevis', 'Maeve, Insidious Singer'], ['8259', 'Cameron Dicker', 'Mega Camerupt ex'],
+    ['11533', 'Brandon Aubrey', 'Brandon'],
+  ]) {
+    const debt = { playerId, player, position: 'K' };
+    const original = { ...debt };
+    const options = shoppingOptions(debt);
+    assert.ok(options.listings.length > 0);
+    assert.ok(options.listings.every(listing => !listing.game && listing.player === player));
+    assert.ok(options.funListings.some(listing => listing.cardName === cardName && listing.nameMatch));
+    assert.deepEqual(debt, original);
+    assert.deepEqual(shoppingOptions({ ...debt, position: 'WR' }).funListings, []);
+    assert.deepEqual(shoppingOptions({ ...debt, player: 'Unrelated kicker' }).funListings, []);
+  }
 });
 
 test('view auto-refreshes only when visible, prevents overlapping loads, and preserves purchases after retries', async () => {

@@ -109,16 +109,24 @@ cards are grouped under the owing manager with listing photos, recipients,
 scores, and weeks. When no verified product exists, a labeled player photo or
 team logo is shown instead. Unavailable photos show an explicit placeholder.
 
-Amazon, Etsy, and eBay shopping links use the reviewed catalog in
+Football shopping links on Amazon, Etsy, and eBay use the reviewed catalog in
 `docs/sleeper/card-products.js`, not generated searches (which returned unrelated
 players). Each included product
-page was checked in a normal browser on November 20, 2026 for the matching player,
+page was reviewed on November 20, 2026 for the matching player,
 availability, and a loading product image. The primary photo and every option's
 thumbnail come from the linked listing. Prices are USD item-price snapshots,
 sorted low to high among the verified options, not a guarantee of the cheapest
 delivered card. Custom/reprint options are labeled, and seller autograph claims
 are not independently certified. Missing matches show "no verified matching
 card" instead of an unrelated search result or a guessed product/photo.
+
+Repeated editions and repeated listing photos appear only once per obligation,
+using the lowest verified item-price snapshot. Shared `cardId` values identify
+the same printing/variant even when sellers use different photos or titles;
+resized versions of the same CDN photo are also grouped. Different parallels,
+custom art, reprints, and signed versions remain separate when their editions
+and photos differ. A hidden duplicate is not reported as a missing source.
+Shipping and tax can still change which seller has the lowest delivered total.
 
 For defense debts, the catalog selects a current defensive standout: Philadelphia
 Eagles - Jalen Carter; Houston Texans - Will Anderson Jr.; Green Bay Packers -
@@ -129,6 +137,16 @@ remain valid. Older cards may show the player's former team. New defenses need
 an explicitly reviewed mapping and product rather than a guessed substitute.
 eBay options are checked Buy It Now single-card listings, not auctions or
 pick-your-card variations.
+
+Each current kicker also has a separately labeled Pokemon or Magic name-match
+gift option with a matching explanation and listing photo: Trey Smack -
+Thwackey; Nick Folk - Nickit; Jason Myers - Jace, Mirror Mage; Will Reichard -
+Will, Scion of Peace; Harrison Mevis - Maeve, Insidious Singer (a loose
+sound-alike); Cameron Dicker - Mega Camerupt ex; Brandon Aubrey - Brandon.
+The Magic options link to reviewed Card Kingdom singles. These are optional
+wordplay gifts, not NFL player cards, and never replace the primary NFL photo,
+change the debt, or create additional cards owed. They also appear in purchased
+entries' card options.
 
 The static site cannot read arbitrary marketplace search pages across origins.
 It intentionally does not scrape the first result on page load: sponsored,

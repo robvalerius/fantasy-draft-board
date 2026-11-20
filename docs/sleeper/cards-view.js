@@ -18,7 +18,11 @@
     const options = SleeperCards.shoppingOptions(debt);
     const section = node('div', undefined, 'shopping');
     const links = node('div', undefined, 'shopping-links');
-    for (const option of options.listings) {
+    for (const option of [...options.listings, ...options.funListings]) {
+      if (option === options.funListings[0]) {
+        links.append(node('strong', 'Fun name-match alternatives', 'fun-heading'));
+        links.append(node('small', 'Pokemon / Magic gifts, not cards of the NFL player.', 'muted'));
+      }
       const link = node('a', undefined, 'product-link');
       link.href = option.url;
       link.target = '_blank';
@@ -31,8 +35,10 @@
       photo.width = 40;
       photo.height = 56;
       const description = node('span');
-      const badge = `${option.fun ? 'Fun pick / ' : ''}${option.marketplace} / $${option.price.toFixed(2)}`;
+      const prefix = option.game || (option.fun ? 'Fun pick' : '');
+      const badge = `${prefix ? `${prefix} / ` : ''}${option.marketplace} / $${option.price.toFixed(2)}`;
       description.append(node('strong', badge), node('small', option.title));
+      if (option.game) description.append(node('small', option.nameMatch, 'product-notice'));
       if (/custom|reprint|facsimile|replica/i.test(option.title)) {
         description.append(node('small', 'Custom/reprint: read the listing', 'product-notice'));
       }
@@ -44,6 +50,11 @@
       links.append(link);
     }
     section.append(links);
+    if (options.hiddenDuplicates) {
+      section.append(node('small',
+        `${options.hiddenDuplicates} duplicate offer${options.hiddenDuplicates === 1 ? '' : 's'} hidden; lowest item price kept.`,
+        'muted'));
+    }
     for (const shop of options.unavailable) {
       section.append(node('small', `${shop}: no verified matching card.`, 'muted'));
     }
