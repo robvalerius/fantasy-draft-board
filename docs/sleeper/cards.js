@@ -200,11 +200,24 @@
     const fun = debt.position === 'K' ? matching.filter(product => product.game) : [];
     const listings = cheapestUniqueListings(football);
     const funListings = cheapestUniqueListings(fun);
+    const recipientListings = [];
+    const preference = catalog.recipientAlternatives.find(pick =>
+      pick.rosterId === debt.to && debt.id?.startsWith(`${pick.leagueId}:`));
+    if (preference) {
+      const product = catalog.products.find(product => product.url === preference.productUrl);
+      if (!product?.fun || !product.cardId || product.game) {
+        throw new Error(`The fun alternative for ${preference.label} is missing from the card catalog.`);
+      }
+      const offers = catalog.products.filter(offer =>
+        offer.playerId === product.playerId && offer.cardId === product.cardId);
+      recipientListings.push({ ...cheapestUniqueListings(offers)[0], recipientLabel: preference.label });
+    }
     return {
       checkedAt: catalog.checkedAt,
       substitution: substitution ? { ...substitution } : null,
       listings,
       funListings,
+      recipientListings,
       hiddenDuplicates: football.length + fun.length - listings.length - funListings.length,
       unavailable: ['Amazon', 'Etsy', 'eBay'].filter(shop => !football.some(product => product.marketplace === shop)),
     };

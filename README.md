@@ -148,6 +148,15 @@ wordplay gifts, not NFL player cards, and never replace the primary NFL photo,
 change the debt, or create additional cards owed. They also appear in purchased
 entries' card options.
 
+Debts owed **to** Jino / Team Trash Can finish with a Caleb Williams 2025 Score
+Trick or Treat Pumpkin card alternative. Debts owed **to** Rob / Bryce's Bench
+finish with the Jaguars' Trevor Lawrence Pumpkin card. These recipient picks
+are scoped to this league's roster IDs (4 and 3), appear after every other
+option in both outstanding and purchased entries, and do not change the
+original player, primary photo, debt ID, totals, or purchased status. A card
+already offered normally is linked only once, at the end; duplicate editions
+still use the cheapest reviewed offer.
+
 The static site cannot read arbitrary marketplace search pages across origins.
 It intentionally does not scrape the first result on page load: sponsored,
 irrelevant, or unavailable items could be shown. Catalog updates require

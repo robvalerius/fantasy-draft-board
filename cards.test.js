@@ -162,6 +162,7 @@ test('unknown players or mismatched identities never get fabricated or wrong-pla
     const options = shoppingOptions(debt);
     assert.deepEqual(options.listings, []);
     assert.deepEqual(options.funListings, []);
+    assert.deepEqual(options.recipientListings, []);
     assert.deepEqual(options.unavailable, ['Amazon', 'Etsy', 'eBay']);
     assert.equal(options.searches, undefined, 'do not fall back to unverified search results');
   }
@@ -310,6 +311,131 @@ test('kicker game-card name matches are separate optional gifts, never replaceme
     assert.deepEqual(shoppingOptions({ ...debt, position: 'WR' }).funListings, []);
     assert.deepEqual(shoppingOptions({ ...debt, player: 'Unrelated kicker' }).funListings, []);
   }
+});
+
+test('recipient fun alternatives target incoming debts while preserving the original card and kicker choices', () => {
+  for (const [to, from, expectedPlayer] of [
+    [4, 3, 'Caleb Williams'], [3, 4, 'Trevor Lawrence'],
+  ]) {
+    const debt = { id: `${league.league_id}:1:${from}:13545`, from, to,
+      playerId: '13545', player: 'Trey Smack', position: 'K', week: 1, points: 0 };
+    const original = { ...debt };
+    const options = shoppingOptions(debt);
+    assert.equal(options.recipientListings.length, 1);
+    const choice = options.recipientListings[0];
+    assert.equal(choice.player, expectedPlayer);
+    assert.ok(choice.fun);
+    assert.match(choice.title, /Pumpkin/);
+    assert.ok(choice.recipientLabel);
+    assert.ok(options.listings.every(listing => listing.player === 'Trey Smack'));
+    assert.ok(options.funListings.some(listing => listing.cardName === 'Thwackey'));
+    assert.deepEqual(debt, original);
+    const offers = require('./docs/sleeper/card-products.js').products
+      .filter(product => product.playerId === choice.playerId && product.cardId === choice.cardId);
+    assert.equal(choice.price, Math.min(...offers.map(product => product.price)));
+    choice.title = 'Changed locally';
+    assert.notEqual(shoppingOptions(debt).recipientListings[0].title, choice.title);
+  }
+});
+
+test('recipient alternatives do not apply to outgoing debts, other recipients, or other leagues', () => {
+  const base = { playerId: '11625', player: 'Adonai Mitchell', position: 'WR' };
+  for (const [from, to, leagueId] of [
+    [3, 2, league.league_id], [4, 2, league.league_id], [1, 5, league.league_id],
+    [1, 3, 'another-league'], [1, 4, 'another-league'],
+  ]) {
+    const debt = { ...base, from, to, id: `${leagueId}:1:${from}:${base.playerId}` };
+    assert.deepEqual(shoppingOptions(debt).recipientListings, []);
+  }
+});
+
+test('view keeps recipient picks last and unique in owed and purchased cards through purchase, undo, and refresh', async () => {
+  const vm = require('node:vm');
+  const fs = require('node:fs');
+  const core = require('./docs/sleeper/cards.js');
+  const elements = new Map(), saved = new Map();
+  function element(tag = '') {
+    return {
+      tag, children: [], value: '', textContent: '', listeners: {},
+      get options() { return this.children; },
+      append(...children) { this.children.push(...children); },
+      replaceChildren(...children) { this.children = children; },
+      add(child) { this.children.push(child); },
+      setAttribute(name, value) { this[name] = value; },
+      addEventListener(name, callback) { this.listeners[name] = callback; },
+    };
+  }
+  const document = {
+    getElementById(id) {
+      if (!elements.has(id)) elements.set(id, element());
+      return elements.get(id);
+    },
+    createElement: element,
+    createTextNode: textContent => ({ textContent, children: [] }),
+    addEventListener() {},
+  };
+  const storage = {
+    getItem: key => saved.get(key) ?? null,
+    setItem: (key, value) => saved.set(key, value),
+  };
+  const debts = [
+    { week: 1, from: 1, to: 4, playerId: '13545', player: 'Trey Smack', position: 'K' },
+    { week: 2, from: 4, to: 3, playerId: '13545', player: 'Trey Smack', position: 'K' },
+    { week: 3, from: 1, to: 4, playerId: '11560', player: 'Caleb Williams', position: 'QB' },
+    { week: 4, from: 1, to: 3, playerId: '7523', player: 'Trevor Lawrence', position: 'QB' },
+    { week: 5, from: 3, to: 2, playerId: '11625', player: 'Adonai Mitchell', position: 'WR' },
+  ].map(debt => ({ ...debt, points: 0,
+    id: `${league.league_id}:${debt.week}:${debt.from}:${debt.playerId}` }));
+  const report = { leagueId: league.league_id, league: league.name, season: '2026', through: 5,
+    teams: [1, 2, 3, 4].map(id => ({ id, name: `Team ${id}`, manager: `Manager ${id}` })),
+    debts, coverage: [{ week: 1, games: 2 }], warnings: [], fetchedAt: '2026-11-20T16:00:00Z' };
+  writePurchased(storage, report.leagueId, report.season, new Set([debts[2].id]));
+  vm.runInNewContext(fs.readFileSync(require.resolve('./docs/sleeper/cards-view.js'), 'utf8'), {
+    document, localStorage: storage, console, setInterval() {},
+    Option: function (text, value) { return { text, value }; },
+    SleeperCards: { ...core, loadReport: async () => report },
+  });
+  await new Promise(resolve => setImmediate(resolve));
+  const walk = item => [item, ...(item.children || []).flatMap(walk)];
+  const rows = () => [
+    ...walk(elements.get('ledger')).filter(item => item.tag === 'li'),
+    ...elements.get('purchased-cards').children,
+  ];
+  const checkboxFor = (row, debt) => walk(row).find(item =>
+    item.tag === 'input' && item['aria-label'].includes(`${debt.player}, week ${debt.week},`));
+  function verifyChoices() {
+    assert.equal(rows().length, debts.length);
+    for (const debt of debts) {
+      const row = rows().find(row => checkboxFor(row, debt));
+      const links = walk(row).filter(item => item.className === 'product-link');
+      const recipientUrl = { 4: 'https://www.amazon.com/dp/B0G2MT6XKL',
+        3: 'https://www.amazon.com/dp/B0FRG3CJC9' }[debt.to];
+      if (recipientUrl) {
+        assert.equal(links.at(-1).href, recipientUrl);
+        assert.equal(links.filter(link => link.href === recipientUrl).length, 1);
+        if (debt.position === 'K') {
+          assert.ok(links.slice(0, -1).some(link => link['aria-label'].includes('Thwackey')));
+        }
+      } else {
+        assert.ok(links.every(link => !/B0G2MT6XKL|B0FRG3CJC9/.test(link.href)));
+      }
+    }
+  }
+  verifyChoices();
+  const debt = debts[0];
+  let checkbox = checkboxFor(rows().find(row => checkboxFor(row, debt)), debt);
+  checkbox.checked = true;
+  checkbox.listeners.change();
+  assert.equal(elements.get('purchased-cards').children.length, 2);
+  verifyChoices();
+  await elements.get('refresh').listeners.click();
+  assert.ok(readPurchased(storage, report.leagueId, report.season).has(debt.id));
+  verifyChoices();
+  checkbox = checkboxFor(rows().find(row => checkboxFor(row, debt)), debt);
+  checkbox.checked = false;
+  checkbox.listeners.change();
+  assert.deepEqual([...readPurchased(storage, report.leagueId, report.season)], [debts[2].id]);
+  verifyChoices();
 });
 
 test('view auto-refreshes only when visible, prevents overlapping loads, and preserves purchases after retries', async () => {

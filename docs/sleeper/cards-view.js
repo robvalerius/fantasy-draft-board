@@ -18,10 +18,17 @@
     const options = SleeperCards.shoppingOptions(debt);
     const section = node('div', undefined, 'shopping');
     const links = node('div', undefined, 'shopping-links');
-    for (const option of [...options.listings, ...options.funListings]) {
+    const recipientUrls = new Set(options.recipientListings.map(option => option.url));
+    const ordinary = [...options.listings, ...options.funListings]
+      .filter(option => !recipientUrls.has(option.url));
+    for (const option of [...ordinary, ...options.recipientListings]) {
       if (option === options.funListings[0]) {
         links.append(node('strong', 'Fun name-match alternatives', 'fun-heading'));
         links.append(node('small', 'Pokemon / Magic gifts, not cards of the NFL player.', 'muted'));
+      }
+      if (option === options.recipientListings[0]) {
+        links.append(node('strong', `${option.recipientLabel}: fun alternative`, 'fun-heading'));
+        links.append(node('small', "Optional recipient pick instead of the original player's card.", 'muted'));
       }
       const link = node('a', undefined, 'product-link');
       link.href = option.url;
