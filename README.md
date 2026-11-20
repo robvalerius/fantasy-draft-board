@@ -119,8 +119,11 @@ delivery. Storage failures are shown explicitly rather than pretending to save.
 
 Only completed weeks through Sleeper's `last_scored_leg` are analyzed; the
 current NFL week is conservatively excluded until the following week starts.
-Refresh reloads the source scores, including corrections. Missing scores produce
-visible warnings rather than false zeroes; failed/incomplete matchup requests
+Refresh reloads the source scores, including corrections. The open page refreshes automatically
+every five minutes while visible and when you return to the tab, without
+overlapping requests or clearing purchased checkmarks. Failed refreshes keep the
+last report visible with an explicit stale-data warning and retry automatically.
+Missing scores produce visible warnings rather than false zeroes; failed/incomplete initial matchup requests
 produce an error instead of a partial ledger. Incurred totals come from Sleeper;
 remaining totals subtract only cards marked purchased locally. Team/manager labels use current
 Sleeper ownership; weekly opponents and starters come from historical matchups.

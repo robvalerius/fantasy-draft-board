@@ -3,6 +3,7 @@
 (function () {
   const $ = id => document.getElementById(id);
   let report;
+  let refreshing = false;
   let purchased = new Set(), purchasesAvailable = false;
   const node = (tag, text, className) => {
     const element = document.createElement(tag);
@@ -162,8 +163,9 @@
   }
 
   async function refresh() {
+    if (refreshing) return;
+    refreshing = true;
     $('refresh').disabled = true;
-    $('report').hidden = true;
     $('status').className = 'muted';
     $('status').textContent = 'Loading completed matchups from Sleeper...';
     try {
@@ -184,13 +186,23 @@
       $('status').textContent = `${report.league} / ${report.season}. ${range} Updated ${new Date(report.fetchedAt).toLocaleString()}.`;
     } catch (error) {
       $('status').className = 'error';
-      $('status').textContent = `Unable to load card debts: ${error.message} No current report is shown. Try Refresh from Sleeper.`;
+      const previous = report && !$('report').hidden
+        ? ` Showing the last report from ${new Date(report.fetchedAt).toLocaleString()}; it may be out of date.`
+        : ' No current report is shown.';
+      $('status').textContent = `Unable to load card debts: ${error.message}${previous} Automatic refresh will retry, or use Refresh from Sleeper.`;
     } finally {
+      refreshing = false;
       $('refresh').disabled = false;
     }
   }
 
   for (const id of ['team', 'direction', 'week']) $(id).addEventListener('change', renderLedger);
   $('refresh').addEventListener('click', refresh);
+  setInterval(() => {
+    if (!document.hidden) refresh();
+  }, 5 * 60 * 1000);
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) refresh();
+  });
   refresh();
 })();

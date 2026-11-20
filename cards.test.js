@@ -150,3 +150,71 @@ test('corrupt or unavailable browser storage is surfaced, not silently reset', (
   assert.throws(() => writePurchased({ setItem() { throw new Error('Quota exceeded'); } },
     league.league_id, '2026', new Set()), /Quota exceeded/);
 });
+
+test('view auto-refreshes only when visible, prevents overlapping loads, and preserves purchases after retries', async () => {
+  const vm = require('node:vm');
+  const fs = require('node:fs');
+  const elements = new Map(), events = new Map(), requests = [], intervals = [];
+  function element() {
+    return {
+      value: '', hidden: false, options: [], textContent: '', listeners: {},
+      append() {},
+      replaceChildren(...children) { this.options = children; },
+      add(option) { this.options.push(option); },
+      addEventListener(name, callback) { this.listeners[name] = callback; },
+    };
+  }
+  const document = {
+    hidden: false,
+    getElementById(id) {
+      if (!elements.has(id)) elements.set(id, element());
+      return elements.get(id);
+    },
+    createElement: element,
+    addEventListener(name, callback) { events.set(name, callback); },
+  };
+  document.getElementById('report').hidden = true;
+  const purchases = new Set([`${league.league_id}:1:1:qb`]);
+  const context = {
+    document, localStorage: {}, console,
+    Option: function (text, value) { return { text, value }; },
+    SleeperCards: {
+      loadReport: () => new Promise((resolve, reject) => requests.push({ resolve, reject })),
+      readPurchased: () => new Set(purchases),
+    },
+    setInterval(callback, milliseconds) { intervals.push({ callback, milliseconds }); },
+  };
+  const report = { leagueId: league.league_id, league: league.name, season: '2026',
+    teams: [], debts: [], coverage: [], warnings: [], fetchedAt: '2026-11-20T16:00:00Z' };
+  const flush = () => new Promise(resolve => setImmediate(resolve));
+  vm.runInNewContext(fs.readFileSync(require.resolve('./docs/sleeper/cards-view.js'), 'utf8'), context);
+  assert.equal(requests.length, 1);
+  assert.equal(intervals[0].milliseconds, 300000);
+  intervals[0].callback();
+  events.get('visibilitychange')();
+  assert.equal(requests.length, 1, 'initial load cannot overlap');
+  requests[0].resolve(report);
+  await flush();
+  assert.equal(document.getElementById('report').hidden, false);
+  document.hidden = true;
+  intervals[0].callback();
+  events.get('visibilitychange')();
+  assert.equal(requests.length, 1, 'hidden tabs do not poll');
+  document.hidden = false;
+  events.get('visibilitychange')();
+  assert.equal(requests.length, 2, 'returning to the tab refreshes');
+  assert.equal(document.getElementById('report').hidden, false, 'keep report during refresh');
+  intervals[0].callback();
+  assert.equal(requests.length, 2, 'background requests cannot overlap');
+  requests[1].reject(new Error('Offline'));
+  await flush();
+  assert.match(document.getElementById('status').textContent, /last report.*out of date/);
+  assert.equal(document.getElementById('report').hidden, false);
+  intervals[0].callback();
+  assert.equal(requests.length, 3, 'timer retries after a failed request');
+  requests[2].resolve(report);
+  await flush();
+  assert.equal(document.getElementById('status').className, 'muted');
+  assert.deepEqual([...purchases], [`${league.league_id}:1:1:qb`]);
+  assert.equal(document.getElementById('refresh').disabled, false);
+});
